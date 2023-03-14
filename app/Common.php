@@ -20,5 +20,9 @@ function setAllRoutes($routes)
     $routes->get('/guarantee/detail', 'Guarantee::detail');
     $routes->get('/guarantee/issued', 'Guarantee::issued');
 
+    $routes->get('/insurance', 'Insurance::index');
+
+    $routes->get('/client', 'Client::index');
+
     $routes->get('/dashboard', 'Dashboard::index');
 }

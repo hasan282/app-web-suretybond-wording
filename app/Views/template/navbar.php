@@ -1,10 +1,10 @@
 <?php
+$uriSegment = 'dashboard';
 $navMenu = array(
-    ['menu' => 'Dashboard', 'url' => 'dashboard', 'icon' => ''],
-    ['menu' => 'Guarentee', 'url' => 'guarantee', 'icon' => ''],
-    ['menu' => 'Guarentee issued', 'url' => 'guarantee/issued', 'icon' => '']
+    ['menu' => 'Dashboard', 'url' => 'dashboard', 'icon' => 'fas fa-tachometer-alt'],
+    ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-tachometer-alt'],
+    ['menu' => 'Pencarian', 'url' => 'search', 'icon' => 'fas fa-search']
 );
-$uriSegment = '';
 ?>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
@@ -13,11 +13,12 @@ $uriSegment = '';
         </li>
         <?php foreach ($navMenu as $nm) : ?>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="<?= $nm['url']; ?>" class="nav-link active"><?= $nm['menu']; ?></a>
+                <a href="<?= $nm['url']; ?>" class="nav-link<?= $uriSegment == $nm['url'] ? ' active' : ''; ?>">
+                    <i class="<?= $nm['icon']; ?> mr-2"></i><?= $nm['menu']; ?>
+                </a>
             </li>
         <?php endforeach; ?>
     </ul>
-
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
