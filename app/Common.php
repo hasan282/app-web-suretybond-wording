@@ -17,6 +17,7 @@ function setAllRoutes($routes)
     $routes->get('/admin', 'Home::admin');
 
     $routes->get('/guarantee', 'Guarantee::index');
+    $routes->get('/guarantee/detail', 'Guarantee::detail');
     $routes->get('/guarantee/issued', 'Guarantee::issued');
 
     $routes->get('/dashboard', 'Dashboard::index');

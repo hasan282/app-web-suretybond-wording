@@ -1,8 +1,8 @@
 <?php
 $navMenu = array(
     ['menu' => 'Dashboard', 'url' => 'dashboard', 'icon' => ''],
-    ['menu' => 'Dashboard', 'url' => '', 'icon' => ''],
-    ['menu' => 'Dashboard', 'url' => '', 'icon' => '']
+    ['menu' => 'Guarentee', 'url' => 'guarantee', 'icon' => ''],
+    ['menu' => 'Guarentee issued', 'url' => 'guarantee/issued', 'icon' => '']
 );
 $uriSegment = '';
 ?>

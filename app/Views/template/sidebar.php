@@ -1,10 +1,9 @@
 <?php
-$uriSegment = 'setting';
+$uriSegment = '';
 $menuItems = array(
-    ['menu' => '', 'icon' => '', 'url' => ''],
-    ['menu' => '', 'icon' => '', 'url' => ''],
-    ['menu' => '', 'icon' => '', 'url' => ''],
-    ['menu' => '', 'icon' => '', 'url' => '']
+    ['menu' => 'Dashboard', 'url' => 'dashboard', 'icon' => ''],
+    ['menu' => 'Jaminan', 'url' => 'guarantee', 'icon' => ''],
+    ['menu' => 'Guarentee issued', 'url' => 'guarantee/issued', 'icon' => '']
 );
 ?>
 <aside class="main-sidebar sidebar-dark-info elevation-4">
@@ -24,33 +23,23 @@ $menuItems = array(
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link<?php if ($uriSegment == 'dashboard') echo ' active'; ?>">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-header">MENU</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>Simple Link</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>Simple Link</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>Simple Link</p>
-                    </a>
-                </li>
+                <?php foreach ($menuItems as $mi) : ?>
+                    <li class="nav-item">
+                        <a href="<?= $mi['url']; ?>" class="nav-link <?php if ($title == $mi['menu']) echo ' active'; ?>">
+                            <i class="nav-icon fas fa-th"></i>
+                            <p><?= $mi['menu']; ?></p>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
                 <li class="nav-header">USER</li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link<?php if ($uriSegment == 'setting') echo ' active'; ?>">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>Pengaturan Akun</p>
                     </a>
