@@ -20,10 +20,10 @@ class Plugins
         $this->plugins = array(
             'basic' => array(
                 ['url' => 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback', 'tipe' => 'css|head'],
-                ['url' => '(base_url)/adminlte/dist/css/adminlte.min.css', 'tipe' => 'css|head'],
+                ['url' => '(base_url)/adminlte/asset/css/adminlte.min.css', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/plugins/jquery/jquery.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js', 'tipe' => 'js|foot'],
-                ['url' => '(base_url)/adminlte/dist/js/adminlte.min.js', 'tipe' => 'js|foot']
+                ['url' => '(base_url)/adminlte/asset/js/adminlte.min.js', 'tipe' => 'js|foot']
             ),
             'fontawesome' => array(
                 ['url' => '(base_url)/adminlte/plugins/fontawesome-free/css/all.min.css', 'tipe' => 'css|head']
