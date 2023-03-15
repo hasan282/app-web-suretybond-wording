@@ -1,9 +1,9 @@
 <?php
-$uriSegment = 'dashboard';
+$userImage = 'hack.jpg';
 $menuItems = array(
-    ['menu' => 'Data Jaminan', 'url' => 'guarantee', 'icon' => 'fas fa-th'],
-    ['menu' => 'Data Klien', 'url' => 'client', 'icon' => 'fas fa-th'],
-    ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-th']
+    ['menu' => 'Data Jaminan', 'url' => 'guarantee', 'icon' => '	fas fa-certificate'],
+    ['menu' => 'Data Klien', 'url' => 'client', 'icon' => '	fas fa-briefcase'],
+    ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt']
 );
 ?>
 <aside class="main-sidebar sidebar-dark-info elevation-4">
@@ -13,7 +13,7 @@ $menuItems = array(
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="/image/user/default_male.jpg" class="img-circle elevation-1" alt="">
+                <img src="<?= SURETY_DOMAIN . 'asset/img/user/' . $userImage; ?>" class="img-circle elevation-1" alt="">
             </div>
             <div class="info">
                 <a href="/user" class="d-block">Alexander Pierce</a>
@@ -22,7 +22,7 @@ $menuItems = array(
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="/dashboard" class="nav-link <?= $uriSegment == 'dashboard' ? ' active' : ''; ?>">
+                    <a href="/dashboard" class="nav-link<?= url_is('dashboard') ? ' active' : ''; ?>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
@@ -30,7 +30,7 @@ $menuItems = array(
                 <li class="nav-header">MENU</li>
                 <?php foreach ($menuItems as $mi) : ?>
                     <li class="nav-item">
-                        <a href="<?= $mi['url']; ?>" class="nav-link<?= $uriSegment == $mi['url'] ? ' active' : ''; ?>">
+                        <a href="/<?= $mi['url']; ?>" class="nav-link<?= url_is($mi['url'] . '*') ? ' active' : ''; ?>">
                             <i class="nav-icon <?= $mi['icon']; ?>"></i>
                             <p><?= $mi['menu']; ?></p>
                         </a>
@@ -38,7 +38,7 @@ $menuItems = array(
                 <?php endforeach; ?>
                 <li class="nav-header">USER</li>
                 <li class="nav-item">
-                    <a href="/setting" class="nav-link">
+                    <a href="/setting" class="nav-link<?= url_is('setting') ? ' active' : ''; ?>">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>Pengaturan Akun</p>
                     </a>

@@ -1,8 +1,9 @@
 <?php
-$uriSegment = 'dashboard';
+$userName = 'Administrator';
+$userImage = 'hack.jpg';
 $navMenu = array(
     ['menu' => 'Dashboard', 'url' => 'dashboard', 'icon' => 'fas fa-tachometer-alt'],
-    ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-tachometer-alt'],
+    ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt'],
     ['menu' => 'Pencarian', 'url' => 'search', 'icon' => 'fas fa-search']
 );
 ?>
@@ -13,7 +14,7 @@ $navMenu = array(
         </li>
         <?php foreach ($navMenu as $nm) : ?>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="<?= $nm['url']; ?>" class="nav-link<?= $uriSegment == $nm['url'] ? ' active' : ''; ?>">
+                <a href="<?= $nm['url']; ?>" class="nav-link<?= url_is($nm['url'] . '*') ? ' active' : ''; ?>">
                     <i class="<?= $nm['icon']; ?> mr-2"></i><?= $nm['menu']; ?>
                 </a>
             </li>
@@ -22,13 +23,13 @@ $navMenu = array(
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="/image/user/default_male.jpg" class="user-image img-circle elevation-1" alt="">
-                <span class="d-none d-md-inline">Alexander Pierce</span>
+                <img src="<?= SURETY_DOMAIN . 'asset/img/user/' . $userImage; ?>" class="user-image img-circle elevation-1" alt="">
+                <span class="d-none d-md-inline"><?= $userName; ?></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <li class="user-header">
-                    <img src="/image/user/default_male.jpg" class="img-circle elevation-2" alt="">
-                    <p>Alexander Pierce</p>
+                    <img src="<?= SURETY_DOMAIN . 'asset/img/user/' . $userImage; ?>" class="img-circle elevation-2" alt="">
+                    <p><?= $userName; ?></p>
                     <small>Web Developer</small>
                 </li>
                 <li class="user-footer">
