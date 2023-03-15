@@ -12,4 +12,9 @@ class Auth extends BaseController
     {
         return redirect()->to('');
     }
+
+    public function user()
+    {
+        var_dump($_POST);
+    }
 }

@@ -21,6 +21,17 @@ $navMenu = array(
         <?php endforeach; ?>
     </ul>
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item d-flex">
+            <div class="custom-control custom-switch my-auto mr-3">
+                <input type="checkbox" class="custom-control-input" id="darkswitch">
+                <label class="custom-control-label text-secondary" for="darkswitch"><i class="fas fa-moon"></i></label>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                <i class="fas fa-expand-arrows-alt"></i>
+            </a>
+        </li>
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="<?= SURETY_DOMAIN . 'asset/img/user/' . $userImage; ?>" class="user-image img-circle elevation-1" alt="">
@@ -38,10 +49,6 @@ $navMenu = array(
                 </li>
             </ul>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                <i class="fas fa-expand-arrows-alt"></i>
-            </a>
-        </li>
+
     </ul>
 </nav>

@@ -16,6 +16,7 @@ if (!function_exists('env_is')) {
 function setAllRoutes($routes)
 {
     $routes->get('/', 'Login::index');
+    $routes->post('/', 'Auth::user');
 
     $routes->get('/user', 'User::index');
     $routes->get('/user/logout', 'Auth::logout');
@@ -31,4 +32,6 @@ function setAllRoutes($routes)
     $routes->get('/dashboard', 'Dashboard::index');
 
     $routes->get('/setting', 'Setting::index');
+
+    $routes->get('/search', 'Search::index');
 }
