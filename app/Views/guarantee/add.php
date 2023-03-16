@@ -100,13 +100,7 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('jscript'); ?>
-<!-- <script src="/adminlte/plugins/jquery/jquery.min.js"></script> -->
-<script src="/adminlte/plugins/moment/moment.min.js"></script>
-<script src="/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-
-
 <script>
-    //Date picker
     $('#reservationdate').datetimepicker({
         format: 'L'
     });

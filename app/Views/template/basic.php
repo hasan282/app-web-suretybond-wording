@@ -10,8 +10,6 @@
     <link rel="icon" href="/icon/icon32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="/icon/icon64.png" sizes="64x64" type="image/png">
     <link rel="apple-touch-icon" href="/icon/icon128.png">
-    <link rel="stylesheet" href="/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-
 
     <?= $adminPlugins->head(); ?>
 
@@ -20,6 +18,12 @@
 <?= $this->renderSection('body'); ?>
 
 <?= $adminPlugins->foot(); ?>
+
+<?php $jscript = $jscript ?? array();
+if (is_string($jscript)) $jscript = explode('|', $jscript);
+foreach ($jscript as $js) : ?>
+    <script src="/asset/js/<?= $js; ?>.js"></script>
+<?php endforeach; ?>
 
 <?= $this->renderSection('jscript'); ?>
 

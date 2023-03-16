@@ -41,8 +41,8 @@ $darkmode = (intval($dark) === 1);
                     <small>Web Developer</small>
                 </li>
                 <li class="user-footer">
-                    <a href="#" class="btn btn-default btn-flat"><i class="fas fa-cog mr-1"></i>Pengaturan</a>
-                    <a href="#" class="btn btn-default btn-flat float-right"><i class="fas fa-sign-out-alt mr-1"></i>Keluar</a>
+                    <a href="/setting" class="btn btn-default btn-flat"><i class="fas fa-cog mr-1"></i>Pengaturan</a>
+                    <a href="/user/logout" class="btn btn-default btn-flat float-right"><i class="fas fa-sign-out-alt mr-1"></i>Keluar</a>
                 </li>
             </ul>
         </li>

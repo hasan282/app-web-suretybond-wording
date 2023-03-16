@@ -47,7 +47,7 @@ class Plugins
             'dateinput' => array(
                 ['url' => '(base_url)/adminlte/plugins/daterangepicker/daterangepicker.css', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css', 'tipe' => 'css|head'],
-                ['url' => '(base_url)/adminlte/plugins/moment/moment.min.js', 'tipe' => 'js|head'],
+                ['url' => '(base_url)/adminlte/plugins/moment/moment.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/inputmask/jquery.inputmask.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/daterangepicker/daterangepicker.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js', 'tipe' => 'js|foot']

@@ -28,7 +28,7 @@ class Guarantee extends BaseController
     public function add()
     {
         $data['title'] = 'Jaminan Diterbitkan';
-        $this->plugin->setup('scrollbar');
+        $this->plugin->setup('scrollbar|dateinput');
         $this->view('guarantee/add', $data);
     }
 

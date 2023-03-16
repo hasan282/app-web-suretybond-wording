@@ -2,6 +2,15 @@
     cursor: pointer;
 }
 
+.link-transparent {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.link-transparent:hover {
+    opacity: 1;
+}
+
 .dark-mode .list-group .list-group-item.active {
     background-color: #33527b;
 }
