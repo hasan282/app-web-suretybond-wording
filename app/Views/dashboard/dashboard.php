@@ -7,7 +7,6 @@
         <div class="small-box bg-info text-lg">
             <div class="inner">
                 <h3>1.500</h3>
-
                 <p>Total List Jaminan</p>
             </div>
             <div class="icon">
@@ -20,7 +19,7 @@
 
         <div class="card">
             <div class="card-body">
-                <button type="button" class="btn btn-success btn-block"><i class="fas fa-plus"></i> Tambah Jaminan</button>
+                <a href="guarantee/add" class="btn btn-success btn-block"><i class="fas fa-plus"></i> Tambah Jaminan</a>
                 <button type="button" class="btn btn-danger btn-block"><i class="fas fa-minus"></i> Hapus Jaminan</button>
                 <button type="button" class="btn btn-primary btn-block"><i class="fas fa-edit"></i> Edit Jaminan</button>
             </div>
