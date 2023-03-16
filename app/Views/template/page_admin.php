@@ -5,9 +5,11 @@
 <?php
 $title = $title ?? 'Menu';
 $bread = $bread ?? $title;
+$dark = get_cookie('DRKMOD') ?? '0';
+$darkmode = (intval($dark) === 1);
 ?>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed<?= $darkmode ? ' dark-mode' : ''; ?>">
     <div class="wrapper">
 
         <?= $this->include('template/navbar'); ?>

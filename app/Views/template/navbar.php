@@ -6,8 +6,10 @@ $navMenu = array(
     ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt'],
     ['menu' => 'Pencarian', 'url' => 'search', 'icon' => 'fas fa-search']
 );
+$dark = get_cookie('DRKMOD') ?? '0';
+$darkmode = (intval($dark) === 1);
 ?>
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand <?= $darkmode ? 'navbar-dark' : 'navbar-white navbar-light'; ?>">
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -23,14 +25,9 @@ $navMenu = array(
     <ul class="navbar-nav ml-auto">
         <li class="nav-item d-flex">
             <div class="custom-control custom-switch my-auto mr-3">
-                <input type="checkbox" class="custom-control-input" id="darkswitch">
-                <label class="custom-control-label text-secondary" for="darkswitch"><i class="fas fa-moon"></i></label>
+                <input <?= $darkmode ? 'checked ' : ''; ?>type="checkbox" class="custom-control-input cursor-pointer" id="darkswitch">
+                <label class="custom-control-label text-secondary cursor-pointer" for="darkswitch"><i class="fas fa-moon"></i></label>
             </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                <i class="fas fa-expand-arrows-alt"></i>
-            </a>
         </li>
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -49,6 +46,5 @@ $navMenu = array(
                 </li>
             </ul>
         </li>
-
     </ul>
 </nav>
