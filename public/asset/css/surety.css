@@ -14,3 +14,15 @@
 .dark-mode .list-group .list-group-item.active {
     background-color: #33527b;
 }
+
+.dark-mode a.list-group-item-action:not(.active) {
+    color: #bebebe;
+}
+
+.dark-mode a.list-group-item-action:not(.active):hover {
+    background-color: #333333;
+}
+
+.dark-mode a.list-group-item-action.active {
+    color: white;
+}

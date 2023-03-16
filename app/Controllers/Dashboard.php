@@ -8,6 +8,7 @@ class Dashboard extends BaseController
     {
         $data['title'] = 'Dashboard';
         $this->plugin->setup('scrollbar');
-        $this->view('dashboard/dashboard', $data);
+        // $this->view('dashboard/dashboard', $data);
+        $this->view('dashboard/user', $data);
     }
 }

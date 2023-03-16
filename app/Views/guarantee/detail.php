@@ -1,12 +1,13 @@
 <?= $this->extend('template/page_admin'); ?>
 
 <?= $this->section('content'); ?>
+
 <div class="card">
     <div class="card-header">
         <h3 class="card-title text-bold text-olive">Detail Jaminan</h3>
         <div class="card-tools"> <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button> </div>
     </div>
-    <div class="card-body" style="display: block;">
+    <div class="card-body">
         <div class="row">
             <div class="col-xl-6">
                 <div class="text-center">
@@ -22,6 +23,7 @@
                 <div class="text-center">
                     <h5 class="text-bold">Data Jaminan</h5> <a href="" class="btn btn-default btn-sm"><i class="fas fa-edit mr-2"></i>Edit Data Jaminan</a>
                 </div>
+                <div style="height:800px"></div>
                 <div class="table-responsive mt-3">
                     <table class="table table-borderless">
                         <tbody>
@@ -88,6 +90,8 @@
                 <div id="box_btn_save" class="text-center zero-height"> <button class="btn btn-primary btn-sm text-bold mt-3">Simpan Keterangan</button> </div>
             </form>
         </div>
+
     </div>
 </div>
+
 <?= $this->endSection(); ?>
