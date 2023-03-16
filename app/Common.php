@@ -1,5 +1,7 @@
 <?php
 
+define('SURETY_DOMAIN', 'https://surety.ptjis.com/');
+
 if (!function_exists('env_is')) {
     /** Cek Environment saat ini
      * @param string $env tipe environtment
@@ -14,11 +16,15 @@ if (!function_exists('env_is')) {
 function setAllRoutes($routes)
 {
     $routes->get('/', 'Login::index');
-    $routes->get('/admin', 'Home::admin');
+    $routes->post('/', 'Auth::user');
 
-    $routes->get('/guarantee', 'Guarantee::index');
+    $routes->get('/user', 'User::index');
+    $routes->get('/user/logout', 'Auth::logout');
+
+    $routes->get('/guarantee', 'Guarantee::draft');
+    $routes->get('/guarantee/issued', 'Guarantee::issued');
     $routes->get('/guarantee/detail', 'Guarantee::detail');
-    $routes->get('/guarantee/add', 'Guarantee::add');
+     $routes->get('/guarantee/add', 'Guarantee::add');
     $routes->post('/guarantee/add', 'Guarantee::add_proccess');
 
     $routes->get('/insurance', 'Insurance::index');
@@ -26,4 +32,8 @@ function setAllRoutes($routes)
     $routes->get('/client', 'Client::index');
 
     $routes->get('/dashboard', 'Dashboard::index');
+
+    $routes->get('/setting', 'Setting::index');
+
+    $routes->get('/search', 'Search::index');
 }

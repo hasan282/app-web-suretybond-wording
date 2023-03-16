@@ -23,7 +23,8 @@ class Plugins
                 ['url' => '(base_url)/adminlte/asset/css/adminlte.min.css', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/plugins/jquery/jquery.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js', 'tipe' => 'js|foot'],
-                ['url' => '(base_url)/adminlte/asset/js/adminlte.min.js', 'tipe' => 'js|foot']
+                ['url' => '(base_url)/adminlte/asset/js/adminlte.min.js', 'tipe' => 'js|foot'],
+                ['url' => '(base_url)/asset/js/all/surety.js(refresher)', 'tipe' => 'js|foot']
             ),
             'fontawesome' => array(
                 ['url' => '(base_url)/adminlte/plugins/fontawesome-free/css/all.min.css', 'tipe' => 'css|head']

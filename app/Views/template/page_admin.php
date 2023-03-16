@@ -2,6 +2,11 @@
 
 <?= $this->section('body'); ?>
 
+<?php
+$title = $title ?? 'Menu';
+$bread = $bread ?? $title;
+?>
+
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
@@ -14,12 +19,28 @@
                 <div class="container">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0"><?= $title ?></h1>
+                            <h1 class="m-0"><?= $title; ?></h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                <li class="breadcrumb-item active"><?= $title ?></li>
+
+                                <?php if (is_array($bread)) : ?>
+                                    <?php foreach ($bread as $k => $br) : ?>
+
+                                        <?php if ($k + 1 === sizeof($bread)) : ?>
+                                            <li class="breadcrumb-item active"><?= $br; ?></li>
+                                        <?php else :
+                                            $brs = explode('|', $br); ?>
+                                            <li class="breadcrumb-item"><a href="/<?= $brs[1] ?? ''; ?>"><?= $brs[0]; ?></a></li>
+                                        <?php endif; ?>
+
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+
+                                <?php if (is_string($bread)) : ?>
+                                    <li class="breadcrumb-item active"><?= $bread; ?></li>
+                                <?php endif; ?>
+
                             </ol>
                         </div>
                     </div>
@@ -39,4 +60,5 @@
             </div>
         </footer>
     </div>
+
     <?= $this->endSection(); ?>

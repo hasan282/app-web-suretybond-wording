@@ -2,12 +2,12 @@
 
 namespace App\Controllers;
 
-class Client extends BaseController
+class User extends BaseController
 {
     public function index()
     {
-        $data['title'] = 'Data Klien';
+        $data['title'] = 'Informasi User';
         $this->plugin->setup('scrollbar');
-        $this->view('client/index', $data);
+        $this->view('user/index', $data);
     }
 }
