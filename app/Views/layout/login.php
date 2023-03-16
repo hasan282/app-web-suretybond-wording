@@ -2,9 +2,13 @@
 
 <?= $this->section('login_box'); ?>
 
+<?php
+$dark = get_cookie('DRKMOD') ?? '0';
+$darkmode = (intval($dark) === 1);
+?>
 <a href="/" class="link-transparent">
     <div class="mx-auto mb-2" style="max-width:300px">
-        <img class="img-fluid" src="/image/icon/jis_suretybond.png" alt="">
+        <img class="img-fluid surety-logo" src="/image/icon/jis_suretybond<?= $darkmode ? '_dark' : ''; ?>.png" alt="">
     </div>
 </a>
 <div class="card">
@@ -36,6 +40,12 @@
                 </a>
             </div>
         </form>
+    </div>
+</div>
+<div class="text-center mt-3">
+    <div class="custom-control custom-switch">
+        <input <?= $darkmode ? 'checked ' : ''; ?>type="checkbox" class="custom-control-input cursor-pointer" id="darkswitch">
+        <label class="custom-control-label text-secondary cursor-pointer" for="darkswitch"><i class="fas fa-moon"></i></label>
     </div>
 </div>
 

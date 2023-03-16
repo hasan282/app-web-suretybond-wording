@@ -1,0 +1,7 @@
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.dark-mode .list-group .list-group-item.active {
+    background-color: #33527b;
+}
