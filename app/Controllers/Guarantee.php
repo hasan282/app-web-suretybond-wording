@@ -24,4 +24,16 @@ class Guarantee extends BaseController
         $this->plugin->setup('scrollbar');
         $this->view('guarantee/draft', $data);
     }
+
+    public function add()
+    {
+        $data['title'] = 'Jaminan Diterbitkan';
+        $this->plugin->setup('scrollbar');
+        $this->view('guarantee/add', $data);
+    }
+
+    public function add_proccess()
+    {
+        var_dump($_POST);
+    }
 }
