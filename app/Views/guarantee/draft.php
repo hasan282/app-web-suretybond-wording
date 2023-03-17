@@ -12,6 +12,7 @@
         <table class="table table-hover text-nowrap">
             <thead>
                 <tr class="text-center">
+                    <th>No</th>
                     <th>Nomor Jaminan</th>
                     <th>Principal</th>
                     <th>Nilai Jaminan</th>
@@ -20,6 +21,7 @@
             </thead>
             <tbody>
                 <tr class="text-center">
+                    <td>1</td>
                     <td><b>23.08.02.1106.DRAFT</b></td>
                     <td class="text-bold">PT. FIBER TECHNOLOGIES INDONESIA</td>
                     <td><?php echo "Rp " . number_format("55452259", 2, ",", "."); ?></td>
