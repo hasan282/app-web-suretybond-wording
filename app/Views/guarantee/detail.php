@@ -120,9 +120,9 @@
 
                     <div class="absolute-bottom pb-3 text-center w-100">
                         <small class="text-danger"><i class="fas fa-info-circle mr-2"></i>Data Belum Lengkap</small>
-                        <button class="btn btn-primary btn-lg mt-2 btn-block" disabled>
+                        <a href="/guarantee/print" class="btn btn-primary btn-lg mt-2 btn-block">
                             <i class="fas fa-print mr-2"></i>Cetak Jaminan
-                        </button>
+                        </a>
                     </div>
                 </div>
 

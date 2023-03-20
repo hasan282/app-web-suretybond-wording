@@ -26,6 +26,14 @@ class Guarantee extends BaseController
         $this->view('guarantee/add', $data);
     }
 
+    public function print()
+    {
+        $data['title'] = 'Cetak Jaminan';
+        $data['bread'] = array('Jaminan|guarantee', 'Detail|guarantee/detail', 'Cetak');
+        $this->plugin->setup('scrollbar');
+        $this->view('guarantee/print', $data);
+    }
+
     public function add_proccess()
     {
         var_dump($_POST);

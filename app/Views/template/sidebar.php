@@ -6,7 +6,7 @@ $menuItems = array(
     ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt']
 );
 ?>
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-info elevation-4">
     <a href="/" class="brand-link link-transparent">
         <img src="<?= SURETY_DOMAIN; ?>asset/img/icon/emblem_for_dark.svg" alt="" class="brand-image">
         <span class="brand-text font-weight-light">SuretyBond <strong>Apps</strong></span>

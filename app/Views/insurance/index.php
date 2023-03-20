@@ -14,11 +14,11 @@ $asuransi = array('BINAGRIYA', 'BUMIDA', 'MALACCA', 'MAXIMUS', 'KRESNA');
                         <a class="list-group-item list-group-item-action<?= ($no === 0) ? ' active' : ''; ?>" id="list_<?= strtolower($ai); ?>_list" data-toggle="list" href="#list_<?= strtolower($ai); ?>" role="tab" aria-controls="<?= strtolower($ai); ?>"><?= $ai; ?></a>
                     <?php endforeach; ?>
                 </div>
-                <div class="text-center">
+                <!-- <div class="text-center">
                     <button class="btn btn-sm btn-outline-primary text-bold mt-3">
                         <i class="fas fa-plus mr-2"></i>Tambah Data Asuransi
                     </button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
