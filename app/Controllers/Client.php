@@ -8,6 +8,7 @@ class Client extends BaseController
     {
         $data['title'] = 'Data Klien';
         $this->plugin->setup('scrollbar');
-        $this->view('client/index', $data);
+        // $this->view('client/index', $data);
+        $this->view('client/index2', $data);
     }
 }

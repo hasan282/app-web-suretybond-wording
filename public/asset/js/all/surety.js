@@ -15,6 +15,19 @@ $(function () {
         }
     });
 
+    $('.btn-expand').click(function () {
+        const EXPAND = (parseInt($(this).data('expand')) === 1);
+        if (EXPAND) {
+            $(this).data('expand', 0);
+            $(this).children('i').removeClass('fa-compress-alt').addClass('fa-expand-alt');
+            $('.content-box').removeClass('container-fluid').addClass('container');
+        } else {
+            $(this).data('expand', 1);
+            $(this).children('i').removeClass('fa-expand-alt').addClass('fa-compress-alt');
+            $('.content-box').removeClass('container').addClass('container-fluid');
+        }
+    });
+
 });
 
 function setCookie(name, value = '', days = 5) {

@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class Guarantee extends BaseController
 {
-    public function draft()
+    public function index()
     {
         $data['title'] = 'Data Jaminan';
         $this->plugin->setup('scrollbar');
@@ -14,15 +14,9 @@ class Guarantee extends BaseController
     public function detail()
     {
         $data['title'] = 'Detail Jaminan';
+        $data['bread'] = array('Data Jaminan|guarantee', 'Detail');
         $this->plugin->setup('scrollbar');
         $this->view('guarantee/detail', $data);
-    }
-
-    public function issued()
-    {
-        $data['title'] = 'Jaminan Diterbitkan';
-        $this->plugin->setup('scrollbar|dateinput');
-        $this->view('guarantee/draft', $data);
     }
 
     public function add()

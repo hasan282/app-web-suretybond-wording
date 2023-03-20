@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col">
-        <div class="small-box bg-danger">
+        <div class="small-box bg-secondary">
             <div class="inner px-3">
                 <h3>158</h3>
                 <p>Draft Jaminan</p>
@@ -50,8 +50,11 @@
     <div class="col-4">
         <div class="card">
             <div class="card-body">
-                <a href="/guarantee/add" class="btn btn-outline-primary btn-block text-bold">
+                <a href="/guarantee/add" class="btn btn-primary btn-lg btn-block text-bold">
                     <i class="fas fa-certificate mr-2"></i>Buat Jaminan Baru
+                </a>
+                <a href="/search" class="btn btn-default btn-block mt-3">
+                    <i class="fas fa-search mr-2"></i>Cari Data Jaminan
                 </a>
             </div>
         </div>

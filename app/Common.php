@@ -21,8 +21,8 @@ function setAllRoutes($routes)
     $routes->get('/user', 'User::index');
     $routes->get('/user/logout', 'Auth::logout');
 
-    $routes->get('/guarantee', 'Guarantee::draft');
-    $routes->get('/guarantee/issued', 'Guarantee::issued');
+    $routes->get('/guarantee', 'Guarantee::index');
+    $routes->get('/guarantee/issued', 'Guarantee::index');
     $routes->get('/guarantee/detail', 'Guarantee::detail');
     $routes->get('/guarantee/add', 'Guarantee::add');
     $routes->post('/guarantee/add', 'Guarantee::add_proccess');

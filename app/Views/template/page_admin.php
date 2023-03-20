@@ -18,7 +18,7 @@ $darkmode = (intval($dark) === 1);
 
         <div class="content-wrapper">
             <div class="content-header">
-                <div class="container">
+                <div class="container content-box">
                     <div class="row mb-2">
                         <div class="col-sm-6">
                             <h1 class="m-0"><?= $title; ?></h1>
@@ -48,8 +48,8 @@ $darkmode = (intval($dark) === 1);
                     </div>
                 </div>
             </div>
-            <div class="content">
-                <div class="container">
+            <div class="content pb-4">
+                <div class="container content-box">
 
                     <?= $this->renderSection('content'); ?>
 

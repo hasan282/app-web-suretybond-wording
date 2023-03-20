@@ -14,9 +14,11 @@ $asuransi = array('BINAGRIYA', 'BUMIDA', 'MALACCA', 'MAXIMUS', 'KRESNA');
                         <a class="list-group-item list-group-item-action<?= ($no === 0) ? ' active' : ''; ?>" id="list_<?= strtolower($ai); ?>_list" data-toggle="list" href="#list_<?= strtolower($ai); ?>" role="tab" aria-controls="<?= strtolower($ai); ?>"><?= $ai; ?></a>
                     <?php endforeach; ?>
                 </div>
-                <button class="btn btn-sm btn-outline-primary btn-block text-bold mt-3">
-                    <i class="fas fa-plus mr-2"></i>Tambah Data Asuransi
-                </button>
+                <div class="text-center">
+                    <button class="btn btn-sm btn-outline-primary text-bold mt-3">
+                        <i class="fas fa-plus mr-2"></i>Tambah Data Asuransi
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -38,6 +40,9 @@ $asuransi = array('BINAGRIYA', 'BUMIDA', 'MALACCA', 'MAXIMUS', 'KRESNA');
                                     <p class="text-muted mb-0">
                                         <i class="fas fa-user-tie fa-fw mr-2"></i>Nicole Pearson
                                     </p>
+                                    <p class="text-muted mb-0">
+                                        <i class="fas fa-briefcase fa-fw mr-2"></i>Kepala Cabang
+                                    </p>
                                 </div>
                             </div>
                             <div class="card bg-light">
@@ -48,6 +53,9 @@ $asuransi = array('BINAGRIYA', 'BUMIDA', 'MALACCA', 'MAXIMUS', 'KRESNA');
                                     </p>
                                     <p class="text-muted mb-0">
                                         <i class="fas fa-user-tie fa-fw mr-2"></i>Nicole Pearson
+                                    </p>
+                                    <p class="text-muted mb-0">
+                                        <i class="fas fa-briefcase fa-fw mr-2"></i>Kepala Cabang
                                     </p>
                                 </div>
                             </div>
