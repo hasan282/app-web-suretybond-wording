@@ -52,6 +52,10 @@ class Plugins
                 ['url' => '(base_url)/adminlte/plugins/daterangepicker/daterangepicker.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js', 'tipe' => 'js|foot']
             ),
+            'jspdf' => array(
+                ['url' => 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', 'tipe' => 'js|foot'],
+                ['url' => 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', 'tipe' => 'js|foot']
+            )
             // 'datatables' => array(
             //     ['url' => '(base_url)/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css', 'tipe' => 'css|head'],
             //     ['url' => '(base_url)/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css', 'tipe' => 'css|head'],

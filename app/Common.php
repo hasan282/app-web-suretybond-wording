@@ -25,6 +25,8 @@ function setAllRoutes($routes)
     $routes->get('/guarantee/issued', 'Guarantee::index');
     $routes->get('/guarantee/detail', 'Guarantee::detail');
     $routes->get('/guarantee/print', 'Guarantee::print');
+    $routes->post('/guarantee/print', 'Guarantee::add_margin');
+    $routes->post('/guarantee/print', 'Guarantee::add_width');
     $routes->get('/guarantee/add', 'Guarantee::add');
     $routes->post('/guarantee/add', 'Guarantee::add_proccess');
 
