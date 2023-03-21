@@ -130,6 +130,7 @@ $line_height = '1em';
                                 <label>Input Height</label>
                                 <input type="number" class="form-control" name="inputHeight" id="inputHeight">
                             </div>
+                            <a href="#" id="submit3" class="btn btn-primary mb-3">Submit</a>
                             <!-- <button id="submit3" class="btn btn-primary mb-3">Submit</button> -->
                         </div>
                         <div class="col-sm-6">
@@ -137,6 +138,7 @@ $line_height = '1em';
                                 <label>Width Kiri</label>
                                 <input type="number" class="form-control" name="inputWidthKiri" min="0" max="18" step="0.5" pattern="^\d+(?:\.\d{1,2})?$" id="inputWidthKiri">
                             </div>
+                            <a href="#" id="submit_width_kiri" class="btn btn-primary mb-3">Submit</a>
                             <!-- <button id="submit_width_kiri" class="btn btn-primary mb-3">Submit</button> -->
                         </div>
                         <div class="col-sm-6">
@@ -144,6 +146,7 @@ $line_height = '1em';
                                 <label>Width Tengah</label>
                                 <input type="number" class="form-control" name="inputWidthTengah" id="inputWidthTengah">
                             </div>
+                            <a href="#" id="submit_width_tengah" class="btn btn-primary mb-3">Submit</a>
                             <!-- <button id="submit_width_tengah" class="btn btn-primary mb-3">Submit</button> -->
                         </div>
                         <div class="col-sm-6">
@@ -151,10 +154,11 @@ $line_height = '1em';
                                 <label>Width Kanan</label>
                                 <input type="number" class="form-control" name="inputWidthKanan" id="inputWidthKanan">
                             </div>
+                            <a href="#" id="submit_width_kanan" class="btn btn-primary mb-3">Submit</a>
                             <!-- <button id="submit_width_kanan" class="btn btn-primary mb-3">Submit</button> -->
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
                 </form>
             </div>
         </div>
