@@ -7,6 +7,7 @@ class Guarantee extends BaseController
     public function index()
     {
         $data['title'] = 'Data Jaminan';
+        $data['jscript'] = 'all/tables';
         $this->plugin->setup('scrollbar');
         $this->view('guarantee/draft', $data);
     }

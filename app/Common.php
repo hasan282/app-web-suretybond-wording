@@ -37,4 +37,13 @@ function setAllRoutes($routes)
     $routes->get('/setting', 'Setting::index');
 
     $routes->get('/search', 'Search::index');
+
+    $routes->get('/content', 'Content::index');
+}
+
+if (!function_exists('nl2space')) {
+    function nl2space(string $str)
+    {
+        return trim(preg_replace('/\s\s+/', ' ', $str));
+    }
 }

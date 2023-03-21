@@ -17,6 +17,10 @@
 
 <?= $this->renderSection('body'); ?>
 
+<script>
+    const BaseURL = "<?= base_url(); ?>/";
+</script>
+
 <?= $adminPlugins->foot(); ?>
 
 <?php $jscript = $jscript ?? array();
