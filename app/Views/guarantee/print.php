@@ -6,13 +6,13 @@
 $margin_top = '100';
 $margin_bottom = '30';
 $margin_left = '30';
-$padding_right = '30';
+$padding_right = '100';
 $line_height = '1em';
 ?>
 
 <style>
     :root {
-        --padding-right: 100px;
+        --padding-right: <?php echo $padding_right . 'px'; ?>;
         --line-height: 1em
     }
 
@@ -20,7 +20,7 @@ $line_height = '1em';
         font-family: sans-serif;
         -webkit-font-smoothing: antialiased;
         color: #000;
-        line-height: 1em;
+        line-height: 0.9em;
         margin: 0 auto;
     }
 
@@ -33,11 +33,11 @@ $line_height = '1em';
     }
 
     .header table {
-        font-size: 10px !important;
+        font-size: 12px !important;
     }
 
     .body table {
-        font-size: 10px !important;
+        font-size: 12px !important;
         /* font-family: 'Open Sans', sans-serif; */
     }
 
@@ -47,7 +47,7 @@ $line_height = '1em';
     }
 
     .footer table {
-        font-size: 10px !important;
+        font-size: 12px !important;
     }
 </style>
 
@@ -168,10 +168,10 @@ $line_height = '1em';
     <div class="card-body">
         <div id="outer">
             <div id="doc-target">
-                <div class="container">
+                <div class="container  text-blue">
                     <div class="header">
-                        <h4 class="text-center text-uppercase mb-5 judul text-primary">Jaminan Pemeliharaan</h4>
-                        <table class="table table-borderless">
+                        <h6 class="text-center text-uppercase text-bold judul text-primary">Jaminan Pemeliharaan</h6>
+                        <table class="table table-borderless mb-0">
                             <tr>
                                 <th width="1%"></th>
                                 <td width="25%">Nomor Jaminan: <b>22.08.02.1106.023489.DRAFT</b></td>
@@ -180,7 +180,7 @@ $line_height = '1em';
                         </table>
                     </div>
                     <div class="body">
-                        <table class="table table-borderless">
+                        <table class="table table-borderless mb-0">
                             <tbody class="text-justify">
                                 <tr>
                                     <th scope="row">1.</th>

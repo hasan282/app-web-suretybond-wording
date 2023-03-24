@@ -33,6 +33,8 @@ function setAllRoutes($routes)
     $routes->get('/insurance', 'Insurance::index');
 
     $routes->get('/client', 'Client::index');
+    $routes->get('/client/add', 'Client::add_client');
+    $routes->post('/client/add', 'Client::add_client_process');
 
     $routes->get('/dashboard', 'Dashboard::index');
 
