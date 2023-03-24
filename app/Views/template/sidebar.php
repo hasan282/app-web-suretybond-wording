@@ -2,7 +2,7 @@
 $userImage = 'hack.jpg';
 $menuItems = array(
     ['menu' => 'Data Jaminan', 'url' => 'guarantee', 'icon' => 'fas fa-certificate'],
-    ['menu' => 'Data Klien', 'url' => 'client', 'icon' => 'fas fa-briefcase'],
+    ['menu' => 'Data Tertanggung', 'url' => 'client', 'icon' => 'fas fa-user-shield'],
     ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt']
 );
 ?>

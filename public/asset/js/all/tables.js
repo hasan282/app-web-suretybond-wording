@@ -12,7 +12,8 @@
         last: 'last',
         prev: 'prev',
         next: 'next',
-        method: 'html'
+        method: 'html',
+        timeout: 100
     };
 
     const enableButton = (now, max) => {
@@ -50,18 +51,20 @@
             tbOption[key] = options[key];
         }
         $(tbOption.loader).fadeIn(function () {
-            $.get(url, params, function (data, status) {
-                if (status == 'success') {
-                    fillContent(container, data.content, data.count, data.page_now, data.page_max);
-                    enableButton(parseInt(data.page_now), parseInt(data.page_max));
-                } else {
+            setTimeout(() => {
+                $.get(url, params, function (data, status) {
+                    if (status == 'success') {
+                        fillContent(container, data.content, data.count, data.page_now, data.page_max);
+                        enableButton(parseInt(data.page_now), parseInt(data.page_max));
+                    } else {
+                        fillContent(container, failed, '0', '1', '1');
+                    }
+                    $(tbOption.loader).fadeOut();
+                }).fail(function () {
                     fillContent(container, failed, '0', '1', '1');
-                }
-                $(tbOption.loader).fadeOut();
-            }).fail(function () {
-                fillContent(container, failed, '0', '1', '1');
-                $(tbOption.loader).fadeOut();
-            });
+                    $(tbOption.loader).fadeOut();
+                });
+            }, tbOption.timeout);
         });
     }
 

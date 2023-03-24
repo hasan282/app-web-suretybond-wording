@@ -6,25 +6,27 @@ class Client extends BaseController
 {
     public function index()
     {
-        $data['title'] = 'Data Klien';
+        $data['title'] = 'Data Principal';
+        $data['jscript'] = 'all/tables';
         $this->plugin->setup('scrollbar');
-        // $this->view('client/index', $data);
-        $this->view('client/index2', $data);
+        $this->view('client/principal', $data);
     }
 
-    public function add_client()
+    public function obligee()
     {
-        var_dump($_POST);
-        $data['title'] = 'Tambah Data Klien';
-        $data['bread'] = array('Data Klien|client', 'Tambah Data Klient');
+    }
+
+    public function principalAdd()
+    {
+        $data['title'] = 'Tambah Data Principal';
+        $data['bread'] = array('Principal|client/principal', 'Tambah Data');
         $this->plugin->setup('scrollbar');
-        // $this->view('client/index', $data);
         return $this->view('client/add', $data);
     }
 
     public function add_client_process()
     {
-        var_dump($_POST);
+        // var_dump($_POST);
         $data['title'] = 'Tambah Data Klien';
         $data['bread'] = array('Data Klien|client', 'Tambah Data Klient');
         $this->plugin->setup('scrollbar');

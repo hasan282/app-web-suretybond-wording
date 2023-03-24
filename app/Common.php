@@ -32,10 +32,14 @@ function setAllRoutes($routes)
 
     $routes->get('/insurance', 'Insurance::index');
 
-    $routes->get('/client', 'Client::index');
     // $routes->get('/client/add', 'Client::add_client');
     // $routes->post('/client/add', 'Client::add_client_process');
-    $routes->match(['get', 'post'], '/client/add', 'Client::add_client');
+    // $routes->match(['get', 'post'], '/client/add', 'Client::add_client');
+
+    $routes->get('/client', 'Client::index');
+    $routes->get('/client/principal', 'Client::index');
+    $routes->get('/client/principal/add', 'Client::principalAdd');
+    $routes->get('/client/obligee', 'Client::obligee');
 
     $routes->get('/dashboard', 'Dashboard::index');
 

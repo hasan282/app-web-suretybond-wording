@@ -16,7 +16,7 @@ $darkmode = (intval($dark) === 1);
         </li>
         <?php foreach ($navMenu as $nm) : ?>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="<?= $nm['url']; ?>" class="nav-link<?= url_is($nm['url'] . '*') ? ' active' : ''; ?>">
+                <a href="/<?= $nm['url']; ?>" class="nav-link<?= url_is($nm['url'] . '*') ? ' active' : ''; ?>">
                     <i class="<?= $nm['icon']; ?> mr-2"></i><?= $nm['menu']; ?>
                 </a>
             </li>
