@@ -38,12 +38,19 @@ function setAllRoutes($routes)
 
     $routes->get('/search', 'Search::index');
 
-    $routes->get('/content', 'Content::index');
+    $routes->get('/content/(:num)', 'Content::index/$1');
 }
 
 if (!function_exists('nl2space')) {
     function nl2space(string $str)
     {
         return trim(preg_replace('/\s\s+/', ' ', $str));
+    }
+}
+
+if (!function_exists('nformat')) {
+    function nformat($number, $decimal = 2)
+    {
+        return number_format(floatval($number), $decimal, ',', '.');
     }
 }

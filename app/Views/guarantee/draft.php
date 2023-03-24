@@ -6,6 +6,7 @@
 $dark = get_cookie('DRKMOD') ?? '0';
 $darkmode = (intval($dark) === 1);
 $tables = new \App\Libraries\Tables;
+$draft = $tables->guaranteeDraft(1);
 ?>
 <div class="row mb-3">
     <div class="col-xl-4 col-md-5 col-sm-6">
@@ -34,7 +35,7 @@ $tables = new \App\Libraries\Tables;
 <div class="card">
     <div class="overlay<?= $darkmode ? ' dark' : ''; ?>" id="loading"></div>
     <div class="card-header">
-        <h3 class="card-title">Draft Jaminan <strong id="total_data">10</strong> Data</h3>
+        <h3 class="card-title">Draft Jaminan <strong id="total_data"><?= $draft->count; ?></strong> Data</h3>
         <div class="card-tools">
             <button type="button" class="btn btn-tool btn-expand" data-expand="0">
                 <i class="fas fa-expand-alt"></i>
@@ -44,14 +45,14 @@ $tables = new \App\Libraries\Tables;
             </button>
         </div>
     </div>
-    <div class="card-body table-responsive p-0">
+    <div class="card-body table-responsive p-0" id="guarantee">
 
-        <?= $tables->guaranteeDraft()->content; ?>
+        <?= $draft->content; ?>
 
     </div>
 </div>
 
-<?= $this->include('table/nav_foot'); ?>
+<?= $tables->footNavs($draft->page_now, $draft->page_max); ?>
 
 <?= $this->endSection(); ?>
 
@@ -61,8 +62,8 @@ $tables = new \App\Libraries\Tables;
         $('#loading').setLoader({
             icon: 'fas fa-circle-notch'
         });
-        $('button').click(function() {
-            $('.table-responsive').setContent(BaseURL + 'content');
+        $('.data-nav').navTable(function(page) {
+            $('#guarantee').setContent(BaseURL + 'content/' + page);
         });
     });
 </script>

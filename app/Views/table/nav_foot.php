@@ -1,6 +1,6 @@
 <?php
 $now = $now ?? 1;
-$max = $max ?? 5;
+$max = $max ?? 1;
 ?>
 <div class="card">
     <div class="card-body py-2">
