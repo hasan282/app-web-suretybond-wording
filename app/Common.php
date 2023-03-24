@@ -25,12 +25,17 @@ function setAllRoutes($routes)
     $routes->get('/guarantee/issued', 'Guarantee::index');
     $routes->get('/guarantee/detail', 'Guarantee::detail');
     $routes->get('/guarantee/print', 'Guarantee::print');
+    $routes->post('/guarantee/print', 'Guarantee::add_margin');
+    $routes->post('/guarantee/print', 'Guarantee::add_width');
     $routes->get('/guarantee/add', 'Guarantee::add');
     $routes->post('/guarantee/add', 'Guarantee::add_proccess');
 
     $routes->get('/insurance', 'Insurance::index');
 
     $routes->get('/client', 'Client::index');
+    // $routes->get('/client/add', 'Client::add_client');
+    // $routes->post('/client/add', 'Client::add_client_process');
+    $routes->match(['get', 'post'], '/client/add', 'Client::add_client');
 
     $routes->get('/dashboard', 'Dashboard::index');
 

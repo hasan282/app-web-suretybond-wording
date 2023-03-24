@@ -35,6 +35,10 @@
     color: #407d95;
 }
 
+.dark-mode .content-box .container {
+    color: #fff;
+}
+
 .mw-1 {
     max-width: 100px;
 }

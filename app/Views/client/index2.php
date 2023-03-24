@@ -17,7 +17,7 @@
     </div>
     <div class="col"></div>
     <div class="col">
-        <a href="#" class="btn btn-primary btn-block text-bold">
+        <a href="/client/add" class="btn btn-primary btn-block text-bold">
             <i class="fas fa-plus mr-2"></i>Tambah Principal Baru
         </a>
     </div>
