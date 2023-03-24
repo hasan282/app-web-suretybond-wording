@@ -36,3 +36,11 @@ function setCookie(name, value = '', days = 5) {
     const expire = '; expires=' + date.toUTCString();
     document.cookie = name + '=' + value + expire + '; path=/';
 }
+
+function getCookie(name) {
+    let result = null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) result = parts.pop().split(';').shift();
+    return result;
+}
