@@ -40,6 +40,7 @@ function setAllRoutes($routes)
     $routes->get('/client/principal', 'Client::index');
     $routes->get('/client/principal/add', 'Client::principalAdd');
     $routes->get('/client/obligee', 'Client::obligee');
+    $routes->get('/client/obligee/add', 'Client::obligeeAdd');
 
     $routes->get('/dashboard', 'Dashboard::index');
 

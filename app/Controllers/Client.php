@@ -14,6 +14,18 @@ class Client extends BaseController
 
     public function obligee()
     {
+        $data['title'] = 'Data Obligee';
+        $data['jscript'] = 'all/tables';
+        $this->plugin->setup('scrollbar');
+        $this->view('client/obligee', $data);
+    }
+
+    public function obligeeAdd()
+    {
+        $data['title'] = 'Data Obligee';
+        $data['bread'] = array('Oblegee|client/obligee', 'Tambah Data');
+        $this->plugin->setup('scrollbar|dateinput');
+        $this->view('client/add_obligee', $data);
     }
 
     public function principalAdd()
@@ -21,15 +33,6 @@ class Client extends BaseController
         $data['title'] = 'Tambah Data Principal';
         $data['bread'] = array('Principal|client/principal', 'Tambah Data');
         $this->plugin->setup('scrollbar');
-        return $this->view('client/add', $data);
-    }
-
-    public function add_client_process()
-    {
-        // var_dump($_POST);
-        $data['title'] = 'Tambah Data Klien';
-        $data['bread'] = array('Data Klien|client', 'Tambah Data Klient');
-        $this->plugin->setup('scrollbar');
-        return $this->view('client/add', $data);
+        return $this->view('client/add_principal', $data);
     }
 }
