@@ -22,9 +22,11 @@ class Guarantee extends BaseController
 
     public function add()
     {
-        $data['title'] = 'Jaminan Diterbitkan';
-        $this->plugin->setup('scrollbar|dateinput');
-        $this->view('guarantee/add', $data);
+        $data['title'] = 'Tambah Data Jaminan';
+        $data['bread'] = array('Jaminan|guarantee', 'Tambah Baru');
+        $this->plugin->setup('scrollbar|select2');
+        // $this->view('guarantee/add', $data);
+        $this->view('guarantee/add/new', $data);
     }
 
     public function print()

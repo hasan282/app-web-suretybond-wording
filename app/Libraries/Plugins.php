@@ -55,6 +55,11 @@ class Plugins
             'jspdf' => array(
                 ['url' => 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', 'tipe' => 'js|foot'],
                 ['url' => 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', 'tipe' => 'js|foot']
+            ),
+            'select2' => array(
+                ['url' => '(base_url)/adminlte/plugins/select2/css/select2.min.css', 'tipe' => 'css|head'],
+                ['url' => '(base_url)/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css', 'tipe' => 'css|head'],
+                ['url' => '(base_url)/adminlte/plugins/select2/js/select2.full.min.js', 'tipe' => 'js|foot']
             )
             // 'datatables' => array(
             //     ['url' => '(base_url)/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css', 'tipe' => 'css|head'],

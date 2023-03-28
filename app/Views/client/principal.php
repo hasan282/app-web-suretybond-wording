@@ -10,7 +10,6 @@ $principal = $table->clientPrincipal(1);
 ?>
 <div class="row mb-3">
     <div class="col">
-
         <div class="input-group">
             <input type="search" id="datasearch" class="form-control" placeholder="Cari Nama Principal">
             <div class="input-group-append">
@@ -19,17 +18,13 @@ $principal = $table->clientPrincipal(1);
                 </button>
             </div>
         </div>
-
     </div>
     <div class="col">
-        <a href="/client/obligee" class="btn btn-default btn-block text-bold">
-            <i class="fas fa-database mr-2"></i>Lihat Data Obligee
-        </a>
-    </div>
-    <div class="col">
-        <a href="/client/principal/add" class="btn btn-primary btn-block text-bold">
-            <i class="fas fa-plus mr-2"></i>Tambah Principal Baru
-        </a>
+        <div class="mw-3 ml-auto mr-xl-0 mr-auto">
+            <a href="/client/principal/add" class="btn btn-primary btn-block text-bold">
+                <i class="fas fa-plus mr-2"></i>Tambah Principal Baru
+            </a>
+        </div>
     </div>
 </div>
 <div class="card">
