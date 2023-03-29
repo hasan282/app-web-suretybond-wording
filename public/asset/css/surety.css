@@ -39,6 +39,21 @@
     color: #fff;
 }
 
+.dark-mode .border-left {
+    border-left: 1px solid #5a5a5a !important;
+}
+
+.dark-mode .border-right {
+    border-right: 1px solid #5a5a5a !important;
+}
+
+.dark-mode .form-control:disabled,
+.dark-mode .form-control[readonly] {
+    background-color: #424a53 !important;
+    color: #cccccc !important;
+    opacity: 1;
+}
+
 .mw-1 {
     max-width: 100px;
 }

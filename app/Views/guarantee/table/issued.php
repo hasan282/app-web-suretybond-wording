@@ -4,7 +4,7 @@ $list = $list ?? array();
 <table class="table table-hover text-nowrap">
     <thead>
         <tr>
-            <th class="text-center border-right">Register</th>
+            <th class="text-center border-right">No. Register</th>
             <th class="text-center">Nomor Jaminan</th>
             <th class="text-center">Jenis Jaminan</th>
             <th class="border-left">Principal</th>

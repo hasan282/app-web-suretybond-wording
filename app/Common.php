@@ -31,7 +31,7 @@ function setAllRoutes($routes)
 
     $routes->get('/search', 'Search::index');
 
-    $routes->get('/content/(:num)', 'Content::index/$1');
+    $routes->get('/content/(:segment)/(:num)', 'Content::index/$1/$2');
 }
 
 if (!function_exists('env_is')) {

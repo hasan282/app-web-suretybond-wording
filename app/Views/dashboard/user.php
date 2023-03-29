@@ -52,10 +52,10 @@ $widget = array(
                 <a href="/guarantee/add" class="btn btn-primary btn-lg btn-block text-bold">
                     <i class="fas fa-certificate mr-2"></i>Buat Jaminan Baru
                 </a>
-                <a href="/client/add" class="btn btn-info btn-block mt-3 text-bold">
+                <a href="/client/add" class="btn btn-info btn-block mt-2 text-bold">
                     <i class="fas fa-user-plus mr-2"></i>Principal Baru
                 </a>
-                <a href="/search" class="btn btn-default btn-block mt-3">
+                <a href="/search" class="btn btn-default btn-block mt-2">
                     <i class="fas fa-search mr-2"></i>Cari Data Jaminan
                 </a>
             </div>
@@ -76,7 +76,7 @@ $widget = array(
                 <table class="table table-striped text-nowrap">
                     <thead>
                         <tr>
-                            <th class="text-center">No. Register</th>
+                            <th class="text-center border-right">No. Register</th>
                             <th class="text-center">Nomor Jaminan</th>
                             <th>Tertanggung</th>
                         </tr>
@@ -84,7 +84,7 @@ $widget = array(
                     <tbody>
                         <?php for ($x = 0; $x < 5; $x++) : ?>
                             <tr>
-                                <td class="text-center">MAX-<strong>012088</strong></td>
+                                <td class="text-center border-right">MAX-<strong>012088</strong></td>
                                 <td class="text-center">11614032.55006872</td>
                                 <td>PT. FIBERHOME TECHNOLOGIES</td>
                             </tr>

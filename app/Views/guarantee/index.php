@@ -35,7 +35,9 @@ $draft = url_is('guarantee/issued') ? $tables->guaranteeIssued(1) : $tables->gua
 <div class="card">
     <div class="overlay<?= $darkmode ? ' dark' : ''; ?>" id="loading"></div>
     <div class="card-header">
-        <h3 class="card-title">Draft Jaminan <strong id="total_data"><?= $draft->count; ?></strong> Data</h3>
+        <h3 class="card-title">
+            <span id="heads">Draft Jaminan</span> <strong id="total_data"><?= $draft->count; ?></strong> Data
+        </h3>
         <div class="card-tools">
             <button type="button" class="btn btn-tool btn-expand" data-expand="0">
                 <i class="fas fa-expand-alt"></i>
@@ -58,12 +60,21 @@ $draft = url_is('guarantee/issued') ? $tables->guaranteeIssued(1) : $tables->gua
 
 <?= $this->section('jscript'); ?>
 <script>
+    let section = '<?= url_is('guarantee/issued') ? 'issued' : 'draft'; ?>';
     $(function() {
         $('#loading').setLoader({
             icon: 'fas fa-circle-notch'
         });
         $('.data-nav').navTable(function(page) {
-            $('#guarantee').setContent(BaseURL + 'content/' + page);
+            $('#guarantee').setContent(BaseURL + 'content/' + section + '/' + page);
+        });
+        $('[name="switcher"]').change(function() {
+            const VAL = $(this).val().split('|');
+            section = VAL[0];
+            $('#heads').html(VAL[1]);
+            $('#total_data').html('0');
+            $('.data-nav').attr('disabled', true);
+            $('#guarantee').setContent(BaseURL + 'content/' + section + '/1');
         });
     });
 </script>

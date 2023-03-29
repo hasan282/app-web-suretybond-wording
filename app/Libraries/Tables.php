@@ -25,7 +25,7 @@ class Tables
 
         return (object) [
             'page_now' => $page,
-            'page_max' => 25,
+            'page_max' => 32,
             'count' => 572,
             'limit' => 10,
             'content' => nl2space(view('guarantee/table/issued', $data))
