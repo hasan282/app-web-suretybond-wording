@@ -6,7 +6,7 @@
 $dark = get_cookie('DRKMOD') ?? '0';
 $darkmode = (intval($dark) === 1);
 $tables = new \App\Libraries\Tables;
-$draft = $tables->guaranteeDraft(1);
+$draft = url_is('guarantee/issued') ? $tables->guaranteeIssued(1) : $tables->guaranteeDraft(1);
 ?>
 <div class="row mb-3">
     <div class="col-xl-4 col-md-5 col-sm-6">

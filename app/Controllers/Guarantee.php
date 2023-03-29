@@ -9,7 +9,7 @@ class Guarantee extends BaseController
         $data['title'] = 'Data Jaminan';
         $data['jscript'] = 'all/tables';
         $this->plugin->setup('scrollbar');
-        $this->view('guarantee/draft', $data);
+        $this->view('guarantee/index', $data);
     }
 
     public function detail()
@@ -25,8 +25,7 @@ class Guarantee extends BaseController
         $data['title'] = 'Tambah Data Jaminan';
         $data['bread'] = array('Jaminan|guarantee', 'Tambah Baru');
         $this->plugin->setup('scrollbar|select2');
-        // $this->view('guarantee/add', $data);
-        $this->view('guarantee/add/new', $data);
+        $this->view('guarantee/add/phase1', $data);
     }
 
     public function print()

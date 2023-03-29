@@ -2,17 +2,6 @@
 
 define('SURETY_DOMAIN', 'https://surety.ptjis.com/');
 
-if (!function_exists('env_is')) {
-    /** Cek Environment saat ini
-     * @param string $env tipe environtment
-     */
-    function env_is(string $env)
-    {
-        $environtment = getenv('CI_ENVIRONMENT') ?: 'production';
-        return ($env == $environtment);
-    }
-}
-
 function setAllRoutes($routes)
 {
     $routes->get('/', 'Login::index');
@@ -45,6 +34,17 @@ function setAllRoutes($routes)
     $routes->get('/content/(:num)', 'Content::index/$1');
 }
 
+if (!function_exists('env_is')) {
+    /** Cek Environment saat ini
+     * @param string $env tipe environtment
+     */
+    function env_is(string $env)
+    {
+        $environtment = getenv('CI_ENVIRONMENT') ?: 'production';
+        return ($env == $environtment);
+    }
+}
+
 if (!function_exists('nl2space')) {
     /** Replace semua New Line menjadi Spasi
      * @param string $str Content
@@ -53,24 +53,5 @@ if (!function_exists('nl2space')) {
     function nl2space(string $str)
     {
         return trim(preg_replace('/\s\s+/', ' ', $str));
-    }
-}
-
-if (!function_exists('nformat')) {
-    /** Format Angka dengan Separator
-     * @param string|int|float $number Value
-     * @param int $decimal Jumlah Angka dibelakang Koma
-     * @param bool $reverse Kebalikan dari Format Internasional
-     * @return string Angka yang diformat
-     */
-    function nformat($number, int $decimal = 2, bool $reverse = true)
-    {
-        $result = null;
-        if (!is_array($number) && !is_object($number)) {
-            $separator = array(',', '.');
-            if ($reverse) $separator = array('.', ',');
-            $result = number_format(floatval($number), $decimal, $separator[1], $separator[0]);
-        }
-        return $result;
     }
 }

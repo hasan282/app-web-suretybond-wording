@@ -12,7 +12,7 @@
 }
 
 .dark-mode .list-group .list-group-item.active {
-    background-color: #33527b;
+    background-color: #3F6791;
 }
 
 .dark-mode a.list-group-item-action:not(.active) {
@@ -28,11 +28,11 @@
 }
 
 .dark-mode .breadcrumb-item:not(.active)>a {
-    color: #70d6ff;
+    color: #66a8ee;
 }
 
 .dark-mode .breadcrumb-item:not(.active)>a:hover {
-    color: #407d95;
+    color: #9dccff;
 }
 
 .dark-mode .content-box .container {
@@ -77,8 +77,12 @@
 
 .border-fade {
     border: solid 1px;
-    border-color: #cdcdcd;
+    border-color: #dddddd;
     border-radius: 10px;
+}
+
+.dark-mode .border-fade {
+    border-color: #4c545c;
 }
 
 .text-fade {

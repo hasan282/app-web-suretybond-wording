@@ -23,7 +23,7 @@ abstract class BaseController extends Controller
      * to all other controllers that extend BaseController.
      * @var array
      */
-    protected $helpers = ['cookie', 'enkripsi'];
+    protected $helpers = ['cookie', 'enkripsi', 'format'];
     protected $plugin;
 
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
@@ -43,8 +43,7 @@ abstract class BaseController extends Controller
     {
         $data['adminPlugins'] = $this->plugin;
         $source = view($view, $data);
-        if (env_is('production'))
-            $source = trim(preg_replace('/\s\s+/', ' ', $source));
+        if (env_is('production')) $source = nl2space($source);
         echo $source;
     }
 
