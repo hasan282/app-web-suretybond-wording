@@ -14,7 +14,21 @@ class Tables
             'page_max' => 25,
             'count' => 572,
             'limit' => 10,
-            'content' => nl2space(view('guarantee/table_draft', $data))
+            'content' => nl2space(view('guarantee/table/draft', $data))
+        ];
+    }
+
+    public function guaranteeIssued(int $page = 1)
+    {
+        $model = new \App\Models\DataModel();
+        $data['list'] = $model->dataIssued();
+
+        return (object) [
+            'page_now' => $page,
+            'page_max' => 32,
+            'count' => 572,
+            'limit' => 10,
+            'content' => nl2space(view('guarantee/table/issued', $data))
         ];
     }
 

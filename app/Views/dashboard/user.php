@@ -2,64 +2,66 @@
 
 <?= $this->section('content'); ?>
 
+<?php
+$widget = array(
+    [
+        'title' => 'Draft Jaminan',
+        'icon' => 'fas fa-file-alt',
+        'link' => 'guarantee',
+        'color' => 'secondary',
+        'data' => '518'
+    ],
+    [
+        'title' => 'Jaminan Diterbitkan',
+        'icon' => 'fas fa-certificate',
+        'link' => 'guarantee/issued',
+        'color' => 'olive',
+        'data' => '2457'
+    ],
+    [
+        'title' => 'Data Nasabah',
+        'icon' => 'fas fa-briefcase',
+        'link' => 'client',
+        'color' => 'info',
+        'data' => '32'
+    ]
+);
+?>
 <div class="row">
-    <div class="col">
-        <div class="small-box bg-secondary">
-            <div class="inner px-3">
-                <h3>158</h3>
-                <p>Draft Jaminan</p>
+    <?php foreach ($widget as $wi) : ?>
+        <div class="col-sm">
+            <div class="small-box bg-<?= $wi['color']; ?>">
+                <div class="inner px-3">
+                    <h3><?= nformat(intval($wi['data']), 0); ?></h3>
+                    <p><?= $wi['title']; ?></p>
+                </div>
+                <div class="icon">
+                    <i class="<?= $wi['icon']; ?>"></i>
+                </div>
+                <a href="/<?= $wi['link']; ?>" class="small-box-footer text-sm">
+                    Lihat Data<i class="fas fa-arrow-circle-right ml-2"></i>
+                </a>
             </div>
-            <div class="icon">
-                <i class="fas fa-file-alt"></i>
-            </div>
-            <a href="/guarantee" class="small-box-footer">
-                Lihat Data<i class="fas fa-arrow-circle-right ml-2"></i>
-            </a>
         </div>
-    </div>
-    <div class="col">
-        <div class="small-box bg-olive">
-            <div class="inner px-3">
-                <h3>1.312</h3>
-                <p>Jaminan Diterbitkan</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-certificate"></i>
-            </div>
-            <a href="/guarantee" class="small-box-footer">
-                Lihat Data<i class="fas fa-arrow-circle-right ml-2"></i>
-            </a>
-        </div>
-    </div>
-    <div class="col">
-        <div class="small-box bg-info">
-            <div class="inner px-3">
-                <h3>71</h3>
-                <p>Data Klien</p>
-            </div>
-            <div class="icon">
-                <i class="fas fa-briefcase"></i>
-            </div>
-            <a href="/client" class="small-box-footer">
-                Lihat Data<i class="fas fa-arrow-circle-right ml-2"></i>
-            </a>
-        </div>
-    </div>
+    <?php endforeach; ?>
 </div>
 <div class="row">
-    <div class="col-4">
+    <div class="col-xl-4 col-md-5">
         <div class="card">
             <div class="card-body">
                 <a href="/guarantee/add" class="btn btn-primary btn-lg btn-block text-bold">
                     <i class="fas fa-certificate mr-2"></i>Buat Jaminan Baru
                 </a>
-                <a href="/search" class="btn btn-default btn-block mt-3">
+                <a href="/client/add" class="btn btn-info btn-block mt-2 text-bold">
+                    <i class="fas fa-user-plus mr-2"></i>Principal Baru
+                </a>
+                <a href="/search" class="btn btn-default btn-block mt-2">
                     <i class="fas fa-search mr-2"></i>Cari Data Jaminan
                 </a>
             </div>
         </div>
     </div>
-    <div class="col-8">
+    <div class="col-xl-8 col-md-7">
 
         <div class="card">
             <div class="card-header">
@@ -74,7 +76,7 @@
                 <table class="table table-striped text-nowrap">
                     <thead>
                         <tr>
-                            <th class="text-center">No. Register</th>
+                            <th class="text-center border-right">No. Register</th>
                             <th class="text-center">Nomor Jaminan</th>
                             <th>Tertanggung</th>
                         </tr>
@@ -82,7 +84,7 @@
                     <tbody>
                         <?php for ($x = 0; $x < 5; $x++) : ?>
                             <tr>
-                                <td class="text-center">MAX-<strong>012088</strong></td>
+                                <td class="text-center border-right">MAX-<strong>012088</strong></td>
                                 <td class="text-center">11614032.55006872</td>
                                 <td>PT. FIBERHOME TECHNOLOGIES</td>
                             </tr>
