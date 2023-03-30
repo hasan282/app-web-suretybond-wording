@@ -20,12 +20,20 @@ class Guarantee extends BaseController
         $this->view('guarantee/detail', $data);
     }
 
-    public function add()
+    public function add_phase1()
     {
         $data['title'] = 'Tambah Data Jaminan';
         $data['bread'] = array('Jaminan|guarantee', 'Tambah Baru');
-        $this->plugin->setup('scrollbar|select2');
+        $this->plugin->setup('scrollbar');
         $this->view('guarantee/add/phase1', $data);
+    }
+
+    public function add_phase2()
+    {
+        $data['title'] = 'Lengkapi Data Jaminan';
+        $data['bread'] = array('Jaminan|guarantee', 'Lengkapi Data');
+        $this->plugin->setup('scrollbar');
+        $this->view('guarantee/add/phase2', $data);
     }
 
     public function print()

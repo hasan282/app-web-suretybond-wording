@@ -26,27 +26,12 @@
         </div>
     </div>
 </div>
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Informasi Jaminan</h3>
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-            </button>
-        </div>
-    </div>
-    <div class="card-body">
 
-    </div>
-</div>
 <div class="card">
     <div class="card-body p-3 text-md-right text-center">
-        <button class="btn btn-primary text-bold">Simpan dan Lanjutkan</button>
+        <!-- <button class="btn btn-primary text-bold">Simpan dan Lanjutkan</button> -->
+        <a href="/guarantee/add/abc12345" class="btn btn-primary text-bold">Simpan dan Lanjutkan<i class="fas fa-arrow-circle-right ml-3"></i></a>
     </div>
 </div>
-
-<?= $this->endSection(); ?>
-
-<?= $this->section('jscript'); ?>
 
 <?= $this->endSection(); ?>

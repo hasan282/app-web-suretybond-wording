@@ -14,7 +14,7 @@ $draft = url_is('guarantee/issued') ? $tables->guaranteeIssued(1) : $tables->gua
         <?= $this->include('guarantee/switcher'); ?>
 
     </div>
-    <div class="col-xl-5 col-md-7 col-sm-6 pt-2 pt-sm-0">
+    <div class="col-xl-5 col-md-7 col-sm-6 pt-3 pt-sm-0">
         <div class="input-group">
             <input type="search" id="blanko_number" class="form-control" placeholder="Pencarian" disabled>
             <div class="input-group-append">
@@ -24,7 +24,7 @@ $draft = url_is('guarantee/issued') ? $tables->guaranteeIssued(1) : $tables->gua
             </div>
         </div>
     </div>
-    <div class="col-xl-3 pt-2 pt-xl-0">
+    <div class="col-xl-3 pt-3 pt-xl-0">
         <div class="mw-3 ml-auto mr-xl-0 mr-auto">
             <a href="/guarantee/add" class="btn btn-primary text-bold btn-block">
                 <i class="fas fa-plus mr-2"></i>Buat Jaminan Baru

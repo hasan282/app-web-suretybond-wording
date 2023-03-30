@@ -54,6 +54,12 @@
     opacity: 1;
 }
 
+.dark-mode .input-group-prepend>.input-group-text,
+.dark-mode .input-group-append>.input-group-text {
+    background-color: #4e5863;
+    color: #e0e0e0;
+}
+
 .mw-1 {
     max-width: 100px;
 }
