@@ -39,7 +39,7 @@ class Tables
             'page_max' => 3,
             'count' => 27,
             'limit' => 10,
-            'content' => nl2space(view('client/table_principal'))
+            'content' => nl2space(view('client/table'))
         ];
     }
 

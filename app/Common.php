@@ -17,22 +17,19 @@ function setAllRoutes($routes)
     $routes->get('/guarantee/add/(:hash)', 'Guarantee::add_phase2/$1');
     $routes->get('/guarantee/print', 'Guarantee::print');
 
-    $routes->post('/guarantee/print', 'Guarantee::add_margin');
-    $routes->post('/guarantee/print', 'Guarantee::add_width');
-    $routes->post('/guarantee/add', 'Guarantee::add_proccess');
+    $routes->get('/client', 'Client::index');
+    $routes->get('/client/detail', 'Client::detail');
+    $routes->get('/client/add', 'Client::add');
+
+    $routes->get('/tb/guarantee/(:segment)/(:num)', 'Guarantee::table/$1/$2');
 
     $routes->get('/insurance', 'Insurance::index');
-
-    $routes->get('/client', 'Client::index');
-    $routes->get('/client/add', 'Client::add');
 
     $routes->get('/dashboard', 'Dashboard::index');
 
     $routes->get('/setting', 'Setting::index');
 
     $routes->get('/search', 'Search::index');
-
-    $routes->get('/content/(:segment)/(:num)', 'Content::index/$1/$2');
 }
 
 if (!function_exists('env_is')) {

@@ -47,6 +47,18 @@
     border-right: 1px solid #5a5a5a !important;
 }
 
+.dark-mode .border-top {
+    border-top: 1px solid #5a5a5a !important;
+}
+
+.dark-mode .border-bottom {
+    border-bottom: 1px solid #5a5a5a !important;
+}
+
+.dark-mode table.table-bordered td {
+    border-color: #535353;
+}
+
 .dark-mode .form-control:disabled,
 .dark-mode .form-control[readonly] {
     background-color: #424a53 !important;

@@ -66,7 +66,7 @@ $draft = url_is('guarantee/issued') ? $tables->guaranteeIssued(1) : $tables->gua
             icon: 'fas fa-circle-notch'
         });
         $('.data-nav').navTable(function(page) {
-            $('#guarantee').setContent(BaseURL + 'content/' + section + '/' + page);
+            $('#guarantee').setContent(BaseURL + 'tb/guarantee/' + section + '/' + page);
         });
         $('[name="switcher"]').change(function() {
             const VAL = $(this).val().split('|');
@@ -74,7 +74,7 @@ $draft = url_is('guarantee/issued') ? $tables->guaranteeIssued(1) : $tables->gua
             $('#heads').html(VAL[1]);
             $('#total_data').html('0');
             $('.data-nav').attr('disabled', true);
-            $('#guarantee').setContent(BaseURL + 'content/' + section + '/1');
+            $('#guarantee').setContent(BaseURL + 'tb/guarantee/' + section + '/1');
         });
     });
 </script>

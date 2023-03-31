@@ -44,18 +44,17 @@ class Guarantee extends BaseController
         $this->view('guarantee/print', $data);
     }
 
-    public function add_proccess()
+    public function table($section, $page)
     {
-        var_dump($_POST);
-    }
-
-    public function add_margin()
-    {
-        var_dump($_POST);
-    }
-
-    public function add_width()
-    {
-        var_dump($_POST);
+        $functions = array(
+            'draft' => 'guaranteeDraft',
+            'issued' => 'guaranteeIssued'
+        );
+        if (in_array($section, array_keys($functions))) {
+            $tables = new \App\Libraries\Tables;
+            return $this->response->setJSON($tables->{$functions[$section]}($page));
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
     }
 }
