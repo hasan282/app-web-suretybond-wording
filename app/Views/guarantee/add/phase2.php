@@ -35,22 +35,22 @@
 
     </div>
 </div>
-<div class="mx-auto">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Informasi Jaminan</h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body">
-
-            <?= $this->include('guarantee/add/jaminan'); ?>
-
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Informasi Jaminan</h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+            </button>
         </div>
     </div>
+    <div class="card-body">
+
+        <?= $this->include('guarantee/add/jaminan'); ?>
+
+    </div>
+</div>
+<div class="mx-auto mw-7">
     <div class="card">
         <div class="card-body text-center p-3">
             <a href="/guarantee/detail" class="btn btn-primary text-bold">

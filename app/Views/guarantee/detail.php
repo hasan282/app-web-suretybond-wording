@@ -9,29 +9,69 @@
     </div>
     <div class="card-body">
 
+        <div class="callout callout-warning bg-light">
+            <div class="row">
+                <div class="col-md-7">
+                    <h5>Pengisian Data Jaminan Belum Lengkap!</h5>
+                    <p class="text-secondary">Silahkan lengkapi data jaminan terlebih dahulu.</p>
+                </div>
+                <div class="col-md-5 d-flex mt-3 mt-md-0">
+                    <button class="btn btn-primary my-auto ml-md-auto text-bold" onclick="window.location.href='/guarantee/add/qwerty123'">
+                        <i class="fas fa-pen-square mr-2"></i>Lengkapi Data Jaminan
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-xl-9 col-lg-8">
 
                 <div class="table-responsive">
                     <table class="table table-borderless table-sm">
-                        <!-- <table class="table table-bordered table-sm"> -->
 
                         <tr>
-                            <td class="fit pr-3 text-bold">Jenis Jaminan</td>
-                            <td class="text-bold">:</td>
-                            <td class="text-nowrap">Jaminan Pemeliharaan (PM)</td>
+                            <td colspan="3" class="text-bold text-secondary">JAMINAN</td>
                         </tr>
                         <tr>
-                            <td class="fit pr-3 text-bold">Nomor Jaminan</td>
+                            <td class="fit pr-3 text-bold pl-4">Jenis Jaminan</td>
+                            <td class="text-bold">:</td>
+                            <td class="text-nowrap">Jaminan Pemeliharaan (<i>Maintenance Bond</i>)</td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Bahasa</td>
+                            <td class="text-bold">:</td>
+                            <td class="text-nowrap">Indonesia</td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Nomor Jaminan</td>
                             <td class="text-bold">:</td>
                             <td class="text-nowrap">23.08.02.1106.DRAFT</td>
                         </tr>
                         <tr>
-                            <td class="fit pr-3 text-bold">Nilai Jaminan</td>
+                            <td class="fit pr-3 text-bold pl-4">Nilai Jaminan</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap"><?php echo "Rp " . number_format("55452259", 2, ",", "."); ?></td>
+                            <td class="text-nowrap">Rp. <?= nformat(55452259); ?></td>
                         </tr>
-
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Berlaku</td>
+                            <td class="text-bold">:</td>
+                            <td class="text-nowrap">366 Hari</td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Mulai Tanggal</td>
+                            <td class="text-bold">:</td>
+                            <td class="text-nowrap">18 November 2023</td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Sampai Tanggal</td>
+                            <td class="text-bold">:</td>
+                            <td class="text-nowrap">18 November 2024</td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Tanggal Penerbitan</td>
+                            <td class="text-bold">:</td>
+                            <td class="text-nowrap">Depok, 18 November 2023</td>
+                        </tr>
 
                         <tr class="border-top">
                             <td colspan="3" class="text-bold text-secondary">ASURANSI</td>
@@ -39,12 +79,17 @@
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nama Asuransi</td>
                             <td class="text-bold">:</td>
-                            <td>PT. ASURANSI MAXIMUS</td>
+                            <td>PT. ASURANSI MAXIMUS GRAHA PERSADA</td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Alamat</td>
                             <td class="text-bold">:</td>
                             <td>Ruko VIP No. 88 B Jl. Raya Pajajaran, Bogor 16128</td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Penandatangan</td>
+                            <td class="text-bold">:</td>
+                            <td>Ricky Firmansyah (Kepala Cabang)</td>
                         </tr>
 
 
@@ -61,47 +106,58 @@
                             <td class="text-bold">:</td>
                             <td>APL Tower Lantai 30, Jl. Jend. S. Parman Kav. 28, Jakarta Barat 11470</td>
                         </tr>
-
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Penandatangan</td>
+                            <td class="text-bold">:</td>
+                            <td>Sugeng Raharjo (Direktur Utama)</td>
+                        </tr>
 
                         <tr class="border-top">
-                            <td colspan="3" class="text-bold text-secondary">OBLIGEE</td>
+                            <td colspan="3" class="text-bold text-secondary">PROYEK</td>
                         </tr>
                         <tr>
-                            <td class="fit pr-3 text-bold pl-4">Nama Obligee</td>
+                            <td class="fit pr-3 text-bold pl-4">Jenis Proyek</td>
+                            <td class="text-bold">:</td>
+                            <td>Swasta</td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Nama Proyek</td>
+                            <td class="text-bold">:</td>
+                            <td>PEKERJAAN PENGADAAN DAN PEMASANGAN NODE B 2022 1 LOP WITEL SULSELBAR</td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Lokasi Proyek</td>
+                            <td class="text-bold">:</td>
+                            <td>SML Plaza, Tower 2, Lt.25, Jl. MH Thamrin No.51 Jakarta Pusat</td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Nilai Proyek</td>
+                            <td class="text-bold">:</td>
+                            <td>Rp. <?= nformat(554522590); ?></td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Dokumen Pendukung</td>
+                            <td class="text-bold">:</td>
+                            <td>
+                                00637/HK.810/TA-370000/11-2021 (14 Agustus 2021)<br>
+                                07896/HK.520/TA-370000/11-2021 (14 Agustus 2021)<br>
+                                00637/HK.457/TA-370000/11-2021 (14 Agustus 2021)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Kelompok Pekerjaan</td>
+                            <td class="text-bold">:</td>
+                            <td>Lainnya</td>
+                        </tr>
+                        <tr>
+                            <td class="fit pr-3 text-bold pl-4">Pemilik Proyek</td>
                             <td class="text-bold">:</td>
                             <td>PT. EKA MAS REPUBLIK</td>
                         </tr>
                         <tr>
-                            <td class="fit pr-3 text-bold pl-4">Alamat</td>
+                            <td class="fit pr-3 text-bold pl-4">Alamat Pemilik Proyek</td>
                             <td class="text-bold">:</td>
                             <td>SML Plaza, Tower 2, Lt.25, Jl. MH Thamrin No.51 Jakarta Pusat</td>
-                        </tr>
-
-                        <tr class="border-top">
-                            <td class="fit pr-3 text-bold">Nomor Kontrak</td>
-                            <td class="text-bold">:</td>
-                            <td>00637/HK.810/TA-370000/11-2021</td>
-                        </tr>
-                        <tr>
-                            <td class="fit pr-3 text-bold">Pekerjaan</td>
-                            <td class="text-bold">:</td>
-                            <td>MITRATEL 1 LOKASI RING MTEL-LMP-DF021 WITEL LAMPUNG</td>
-                        </tr>
-
-                        <tr>
-                            <td class="fit pr-3 text-bold">Jaminan Berlaku</td>
-                            <td class="text-bold">:</td>
-                            <td class="text-nowrap">366 Hari</td>
-                        </tr>
-                        <tr>
-                            <td class="fit pr-3 text-bold">Berlaku Mulai Tanggal</td>
-                            <td class="text-bold">:</td>
-                            <td class="text-nowrap">18 November 2023</td>
-                        </tr>
-                        <tr>
-                            <td class="fit pr-3 text-bold">Berlaku Sampai Tanggal</td>
-                            <td class="text-bold">:</td>
-                            <td class="text-nowrap">18 November 2024</td>
                         </tr>
 
                     </table>
@@ -110,7 +166,7 @@
             </div>
             <div class="col-xl-3 col-lg-4">
 
-                <div class="mw-2 mx-auto position-relative" style="height:100%;min-height:200px">
+                <div class="mw-2 mx-auto position-relative h-100 pt-3" style="min-height:200px">
                     <button class="btn btn-secondary btn-sm btn-block">
                         <i class="fas fa-edit mr-2"></i>Edit Data Jaminan
                     </button>
@@ -120,7 +176,7 @@
 
                     <div class="absolute-bottom pb-3 text-center w-100">
                         <small class="text-danger"><i class="fas fa-info-circle mr-2"></i>Data Belum Lengkap</small>
-                        <a href="/guarantee/print" class="btn btn-primary btn-lg mt-2 btn-block">
+                        <a href="/guarantee/print/a1b2c3" class="btn btn-primary btn-lg mt-2 btn-block text-bold">
                             <i class="fas fa-print mr-2"></i>Cetak Jaminan
                         </a>
                     </div>

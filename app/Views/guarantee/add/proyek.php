@@ -27,7 +27,7 @@
             </div>
 
             <div class="form-group mw-3">
-                <label for="">Jenis Pekerjaan</label>
+                <label for="">Kelompok Pekerjaan</label>
                 <select name="" id="" class="form-control">
                     <option selected disabled>---</option>
                     <option value="">Konstruksi</option>
@@ -77,6 +77,11 @@
                         <input type="text" class="form-control datetimepicker-input" id="XXXXXX_input" data-target="#tanggal_from" placeholder="Tanggal">
                     </div>
                 </div>
+            </div>
+            <div class="text-center pt-3">
+                <button class="btn btn-default btn-sm">
+                    <i class="fas fa-plus mr-2"></i>Tambah Dokumen
+                </button>
             </div>
 
         </div>

@@ -28,7 +28,7 @@ class Guarantee extends BaseController
         $this->view('guarantee/add/phase1', $data);
     }
 
-    public function add_phase2()
+    public function add_phase2($param)
     {
         $data['title'] = 'Lengkapi Data Jaminan';
         $data['bread'] = array('Jaminan|guarantee', 'Lengkapi Data');
@@ -36,12 +36,13 @@ class Guarantee extends BaseController
         $this->view('guarantee/add/phase2', $data);
     }
 
-    public function print()
+    public function print($param)
     {
         $data['title'] = 'Cetak Jaminan';
         $data['bread'] = array('Jaminan|guarantee', 'Detail|guarantee/detail', 'Cetak');
         $this->plugin->setup('scrollbar|jspdf');
-        $this->view('guarantee/print', $data);
+        // $this->view('guarantee/print', $data);
+        $this->view('guarantee/print/index', $data);
     }
 
     public function table($section, $page)
