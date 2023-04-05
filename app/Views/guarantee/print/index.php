@@ -18,19 +18,16 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-8">
+    <div class="col-9">
         <div class="card">
             <div class="card-body">
 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores labore quas dicta facilis delectus. Cumque.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores labore quas dicta facilis delectus. Cumque.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores labore quas dicta facilis delectus. Cumque.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores labore quas dicta facilis delectus. Cumque.</p>
+                <?= $this->include('guarantee/draft/mb_ind'); ?>
 
             </div>
         </div>
     </div>
-    <div class="col-4 d-flex justify-content-center">
+    <div class="col-3 d-flex justify-content-center">
         <div class="my-auto">
             <button type="button" class="btn btn-danger btn-lg btn-block">
                 Jadikan <strong>PDF</strong>

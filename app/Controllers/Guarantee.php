@@ -41,7 +41,6 @@ class Guarantee extends BaseController
         $data['title'] = 'Cetak Jaminan';
         $data['bread'] = array('Jaminan|guarantee', 'Detail|guarantee/detail', 'Cetak');
         $this->plugin->setup('scrollbar|jspdf');
-        // $this->view('guarantee/print', $data);
         $this->view('guarantee/print/index', $data);
     }
 

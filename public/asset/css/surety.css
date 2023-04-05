@@ -132,3 +132,7 @@ table th.fit {
     white-space: nowrap;
     width: 1%;
 }
+
+.hide-content {
+    display: none;
+}
