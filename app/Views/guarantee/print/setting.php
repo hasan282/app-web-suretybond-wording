@@ -27,6 +27,15 @@
     </div>
     <div class="col-xl-4 col-md-6">
 
+        <div class="form-group mw-2">
+            <label for="">Ukuran Kertas</label>
+            <select name="" id="" class="form-control" disabled>
+                <option value="" selected>A4</option>
+                <option value="">Letter</option>
+                <option value="">Legal</option>
+            </select>
+        </div>
+
         <label>Margin Halaman</label>
         <div class="border-fade py-3 px-3 mb-3">
             <div class="input-group mw-2 mx-auto">
@@ -76,6 +85,10 @@
         <div class="form-group mw-2 mx-md-auto">
             <label for="">Jarak Antar Tanda Tangan</label>
             <input type="text" class="form-control" placeholder="Jarak" disabled>
+        </div>
+        <div class="form-group mw-2 mx-md-auto">
+            <label for="">Tinggi Tanda Tangan</label>
+            <input type="text" class="form-control" placeholder="Tinggi" disabled>
         </div>
 
     </div>

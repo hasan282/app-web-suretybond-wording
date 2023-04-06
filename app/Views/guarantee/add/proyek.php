@@ -22,7 +22,7 @@
             </div>
 
             <div class="form-group">
-                <label for="">Nama Proyek</label>
+                <label for="">Nama Pekerjaan</label>
                 <textarea id="" name="" rows="2" class="form-control" placeholder="Proyek"></textarea>
             </div>
 
@@ -50,7 +50,7 @@
             </div>
 
             <div class="form-group mw-3">
-                <label>Nilai Proyek</label>
+                <label>Nilai Kontrak</label>
                 <div class="input-group">
                     <select name="currency" id="currency" class="form-control mw-1">
                         <option value="3">EUR</option>
@@ -61,27 +61,9 @@
                 </div>
             </div>
 
-            <p class="mb-1"><small class="text-secondary ml-2">Dokumen Pendukung</small></p>
-            <div class="border-fade px-3 pt-2">
-                <div class="form-group">
-                    <label for="">Dokumen</label>
-                    <textarea id="" name="" rows="2" class="form-control" placeholder="Dokumen"></textarea>
-                </div>
-                <div class="form-group row">
-                    <label for="XXXXXX" class="col-xl-3 col-form-label text-xl-right">Tanggal</label>
-                    <div class="input-group date col-xl-9" id="XXXXXX" data-target-input="nearest">
-                        <div class="input-group-prepend" data-target="#XXXXXX" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
-                        </div>
-                        <input type="hidden" id="val_XXXXXX" name="XXXXXX">
-                        <input type="text" class="form-control datetimepicker-input" id="XXXXXX_input" data-target="#tanggal_from" placeholder="Tanggal">
-                    </div>
-                </div>
-            </div>
-            <div class="text-center pt-3">
-                <button class="btn btn-default btn-sm">
-                    <i class="fas fa-plus mr-2"></i>Tambah Dokumen
-                </button>
+            <div class="form-group">
+                <label for="">Dokumen Pendukung</label>
+                <textarea id="" name="" rows="5" class="form-control" placeholder="Dokumen"></textarea>
             </div>
 
         </div>

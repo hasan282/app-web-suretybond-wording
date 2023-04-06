@@ -4,10 +4,6 @@ namespace App\Controllers;
 
 class Auth extends BaseController
 {
-    public function index()
-    {
-    }
-
     public function logout()
     {
         return redirect()->to('');
@@ -15,6 +11,8 @@ class Auth extends BaseController
 
     public function user()
     {
+
+
         var_dump($_POST);
     }
 }

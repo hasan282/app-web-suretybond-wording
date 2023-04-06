@@ -81,7 +81,7 @@
         <div class="border-fade px-3 pt-3">
 
             <div class="form-group row mb-2 mb-xl-3">
-                <label for="days" class="col-xl-4 col-form-label text-xl-right">Tempat</label>
+                <label for="days" class="col-xl-4 col-form-label text-xl-right">Tempat Terbit</label>
                 <div class="input-group col-xl-8 mw-2">
                     <input type="text" name="days" id="days" class="form-control">
                 </div>

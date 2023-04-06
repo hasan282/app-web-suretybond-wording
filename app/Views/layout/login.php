@@ -15,6 +15,7 @@ $darkmode = (intval($dark) === 1);
     <div class="card-body login-card-body">
         <p class="login-box-msg">Login sebagai User</p>
         <form method="POST">
+            <?= csrf_field(); ?>
             <div class="input-group mb-3">
                 <input type="text" name="in_user" id="in_user" class="form-control" placeholder="Username">
                 <div class="input-group-append">
@@ -32,12 +33,9 @@ $darkmode = (intval($dark) === 1);
                 </div>
             </div>
             <div class="text-center mt-5">
-                <!-- <button type="submit" class="btn btn-primary btn-block text-bold">
+                <button type="submit" class="btn btn-primary btn-block text-bold">
                     <i class="fas fa-sign-in-alt mr-2"></i>Login
-                </button> -->
-                <a href="/dashboard" class="btn btn-primary btn-block text-bold">
-                    <i class="fas fa-sign-in-alt mr-2"></i>Login
-                </a>
+                </button>
             </div>
         </form>
     </div>

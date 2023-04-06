@@ -50,6 +50,7 @@ abstract class BaseController extends Controller
     private function _autoloaders()
     {
         $this->session = \Config\Services::session();
+        $this->validation = \Config\Services::validation();
         $this->plugin = new \App\Libraries\Plugins(array(
             'refresher' => true, 'autoload' => 'basic|fontawesome'
         ));

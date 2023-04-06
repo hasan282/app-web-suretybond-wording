@@ -62,7 +62,7 @@ $widget = array(
         </div>
     </div>
     <div class="col-xl-8 col-md-7">
-
+        <!--  
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title text-secondary">Penerbitan Jaminan Terakhir</h3>
@@ -93,7 +93,7 @@ $widget = array(
                 </table>
             </div>
         </div>
-
+        -->
     </div>
 </div>
 

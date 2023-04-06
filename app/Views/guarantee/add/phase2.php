@@ -5,6 +5,7 @@
 <div class="mx-auto mw-7">
     <div class="card">
         <div class="card-body">
+            <!--  
             <table class="table table-borderless table-sm">
                 <tr>
                     <td class="fit pr-2 text-bold text-secondary">Principal</td>
@@ -17,6 +18,15 @@
                     <td><span class="text-bold">PT. ASURANSI MAXIMUS GRAHA PERSADA</span> Kantor Cabang Bogor</td>
                 </tr>
             </table>
+            -->
+            <div class="text-center">
+                <p class="text-muted mb-1">PRINCIPAL</p>
+                <h6 class="text-bold">PT. FIBERHOME TECHNOLOGIES INDONESIA</h6>
+                <hr>
+                <p class="text-muted mb-1">ASURANSI</p>
+                <h6 class="text-bold mb-1">PT. ASURANSI MAXIMUS GRAHA PERSADA</h6>
+                <p class="mb-0">Kantor Cabang Bogor</p>
+            </div>
         </div>
     </div>
 </div>
