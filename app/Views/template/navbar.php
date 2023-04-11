@@ -1,6 +1,6 @@
 <?php
-$userName = 'Administrator';
-$userImage = 'hack.jpg';
+$userName = userdata('nama');
+$userImage = userdata('foto');
 $navMenu = array(
     ['menu' => 'Dashboard', 'url' => 'dashboard', 'icon' => 'fas fa-tachometer-alt'],
     ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt'],
@@ -31,14 +31,14 @@ $darkmode = (intval($dark) === 1);
         </li>
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="<?= SURETY_DOMAIN . 'asset/img/user/' . $userImage; ?>" class="user-image img-circle elevation-1" alt="">
+                <img src="<?= $userImage; ?>" class="user-image img-circle elevation-1" alt="">
                 <span class="d-none d-md-inline"><?= $userName; ?></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <li class="user-header">
-                    <img src="<?= SURETY_DOMAIN . 'asset/img/user/' . $userImage; ?>" class="img-circle elevation-2" alt="">
+                    <img src="<?= $userImage; ?>" class="img-circle elevation-2" alt="">
                     <p><?= $userName; ?></p>
-                    <small>Web Developer</small>
+                    <small><?= userdata('user'); ?></small>
                 </li>
                 <li class="user-footer">
                     <a href="/setting" class="btn btn-default btn-flat"><i class="fas fa-cog mr-1"></i>Pengaturan</a>

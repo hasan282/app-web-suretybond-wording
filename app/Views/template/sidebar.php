@@ -1,5 +1,4 @@
 <?php
-$userImage = 'hack.jpg';
 $menuItems = array(
     ['menu' => 'Data Jaminan', 'url' => 'guarantee', 'icon' => 'fas fa-certificate'],
     ['menu' => 'Data Nasabah', 'url' => 'client', 'icon' => 'fas fa-user-shield'],
@@ -14,10 +13,10 @@ $menuItems = array(
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?= SURETY_DOMAIN . 'asset/img/user/' . $userImage; ?>" class="img-circle elevation-1" alt="">
+                <img src="<?= userdata('foto'); ?>" class="img-circle elevation-1" alt="">
             </div>
             <div class="info">
-                <a href="/user" class="d-block">Alexander Pierce</a>
+                <a href="/user" class="d-block"><?= userdata('nama'); ?></a>
             </div>
         </div>
         <nav class="mt-2">

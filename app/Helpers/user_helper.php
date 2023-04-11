@@ -1,11 +1,12 @@
 <?php
 
 if (!function_exists('userdata')) {
-    function userdata(?string $val = null)
+    function userdata(?string $param = null)
     {
-        if ($val === null) {
-            $session = session()->get();
-            $userdata = array_filter($session, function ($key) {
+        $session = \Config\Services::session();
+        if ($param === null) {
+            $sesdata = $session->get();
+            $userdata = array_filter($sesdata, function ($key) {
                 return strpos($key, 'userdata_') === 0;
             }, ARRAY_FILTER_USE_KEY);
             if (!empty($userdata)) {
@@ -17,13 +18,47 @@ if (!function_exists('userdata')) {
             }
             return $userdata;
         } else {
-            return session()->get('userdata_' . $val);
+            return $session->get('userdata_' . $param);
         }
     }
 }
 
 if (!function_exists('set_userdata')) {
-    function set_userdata()
+    function set_userdata(array $data)
     {
+        $set = array();
+        foreach ($data as $k => $v) $set['userdata_' . $k] = $v;
+        session()->set($set);
+    }
+}
+
+if (!function_exists('remove_userdata')) {
+    function remove_userdata($keys = null)
+    {
+        $session = \Config\Services::session();
+        $remove = array();
+        if ($keys === null) {
+            $sesdata = $session->get();
+            $userdata = array_filter($sesdata, function ($key) {
+                return strpos($key, 'userdata_') === 0;
+            }, ARRAY_FILTER_USE_KEY);
+            $remove = array_keys($userdata);
+        } elseif (is_string($keys)) {
+            array_push($remove, 'userdata_' . $keys);
+        } elseif (is_array($keys)) {
+            foreach ($keys as $k) array_push($remove, 'userdata_' . $k);
+        }
+        $session->remove($remove);
+    }
+}
+
+if (!function_exists('is_login')) {
+    function is_login()
+    {
+        $check = array('id', 'user', 'nama', 'foto');
+        $session = \Config\Services::session();
+        $result = array();
+        foreach ($check as $ch) array_push($result, $session->has('userdata_' . $ch));
+        return (count(array_unique($result)) === 1 && !in_array(false, $result));
     }
 }

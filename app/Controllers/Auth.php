@@ -6,10 +6,8 @@ class Auth extends BaseController
 {
     public function logout()
     {
-        // return redirect()->to('');
-
-        // var_dump(session()->get());
-        var_dump(userdata());
+        remove_userdata();
+        return redirect()->to('');
     }
 
     public function user()
@@ -19,9 +17,7 @@ class Auth extends BaseController
             (string) $this->request->getPost('in_user'),
             (string) $this->request->getPost('in_pass')
         );
-        if ($data !== null) {
-            // set session
-        }
+        if ($data !== null) set_userdata($data);
         return redirect()->to('');
     }
 }

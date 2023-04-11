@@ -6,7 +6,11 @@ class Login extends BaseController
 {
     public function index()
     {
-        $this->plugin->setup('icheck');
-        $this->view('layout/login');
+        if (is_login()) {
+            return redirect()->to('dashboard');
+        } else {
+            $this->plugin->setup('icheck');
+            $this->view('layout/login');
+        }
     }
 }
