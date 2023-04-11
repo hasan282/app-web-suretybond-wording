@@ -3,6 +3,7 @@
 <?= $this->section('login_box'); ?>
 
 <?php
+$loginFail = (session()->getFlashdata('login_status') == 'failed');
 $dark = get_cookie('DRKMOD') ?? '0';
 $darkmode = (intval($dark) === 1);
 ?>
@@ -13,7 +14,13 @@ $darkmode = (intval($dark) === 1);
 </a>
 <div class="card">
     <div class="card-body login-card-body">
-        <p class="login-box-msg">Login sebagai User</p>
+        <?php if ($loginFail) : ?>
+            <p class="login-box-msg text-danger">
+                <i class="fas fa-exclamation-triangle mr-2"></i>Data User Tidak Sesuai
+            </p>
+        <?php else : ?>
+            <p class="login-box-msg">Login sebagai User</p>
+        <?php endif; ?>
         <form method="POST">
             <?= csrf_field(); ?>
             <div class="input-group mb-3">
@@ -33,7 +40,7 @@ $darkmode = (intval($dark) === 1);
                 </div>
             </div>
             <div class="text-center mt-5">
-                <button type="submit" class="btn btn-primary btn-block text-bold">
+                <button type="submit" class="btn btn-primary btn-block text-bold" disabled>
                     <i class="fas fa-sign-in-alt mr-2"></i>Login
                 </button>
             </div>
@@ -47,4 +54,19 @@ $darkmode = (intval($dark) === 1);
     </div>
 </div>
 
+<?= $this->endSection(); ?>
+
+<?= $this->section('jscript'); ?>
+<script>
+    $(function() {
+        <?php if ($loginFail) : ?>
+            setTimeout(() => {
+                $('.login-box-msg').removeClass('text-danger').html('Login sebagai User');
+            }, 5000);
+        <?php endif; ?>
+        $('input.form-control').on('keyup', function() {
+            $('button[type="submit"]').attr('disabled', ($('#in_user').val() == '' || $('#in_pass').val() == ''));
+        });
+    });
+</script>
 <?= $this->endSection(); ?>

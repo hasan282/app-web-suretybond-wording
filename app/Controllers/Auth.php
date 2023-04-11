@@ -17,7 +17,13 @@ class Auth extends BaseController
             (string) $this->request->getPost('in_user'),
             (string) $this->request->getPost('in_pass')
         );
-        if ($data !== null) set_userdata($data);
-        return redirect()->to('');
+        $redirect = redirect()->to('');
+        if ($data !== null) {
+            set_userdata($data);
+            $redirect->setCookie('USRLOG', $data['id'], 432000);
+        } else {
+            session()->setFlashdata('login_status', 'failed');
+        }
+        return $redirect;
     }
 }

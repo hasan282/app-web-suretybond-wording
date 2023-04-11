@@ -9,6 +9,7 @@ class Login extends BaseController
         if (is_login()) {
             return redirect()->to('dashboard');
         } else {
+            $userid = get_cookie('USRLOG');
             $this->plugin->setup('icheck');
             $this->view('layout/login');
         }
