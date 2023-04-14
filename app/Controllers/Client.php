@@ -6,6 +6,8 @@ class Client extends BaseController
 {
     public function index()
     {
+        if (!is_login())
+            return login_page(full_url(false));
         $data['title'] = 'Data Principal';
         $data['jscript'] = 'all/tables';
         $this->plugin->setup('scrollbar');
@@ -14,6 +16,8 @@ class Client extends BaseController
 
     public function add()
     {
+        if (!is_login())
+            return login_page(full_url(false));
         $data['title'] = 'Tambah Data Principal';
         $data['bread'] = array('Principal|client', 'Tambah Data');
         $this->plugin->setup('scrollbar');

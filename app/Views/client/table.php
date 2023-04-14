@@ -1,3 +1,16 @@
+<?php
+$clients = array(
+    'PT. CITRA GUMILANG PRATAMA',
+    'PT. DHARMA HUTAMA KARYA',
+    'PT. DINAYA SEJAHTERA ABADI',
+    'PT. ENDAVO CITA PERKASA',
+    'PT. FIBERHOME TECHNOLOGIES INDONESIA',
+    'PT. INDONESIA FERRY PROPERTI',
+    'PT. INFITECH SOLUSI INDONESIA',
+    'PT. MANDALA PUTERA PRIMA',
+    'PT. PALAPA TIMUR TELEMATIKA'
+);
+?>
 <table class="table table-hover text-nowrap">
     <thead>
         <tr>
@@ -7,16 +20,16 @@
         </tr>
     </thead>
     <tbody>
-        <?php for ($r = 0; $r < 10; $r++) : ?>
+        <?php foreach ($clients as $num => $cn) : ?>
             <tr>
-                <td class="text-center text-bold border-right fit"><?= $r + 1; ?></td>
+                <td class="text-center text-bold border-right fit"><?= $num + 1; ?></td>
                 <td class="py-0 align-middle text-center fit">
                     <span class="btn btn-info btn-sm pb-1 text-bold">
                         <i class="fas fa-info-circle mr-2"></i>info
                     </span>
                 </td>
-                <td class="border-left">PT. FIBERHOME TECHNOLOGIES INDONESIA</td>
+                <td class="border-left"><?= $cn; ?></td>
             </tr>
-        <?php endfor; ?>
+        <?php endforeach; ?>
     </tbody>
 </table>

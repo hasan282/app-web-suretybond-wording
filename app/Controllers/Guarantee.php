@@ -6,14 +6,18 @@ class Guarantee extends BaseController
 {
     public function index()
     {
+        if (!is_login())
+            return login_page(full_url(false));
         $data['title'] = 'Data Jaminan';
         $data['jscript'] = 'all/tables';
         $this->plugin->setup('scrollbar');
-        $this->view('guarantee/index', $data);
+        return $this->view('guarantee/index', $data, true);
     }
 
     public function detail()
     {
+        if (!is_login())
+            return login_page(full_url(false));
         $data['title'] = 'Detail Jaminan';
         $data['bread'] = array('Data Jaminan|guarantee', 'Detail');
         $this->plugin->setup('scrollbar');
@@ -22,6 +26,8 @@ class Guarantee extends BaseController
 
     public function add_phase1()
     {
+        if (!is_login())
+            return login_page(full_url(false));
         $data['title'] = 'Tambah Data Jaminan';
         $data['bread'] = array('Jaminan|guarantee', 'Tambah Baru');
         $this->plugin->setup('scrollbar');
@@ -30,6 +36,8 @@ class Guarantee extends BaseController
 
     public function add_phase2($param)
     {
+        if (!is_login())
+            return login_page(full_url(false));
         $data['title'] = 'Lengkapi Data Jaminan';
         $data['bread'] = array('Jaminan|guarantee', 'Lengkapi Data');
         $this->plugin->setup('scrollbar');
@@ -38,6 +46,8 @@ class Guarantee extends BaseController
 
     public function print($param)
     {
+        if (!is_login())
+            return login_page(full_url(false));
         $data['title'] = 'Cetak Jaminan';
         $data['bread'] = array('Jaminan|guarantee', 'Detail|guarantee/detail', 'Cetak');
         $this->plugin->setup('scrollbar|jspdf');

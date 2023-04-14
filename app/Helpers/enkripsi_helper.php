@@ -23,9 +23,10 @@ if (!function_exists('sha3hash')) {
      */
     function sha3hash(string $text, int $length = 32)
     {
+        $chars = $length < 64 ? $length : 64;
+        $offset = $chars < (64 - 1) ? floor((64 - $chars) / 2) : 0;
         $key = md5('J4smine1ndah');
         $result = hash_hmac('sha3-256', $text, $key);
-        $offset = floor((64 - $length) / 2);
-        return substr($result, $offset, $length);
+        return substr($result, $offset, $chars);
     }
 }

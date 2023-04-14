@@ -18,3 +18,23 @@ if (!function_exists('nformat')) {
         return $result;
     }
 }
+
+if (!function_exists('create_id')) {
+    function create_id(int $suffix = 4)
+    {
+        $suffix_value = '';
+        if ($suffix > 0) {
+            if ($suffix === 1) {
+                $suffix_value .= mt_rand(0, 9);
+            } else {
+                $min = str_pad('1', $suffix, '0');
+                $max = str_pad('9', $suffix, '9');
+                $suffix_value .= mt_rand(intval($min), intval($max));
+            }
+        }
+        return date('ymdHis') . $suffix_value;
+    }
+}
+
+if (!function_exists('id2date')) {
+}

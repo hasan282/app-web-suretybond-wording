@@ -62,3 +62,12 @@ if (!function_exists('is_login')) {
         return (count(array_unique($result)) === 1 && !in_array(false, $result));
     }
 }
+
+if (!function_exists('login_page')) {
+    function login_page(string $url)
+    {
+        $session = \Config\Services::session();
+        $session->setFlashdata('requested_url', $url);
+        return redirect()->to('');
+    }
+}

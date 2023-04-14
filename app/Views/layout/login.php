@@ -3,7 +3,8 @@
 <?= $this->section('login_box'); ?>
 
 <?php
-$loginFail = (session()->getFlashdata('login_status') == 'failed');
+$session = session();
+$loginFail = ($session->getFlashdata('login_status') == 'failed');
 $dark = get_cookie('DRKMOD') ?? '0';
 $darkmode = (intval($dark) === 1);
 ?>
@@ -23,19 +24,20 @@ $darkmode = (intval($dark) === 1);
         <?php endif; ?>
         <form method="POST">
             <?= csrf_field(); ?>
+            <input type="hidden" name="requested_url" value="<?= $session->getFlashdata('requested_url'); ?>">
             <div class="input-group mb-3">
                 <input type="text" name="in_user" id="in_user" class="form-control" placeholder="Username">
                 <div class="input-group-append">
                     <div class="input-group-text">
-                        <span class="fas fa-user"></span>
+                        <span class="fas fa-fw fa-user"></span>
                     </div>
                 </div>
             </div>
             <div class="input-group mb-3">
                 <input type="password" name="in_pass" id="in_pass" class="form-control" placeholder="Password">
                 <div class="input-group-append">
-                    <div class="input-group-text" data-target="in_pass" data-show="0">
-                        <span class="fas fa-lock"></span>
+                    <div class="input-group-text cursor-pointer showpass" data-target="in_pass" data-show="0">
+                        <span class="fas fa-fw fa-eye"></span>
                     </div>
                 </div>
             </div>
@@ -66,6 +68,14 @@ $darkmode = (intval($dark) === 1);
         <?php endif; ?>
         $('input.form-control').on('keyup', function() {
             $('button[type="submit"]').attr('disabled', ($('#in_user').val() == '' || $('#in_pass').val() == ''));
+        });
+        $('.showpass').on('click', function() {
+            const ICON = 'fas fa-fw fa-eye';
+            const SHOW = parseInt($(this).data('show')) === 1;
+            const TARGET = $('#' + $(this).data('target'));
+            TARGET.attr('type', SHOW ? 'password' : 'text');
+            $(this).children('span').attr('class', SHOW ? ICON : ICON + '-slash');
+            $(this).data('show', SHOW ? '0' : '1');
         });
     });
 </script>

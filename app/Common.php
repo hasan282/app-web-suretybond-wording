@@ -18,7 +18,7 @@ function setAllRoutes($routes)
     $routes->get('/guarantee/print/(:hash)', 'Guarantee::print/$1');
 
     $routes->get('/client', 'Client::index');
-    $routes->get('/client/detail', 'Client::detail');
+    // $routes->get('/client/detail', 'Client::detail');
     $routes->get('/client/add', 'Client::add');
 
     $routes->get('/tb/guarantee/(:segment)/(:num)', 'Guarantee::table/$1/$2');

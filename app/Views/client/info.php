@@ -1,8 +1,10 @@
+<!--  
 <div class="text-right">
     <a href="/client/detail" class="btn btn-info btn-sm">
         Lihat Detail Principal<i class="fas fa-arrow-circle-right ml-2"></i>
     </a>
 </div>
+-->
 <p>
     <small class="text-info">Nama Principal</small><br>
     <span class="text-bold">PT. FIBERHOME TECHNOLOGIES INDONESIA</span>

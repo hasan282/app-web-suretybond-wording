@@ -37,14 +37,18 @@ abstract class BaseController extends Controller
      * Call a Views and Remove a New Line
      * @param string $view Path of View
      * @param array $data Data to Send
-     * @param bool $return Retun Source Code (default false)
+     * @param bool $return Return Source Code (default false)
      */
-    protected function view(string $view, array $data = [])
+    protected function view(string $view, array $data = [], $return = false)
     {
         $data['adminPlugins'] = $this->plugin;
         $source = view($view, $data);
         if (env_is('production')) $source = nl2space($source);
-        echo $source;
+        if ($return) {
+            return $source;
+        } else {
+            echo $source;
+        }
     }
 
     private function _autoloaders()
