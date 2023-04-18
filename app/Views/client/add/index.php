@@ -4,6 +4,7 @@
 
 <div class="mx-auto mw-9">
     <form method="POST">
+        <?= csrf_field(); ?>
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">Informasi Principal</h3>
@@ -19,12 +20,9 @@
 
             </div>
             <div class="card-footer text-center">
-                <a href="/client" class="btn btn-primary text-bold">
+                <button type="submit" class="btn btn-primary text-bold">
                     <i class="fas fa-save mr-2"></i>Simpan Data Principal
-                </a>
-                <!-- <button type="submit" class="btn btn-primary text-bold">
-                    <i class="fas fa-save mr-2"></i>Simpan Data Principal
-                </button> -->
+                </button>
             </div>
         </div>
     </form>

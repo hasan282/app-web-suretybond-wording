@@ -1,43 +1,36 @@
 <div class="row">
     <div class="col-md">
-
         <div class="form-group">
-            <label for="">Nama Perusahaan</label>
-            <input id="" name="" class="form-control" placeholder="Perusahaan">
+            <label for="principal">Nama Perusahaan <span class="text-danger">*</span></label>
+            <input id="principal" name="principal" class="form-control" value="<?= set_value('principal'); ?>" placeholder="Perusahaan">
         </div>
-
         <div class="form-group">
-            <label for="">Alamat</label>
-            <textarea id="" name="" rows="2" class="form-control" placeholder="Alamat"></textarea>
+            <label for="alamat">Alamat <span class="text-danger">*</span></label>
+            <textarea id="alamat" name="alamat" rows="2" class="form-control" placeholder="Alamat"></textarea>
         </div>
-
         <div class="form-group">
-            <label for="">Nomor Telpon</label>
-            <input id="" name="" class="form-control" placeholder="Telpon">
+            <label for="telpon">Nomor Telpon</label>
+            <input id="telpon" name="telpon" class="form-control" value="<?= set_value('telpon'); ?>" placeholder="Telpon">
         </div>
-
         <div class="form-group">
-            <label for="">Email</label>
-            <input id="" name="" class="form-control" placeholder="Email">
+            <label for="email">Email</label>
+            <input id="email" name="email" class="form-control" value="<?= set_value('email'); ?>" placeholder="Email">
         </div>
-
     </div>
     <div class="col-md">
-
         <label><small class="ml-2 text-secondary">Pejabat Penandatangan</small></label>
         <div class="border-fade px-3 pt-2">
-
             <div class="form-group">
-                <label for="">Nama Lengkap</label>
-                <input id="" name="" class="form-control" placeholder="Nama">
+                <label for="pejabat">Nama Lengkap <span class="text-danger">*</span></label>
+                <input id="pejabat" name="pejabat" class="form-control" value="<?= set_value('pejabat'); ?>" placeholder="Nama">
             </div>
-
             <div class="form-group">
-                <label for="">Jabatan</label>
-                <input id="" name="" class="form-control" placeholder="Jabatan">
+                <label for="jabatan">Jabatan <span class="text-danger">*</span></label>
+                <input id="jabatan" name="jabatan" class="form-control" value="<?= set_value('jabatan'); ?>" placeholder="Jabatan">
             </div>
-
         </div>
-
+        <div class="text-right px-3 pt-2">
+            <small class="text-danger"><i>* kolom yang harus diisi</i></small>
+        </div>
     </div>
 </div>

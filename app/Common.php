@@ -20,6 +20,7 @@ function setAllRoutes($routes)
     $routes->get('/client', 'Client::index');
     // $routes->get('/client/detail', 'Client::detail');
     $routes->get('/client/add', 'Client::add');
+    $routes->post('/client/add', 'Client::addNew');
 
     $routes->get('/tb/guarantee/(:segment)/(:num)', 'Guarantee::table/$1/$2');
 
