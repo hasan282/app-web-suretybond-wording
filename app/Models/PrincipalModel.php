@@ -6,7 +6,7 @@ use App\Models\BaseModel;
 
 class PrincipalModel extends BaseModel
 {
-    public function addNew($post = [], $office = null)
+    public function addNew(array $post = [], ?string $office = null)
     {
         $data['id'] = create_id();
         $data['enkripsi'] = sha3hash($data['id'], 50);

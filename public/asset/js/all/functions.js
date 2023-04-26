@@ -1,3 +1,18 @@
+function setCookie(name, value = '', days = 5) {
+    let date = new Date;
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expire = '; expires=' + date.toUTCString();
+    document.cookie = name + '=' + value + expire + '; path=/';
+}
+
+function getCookie(name) {
+    let result = null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) result = parts.pop().split(';').shift();
+    return result;
+}
+
 $(function () {
 
     $('#darkswitch').change(function () {
@@ -28,19 +43,13 @@ $(function () {
         }
     });
 
+    $('[class^="icheck-"]').on('change', function () {
+        const CHECKBOX = $(this);
+        const COLOR = CHECKBOX.attr('class').split(' ').filter(function (val) {
+            return val.indexOf('icheck') !== -1;
+        }).pop().replace('icheck-', '');
+        const METHOD = CHECKBOX.children('input').is(':checked') ? 'addClass' : 'removeClass';
+        CHECKBOX.children('label')[METHOD]('text-' + COLOR);
+    });
+
 });
-
-function setCookie(name, value = '', days = 5) {
-    let date = new Date;
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    const expire = '; expires=' + date.toUTCString();
-    document.cookie = name + '=' + value + expire + '; path=/';
-}
-
-function getCookie(name) {
-    let result = null;
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) result = parts.pop().split(';').shift();
-    return result;
-}

@@ -20,7 +20,7 @@ class Client extends BaseController
             return login_page(full_url(false));
         $data['title'] = 'Tambah Data Principal';
         $data['bread'] = array('Principal|client', 'Tambah Data');
-        $this->plugin->setup('scrollbar');
+        $this->plugin->setup('scrollbar|icheck');
         return $this->view('client/add/index', $data, true);
     }
 
@@ -38,7 +38,7 @@ class Client extends BaseController
             return $this->add();
         $data = $this->request->getPost();
         $principal = new \App\Models\PrincipalModel;
-        if ($principal->addNew($data)) {
+        if ($principal->addNew($data, userdata('office_id'))) {
             return redirect()->to('client');
         } else {
             echo 'FAILED';

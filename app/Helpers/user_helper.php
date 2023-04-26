@@ -55,7 +55,7 @@ if (!function_exists('remove_userdata')) {
 if (!function_exists('is_login')) {
     function is_login()
     {
-        $check = array('id', 'user', 'nama', 'foto');
+        $check = array('id', 'user', 'nama', 'foto', 'office', 'role');
         $session = \Config\Services::session();
         $result = array();
         foreach ($check as $ch) array_push($result, $session->has('userdata_' . $ch));

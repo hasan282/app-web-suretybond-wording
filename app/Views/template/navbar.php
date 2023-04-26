@@ -38,7 +38,7 @@ $darkmode = (intval($dark) === 1);
                 <li class="user-header">
                     <img src="<?= $userImage; ?>" class="img-circle elevation-2" alt="">
                     <p><?= $userName; ?></p>
-                    <small><?= userdata('user'); ?></small>
+                    <small><?= userdata('office'); ?></small>
                 </li>
                 <li class="user-footer">
                     <a href="/setting" class="btn btn-default btn-flat"><i class="fas fa-cog mr-1"></i>Pengaturan</a>
