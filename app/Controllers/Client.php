@@ -38,10 +38,14 @@ class Client extends BaseController
             return $this->add();
         $data = $this->request->getPost();
         $principal = new \App\Models\PrincipalModel;
-        if ($principal->addNew($data, userdata('office_id'))) {
-            return redirect()->to('client');
-        } else {
+        $dataClient = $principal->addNew($data, userdata('office_id'));
+        if ($dataClient === false) {
             echo 'FAILED';
+        } else {
+            $direct = $this->request->getPost(
+                'continues'
+            ) == 'on' ? 'guarantee/add?client=' . $dataClient['enkripsi'] : 'client';
+            return redirect()->to($direct);
         }
     }
 
