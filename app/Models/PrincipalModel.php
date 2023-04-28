@@ -76,7 +76,26 @@ class PrincipalModel extends BaseModel
         return $this;
     }
 
-    public function order($order, bool $isQuery = false)
+    public function where($where, array $addField = [])
     {
+        $fields = array(
+            'id' => 'principal.id',
+            'enkrip' => 'principal.enkripsi',
+            'nama' => 'principal.nama',
+            'office' => 'principal.id_office'
+        );
+        if (!empty($addField)) $fields = array_merge($fields, $addField);
+        return parent::where($where, $fields);
+    }
+
+    public function order($order, bool $isQuery = false, array $addOption = [])
+    {
+        $options = array(
+            'principal' => 'principal.nama ASC',
+            'oldest' => 'principal.id ASC',
+            'newest' => 'principal.id DESC'
+        );
+        if (!empty($addOption)) $options = array_merge($options, $addOption);
+        return parent::order($order, $isQuery, $options);
     }
 }

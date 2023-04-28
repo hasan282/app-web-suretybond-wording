@@ -30,7 +30,12 @@ class Insurance extends BaseController
         // );
         // var_dump($principal->addPeople('2304270957274734', $data));
 
-        $pr = $principal->getData(['enkrip', 'principal'])->data();
+        $pr = $principal->getData(
+            ['enkrip', 'principal']
+        )->where(
+            ['enkrip' => '8d9baa09a1da1be0420112fbd2e778ea31d0893d7b124253f9']
+            // ['office' => userdata('office_id')]
+        )->order('principal')->data(false);
 
         var_dump($pr);
         // echo $pr;
