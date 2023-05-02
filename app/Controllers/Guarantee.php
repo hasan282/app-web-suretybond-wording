@@ -29,6 +29,7 @@ class Guarantee extends BaseController
         if (!is_login())
             return login_page(full_url(false));
         $data['title'] = 'Tambah Data Jaminan';
+        $data['jscript'] = 'guarantee/add';
         $data['bread'] = array('Jaminan|guarantee', 'Tambah Baru');
         $this->plugin->setup('scrollbar');
         $this->view('guarantee/add/phase1', $data);
