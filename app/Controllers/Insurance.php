@@ -12,12 +12,14 @@ class Insurance extends BaseController
         // $this->plugin->setup('scrollbar');
         // $this->view('insurance/index', $data);
 
-        $this->_test2();
+        $this->_test1();
     }
 
     private function _test1()
     {
-        var_dump($_SESSION);
+        // var_dump($_SESSION);
+
+        var_dump(userdata('office_id'));
     }
 
     private function _test2()
@@ -30,12 +32,18 @@ class Insurance extends BaseController
         // );
         // var_dump($principal->addPeople('2304270957274734', $data));
 
-        $pr = $principal->getData(
-            ['enkrip', 'principal']
-        )->where(
-            ['enkrip' => '8d9baa09a1da1be0420112fbd2e778ea31d0893d7b124253f9']
-            // ['office' => userdata('office_id')]
-        )->order('principal')->data(false);
+        // $pr = $principal->getData(
+        // ['enkrip', 'principal']
+        // )->where(
+        // ['enkrip' => '8d9baa09a1da1be0420112fbd2e778ea31d0893d7b124253f9']
+        // ['office' => userdata('office_id')]
+        // )->order('principal')->data(false);
+
+        $principal->getData(['enkrip', 'principal'])->where(['office' => userdata('office_id')]);
+        $pr = array(
+            'count' => $principal->count(),
+            'data' => $principal->order('principal')->data(false)
+        );
 
         var_dump($pr);
         // echo $pr;

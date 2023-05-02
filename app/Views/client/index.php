@@ -11,9 +11,9 @@ $principal = $table->clientPrincipal(1);
 <div class="row mb-3">
     <div class="col-sm">
         <div class="input-group mb-3 mb-sm-0 mw-4">
-            <input type="search" id="datasearch" class="form-control" placeholder="Cari Nama Principal">
+            <input type="search" id="datasearch" class="form-control" placeholder="Cari Nama Principal" disabled>
             <div class="input-group-append">
-                <button type="button" id="btn_search" class="btn btn-default">
+                <button type="button" id="btn_search" class="btn btn-default" disabled>
                     <i class="fas fa-search mx-2"></i>
                 </button>
             </div>
@@ -32,7 +32,7 @@ $principal = $table->clientPrincipal(1);
         <div class="card">
             <div class="overlay<?= $darkmode ? ' dark' : ''; ?>" id="loading"></div>
             <div class="card-header">
-                <h3 class="card-title">Principal <strong id="count_data">10</strong> Data</h3>
+                <h3 class="card-title">Principal <strong id="count_data"><?= $principal->count; ?></strong> Data</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
@@ -45,7 +45,6 @@ $principal = $table->clientPrincipal(1);
 
             </div>
         </div>
-
     </div>
     <div class="col-xl-5 col-md-6">
         <div class="card">
@@ -54,9 +53,13 @@ $principal = $table->clientPrincipal(1);
                     <h6 class="text-secondary">Informasi Principal</h6>
                 </div>
                 <div class="mt-4 px-2">
-
-                    <?= $this->include('client/info'); ?>
-
+                    <div class="text-center text-info">
+                        <p>Tekan <i class="fas fa-info-circle"></i> <strong>Info</strong> untuk Menampilkan Informasi Principal</p>
+                    </div>
+                    <?=
+                    '';
+                    //  $this->include('client/info'); 
+                    ?>
                 </div>
             </div>
         </div>
@@ -64,7 +67,7 @@ $principal = $table->clientPrincipal(1);
 </div>
 <div class="row">
     <div class="col-xl-7">
-        <?= $this->include('table/nav_foot'); ?>
+        <?= $table->footNavs($principal->page_now, $principal->page_max); ?>
     </div>
 </div>
 
@@ -75,6 +78,9 @@ $principal = $table->clientPrincipal(1);
     $(function() {
         $('#loading').setLoader({
             icon: 'fas fa-circle-notch'
+        });
+        $('.data-nav').navTable(function(page) {
+            $('#principal').setContent(BaseURL + 'tb/client/' + page);
         });
     });
 </script>

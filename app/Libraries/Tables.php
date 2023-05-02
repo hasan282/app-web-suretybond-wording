@@ -4,9 +4,18 @@ namespace App\Libraries;
 
 class Tables
 {
+    private $now, $max, $count, $dataList;
+    private $limit, $offset;
+
+    public function __construct()
+    {
+        $this->limit = 10;
+        $this->offset = 0;
+    }
+
     public function guaranteeDraft(int $page = 1)
     {
-        $model = new \App\Models\DataModel();
+        $model = new \App\Models\DataModel;
         $data['list'] = $model->dataJaminan();
 
         return (object) [
@@ -20,7 +29,7 @@ class Tables
 
     public function guaranteeIssued(int $page = 1)
     {
-        $model = new \App\Models\DataModel();
+        $model = new \App\Models\DataModel;
         $data['list'] = $model->dataIssued();
 
         return (object) [
@@ -34,18 +43,52 @@ class Tables
 
     public function clientPrincipal(int $page = 1)
     {
-        return (object) [
-            'page_now' => $page,
-            'page_max' => 3,
-            'count' => 27,
-            'limit' => 10,
-            'content' => nl2space(view('client/table'))
-        ];
+        $model = new \App\Models\PrincipalModel;
+        $model->getData(array('enkrip', 'principal'));
+        $office = userdata('office_id');
+        if ($office !== null) $model->where(array('office' => $office));
+        $this->_setPage($page, $model->count('principal.id'));
+        $this->dataList = $model->limit(
+            $this->limit,
+            $this->offset
+        )->order('principal')->data();
+        return $this->_objectReturn('client/table', 'principal');
     }
 
     public function footNavs($now = 1, $max = 1)
     {
         $data = array('now' => $now, 'max' => $max);
         return view('table/nav_foot', $data);
+    }
+
+    private function _setPage(int $page, int $dataCount)
+    {
+        if ($page > 0 && $dataCount > 0) {
+            $this->now = $page;
+            $this->count = $dataCount;
+            $this->max = (int) floor($dataCount / $this->limit) +
+                ($dataCount % $this->limit === 0 ? 0 : 1);
+            $this->offset = ($this->now - 1) * $this->limit;
+        } else {
+            $this->now = 1;
+            $this->max = 0;
+            $this->count = 0;
+        }
+    }
+
+    private function _objectReturn(string $tablePath, string $var = 'list')
+    {
+        $dataReturn = array(
+            'page_now' => $this->now,
+            'page_max' => $this->max === 0 ? 1 : $this->max,
+            'count' => $this->count,
+            'limit' => $this->limit
+        );
+        $data[$var] = $this->dataList;
+        $data['pages'] = $dataReturn;
+        $contentShow = (!empty($this->dataList) && $this->max > 0)
+            ? view($tablePath, $data) : view('table/empty');
+        $dataReturn['content'] = nl2space($contentShow);
+        return (object) $dataReturn;
     }
 }

@@ -58,4 +58,17 @@ class Client extends BaseController
         $this->plugin->setup('scrollbar');
         $this->view('client/detail', $data);
     }
+
+    public function table($pageNumber)
+    {
+        $page = intval($pageNumber);
+        if (is_login() && $page > 0) {
+            $table = new \App\Libraries\Tables;
+            return $this->response->setJSON(
+                $table->clientPrincipal($page, userdata('office_id'))
+            );
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
 }

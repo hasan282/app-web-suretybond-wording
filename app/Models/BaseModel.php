@@ -8,6 +8,7 @@ class BaseModel
     protected $select, $table, $where, $group, $order;
 
     private $query = '';
+    private $limit = '';
 
     public function __construct()
     {
@@ -33,7 +34,7 @@ class BaseModel
         if (!is_string($this->select) || !is_string($this->table)) {
             return null;
         } else {
-            $this->_createQuery($this->select, $this->table);
+            $this->_queryAssemble($this->select, $this->table);
             $binds = empty($this->bind) ? null : $this->bind;
             $data = $this->db->query($this->query, $binds)->getResultArray();
             if ($alwaysList) {
@@ -53,10 +54,29 @@ class BaseModel
 
     public function count(string $field = 'id')
     {
+        if (!is_string($this->table)) {
+            return 0;
+        } else {
+            $query = 'SELECT COUNT(' . $field . ') AS jumlah FROM ' . $this->table;
+            if ($this->where !== null) {
+                if (is_string($this->where)) $query .= ' WHERE ' . $this->where;
+                if (is_array($this->where)) $query .= ' WHERE ' . implode(' AND ', $this->where);
+            }
+            $binds = empty($this->bind) ? null : $this->bind;
+            $count = $this->db->query($query, $binds)->getResultArray();
+            return intval($count[0]['jumlah']);
+        }
     }
 
     public function limit(int $limit, int $offset = 0)
     {
+        $limitQuery = '';
+        if ($limit > 0) {
+            $limitQuery .= ' LIMIT ' . $limit;
+            if ($offset > 0) $limitQuery .= ' OFFSET ' . $offset;
+        }
+        $this->limit = $limitQuery;
+        return $this;
     }
 
     public function where($where, array $fields = [])
@@ -121,7 +141,7 @@ class BaseModel
         }
     }
 
-    private function _createQuery(?string $select, ?string $table)
+    private function _queryAssemble(?string $select, ?string $table)
     {
         $query = 'SELECT ' . $select . ' FROM ' . $table;
         if ($this->where !== null) {
@@ -136,6 +156,6 @@ class BaseModel
             if (is_string($this->order)) $query .= ' ORDER BY ' . $this->order;
             if (is_array($this->order)) $query .= ' ORDER BY ' . implode(', ', $this->order);
         }
-        $this->query = $query;
+        $this->query = $query . $this->limit;
     }
 }
