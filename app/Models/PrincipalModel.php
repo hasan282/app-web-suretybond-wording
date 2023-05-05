@@ -24,6 +24,15 @@ class PrincipalModel extends BaseModel
         return $insert === false ? $insert : $data;
     }
 
+    public function addPeople(string $principal, $post = [])
+    {
+        $data = $this->_peopleData($principal, $post);
+        $insert = $this->transaction(function ($db) use ($data) {
+            $db->table('principal_people')->insert($data);
+        });
+        return $insert === false ? $insert : $data;
+    }
+
     private function _peopleData(string $principal, $post = [])
     {
         $data['id'] = create_id();
@@ -34,15 +43,6 @@ class PrincipalModel extends BaseModel
         $data['actives'] = 1;
         foreach ($data as $k => $v) if ($v == '') unset($data[$k]);
         return $data;
-    }
-
-    public function addPeople(string $principal, $post = [])
-    {
-        $data = $this->_peopleData($principal, $post);
-        $insert = $this->transaction(function ($db) use ($data) {
-            $db->table('principal_people')->insert($data);
-        });
-        return $insert === false ? $insert : $data;
     }
 
     public function getData(array $select = [], bool $active = true)
@@ -72,14 +72,32 @@ class PrincipalModel extends BaseModel
             $fields['active'] = 'principal.actives AS active';
             if (!empty($select)) array_push($select, 'active');
         }
-        $this->selector($fields, $select);
+        $this->select($fields, $select);
         return $this;
     }
+
+    public function getPeople(array $select = [], bool $active = true)
+    {
+        $fields = array(
+            'id' => 'principal_people.id AS id',
+            'enkrip' => 'principal_people.enkripsi AS enkrip',
+            'nama' => 'principal_people.nama AS nama',
+            'jabatan' => 'principal_people.jabatan AS jabatan',
+            'active' => 'principal_people.actives AS active'
+        );
+        $this->select($fields, $select);
+        $this->table = 'principal_people';
+        if ($active) $this->where = array('principal_people.actives = 1');
+        return $this;
+    }
+
+    // ----- PARENT OVERRIDE ------------------------------------------------------
 
     public function where($where, array $addField = [])
     {
         $fields = array(
             'id' => 'principal.id',
+            'id_principal' => 'principal_people.id_principal',
             'enkrip' => 'principal.enkripsi',
             'nama' => 'principal.nama',
             'office' => 'principal.id_office'

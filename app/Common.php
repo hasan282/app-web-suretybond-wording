@@ -22,9 +22,6 @@ function setAllRoutes($routes)
     $routes->get('/client/add', 'Client::add');
     $routes->post('/client/add', 'Client::addNew');
 
-    $routes->get('/tb/guarantee/(:segment)/(:num)', 'Guarantee::table/$1/$2');
-    $routes->get('/tb/client/(:num)', 'Client::table/$1');
-
     $routes->get('/insurance', 'Insurance::index');
 
     $routes->get('/dashboard', 'Dashboard::index');
@@ -32,6 +29,14 @@ function setAllRoutes($routes)
     $routes->get('/setting', 'Setting::index');
 
     $routes->get('/search', 'Search::index');
+
+    // --- JSON Table --------------------------------------------------------
+    $routes->get('/tb/guarantee/(:segment)/(:num)', 'Guarantee::table/$1/$2');
+    $routes->get('/tb/client/(:num)', 'Client::table/$1');
+
+    // --- JSON Data ---------------------------------------------------------
+    $routes->get('/d/client/people/(:hash)', 'Client::people/$1');
+    $routes->get('/d/insurance/(:hash)', 'Insurance::dataCabang/$1');
 }
 
 if (!function_exists('env_is')) {

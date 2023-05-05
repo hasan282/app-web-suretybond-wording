@@ -128,7 +128,7 @@ class BaseModel
         return $this;
     }
 
-    protected function selector(array $fields, array $select = [])
+    protected function select(array $fields, array $select = [])
     {
         if (empty($select)) {
             $this->select = implode(', ', array_values($fields));

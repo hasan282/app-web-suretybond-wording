@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 class Client extends BaseController
 {
+
+
     public function index()
     {
         if (!is_login())
@@ -69,6 +71,25 @@ class Client extends BaseController
             );
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        }
+    }
+
+    public function people($principalID)
+    {
+        $principal = new \App\Models\PrincipalModel;
+        $data = $principal->getData(['id'])->where(
+            array('enkrip' => $principalID)
+        )->data(false);
+        if ($data === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+            $principal = new \App\Models\PrincipalModel;
+            $people = $principal->getPeople(
+                ['enkrip', 'nama', 'jabatan']
+            )->where(
+                ['id_principal' => $data['id']]
+            )->data();
+            return $this->response->setJSON($people);
         }
     }
 }
