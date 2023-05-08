@@ -12,10 +12,12 @@ function setAllRoutes($routes)
 
     $routes->get('/guarantee', 'Guarantee::index');
     $routes->get('/guarantee/issued', 'Guarantee::index');
-    $routes->get('/guarantee/detail', 'Guarantee::detail');
+    $routes->get('/guarantee/detail/(:hash)', 'Guarantee::detail/$1');
     $routes->get('/guarantee/add', 'Guarantee::add_phase1');
     $routes->get('/guarantee/add/(:hash)', 'Guarantee::add_phase2/$1');
     $routes->get('/guarantee/print/(:hash)', 'Guarantee::print/$1');
+
+    $routes->post('/guarantee/add', 'Guarantee::phase1_process');
 
     $routes->get('/client', 'Client::index');
     // $routes->get('/client/detail', 'Client::detail');
@@ -35,8 +37,9 @@ function setAllRoutes($routes)
     $routes->get('/tb/client/(:num)', 'Client::table/$1');
 
     // --- JSON Data ---------------------------------------------------------
-    $routes->get('/d/client/people/(:hash)', 'Client::people/$1');
+    $routes->get('/d/client/person/(:hash)', 'Client::people/$1');
     $routes->get('/d/insurance/(:hash)', 'Insurance::dataCabang/$1');
+    $routes->get('/d/insurance/person/(:hash)', 'Insurance::dataPeople/$1');
 }
 
 if (!function_exists('env_is')) {

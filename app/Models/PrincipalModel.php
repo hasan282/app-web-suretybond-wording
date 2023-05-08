@@ -99,6 +99,7 @@ class PrincipalModel extends BaseModel
             'id' => 'principal.id',
             'id_principal' => 'principal_people.id_principal',
             'enkrip' => 'principal.enkripsi',
+            'enkrip_people' => 'principal_people.enkripsi',
             'nama' => 'principal.nama',
             'office' => 'principal.id_office'
         );

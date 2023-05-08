@@ -9,7 +9,7 @@ $selectedPrincipal = null;
 ?>
 <div class="form-group">
     <label for="principal">Principal</label>
-    <select name="principal" id="principal" class="form-control">
+    <select id="principal" class="form-control">
         <option selected disabled>---</option>
         <?php foreach ($principalData as $pd) :
             if ($pd['enkrip'] === $request->getGet('client')) $selectedPrincipal = $pd['enkrip'];

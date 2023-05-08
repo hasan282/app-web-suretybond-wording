@@ -15,16 +15,14 @@ class Tables
 
     public function guaranteeDraft(int $page = 1)
     {
-        $model = new \App\Models\DataModel;
-        $data['list'] = $model->dataJaminan();
-
-        return (object) [
-            'page_now' => $page,
-            'page_max' => 25,
-            'count' => 572,
-            'limit' => 10,
-            'content' => nl2space(view('guarantee/table/draft', $data))
-        ];
+        $model = new \App\Models\JaminanModel;
+        $model->getData(['enkrip', 'nomor', 'nilai', 'jenis_jaminan', 'principal']);
+        $this->_setPage($page, $model->count('jaminan.id'));
+        $this->dataList = $model->limit(
+            $this->limit,
+            $this->offset
+        )->order('newest')->data();
+        return $this->_objectReturn('guarantee/table/draft', 'jaminan');
     }
 
     public function guaranteeIssued(int $page = 1)

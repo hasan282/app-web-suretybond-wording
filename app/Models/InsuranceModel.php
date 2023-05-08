@@ -34,6 +34,22 @@ class InsuranceModel extends BaseModel
         return $this;
     }
 
+    public function getPeople(array $select = [], bool $join = false)
+    {
+        $fields = array(
+            'id' => 'asuransi_people.id AS id',
+            'enkrip' => 'asuransi_people.enkripsi AS enkrip',
+            'nama' => 'asuransi_people.nama AS nama',
+            'jabatan' => 'asuransi_people.jabatan AS jabatan',
+            'active' => 'asuransi_people.active AS active'
+        );
+        $table = 'asuransi_people';
+        if ($join) $table .= ' INNER JOIN asuransi_cabang ON asuransi_cabang.id = asuransi_people.id_cabang';
+        $this->select($fields, $select);
+        $this->table = $table;
+        return $this;
+    }
+
     // ----- PARENT OVERRIDE ------------------------------------------------------
 
     public function where($where, array $addField = [])
@@ -41,8 +57,10 @@ class InsuranceModel extends BaseModel
         $fields = array(
             'active' => 'asuransi.actives',
             'active_cabang' => 'asuransi_cabang.actives',
+            'active_people' => 'asuransi_people.active',
             'enkrip' => 'asuransi.enkripsi',
-            'enkrip_cabang' => 'asuransi_cabang.enkripsi'
+            'enkrip_cabang' => 'asuransi_cabang.enkripsi',
+            'enkrip_people' => 'asuransi_people.enkripsi'
         );
         if (!empty($addField)) $fields = array_merge($fields, $addField);
         return parent::where($where, $fields);
@@ -51,7 +69,8 @@ class InsuranceModel extends BaseModel
     public function order($order, bool $isQuery = false, array $addOption = [])
     {
         $options = array(
-            'asuransi' => 'asuransi.nama ASC'
+            'asuransi' => 'asuransi.nama ASC',
+            'cabang' => 'asuransi_cabang.cabang ASC'
         );
         if (!empty($addOption)) $options = array_merge($options, $addOption);
         return parent::order($order, $isQuery, $options);

@@ -20,6 +20,10 @@ if (!function_exists('nformat')) {
 }
 
 if (!function_exists('create_id')) {
+    /** Format ID YYMMDDHHIISS (Length 12) ditambah Suffix Angka Random
+     * @param int $suffix Length angka random
+     * @return string ID yang dihasilkan.
+     */
     function create_id(int $suffix = 4)
     {
         $suffix_value = '';

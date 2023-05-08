@@ -11,5 +11,15 @@ class Dashboard extends BaseController
         $data['title'] = 'Dashboard';
         $this->plugin->setup('scrollbar');
         $this->view('dashboard/user', $data);
+
+        // $this->_trial();
+    }
+
+    private function _trial()
+    {
+        $jaminan = new \App\Models\JaminanModel;
+        $data = $jaminan->getData()->data();
+
+        var_dump($data);
     }
 }
