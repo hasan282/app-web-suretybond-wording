@@ -18,10 +18,16 @@ class Guarantee extends BaseController
     {
         if (!is_login())
             return login_page(full_url(false));
-        $data['title'] = 'Detail Jaminan';
-        $data['bread'] = array('Data Jaminan|guarantee', 'Detail');
-        $this->plugin->setup('scrollbar');
-        $this->view('guarantee/detail', $data);
+        $jaminan = new \App\Models\JaminanData;
+        $data['jaminan'] = $jaminan->getDetail($param);
+        if ($data['jaminan'] === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+            $data['title'] = 'Detail Jaminan';
+            $data['bread'] = array('Data Jaminan|guarantee', 'Detail');
+            $this->plugin->setup('scrollbar');
+            return $this->view('guarantee/detail', $data, true);
+        }
     }
 
     public function add_phase1()
@@ -71,10 +77,8 @@ class Guarantee extends BaseController
     {
         if (!is_login())
             return login_page(full_url(false));
-        $jaminan = new \App\Models\JaminanModel;
-        $data['jaminan'] = $jaminan->getData()->where(
-            ['enkrip' => $param]
-        )->data(false);
+        $jaminan = new \App\Models\JaminanData;
+        $data['jaminan'] = $jaminan->dataInput($param);
         if ($data['jaminan'] === null) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         } else {
@@ -83,6 +87,11 @@ class Guarantee extends BaseController
             $this->plugin->setup('scrollbar');
             $this->view('guarantee/add/phase2', $data);
         }
+    }
+
+    public function phase2_process($param)
+    {
+        var_dump($_POST);
     }
 
     public function print($param)

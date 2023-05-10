@@ -16,7 +16,7 @@
                     <p class="text-secondary">Silahkan lengkapi data jaminan terlebih dahulu.</p>
                 </div>
                 <div class="col-md-5 d-flex mt-3 mt-md-0">
-                    <button class="btn btn-primary my-auto ml-md-auto text-bold" onclick="window.location.href='/guarantee/add/qwerty123'">
+                    <button class="btn btn-primary my-auto ml-md-auto text-bold" onclick="window.location.href='/guarantee/add/<?= $jaminan['enkrip']; ?>'">
                         <i class="fas fa-pen-square mr-2"></i>Lengkapi Data Jaminan
                     </button>
                 </div>
@@ -25,91 +25,90 @@
 
         <div class="row">
             <div class="col-xl-9 col-lg-8">
-
                 <div class="table-responsive">
                     <table class="table table-borderless table-sm">
-
                         <tr>
                             <td colspan="3" class="text-bold text-secondary">JAMINAN</td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Jenis Jaminan</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap">Jaminan Pemeliharaan (<i>Maintenance Bond</i>)</td>
+                            <td class="text-nowrap"><?= $jaminan['jenis'] ?? '-'; ?></td>
                         </tr>
                         <tr>
+                            <?php $bahasa = array('ID' => 'indonesia', 'EN' => 'English'); ?>
                             <td class="fit pr-3 text-bold pl-4">Bahasa</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap">Indonesia</td>
+                            <td class="text-nowrap"><?= array_key_exists($jaminan['bahasa'], $bahasa) ? $bahasa[$jaminan['bahasa']] : '-'; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nomor Jaminan</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap">23.08.02.1106.DRAFT</td>
+                            <td class="text-nowrap"><?= $jaminan['nomor'] ?? '-'; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nilai Jaminan</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap">Rp. <?= nformat(55452259); ?></td>
+                            <td class="text-nowrap">
+                                Rp.
+                                <?= nformat($jaminan['nilai']); ?>
+                            </td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Berlaku</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap">366 Hari</td>
+                            <td class="text-nowrap"><?= $jaminan['days'] ?? '0'; ?> Hari</td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Mulai Tanggal</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap">18 November 2023</td>
+                            <td class="text-nowrap"><?= $jaminan['date_from'] ?? '-'; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Sampai Tanggal</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap">18 November 2024</td>
+                            <td class="text-nowrap"><?= $jaminan['date_to'] ?? '-'; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Tanggal Penerbitan</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap">Depok, 18 November 2023</td>
+                            <td class="text-nowrap"><?= $jaminan['issued_place'] ?? '-'; ?>, <?= $jaminan['issued_date'] ?? '-'; ?></td>
                         </tr>
-
                         <tr class="border-top">
                             <td colspan="3" class="text-bold text-secondary">ASURANSI</td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nama Asuransi</td>
                             <td class="text-bold">:</td>
-                            <td>PT. ASURANSI MAXIMUS GRAHA PERSADA</td>
+                            <td><?= $jaminan['asuransi']; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Alamat</td>
                             <td class="text-bold">:</td>
-                            <td>Ruko VIP No. 88 B Jl. Raya Pajajaran, Bogor 16128</td>
+                            <td><?= $jaminan['cabang_alamat']; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Penandatangan</td>
                             <td class="text-bold">:</td>
-                            <td>Ricky Firmansyah (Kepala Cabang)</td>
+                            <td><?= $jaminan['cabang_pejabat']; ?> (<?= $jaminan['cabang_jabatan']; ?>)</td>
                         </tr>
-
-
                         <tr class="border-top">
                             <td colspan="3" class="text-bold text-secondary">PRINCIPAL</td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nama Principal</td>
                             <td class="text-bold">:</td>
-                            <td>PT. FIBERHOME TECHNOLOGIES INDONESIA</td>
+                            <td><?= $jaminan['principal']; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Alamat</td>
                             <td class="text-bold">:</td>
-                            <td>APL Tower Lantai 30, Jl. Jend. S. Parman Kav. 28, Jakarta Barat 11470</td>
+                            <td><?= $jaminan['principal_alamat']; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Penandatangan</td>
                             <td class="text-bold">:</td>
-                            <td>Sugeng Raharjo (Direktur Utama)</td>
+                            <td><?= $jaminan['principal_pejabat']; ?> (<?= $jaminan['principal_jabatan']; ?>)</td>
                         </tr>
 
                         <tr class="border-top">
@@ -118,51 +117,51 @@
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Jenis Proyek</td>
                             <td class="text-bold">:</td>
-                            <td>Swasta</td>
+                            <td><?= $jaminan['proyek'] ?? '-'; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nama Proyek</td>
                             <td class="text-bold">:</td>
-                            <td>PEKERJAAN PENGADAAN DAN PEMASANGAN NODE B 2022 1 LOP WITEL SULSELBAR</td>
+                            <td><?= $jaminan['proyek_nama'] ?? '-'; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Lokasi Proyek</td>
                             <td class="text-bold">:</td>
-                            <td>SML Plaza, Tower 2, Lt.25, Jl. MH Thamrin No.51 Jakarta Pusat</td>
+                            <td><?= $jaminan['proyek_alamat'] ?? '-'; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nilai Proyek</td>
                             <td class="text-bold">:</td>
-                            <td>Rp. <?= nformat(554522590); ?></td>
+                            <td>
+                                Rp.
+                                <?= nformat($jaminan['proyek_nilai']); ?>
+                            </td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Dokumen Pendukung</td>
                             <td class="text-bold">:</td>
                             <td>
-                                00637/HK.810/TA-370000/11-2021 (14 Agustus 2021)<br>
-                                07896/HK.520/TA-370000/11-2021 (14 Agustus 2021)<br>
-                                00637/HK.457/TA-370000/11-2021 (14 Agustus 2021)
+                                <?= $jaminan['dokumen'] ?? '-'; ?>
+                                <?= $jaminan['dokumen_date'] != null ? 'tanggal ' . $jaminan['dokumen_date'] : ''; ?>
                             </td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Kelompok Pekerjaan</td>
                             <td class="text-bold">:</td>
-                            <td>Lainnya</td>
+                            <td><?= $jaminan['pekerjaan'] ?? '-'; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Pemilik Proyek</td>
                             <td class="text-bold">:</td>
-                            <td>PT. EKA MAS REPUBLIK</td>
+                            <td><?= $jaminan['obligee'] ?? '-'; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Alamat Pemilik Proyek</td>
                             <td class="text-bold">:</td>
-                            <td>SML Plaza, Tower 2, Lt.25, Jl. MH Thamrin No.51 Jakarta Pusat</td>
+                            <td><?= $jaminan['obligee_alamat'] ?? '-'; ?></td>
                         </tr>
-
                     </table>
                 </div>
-
             </div>
             <div class="col-xl-3 col-lg-4">
 

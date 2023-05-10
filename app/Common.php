@@ -18,6 +18,7 @@ function setAllRoutes($routes)
     $routes->get('/guarantee/print/(:hash)', 'Guarantee::print/$1');
 
     $routes->post('/guarantee/add', 'Guarantee::phase1_process');
+    $routes->post('/guarantee/add/(:hash)', 'Guarantee::phase2_process/$1');
 
     $routes->get('/client', 'Client::index');
     // $routes->get('/client/detail', 'Client::detail');

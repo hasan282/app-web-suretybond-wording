@@ -1,41 +1,41 @@
+<?php
+$db = \Config\Database::connect();
+$proyek = $db->table('jaminan_proyek')->get()->getResultArray();
+$pekerjaan = $db->table('jaminan_pekerjaan')->get()->getResultArray();
+?>
 <div class="row px-md-2 px-lg-3 px-xl-5">
     <div class="col-md">
         <div class="mx-auto mw-5">
-
             <div class="form-group">
-                <label for="">Pemilik Proyek (Obligee)</label>
-                <input id="" name="" class="form-control" placeholder="Obligee">
+                <label for="obligee">Pemilik Proyek (Obligee)</label>
+                <textarea id="obligee" name="obligee" rows="2" class="form-control" placeholder="Obligee"></textarea>
             </div>
-
             <div class="form-group">
-                <label for="">Alamat Obligee</label>
-                <textarea id="" name="" rows="3" class="form-control" placeholder="Alamat"></textarea>
+                <label for="obligee_alamat">Alamat Obligee</label>
+                <textarea id="obligee_alamat" name="obligee_alamat" rows="3" class="form-control" placeholder="Alamat"></textarea>
             </div>
-
             <div class="form-group mw-3">
-                <label for="">Jenis Proyek</label>
-                <select name="" id="" class="form-control">
+                <label for="proyek">Jenis Proyek</label>
+                <select name="proyek" id="proyek" class="form-control">
                     <option selected disabled>---</option>
-                    <option value="">Pemerintah</option>
-                    <option value="">Swasta</option>
+                    <?php foreach ($proyek as $pro) : ?>
+                        <option value="<?= $pro['id']; ?>"><?= $pro['proyek']; ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
-
             <div class="form-group">
-                <label for="">Nama Pekerjaan</label>
-                <textarea id="" name="" rows="2" class="form-control" placeholder="Proyek"></textarea>
+                <label for="proyek_nama">Nama Proyek</label>
+                <textarea id="proyek_nama" name="proyek_nama" rows="2" class="form-control" placeholder="Proyek"></textarea>
             </div>
-
             <div class="form-group mw-3">
-                <label for="">Kelompok Pekerjaan</label>
-                <select name="" id="" class="form-control">
+                <label for="pekerjaan">Kelompok Pekerjaan</label>
+                <select name="pekerjaan" id="pekerjaan" class="form-control">
                     <option selected disabled>---</option>
-                    <option value="">Konstruksi</option>
-                    <option value="">Instalasi</option>
-                    <option value="">Konsultan</option>
+                    <?php foreach ($pekerjaan as $pkr) : ?>
+                        <option value="<?= $pkr['id']; ?>"><?= $pkr['pekerjaan']; ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
-
         </div>
     </div>
     <div class="col-md-1">

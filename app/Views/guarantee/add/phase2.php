@@ -16,48 +16,48 @@
         </div>
     </div>
 </div>
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Informasi Proyek</h3>
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-            </button>
-        </div>
-    </div>
-    <div class="card-body">
-
-        <?= $this->include('guarantee/add/proyek'); ?>
-
-    </div>
-</div>
-<div class="card">
-    <div class="card-header">
-        <h3 class="card-title">Informasi Jaminan</h3>
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-            </button>
-        </div>
-    </div>
-    <div class="card-body">
-
-        <?= $this->include('guarantee/add/jaminan'); ?>
-
-    </div>
-</div>
-<div class="mx-auto mw-7">
+<form method="POST">
+    <?= csrf_field(); ?>
     <div class="card">
-        <div class="card-body text-center p-3">
-            <a href="/guarantee/detail" class="btn btn-primary text-bold">
-                <i class="fas fa-save mr-2"></i>Simpan Data Jaminan
-            </a>
-            <!-- <button class="btn btn-primary text-bold">
-                <i class="fas fa-save mr-2"></i>Simpan Data Jaminan
-            </button> -->
+        <div class="card-header">
+            <h3 class="card-title">Informasi Proyek</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <?= $this->include('guarantee/add/proyek'); ?>
+
         </div>
     </div>
-</div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Informasi Jaminan</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <?= $this->include('guarantee/add/jaminan'); ?>
+
+        </div>
+    </div>
+    <div class="mx-auto mw-7">
+        <div class="card">
+            <div class="card-body text-center p-3">
+                <button type="submit" class="btn btn-primary text-bold">
+                    <i class="fas fa-save mr-2"></i>Simpan Data Jaminan
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
 
 <?= $this->endSection(); ?>
 

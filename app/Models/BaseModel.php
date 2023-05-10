@@ -128,6 +128,12 @@ class BaseModel
         return $this;
     }
 
+    public function sql()
+    {
+        $this->_queryAssemble($this->select, $this->table);
+        return $this->query;
+    }
+
     protected function select(array $fields, array $select = [])
     {
         if (empty($select)) {
