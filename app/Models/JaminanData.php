@@ -29,10 +29,18 @@ class JaminanData
     public function dataInput(string $enkripsi)
     {
         $fields = array(
+            'obligee', 'obligee_alamat', 'proyek_id', 'proyek_nama', 'pekerjaan_id',
+            'proyek_alamat', 'currency_proyek_id', 'proyek_nilai', 'dokumen', 'dokumen_date',
+
             'asuransi', 'cabang', 'principal'
         );
         return $this->model->getData($fields)->where(
             ['enkrip' => $enkripsi]
         )->data(false);
+    }
+
+    public function dataEdit(array $input = [], string $enkripsi)
+    {
+        $data = $this->dataInput($enkripsi);
     }
 }

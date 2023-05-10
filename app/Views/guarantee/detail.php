@@ -36,7 +36,7 @@
                             <td class="text-nowrap"><?= $jaminan['jenis'] ?? '-'; ?></td>
                         </tr>
                         <tr>
-                            <?php $bahasa = array('ID' => 'indonesia', 'EN' => 'English'); ?>
+                            <?php $bahasa = array('ID' => 'Bahasa Indonesia', 'EN' => 'English'); ?>
                             <td class="fit pr-3 text-bold pl-4">Bahasa</td>
                             <td class="text-bold">:</td>
                             <td class="text-nowrap"><?= array_key_exists($jaminan['bahasa'], $bahasa) ? $bahasa[$jaminan['bahasa']] : '-'; ?></td>
