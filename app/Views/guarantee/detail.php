@@ -50,7 +50,7 @@
                             <td class="fit pr-3 text-bold pl-4">Nilai Jaminan</td>
                             <td class="text-bold">:</td>
                             <td class="text-nowrap">
-                                Rp.
+                                <?= $jaminan['currency_proyek_2']; ?>
                                 <?= nformat($jaminan['nilai']); ?>
                             </td>
                         </tr>
@@ -133,7 +133,7 @@
                             <td class="fit pr-3 text-bold pl-4">Nilai Proyek</td>
                             <td class="text-bold">:</td>
                             <td>
-                                Rp.
+                                <?= $jaminan['currency_2']; ?>
                                 <?= nformat($jaminan['proyek_nilai']); ?>
                             </td>
                         </tr>

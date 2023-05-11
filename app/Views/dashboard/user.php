@@ -62,38 +62,18 @@ $widget = array(
         </div>
     </div>
     <div class="col-xl-8 col-md-7">
-        <!--  
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title text-secondary">Penerbitan Jaminan Terakhir</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
+                <h3 class="card-title text-secondary">
+                    <i class="fas fa-bell mr-2"></i>Notifikasi
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="d-flex" style="min-height:93px">
+                    <h6 class="text-secondary my-auto mx-auto">Tidak ada Notifikasi</h6>
                 </div>
             </div>
-            <div class="card-body table-responsive p-0">
-                <table class="table table-striped text-nowrap">
-                    <thead>
-                        <tr>
-                            <th class="text-center border-right">No. Register</th>
-                            <th class="text-center">Nomor Jaminan</th>
-                            <th>Tertanggung</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php for ($x = 0; $x < 5; $x++) : ?>
-                            <tr>
-                                <td class="text-center border-right">MAX-<strong>012088</strong></td>
-                                <td class="text-center">11614032.55006872</td>
-                                <td>PT. FIBERHOME TECHNOLOGIES</td>
-                            </tr>
-                        <?php endfor; ?>
-                    </tbody>
-                </table>
-            </div>
         </div>
-        -->
     </div>
 </div>
 

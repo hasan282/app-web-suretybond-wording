@@ -19,6 +19,19 @@ if (!function_exists('nformat')) {
     }
 }
 
+if (!function_exists('unformat')) {
+    function unformat($number, string $separator = '.', string $decimal = ',')
+    {
+        $result = null;
+        if (is_string($number) && $number !== null) {
+            $numb = str_replace($separator, '', $number);
+            $numb = str_replace($decimal, '.', $numb);
+            if (preg_match('/^[0-9.]+$/i', $numb)) $result = $numb;
+        }
+        return $result;
+    }
+}
+
 if (!function_exists('create_id')) {
     /** Format ID YYMMDDHHIISS (Length 12) ditambah Suffix Angka Random
      * @param int $suffix Length angka random

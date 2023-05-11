@@ -58,75 +58,18 @@
         </div>
     </div>
 </form>
-<div class="card">
-    <div class="card-body">
-        <?php var_dump($jaminan); ?>
-    </div>
-</div>
 
 <?= $this->endSection(); ?>
 
 <?= $this->section('jscript'); ?>
+
 <script>
-    function dateConvert(date, tipe = 1) {
-        let dateresult = null;
-        let dt = [];
-        const month = ('Januari,Februari,Maret,April,Mei,Juni,Juli,Agustus,September,Oktober,November,Desember').split(',');
-        switch (tipe) {
-            case 1:
-                dt = date.split('-');
-                if (dt.length == 3) dateresult = parseInt(dt[2]) + ' ' + month[dt[1] - 1] + ' ' + dt[0];
-                break;
-            case 2:
-                dt = date.split('-');
-                if (dt.length == 3) dateresult = dt[2] + '/' + dt[1] + '/' + dt[0];
-                break;
-            case 11:
-                dt = date.split('/');
-                if (dt.length == 3) dateresult = parseInt(dt[2]) + ' ' + month[dt[1] - 1] + ' ' + dt[0];
-                break;
-            case 12:
-                dt = date.split('/');
-                if (dt.length == 3) dateresult = dt[2] + '-' + dt[1] + '-' + dt[0];
-                break;
-            case 13:
-                dt = date.split('/');
-                if (dt.length == 3) dateresult = parseInt(dt[0]) + ' ' + month[dt[1] - 1] + ' ' + dt[2];
-                break;
-            default:
-                dateresult = null;
-                break;
-        }
-        return dateresult;
-    }
-
-    function dateInput(selector, multiForm = false) {
-        $(selector).datetimepicker({
-            format: 'DD/MM/YYYY'
-        });
-        let preview = '.datetimepicker-input';
-        if (multiForm) preview = selector + '_input';
-        $(preview).on('focus', function() {
-            const preval = $(this).prev().val();
-            $(this).val(dateConvert(preval, 2));
-        });
-        $(preview).on('focusout', function() {
-            const vals = $(this).prev().val();
-            $(this).val(dateConvert(vals));
-        });
-        $(preview).prev().on('input', function() {
-            const vals = $(this).val();
-            $(this).val(dateConvert(vals, 12));
-            $(preview).val(dateConvert(vals, 13));
-        });
-    }
-
     $(function() {
-        dateInput('#dokumen_date', true);
-
+        $('#dokumen_date').inputDate();
         $('#date_from').inputDate();
         $('#date_to').inputDate();
         $('#issued_date').inputDate();
     });
 </script>
+
 <?= $this->endSection(); ?>

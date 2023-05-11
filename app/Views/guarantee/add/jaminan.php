@@ -1,10 +1,17 @@
+<?php
+$db = \Config\Database::connect();
+$jaminan = $db->query('SELECT id, jenis FROM jaminan_jenis WHERE actives = 1')->getResultArray();
+$currency = $db->query('SELECT id, symbol_1 AS curr FROM currency ORDER BY symbol_1 ASC')->getResultArray();
+?>
 <div class="row px-md-2 px-lg-3 px-xl-5">
     <div class="col-md">
         <div class="form-group mw-3">
             <label for="jaminan_tipe">Jenis Jaminan</label>
             <select name="jaminan_tipe" id="jaminan_tipe" class="form-control">
                 <option selected disabled>---</option>
-                <option value="">Jaminan Penawaran</option>
+                <?php foreach ($jaminan as $jm) : ?>
+                    <option value="<?= $jm['id']; ?>"><?= $jm['jenis']; ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div class="form-group">
@@ -15,9 +22,9 @@
             <label for="nilai">Nilai Jaminan<span class="btn btn-default btn-sm py-0 ml-2 text-bold mb-1">auto</span></label>
             <div class="input-group">
                 <select name="currency" id="currency" class="form-control mw-1">
-                    <option value="3">EUR</option>
-                    <option selected value="1">IDR</option>
-                    <option value="2">USD</option>
+                    <?php foreach ($currency as $cr) : ?>
+                        <option <?= $cr['id'] == '1' ? 'selected ' : ''; ?>value="<?= $cr['id']; ?>"><?= $cr['curr']; ?></option>
+                    <?php endforeach; ?>
                 </select>
                 <input type="text" name="nilai" id="nilai" class="form-control" data-inputmask="'alias':'numeric','groupSeparator':'.','radixPoint':','" data-mask>
             </div>

@@ -92,7 +92,21 @@ class Guarantee extends BaseController
 
     public function phase2_process($param)
     {
-        var_dump($_POST);
+        if (!is_login())
+            return login_page(full_url(false));
+        $jaminan = new \App\Models\JaminanData;
+        $jaminan->rowEdit($param);
+        $update = $jaminan->rowEdit($param);
+        if ($update === false) {
+            // failed or false
+        } else {
+            if (empty($update)) {
+                // no update
+            } else {
+                // update success
+            }
+        }
+        return redirect()->to('guarantee/detail/' . $param);
     }
 
     public function print($param)

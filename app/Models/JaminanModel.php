@@ -19,6 +19,13 @@ class JaminanModel extends BaseModel
         return $insert === false ? $insert : $data;
     }
 
+    public function getTable()
+    {
+        $this->select = '*';
+        $this->table = 'jaminan';
+        return $this;
+    }
+
     public function getData(array $select = [])
     {
         $fields = array(
