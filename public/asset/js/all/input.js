@@ -37,32 +37,40 @@
     }
 
     $.fn.inputDate = function (options = {}) {
-        const DIV = this;
-        const ID = DIV.attr('id');
         for (const key in options) {
             inOption[key] = options[key];
         }
-        let form = '<div class="input-group-prepend" data-target="#' + ID + '" data-toggle="datetimepicker">';
-        form += '<div class="input-group-text"><i class="fa fa-calendar-alt"></i></div></div>';
-        form += '<input type="hidden" id="val_' + ID + '" name="' + ID + '">';
-        form += '<input type="text" class="form-control datetimepicker-input" id="' + ID + '_input" data-target="#' + ID + '" placeholder="' + inOption.placeholder + '">';
-        DIV.addClass('input-group').data('target-input', 'nearest').html(form);
-        DIV.datetimepicker({
-            format: 'DD/MM/YYYY'
+        this.each(function () {
+            const ELEID = $(this).attr('id');
+            const ELEMENT = $('#' + ELEID);
+            const FORM = '<div class="input-group-prepend" data-target="#' + ELEID + '" data-toggle="datetimepicker"><div class="input-group-text"><i class="fa fa-calendar-alt"></i></div></div><input type="hidden" id="val_' + ELEID + '" name="' + ELEID + '"><input type="text" class="form-control datetimepicker-input" id="' + ELEID + '_input" data-target="#' + ELEID + '" placeholder="' + inOption.placeholder + '">';
+            ELEMENT.addClass('input-group').data('target-input', 'nearest').html(FORM);
+            ELEMENT.datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+            const PREVIEW = '#' + ELEID + '_input';
+            $(PREVIEW).on('focus', function () {
+                const PREVAL = $(this).prev().val();
+                $(this).val(dateConvert(PREVAL, 2));
+            });
+            $(PREVIEW).on('focusout', function () {
+                const PREVAL = $(this).prev().val();
+                $(this).val(dateConvert(PREVAL));
+            });
+            $(PREVIEW).prev().on('input', function () {
+                const VALS = $(this).val();
+                $(this).val(dateConvert(VALS, 12));
+                $(PREVIEW).val(dateConvert(VALS, 13));
+            });
         });
-        let preview = '#' + ID + '_input';
-        $(preview).on('focus', function () {
-            const preval = $(this).prev().val();
-            $(this).val(dateConvert(preval, 2));
-        });
-        $(preview).on('focusout', function () {
-            const vals = $(this).prev().val();
-            $(this).val(dateConvert(vals));
-        });
-        $(preview).prev().on('input', function () {
-            const vals = $(this).val();
-            $(this).val(dateConvert(vals, 12));
-            $(preview).val(dateConvert(vals, 13));
+    }
+
+    $.fn.dateValue = function (value) {
+        this.each(function () {
+            const ELEID = $(this).attr('id');
+            const VALS = dateConvert(value, 2);
+            $('#val_' + ELEID).val(value);
+            $('#' + ELEID + '_input').val(VALS).trigger('change');
         });
     }
 

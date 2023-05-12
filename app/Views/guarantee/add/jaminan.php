@@ -43,12 +43,12 @@ $currency = $db->query('SELECT id, symbol_1 AS curr FROM currency ORDER BY symbo
         <p class="mb-1"><small class="text-secondary ml-2">Jangka Waktu</small></p>
         <div class="border-fade px-3 pt-3 mb-2">
             <div class="form-group row mb-2 mb-xl-3">
-                <label for="date_from" class="col-xl-4 col-form-label text-xl-right text-nowrap">Dari Tanggal</label>
-                <div class="col-xl-8" id="date_from"></div>
+                <label class="col-xl-4 col-form-label text-xl-right text-nowrap">Dari Tanggal</label>
+                <div class="col-xl-8 inputdate" id="date_from"></div>
             </div>
             <div class="form-group row mb-2 mb-xl-3">
-                <label for="date_to" class="col-xl-4 col-form-label text-xl-right text-nowrap">Sampai Tanggal</label>
-                <div class="col-xl-8" id="date_to"></div>
+                <label class="col-xl-4 col-form-label text-xl-right text-nowrap">Sampai Tanggal</label>
+                <div class="col-xl-8 inputdate" id="date_to"></div>
             </div>
             <div class="form-group row">
                 <label for="days" class="col-xl-4 col-form-label text-xl-right">Selama</label>
@@ -69,7 +69,7 @@ $currency = $db->query('SELECT id, symbol_1 AS curr FROM currency ORDER BY symbo
                 </div>
             </div>
             <div class="form-group row">
-                <label for="issued_date" class="col-xl-4 col-form-label text-xl-right text-nowrap">Tanggal Terbit</label>
+                <label class="col-xl-4 col-form-label text-xl-right text-nowrap">Tanggal Terbit</label>
                 <div class="col-xl-8" id="issued_date"></div>
             </div>
         </div>

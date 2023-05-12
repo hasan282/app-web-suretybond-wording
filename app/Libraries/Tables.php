@@ -16,7 +16,9 @@ class Tables
     public function guaranteeDraft(int $page = 1)
     {
         $model = new \App\Models\JaminanModel;
-        $model->getData(['enkrip', 'nomor', 'nilai', 'jenis_jaminan', 'principal']);
+        $model->getData(
+            ['enkrip', 'nomor', 'nilai', 'jenis_jaminan', 'principal']
+        )->where(['active' => 1]);
         $this->_setPage($page, $model->count('jaminan.id'));
         $this->dataList = $model->limit(
             $this->limit,

@@ -50,7 +50,7 @@
                             <td class="fit pr-3 text-bold pl-4">Nilai Jaminan</td>
                             <td class="text-bold">:</td>
                             <td class="text-nowrap">
-                                <?= $jaminan['currency_proyek_2']; ?>
+                                <?= $jaminan['currency_2']; ?>
                                 <?= nformat($jaminan['nilai']); ?>
                             </td>
                         </tr>
@@ -62,17 +62,17 @@
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Mulai Tanggal</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap"><?= $jaminan['date_from'] ?? '-'; ?></td>
+                            <td class="text-nowrap"><?= fdate($jaminan['date_from']) ?? '-'; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Sampai Tanggal</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap"><?= $jaminan['date_to'] ?? '-'; ?></td>
+                            <td class="text-nowrap"><?= fdate($jaminan['date_to']) ?? '-'; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Tanggal Penerbitan</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap"><?= $jaminan['issued_place'] ?? '-'; ?>, <?= $jaminan['issued_date'] ?? '-'; ?></td>
+                            <td class="text-nowrap"><?= $jaminan['issued_place'] ?? '-'; ?>, <?= fdate($jaminan['issued_date']) ?? '-'; ?></td>
                         </tr>
                         <tr class="border-top">
                             <td colspan="3" class="text-bold text-secondary">ASURANSI</td>
@@ -133,7 +133,7 @@
                             <td class="fit pr-3 text-bold pl-4">Nilai Proyek</td>
                             <td class="text-bold">:</td>
                             <td>
-                                <?= $jaminan['currency_2']; ?>
+                                <?= $jaminan['currency_proyek_2']; ?>
                                 <?= nformat($jaminan['proyek_nilai']); ?>
                             </td>
                         </tr>
@@ -142,7 +142,7 @@
                             <td class="text-bold">:</td>
                             <td>
                                 <?= $jaminan['dokumen'] ?? '-'; ?>
-                                <?= $jaminan['dokumen_date'] != null ? 'tanggal ' . $jaminan['dokumen_date'] : ''; ?>
+                                <?= $jaminan['dokumen_date'] != null ? 'tanggal ' . fdate($jaminan['dokumen_date']) : ''; ?>
                             </td>
                         </tr>
                         <tr>

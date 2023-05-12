@@ -58,17 +58,44 @@
         </div>
     </div>
 </form>
+<?php
+$dataField = array(
+    'obligee' => [$jaminan['obligee'], 'val'],
+    'obligee_alamat' => [$jaminan['obligee_alamat'], 'val'],
+    'proyek' => [$jaminan['proyek_id'], 'val'],
+    'proyek_nama' => [$jaminan['proyek_nama'], 'val'],
+    'pekerjaan' => [$jaminan['pekerjaan_id'], 'val'],
+    'proyek_alamat' => [$jaminan['proyek_alamat'], 'val'],
+    'currency_proyek' => [$jaminan['currency_proyek_id'], 'val'],
+    'proyek_nilai' => [nformat($jaminan['proyek_nilai']), 'val'],
+    'dokumen' => [$jaminan['dokumen'], 'val'],
+    'dokumen_date' => [$jaminan['dokumen_date'], 'dateValue'],
+    'jaminan_tipe' => [$jaminan['jenis_id'], 'val'],
+    'nomor' => [$jaminan['nomor'], 'val'],
+    'currency' => [$jaminan['currency_id'], 'val'],
+    'nilai' => [nformat($jaminan['nilai']), 'val'],
+    'bahasa' => [$jaminan['bahasa'], 'val'],
+    'date_from' => [$jaminan['date_from'], 'dateValue'],
+    'date_to' => [$jaminan['date_to'], 'dateValue'],
+    'days' => [$jaminan['days'], 'val'],
+    'issued_place' => [$jaminan['issued_place'], 'val'],
+    'issued_date' => [$jaminan['issued_date'], 'dateValue']
+);
+foreach ($dataField as $key => $arr) if ($arr[0] === null) unset($dataField[$key]);
+?>
 
 <?= $this->endSection(); ?>
 
 <?= $this->section('jscript'); ?>
 
 <script>
+    const INPUTVAL = <?= json_encode($dataField); ?>;
     $(function() {
+        $("[data-mask]").inputmask();
         $('#dokumen_date').inputDate();
-        $('#date_from').inputDate();
-        $('#date_to').inputDate();
+        $('.inputdate').inputDate();
         $('#issued_date').inputDate();
+        for (const ID in INPUTVAL) $('#' + ID)[INPUTVAL[ID][1]](INPUTVAL[ID][0]);
     });
 </script>
 

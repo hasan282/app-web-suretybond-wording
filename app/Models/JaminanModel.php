@@ -117,6 +117,7 @@ class JaminanModel extends BaseModel
     public function where($where, array $addField = [])
     {
         $fields = array(
+            'active' => 'jaminan.actives',
             'enkrip' => 'jaminan.enkripsi'
         );
         if (!empty($addField)) $fields = array_merge($fields, $addField);

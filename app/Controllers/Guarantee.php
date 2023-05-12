@@ -99,11 +99,14 @@ class Guarantee extends BaseController
         $update = $jaminan->rowEdit($param);
         if ($update === false) {
             // failed or false
+            // echo 'failed';
         } else {
             if (empty($update)) {
                 // no update
+                // echo 'no update';
             } else {
                 // update success
+                // echo 'success';
             }
         }
         return redirect()->to('guarantee/detail/' . $param);
