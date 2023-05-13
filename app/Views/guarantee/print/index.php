@@ -2,6 +2,8 @@
 
 <?= $this->section('content'); ?>
 
+
+
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Pengaturan Halaman</h3>
@@ -31,7 +33,9 @@
             <div class="card">
                 <div class="card-body">
 
-                    <?= $this->include('guarantee/draft/mb_ind'); ?>
+                    <?= '';
+                    // $this->include('guarantee/draft/mb_ind');
+                    ?>
 
                 </div>
             </div>
@@ -67,5 +71,51 @@
 <?= $this->endSection(); ?>
 
 <?= $this->section('jscript'); ?>
-
+<script src="/adminlte/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="/adminlte/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="/asset/js/pdf/trials.js"></script>
+<script>
+    pdfMake.fonts = {
+        TimesNewRoman: {
+            normal: '<?= base_url(); ?>/asset/font/times.ttf',
+            bold: '<?= base_url(); ?>/asset/font/timesbd.ttf',
+            italics: '<?= base_url(); ?>/asset/font/timesi.ttf',
+            bolditalics: '<?= base_url(); ?>/asset/font/timesbi.ttf'
+        }
+    };
+    setTimeout(() => {
+        const docDefinition = {
+            content: [
+                'First paragraph',
+                [
+                    'First paragraph',
+                    'First paragraph',
+                    'First paragraph'
+                ],
+                {
+                    text: [
+                        'This paragraph is defined as an array of elements to make it possible to ',
+                        {
+                            text: 'restyle part of it and make it bigger ',
+                            fontSize: 15,
+                            bold: true,
+                            italics: true
+                        },
+                        'than the rest.'
+                    ],
+                    alignment: 'justify'
+                },
+                'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines',
+            ],
+            defaultStyle: {
+                font: 'TimesNewRoman'
+            },
+            pageOrientation: 'potrait',
+            pageSize: 'LETTER',
+            pageMargins: [27, 46, 25, 10]
+        };
+        pdfMake.createPdf(docDefinition).open();
+        // pdfMake.createPdf(printPdf()).open();
+    }, 3000);
+</script>
 <?= $this->endSection(); ?>
