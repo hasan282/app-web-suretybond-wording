@@ -70,7 +70,7 @@
             </div>
         </div>
         <?php
-        // var_dump($jaminan); 
+        var_dump($jaminan);
         ?>
     </div>
 </div>

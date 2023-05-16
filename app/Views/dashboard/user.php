@@ -3,27 +3,29 @@
 <?= $this->section('content'); ?>
 
 <?php
+$jaminan = new \App\Models\JaminanModel;
+$principal = new \App\Models\PrincipalModel;
 $widget = array(
     [
         'title' => 'Draft Jaminan',
         'icon' => 'fas fa-file-alt',
         'link' => 'guarantee',
         'color' => 'secondary',
-        'data' => '518'
+        'data' => $jaminan->getData()->where(['active' => 1])->count()
     ],
     [
         'title' => 'Jaminan Diterbitkan',
         'icon' => 'fas fa-certificate',
         'link' => 'guarantee/issued',
         'color' => 'olive',
-        'data' => '2457'
+        'data' => '0'
     ],
     [
         'title' => 'Data Nasabah',
         'icon' => 'fas fa-briefcase',
         'link' => 'client',
         'color' => 'info',
-        'data' => '32'
+        'data' => $principal->getData(['id'])->count()
     ]
 );
 ?>

@@ -45,8 +45,8 @@ class Tables
     {
         $model = new \App\Models\PrincipalModel;
         $model->getData(array('enkrip', 'principal'));
-        $office = userdata('office_id');
-        if ($office !== null) $model->where(array('office' => $office));
+        // $office = userdata('office_id');
+        // if ($office !== null) $model->where(array('office' => $office));
         $this->_setPage($page, $model->count('principal.id'));
         $this->dataList = $model->limit(
             $this->limit,

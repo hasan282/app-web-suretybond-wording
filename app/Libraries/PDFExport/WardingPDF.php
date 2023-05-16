@@ -16,10 +16,10 @@ class WardingPDF extends PDFMake
         $this->data = array();
     }
 
-    protected function data(string $key)
+    protected function data(string $key, string $filter = '$1')
     {
         if (array_key_exists($key, $this->data)) {
-            return $this->data[$key];
+            return str_replace('$1', $this->data[$key], $filter);
         } else {
             return null;
         }
