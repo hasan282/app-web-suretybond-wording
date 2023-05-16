@@ -26,6 +26,18 @@ class JaminanData
         )->data(false);
     }
 
+    public function dataPrint(string $enkripsi)
+    {
+        $fields = array(
+            'jenis', 'nomor', 'nilai', 'currency', 'currency_2',
+            'principal', 'principal_alamat', 'asuransi_print', 'cabang_print', 'cabang_alamat',
+            'obligee', 'obligee_alamat'
+        );
+        return $this->model->getData($fields)->where(
+            ['enkrip' => $enkripsi]
+        )->data(false);
+    }
+
     public function dataInput(string $enkripsi, array $exclude = [])
     {
         $fields = array(

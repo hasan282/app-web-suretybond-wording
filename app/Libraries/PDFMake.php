@@ -85,13 +85,18 @@ class PDFMake
         foreach ($matches as $mc) {
             $style = array(
                 'b' => 'bold',
-                'i' => 'italics',
-                'bi' => 'bolditalics'
+                'i' => 'italics'
             );
             if ($mc[1] == '') {
                 $result[] = $mc[3];
             } elseif (array_key_exists($mc[1], $style)) {
                 $result[] = array('text' => $mc[2], $style[$mc[1]] => true);
+            } elseif ($mc[1] == 'bi') {
+                $result[] = array(
+                    'text' => $mc[2],
+                    'bold' => true,
+                    'italics' => true
+                );
             } else {
                 $result[] = $mc[0];
             }

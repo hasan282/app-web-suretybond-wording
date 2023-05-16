@@ -116,10 +116,20 @@ class Guarantee extends BaseController
     {
         if (!is_login())
             return login_page(full_url(false));
-        $data['title'] = 'Cetak Jaminan';
-        $data['bread'] = array('Jaminan|guarantee', 'Detail|guarantee/detail', 'Cetak');
-        $this->plugin->setup('scrollbar|jspdf');
-        $this->view('guarantee/print/index', $data);
+        $jaminan = new \App\Models\JaminanData;
+        $data['jaminan'] = $jaminan->dataPrint($param);
+        if ($data['jaminan'] === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+            $data['title'] = 'Cetak Jaminan';
+            $data['bread'] = array(
+                'Jaminan|guarantee',
+                'Detail|guarantee/detail/' . $param,
+                'Cetak'
+            );
+            $this->plugin->setup('scrollbar|pdfmake');
+            $this->view('guarantee/print/index', $data);
+        }
     }
 
     public function table($section, $page)

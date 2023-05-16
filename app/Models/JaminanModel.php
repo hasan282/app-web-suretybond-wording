@@ -62,9 +62,11 @@ class JaminanModel extends BaseModel
         );
         $fieldAsuransi = array(
             'asuransi' => 'asuransi.nama AS asuransi',
+            'asuransi_print' => 'asuransi.deskripsi AS asuransi_print',
             'asuransi_id' => 'asuransi.id AS asuransi_id',
             'asuransi_nick' => 'asuransi.nickname AS asuransi_nick',
             'cabang' => 'asuransi_cabang.cabang AS cabang',
+            'cabang_print' => 'asuransi_cabang.deskripsi AS cabang_print',
             'cabang_alamat' => 'asuransi_cabang.alamat AS cabang_alamat',
             'cabang_pejabat' => 'asuransi_people.nama AS cabang_pejabat',
             'cabang_jabatan' => 'asuransi_people.jabatan AS cabang_jabatan'

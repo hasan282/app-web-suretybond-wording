@@ -174,8 +174,10 @@
                     </button>
 
                     <div class="absolute-bottom pb-3 text-center w-100">
+                        <!--  
                         <small class="text-danger"><i class="fas fa-info-circle mr-2"></i>Data Belum Lengkap</small>
-                        <a href="/guarantee/print/a1b2c3" class="btn btn-primary btn-lg mt-2 btn-block text-bold">
+                        -->
+                        <a href="/guarantee/print/<?= $jaminan['enkrip']; ?>" class="btn btn-primary btn-lg mt-2 btn-block text-bold">
                             <i class="fas fa-print mr-2"></i>Cetak Jaminan
                         </a>
                     </div>

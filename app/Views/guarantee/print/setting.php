@@ -2,25 +2,23 @@
     <div class="col-xl-4">
 
         <div class="pr-xl-3">
-            <button class="btn btn-primary btn-sm mb-4">
+            <button class="btn btn-primary btn-sm mb-4" disabled>
                 <i class="fas fa-plus mr-2"></i>Buat Profil Pengaturan Baru
             </button>
             <div class="form-group">
-                <label for="">Profil Pengaturan</label>
-                <select id="" class="form-control">
+                <label for="profile">Profil Pengaturan</label>
+                <select id="profile" class="form-control" disabled>
                     <option value="">MAXIMUS-PELAKSANAAN-1</option>
                 </select>
             </div>
-            <button class="btn btn-secondary btn-sm">
+            <button class="btn btn-secondary btn-sm" disabled>
                 <i class="fas fa-edit mr-2"></i>Edit Pengaturan
             </button>
         </div>
         <div class="pr-xl-3 hide-content">
             <div class="form-group">
-                <label for="">Profil Pengaturan</label>
-                <select id="" class="form-control">
-                    <option value="">MAXIMUS-PELAKSANAAN-1</option>
-                </select>
+                <label for="profile_name">Profil Pengaturan</label>
+                <input id="profile_name" class="form-control">
             </div>
         </div>
 
@@ -28,11 +26,11 @@
     <div class="col-xl-4 col-md-6">
 
         <div class="form-group mw-2">
-            <label for="">Ukuran Kertas</label>
-            <select name="" id="" class="form-control" disabled>
+            <label for="paper_size">Ukuran Kertas</label>
+            <select name="paper_size" id="paper_size" class="form-control" disabled>
                 <option value="" selected>A4</option>
-                <option value="">Letter</option>
-                <option value="">Legal</option>
+                <option value="">LETTER</option>
+                <option value="">LEGAL</option>
             </select>
         </div>
 
@@ -62,9 +60,9 @@
             </div>
         </div>
         <div class="form-group mw-2">
-            <label for="">Spacing</label>
+            <label for="spacing">Spacing</label>
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Spacing" disabled>
+                <input type="text" id="spacing" class="form-control" placeholder="Spacing" disabled>
                 <div class="input-group-append">
                     <span class="input-group-text"><i class="fas fa-percentage"></i></span>
                 </div>
@@ -75,20 +73,20 @@
     <div class="col-xl-4 col-md-6">
 
         <div class="form-group mw-2 mx-md-auto">
-            <label for="">Margin Tanda Tangan</label>
-            <input type="text" class="form-control" placeholder="Margin" disabled>
+            <label for="sign_margin">Margin Tanda Tangan</label>
+            <input type="text" id="sign_margin" class="form-control" placeholder="Margin" disabled>
         </div>
         <div class="form-group mw-2 mx-md-auto">
-            <label for="">Lebar Tanda Tangan</label>
-            <input type="text" class="form-control" placeholder="Lebar" disabled>
+            <label for="sign_width">Lebar Tanda Tangan</label>
+            <input type="text" id="sign_width" class="form-control" placeholder="Lebar" disabled>
         </div>
         <div class="form-group mw-2 mx-md-auto">
-            <label for="">Jarak Antar Tanda Tangan</label>
-            <input type="text" class="form-control" placeholder="Jarak" disabled>
+            <label for="sign_gap">Jarak Antar Tanda Tangan</label>
+            <input type="text" id="sign_gap" class="form-control" placeholder="Jarak" disabled>
         </div>
         <div class="form-group mw-2 mx-md-auto">
-            <label for="">Tinggi Tanda Tangan</label>
-            <input type="text" class="form-control" placeholder="Tinggi" disabled>
+            <label for="sign_height">Tinggi Tanda Tangan</label>
+            <input type="text" id="sign_height" class="form-control" placeholder="Tinggi" disabled>
         </div>
 
     </div>
