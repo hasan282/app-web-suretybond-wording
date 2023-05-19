@@ -4,50 +4,43 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class JaminanJenis extends Migration
+class Currency extends Migration
 {
     public function up()
     {
         $this->forge->addField(array(
             'id' => array(
                 'type' => 'INT',
-                'constraint' => 3
+                'constraint' => 4
             ),
-            'jenis' => array(
+            'nama' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 32,
+                'constraint' => 16,
                 'null' => true,
                 'default' => null
             ),
-            'jenis_eng' => array(
-                'type' => 'VARCHAR',
-                'constraint' => 32,
-                'null' => true,
-                'default' => null
-            ),
-            'singkat' => array(
+            'symbol_1' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 8,
                 'null' => true,
                 'default' => null
             ),
-            'actives' => array(
-                'type' => 'INT',
-                'constraint' => 1,
-                'unsigned' => true,
-                'default' => 0
+            'symbol_2' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 8,
+                'null' => true,
+                'default' => null
             )
         ));
 
         $this->forge->addPrimaryKey('id', 'PRIMARY');
-        $this->forge->addKey('actives', false, false, 'ACTIVE');
 
         $attribute = array('ENGINE' => 'InnoDB');
-        $this->forge->createTable('jaminan_jenis', true, $attribute);
+        $this->forge->createTable('currency', true, $attribute);
     }
 
     public function down()
     {
-        $this->forge->dropTable('jaminan_jenis', true);
+        $this->forge->dropTable('currency', true);
     }
 }

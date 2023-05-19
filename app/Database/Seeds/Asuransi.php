@@ -34,7 +34,6 @@ class Asuransi extends Seeder
                 'actives' => 1
             )
         );
-
         $this->db->table('asuransi')->insertBatch($data);
     }
 }

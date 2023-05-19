@@ -27,7 +27,7 @@ class Jaminan extends Migration
             ),
             'id_asuransi_people' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 32,
+                'constraint' => 16,
                 'null' => true,
                 'default' => null
             ),
@@ -157,13 +157,13 @@ class Jaminan extends Migration
 
         $this->forge->addPrimaryKey('id', 'PRIMARY');
         $this->forge->addUniqueKey('enkripsi', 'ID');
-        $this->forge->addKey('id_principal_people', false, false, '');
-        $this->forge->addKey('id_asuransi_people', false, false, '');
-        $this->forge->addKey('id_proyek', false, false, '');
-        $this->forge->addKey('id_jenis', false, false, '');
-        $this->forge->addKey('id_pekerjaan', false, false, '');
-        $this->forge->addKey('id_currency_proyek', false, false, '');
-        $this->forge->addKey('id_currency_jaminan', false, false, '');
+        $this->forge->addKey('id_principal_people', false, false, 'PRINCIPAL');
+        $this->forge->addKey('id_asuransi_people', false, false, 'ASURANSI');
+        $this->forge->addKey('id_proyek', false, false, 'PROYEK');
+        $this->forge->addKey('id_jenis', false, false, 'JENIS');
+        $this->forge->addKey('id_pekerjaan', false, false, 'PEKERJAAN');
+        $this->forge->addKey('id_currency_proyek', false, false, 'CURRENCY1');
+        $this->forge->addKey('id_currency_jaminan', false, false, 'CURRENCY2');
         $this->forge->addKey('actives', false, false, 'ACTIVE');
 
         $attribute = array('ENGINE' => 'InnoDB');

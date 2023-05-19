@@ -37,7 +37,7 @@ class AsuransiPeople extends Migration
                 'null' => true,
                 'default' => null
             ),
-            'active' => array(
+            'actives' => array(
                 'type' => 'INT',
                 'constraint' => 1,
                 'unsigned' => true,

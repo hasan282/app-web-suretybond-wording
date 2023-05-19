@@ -19,15 +19,21 @@ class Principal extends Migration
                 'null' => true,
                 'default' => null
             ),
-            'id_asuransi' => array(
+            'nama' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 12,
+                'constraint' => 128,
                 'null' => true,
                 'default' => null
             ),
-            'cabang' => array(
+            'telpon' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 32,
+                'null' => true,
+                'default' => null
+            ),
+            'email' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 64,
                 'null' => true,
                 'default' => null
             ),
@@ -37,9 +43,15 @@ class Principal extends Migration
                 'null' => true,
                 'default' => null
             ),
-            'deskripsi' => array(
+            'id_office' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 64,
+                'constraint' => 12,
+                'null' => true,
+                'default' => null
+            ),
+            'id_marketing' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 12,
                 'null' => true,
                 'default' => null
             ),
@@ -53,7 +65,8 @@ class Principal extends Migration
 
         $this->forge->addPrimaryKey('id', 'PRIMARY');
         $this->forge->addUniqueKey('enkripsi', 'ID');
-        $this->forge->addKey('id_asuransi', false, false, 'ASURANSI');
+        $this->forge->addKey('id_office', false, false, 'OFFICE');
+        $this->forge->addKey('id_marketing', false, false, 'MARKETING');
         $this->forge->addKey('actives', false, false, 'ACTIVE');
 
         $attribute = array('ENGINE' => 'InnoDB');

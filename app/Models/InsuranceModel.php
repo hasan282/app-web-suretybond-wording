@@ -41,7 +41,7 @@ class InsuranceModel extends BaseModel
             'enkrip' => 'asuransi_people.enkripsi AS enkrip',
             'nama' => 'asuransi_people.nama AS nama',
             'jabatan' => 'asuransi_people.jabatan AS jabatan',
-            'active' => 'asuransi_people.active AS active'
+            'active' => 'asuransi_people.actives AS active'
         );
         $table = 'asuransi_people';
         if ($join) $table .= ' INNER JOIN asuransi_cabang ON asuransi_cabang.id = asuransi_people.id_cabang';
@@ -57,7 +57,7 @@ class InsuranceModel extends BaseModel
         $fields = array(
             'active' => 'asuransi.actives',
             'active_cabang' => 'asuransi_cabang.actives',
-            'active_people' => 'asuransi_people.active',
+            'active_people' => 'asuransi_people.actives',
             'enkrip' => 'asuransi.enkripsi',
             'enkrip_cabang' => 'asuransi_cabang.enkripsi',
             'enkrip_people' => 'asuransi_people.enkripsi'
