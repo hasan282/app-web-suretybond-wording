@@ -41,7 +41,7 @@ $RECYCLE.BIN/
 
 # These should never be under version control,
 # as it poses a security risk.
-.env
+# .env
 .vagrant
 Vagrantfile
 
@@ -70,7 +70,7 @@ tests/coverage*
 phpunit
 
 # Composer
-vendor/
+# vendor/
 
 # Modules Testing
 _modules/*

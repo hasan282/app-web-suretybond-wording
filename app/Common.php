@@ -1,6 +1,7 @@
 <?php
 
 define('SURETY_DOMAIN', 'https://surety.ptjis.com/');
+define('ASSET_URL', 'http://localhost/assets-plugins/');
 
 function setAllRoutes($routes)
 {
