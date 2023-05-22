@@ -26,7 +26,7 @@ $validatError = \Config\Services::validation()->getErrors();
             <input id="email" name="email" class="form-control" value="<?= set_value('email'); ?>" placeholder="Email">
         </div>
     </div>
-    <div class="col-md">
+    <div class="col-md position-relative" style="min-height:310px">
         <label><small class="ml-2 text-secondary">Pejabat Penandatangan</small></label>
         <div class="border-fade px-3 pt-2">
             <div class="form-group">
@@ -45,9 +45,52 @@ $validatError = \Config\Services::validation()->getErrors();
             </div>
         </div>
         <div class="text-right px-3 pt-2">
-            <small class="text-danger"><i>* kolom yang harus diisi</i></small>
+            <small class="text-danger"><i>* kolom yang harus diisi</i></small><br>
+        </div>
+        <div class="absolute-bottom py-3 px-3 text-md-right text-center w-100">
+            <button type="button" class="btn btn-default btn-sm mt-4">
+                <i class="fas fa-folder-open mr-2"></i><span>Buka Input Rate Principal</span>
+            </button>
         </div>
     </div>
+</div>
+<div class="pt-4 hide-content">
+    <!-- <div class="pt-4"> -->
+
+
+
+
+    <div class="row">
+        <div class="col">
+
+
+            <div class="border-fade pt-3 px-3">
+
+
+
+
+                <div class="form-group">
+                    <label for="spacing">Spacing</label>
+                    <div class="input-group">
+                        <input type="text" id="spacing" class="form-control" data-inputmask="'alias':'numeric','groupSeparator':'.','radixPoint':','" data-mask>
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+
+
+
 </div>
 <div class="text-center pt-3">
     <div class="icheck-primary text-secondary">

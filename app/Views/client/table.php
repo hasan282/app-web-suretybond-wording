@@ -15,7 +15,7 @@ $numOffset = ($pages['page_now'] - 1) * $pages['limit'];
             <tr>
                 <td class="text-center text-bold border-right fit"><?= $num + $numOffset + 1; ?></td>
                 <td class="py-0 align-middle text-center fit">
-                    <span class="btn btn-info btn-sm pb-1 text-bold" data-detail="<?= $pr['enkrip']; ?>">
+                    <span class="btn btn-info btn-sm pb-1 text-bold" data-detail="<?= $pr['enkrip']; ?>" onclick="showinfo(this)">
                         <i class="fas fa-info-circle mr-2"></i>info
                     </span>
                 </td>

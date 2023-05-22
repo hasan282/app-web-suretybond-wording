@@ -1,7 +1,8 @@
 # -------- me --------
 
-# image folder
 # public/image/*
+public/files/*
+public/adminlte/*
 
 # -------- frameworks --------
 
@@ -70,7 +71,7 @@ tests/coverage*
 phpunit
 
 # Composer
-# vendor/
+vendor/
 
 # Modules Testing
 _modules/*

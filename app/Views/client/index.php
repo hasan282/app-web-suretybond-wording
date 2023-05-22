@@ -48,18 +48,15 @@ $principal = $table->clientPrincipal(1);
     </div>
     <div class="col-xl-5 col-md-6">
         <div class="card">
+            <div class="overlay<?= $darkmode ? ' dark' : ''; ?>" id="infoloader"></div>
             <div class="card-body">
                 <div class="border-fade text-center pt-3 pb-2">
                     <h6 class="text-secondary">Informasi Principal</h6>
                 </div>
-                <div class="mt-4 px-2">
+                <div class="mt-4 px-2" id="principalinfo">
                     <div class="text-center text-info">
                         <p>Tekan <i class="fas fa-info-circle"></i> <strong>Info</strong> untuk Menampilkan Informasi Principal</p>
                     </div>
-                    <?=
-                    '';
-                    //  $this->include('client/info'); 
-                    ?>
                 </div>
             </div>
         </div>
@@ -71,17 +68,4 @@ $principal = $table->clientPrincipal(1);
     </div>
 </div>
 
-<?= $this->endSection(); ?>
-
-<?= $this->section('jscript'); ?>
-<script>
-    $(function() {
-        $('#loading').setLoader({
-            icon: 'fas fa-circle-notch'
-        });
-        $('.data-nav').navTable(function(page) {
-            $('#principal').setContent(BaseURL + 'tb/client/' + page);
-        });
-    });
-</script>
 <?= $this->endSection(); ?>

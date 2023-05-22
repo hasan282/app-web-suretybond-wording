@@ -36,6 +36,15 @@
         return dateresult;
     }
 
+    const dateRange = function (from, to) {
+        let dateFrom = from != '' ? (new Date(from)).getTime() : 0;
+        let dateTo = to != '' ? (new Date(to)).getTime() : 0;
+        if (dateFrom > 0 && (dateTo - dateFrom) > 0) {
+            return Math.ceil((dateTo - dateFrom) / (1000 * 3600 * 24)) + 1;
+        }
+        return 0;
+    }
+
     $.fn.inputDate = function (options = {}) {
         for (const key in options) {
             inOption[key] = options[key];
@@ -74,4 +83,17 @@
         });
     }
 
-})(jQuery)
+    $.fn.rangeFrom = function (from, to) {
+        const RANGE = this;
+        const DFROM = $('#val_' + from);
+        const DTO = $('#val_' + to);
+
+        RANGE.on('keyup', function () {
+            console.log('RANGE');
+        });
+        DFROM.on('input', function () {
+            console.log($(this).val());
+        });
+    }
+
+})(jQuery);

@@ -4,14 +4,12 @@ namespace App\Controllers;
 
 class Client extends BaseController
 {
-
-
     public function index()
     {
         if (!is_login())
             return login_page(full_url(false));
         $data['title'] = 'Data Principal';
-        $data['jscript'] = 'all/tables';
+        $data['jscript'] = array('all/tables', 'client/main');
         $this->plugin->setup('scrollbar');
         $this->view('client/index', $data);
     }
@@ -51,16 +49,6 @@ class Client extends BaseController
         }
     }
 
-    public function detail()
-    {
-        if (!is_login())
-            return login_page(full_url(false));
-        $data['title'] = 'Detail Principal';
-        $data['bread'] = array('Principal|client', 'Detail');
-        $this->plugin->setup('scrollbar');
-        $this->view('client/detail', $data);
-    }
-
     public function table($pageNumber)
     {
         $page = intval($pageNumber);
@@ -72,6 +60,23 @@ class Client extends BaseController
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
+    }
+
+    public function info($enkripsi)
+    {
+        $principal = new \App\Models\PrincipalModel;
+        $data = $principal->getData(array(
+            'id', 'enkrip', 'principal', 'telpon', 'email', 'alamat'
+        ), false)->where(array('enkrip' => $enkripsi))->data(false);
+        if ($data === null) {
+            $views = view('table/empty');
+        } else {
+            $views = view('client/info', array('principal' => $data));
+        }
+        return $this->response->setJSON(array(
+            'status' => true,
+            'content' => nl2space($views)
+        ));
     }
 
     public function people($principalID)

@@ -7,11 +7,19 @@
 -->
 <p>
     <small class="text-info">Nama Principal</small><br>
-    <span class="text-bold">PT. FIBERHOME TECHNOLOGIES INDONESIA</span>
+    <span class="text-bold"><?= $principal['principal']; ?></span>
 </p>
 <p>
     <small class="text-info">Alamat</small><br>
-    <span>APL Tower, Jakarta Barat, RT.12 RW.06, Grogol, Grogol petamburan, West Jakarta City, Jakarta 11440</span>
+    <span><?= $principal['alamat']; ?></span>
+</p>
+<p>
+    <small class="text-info">Nomor Telpon</small><br>
+    <span><?= $principal['telpon'] ?? '-'; ?></span>
+</p>
+<p>
+    <small class="text-info">Email</small><br>
+    <span><?= $principal['email'] ?? '-'; ?></span>
 </p>
 <p class="mb-2">
     <small class="text-info">Pejabat Penandatangan</small>
@@ -27,11 +35,13 @@
     </tr>
 </table>
 <div class="text-center mt-4">
+    <!--  
     <p class="text-secondary mb-1">Status : <strong class="text-success">Aktif</strong></p>
     <div class="mb-4">
         <button class="btn btn-default btn-sm">Nonaktifkan</button>
     </div>
-    <a href="/guarantee/add" class="btn btn-primary text-bold">
+    -->
+    <a href="/guarantee/add?client=<?= $principal['enkrip']; ?>" class="btn btn-primary text-bold">
         <i class="fas fa-certificate mr-2"></i>Buat Jaminan Baru
     </a>
 </div>

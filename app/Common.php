@@ -1,7 +1,7 @@
 <?php
 
 define('SURETY_DOMAIN', 'https://surety.ptjis.com/');
-define('ASSET_URL', 'http://localhost/assets-plugins/');
+define('ASSET_URL', 'https://assets.ptjis.com/');
 
 function setAllRoutes($routes)
 {
@@ -22,7 +22,6 @@ function setAllRoutes($routes)
     $routes->post('/guarantee/add/(:hash)', 'Guarantee::phase2_process/$1');
 
     $routes->get('/client', 'Client::index');
-    // $routes->get('/client/detail', 'Client::detail');
     $routes->get('/client/add', 'Client::add');
     $routes->post('/client/add', 'Client::addNew');
 
@@ -42,6 +41,9 @@ function setAllRoutes($routes)
     $routes->get('/d/client/person/(:hash)', 'Client::people/$1');
     $routes->get('/d/insurance/(:hash)', 'Insurance::dataCabang/$1');
     $routes->get('/d/insurance/person/(:hash)', 'Insurance::dataPeople/$1');
+
+    // --- JSON Views --------------------------------------------------------
+    $routes->get('/v/client/(:hash)', 'Client::info/$1');
 }
 
 if (!function_exists('env_is')) {

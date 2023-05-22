@@ -96,6 +96,7 @@ foreach ($dataField as $key => $arr) if ($arr[0] === null) unset($dataField[$key
         $('.inputdate').inputDate();
         $('#issued_date').inputDate();
         for (const ID in INPUTVAL) $('#' + ID)[INPUTVAL[ID][1]](INPUTVAL[ID][0]);
+        $('#days').rangeFrom('date_from', 'date_to');
     });
 </script>
 
