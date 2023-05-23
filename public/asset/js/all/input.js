@@ -45,6 +45,15 @@
         return 0;
     }
 
+    const daysAdd = function (date, days) {
+        if (date != '' && days > 0) {
+            let dateTo = new Date(date);
+            dateTo.setDate(dateTo.getDate() + days);
+            return dateTo.toISOString().substring(0, 10);
+        }
+        return null;
+    }
+
     $.fn.inputDate = function (options = {}) {
         for (const key in options) {
             inOption[key] = options[key];
@@ -84,15 +93,16 @@
     }
 
     $.fn.rangeFrom = function (from, to) {
-        const RANGE = this;
-        const DFROM = $('#val_' + from);
-        const DTO = $('#val_' + to);
-
-        RANGE.on('keyup', function () {
-            console.log('RANGE');
+        const INDAYS = this;
+        INDAYS.on('keyup', function () {
+            const DATETO = daysAdd($('#val_' + from).val(), parseInt($(this).val()) - 1);
+            if (DATETO !== null) {
+                $('#val_' + to).val(DATETO);
+                $('#' + to + '_input').val(dateConvert(DATETO, 2)).trigger('change');
+            }
         });
-        DFROM.on('input', function () {
-            console.log($(this).val());
+        $('#val_' + from + ',#val_' + to).on('input', function () {
+            INDAYS.val(dateRange($('#val_' + from).val(), $('#val_' + to).val()));
         });
     }
 

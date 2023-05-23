@@ -70,6 +70,7 @@ class InsuranceModel extends BaseModel
     {
         $options = array(
             'asuransi' => 'asuransi.nama ASC',
+            'nickname' => 'asuransi.nickname ASC',
             'cabang' => 'asuransi_cabang.cabang ASC'
         );
         if (!empty($addOption)) $options = array_merge($options, $addOption);
