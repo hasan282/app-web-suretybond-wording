@@ -114,6 +114,20 @@ class JaminanModel extends BaseModel
         return $this;
     }
 
+    public function getTipe(array $select = [])
+    {
+        $fields = array(
+            'id' => 'jaminan_jenis.id AS id',
+            'jenis' => 'jaminan_jenis.jenis AS jenis',
+            'english' => 'jaminan_jenis.jenis_eng AS english',
+            'nick' => 'jaminan_jenis.singkat AS nick'
+        );
+        $this->select($fields, $select);
+        $this->table = 'jaminan_jenis';
+        $this->where = 'jaminan_jenis.actives = 1';
+        return $this;
+    }
+
     // ----- PARENT OVERRIDE ------------------------------------------------------
 
     public function where($where, array $addField = [])

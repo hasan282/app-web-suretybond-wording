@@ -14,7 +14,7 @@ class Principal extends Seeder
             'PT JAYA KARYA PASUNDAN',
             'PT INFITECH SOLUSI INDONESIA',
             'PT INDONESIA FERRY PROPERTI',
-            'PT HUTAMA MANGGALA PERSADA ',
+            'PT HUTAMA MANGGALA PERSADA',
             'PT HARMONI PRIMA MEDIKA',
             'PT HANWHA LIFE INSURANCE INDONESIA',
             'PT GALUNG SOLUSI BANGUN TEKNIK',

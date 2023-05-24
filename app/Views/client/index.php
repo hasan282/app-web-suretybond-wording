@@ -9,8 +9,8 @@ $table = new \App\Libraries\Tables;
 $principal = $table->clientPrincipal(1);
 ?>
 <div class="row mb-3">
-    <div class="col-sm">
-        <div class="input-group mb-3 mb-sm-0 mw-4">
+    <div class="col-md">
+        <div class="input-group mb-3 mb-md-0">
             <input type="search" id="datasearch" class="form-control" placeholder="Cari Nama Principal" disabled>
             <div class="input-group-append">
                 <button type="button" id="btn_search" class="btn btn-default" disabled>
@@ -19,8 +19,20 @@ $principal = $table->clientPrincipal(1);
             </div>
         </div>
     </div>
-    <div class="col-sm">
-        <div class="mw-3 ml-auto mr-sm-0 mr-auto">
+    <div class="col-md">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">
+                    <i class="fas fa-filter mr-2"></i>Filter
+                </span>
+            </div>
+            <select id="marketing" class="form-control">
+                <option value="">Semua Data</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-xl-3">
+        <div class="mw-3 ml-auto mr-md-0 mr-auto mt-xl-0 mt-3">
             <a href="/client/add" class="btn btn-primary btn-block text-bold">
                 <i class="fas fa-plus mr-2"></i>Tambah Principal Baru
             </a>

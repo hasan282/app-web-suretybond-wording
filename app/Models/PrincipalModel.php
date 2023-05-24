@@ -10,16 +10,18 @@ class PrincipalModel extends BaseModel
     {
         $data['id'] = create_id();
         $data['enkripsi'] = sha3hash($data['id'], 50);
-        $data['nama'] = strtoupper(trim($post['principal'] ?? ''));
+        $data['nama'] = trim($post['principal'] ?? '');
         $data['telpon'] = trim($post['telpon'] ?? '');
         $data['email'] = trim($post['email'] ?? '');
         $data['alamat'] = trim(nl2space($post['alamat'] ?? ''));
         if ($office !== null) $data['id_office'] = $office;
+        $data['id_marketing'] = $post['marketing'] ?? '';
         $data['actives'] = 1;
         foreach ($data as $k => $v) if ($v == '') unset($data[$k]);
         $insert = $this->transaction(function ($db) use ($data, $post) {
             $db->table('principal')->insert($data);
             $db->table('principal_people')->insert($this->_peopleData($data['id'], $post));
+            $db->table('principal_rate')->insertBatch($this->_rateData($post['rates'], $data['id']));
         });
         return $insert === false ? $insert : $data;
     }
@@ -42,6 +44,24 @@ class PrincipalModel extends BaseModel
         $data['jabatan'] = trim($post['jabatan'] ?? '');
         $data['actives'] = 1;
         foreach ($data as $k => $v) if ($v == '') unset($data[$k]);
+        return $data;
+    }
+
+    private function _rateData(array $rates, string $principal)
+    {
+        $data = array();
+        foreach ($rates as $key => $val) {
+            $asuransi = ltrim($key, 'AS');
+            foreach ($val as $ky => $vl) {
+                $rate = unformat($vl);
+                if ($rate !== null) $data[] = array(
+                    'id_principal' => $principal,
+                    'id_asuransi' => $asuransi,
+                    'id_jenis' => ltrim($ky, 'JT'),
+                    'rate_percent' => $rate
+                );
+            }
+        }
         return $data;
     }
 

@@ -11,6 +11,12 @@ class Insurance extends BaseController
         $data['title'] = 'Asuransi';
         $this->plugin->setup('scrollbar');
         $this->view('insurance/index', $data);
+
+        // $id = create_id(0, true);
+        // var_dump(array(
+        //     'id' => $id,
+        //     'hash' => sha3hash($id, 40)
+        // ));
     }
 
     public function dataCabang($enkrip)

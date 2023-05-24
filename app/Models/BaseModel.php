@@ -13,6 +13,17 @@ class BaseModel
     public function __construct()
     {
         $this->db = \Config\Database::connect();
+        $this->_emptyValues();
+    }
+
+    public function refresh()
+    {
+        $this->_emptyValues();
+        return $this;
+    }
+
+    private function _emptyValues()
+    {
         $this->bind = array();
         $this->select = null;
         $this->table = null;

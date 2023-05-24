@@ -1,3 +1,9 @@
+<?php
+$modelPrincipal = new \App\Models\PrincipalModel;
+$people = $modelPrincipal->getPeople(['nama', 'jabatan'])->where(
+    ['id_principal' => $principal['id']]
+)->data();
+?>
 <!--  
 <div class="text-right">
     <a href="/client/detail" class="btn btn-info btn-sm">
@@ -25,14 +31,12 @@
     <small class="text-info">Pejabat Penandatangan</small>
 </p>
 <table class="table table-bordered table-sm">
-    <tr>
-        <td class="text-bold fit px-2">1</td>
-        <td class="px-2">Tugiman Maheswara</td>
-    </tr>
-    <tr>
-        <td class="text-bold fit px-2">2</td>
-        <td class="px-2">Zamira Suryatmi</td>
-    </tr>
+    <?php foreach ($people as $num => $pl) : ?>
+        <tr>
+            <td class="text-bold fit px-2"><?= $num + 1; ?></td>
+            <td class="px-2"><?= $pl['nama']; ?> <span class="text-secondary">(<?= $pl['jabatan']; ?>)</span></td>
+        </tr>
+    <?php endforeach; ?>
 </table>
 <div class="text-center mt-4">
     <!--  

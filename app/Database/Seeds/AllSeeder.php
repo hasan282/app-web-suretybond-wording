@@ -15,5 +15,6 @@ class AllSeeder extends Seeder
         $this->call('JaminanJenis');
         $this->call('JaminanPekerjaan');
         $this->call('JaminanProyek');
+        $this->call('Marketing');
     }
 }

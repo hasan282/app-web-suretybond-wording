@@ -20,7 +20,7 @@ class Client extends BaseController
             return login_page(full_url(false));
         $data['title'] = 'Tambah Data Principal';
         $data['bread'] = array('Principal|client', 'Tambah Data');
-        $this->plugin->setup('scrollbar|icheck');
+        $this->plugin->setup('scrollbar|icheck|dateinput');
         return $this->view('client/add/index', $data, true);
     }
 

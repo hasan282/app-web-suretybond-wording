@@ -37,8 +37,14 @@ if (!function_exists('create_id')) {
      * @param int $suffix Length angka random
      * @return string ID yang dihasilkan.
      */
-    function create_id(int $suffix = 4)
+    function create_id(int $suffix = 4, $randomize = false)
     {
+        if ($randomize) {
+            $time = strtotime('-' . mt_rand(1, 9999999) . ' seconds');
+            $dateid = date('ymdHis', $time);
+        } else {
+            $dateid = date('ymdHis');
+        }
         $suffix_value = '';
         if ($suffix > 0) {
             if ($suffix === 1) {
@@ -49,7 +55,7 @@ if (!function_exists('create_id')) {
                 $suffix_value .= mt_rand(intval($min), intval($max));
             }
         }
-        return date('ymdHis') . $suffix_value;
+        return $dateid . $suffix_value;
     }
 }
 
