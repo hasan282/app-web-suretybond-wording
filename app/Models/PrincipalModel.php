@@ -21,7 +21,8 @@ class PrincipalModel extends BaseModel
         $insert = $this->transaction(function ($db) use ($data, $post) {
             $db->table('principal')->insert($data);
             $db->table('principal_people')->insert($this->_peopleData($data['id'], $post));
-            $db->table('principal_rate')->insertBatch($this->_rateData($post['rates'], $data['id']));
+            $dataRate = $this->_rateData($post['rates'], $data['id']);
+            if (!empty($dataRate)) $db->table('principal_rate')->insertBatch($dataRate);
         });
         return $insert === false ? $insert : $data;
     }
@@ -50,16 +51,20 @@ class PrincipalModel extends BaseModel
     private function _rateData(array $rates, string $principal)
     {
         $data = array();
-        foreach ($rates as $key => $val) {
-            $asuransi = ltrim($key, 'AS');
-            foreach ($val as $ky => $vl) {
-                $rate = unformat($vl);
-                if ($rate !== null) $data[] = array(
-                    'id_principal' => $principal,
-                    'id_asuransi' => $asuransi,
-                    'id_jenis' => ltrim($ky, 'JT'),
-                    'rate_percent' => $rate
-                );
+        foreach ($rates as $asrid => $jt) {
+            $asuransi = ltrim($asrid, 'AS');
+            foreach ($jt as $jtid => $pro) {
+                $tipe = ltrim($jtid, 'JT');
+                foreach ($pro as $proid => $rt) {
+                    $rate = unformat($rt);
+                    if ($rate !== null) $data[] = array(
+                        'id_principal' => $principal,
+                        'id_asuransi' => $asuransi,
+                        'id_jenis' => $tipe,
+                        'id_proyek' => ltrim($proid, 'PR'),
+                        'rate_percent' => $rate
+                    );
+                }
             }
         }
         return $data;
@@ -121,7 +126,8 @@ class PrincipalModel extends BaseModel
             'enkrip' => 'principal.enkripsi',
             'enkrip_people' => 'principal_people.enkripsi',
             'nama' => 'principal.nama',
-            'office' => 'principal.id_office'
+            'office' => 'principal.id_office',
+            'marketing' => 'principal.id_marketing'
         );
         if (!empty($addField)) $fields = array_merge($fields, $addField);
         return parent::where($where, $fields);

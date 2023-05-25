@@ -128,6 +128,13 @@ class JaminanModel extends BaseModel
         return $this;
     }
 
+    public function getProyek()
+    {
+        $this->select = '*';
+        $this->table = 'jaminan_proyek';
+        return $this;
+    }
+
     // ----- PARENT OVERRIDE ------------------------------------------------------
 
     public function where($where, array $addField = [])

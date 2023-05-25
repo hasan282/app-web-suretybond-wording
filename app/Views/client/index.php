@@ -6,14 +6,15 @@
 $dark = get_cookie('DRKMOD') ?? '0';
 $darkmode = (intval($dark) === 1);
 $table = new \App\Libraries\Tables;
+$modelMkt = new \App\Models\MarketingModel;
 $principal = $table->clientPrincipal(1);
 ?>
 <div class="row mb-3">
     <div class="col-md">
         <div class="input-group mb-3 mb-md-0">
-            <input type="search" id="datasearch" class="form-control" placeholder="Cari Nama Principal" disabled>
+            <input type="search" id="datasearch" class="form-control" placeholder="Cari Nama Principal">
             <div class="input-group-append">
-                <button type="button" id="btn_search" class="btn btn-default" disabled>
+                <button type="button" id="btn_search" class="btn btn-default">
                     <i class="fas fa-search mx-2"></i>
                 </button>
             </div>
@@ -27,7 +28,10 @@ $principal = $table->clientPrincipal(1);
                 </span>
             </div>
             <select id="marketing" class="form-control">
-                <option value="">Semua Data</option>
+                <option value="ALLDATA">Semua Data</option>
+                <?php foreach ($modelMkt->getData()->data() as $mkt) : ?>
+                    <option value="<?= $mkt['id']; ?>"><?= $mkt['nama']; ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
     </div>

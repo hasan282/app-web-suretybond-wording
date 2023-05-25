@@ -5,54 +5,14 @@ namespace App\Libraries;
 class Tables
 {
     private $now, $max, $count, $dataList;
-    private $limit, $offset;
+    private $limit, $offset, $request, $get;
 
     public function __construct()
     {
         $this->limit = 10;
         $this->offset = 0;
-    }
-
-    public function guaranteeDraft(int $page = 1)
-    {
-        $model = new \App\Models\JaminanModel;
-        $model->getData(
-            ['enkrip', 'nomor', 'nilai', 'jenis_jaminan', 'principal']
-        )->where(['active' => 1]);
-        $this->_setPage($page, $model->count('jaminan.id'));
-        $this->dataList = $model->limit(
-            $this->limit,
-            $this->offset
-        )->order('newest')->data();
-        return $this->_objectReturn('guarantee/table/draft', 'jaminan');
-    }
-
-    public function guaranteeIssued(int $page = 1)
-    {
-        $model = new \App\Models\DataModel;
-        $data['list'] = $model->dataIssued();
-
-        return (object) [
-            'page_now' => $page,
-            'page_max' => 32,
-            'count' => 572,
-            'limit' => 10,
-            'content' => nl2space(view('guarantee/table/issued', $data))
-        ];
-    }
-
-    public function clientPrincipal(int $page = 1)
-    {
-        $model = new \App\Models\PrincipalModel;
-        $model->getData(array('enkrip', 'principal'));
-        // $office = userdata('office_id');
-        // if ($office !== null) $model->where(array('office' => $office));
-        $this->_setPage($page, $model->count('principal.id'));
-        $this->dataList = $model->limit(
-            $this->limit,
-            $this->offset
-        )->order('principal')->data();
-        return $this->_objectReturn('client/table', 'principal');
+        $this->request = \Config\Services::request();
+        $this->get = $this->request->getGet();
     }
 
     public function footNavs($now = 1, $max = 1)
@@ -90,5 +50,58 @@ class Tables
             ? view($tablePath, $data) : view('table/empty');
         $dataReturn['content'] = nl2space($contentShow);
         return (object) $dataReturn;
+    }
+
+    // ------ USER FUNCTIONS -----------------------------------------
+
+    public function guaranteeDraft(int $page = 1)
+    {
+        $model = new \App\Models\JaminanModel;
+        $model->getData(
+            ['enkrip', 'nomor', 'nilai', 'jenis_jaminan', 'principal']
+        )->where(['active' => 1]);
+        $this->_setPage($page, $model->count('jaminan.id'));
+        $this->dataList = $model->limit(
+            $this->limit,
+            $this->offset
+        )->order('newest')->data();
+        return $this->_objectReturn('guarantee/table/draft', 'jaminan');
+    }
+
+    public function guaranteeIssued(int $page = 1)
+    {
+        // $model = new \App\Models\DataModel;
+        // $data['list'] = $model->dataIssued();
+        // return (object) [
+        //     'page_now' => $page,
+        //     'page_max' => 32,
+        //     'count' => 572,
+        //     'limit' => 10,
+        //     'content' => nl2space(view('guarantee/table/issued', $data))
+        // ];
+
+        $this->_setPage($page, 0);
+        $this->dataList = [];
+        return $this->_objectReturn('guarantee/table/issued');
+    }
+
+    public function clientPrincipal(int $page = 1)
+    {
+        $model = new \App\Models\PrincipalModel;
+        $model->getData(array('enkrip', 'principal'));
+
+        $where = array();
+        $office = userdata('office_id');
+        if ($office !== null) $where['office'] = $office;
+        if (array_key_exists('search', $this->get)) $where['nama'] = '%' . $this->get['search'] . '%';
+        if (array_key_exists('filter', $this->get)) $where['marketing'] = $this->get['filter'];
+
+        if (!empty($where)) $model->where($where);
+        $this->_setPage($page, $model->count('principal.id'));
+        $this->dataList = $model->limit(
+            $this->limit,
+            $this->offset
+        )->order('principal')->data();
+        return $this->_objectReturn('client/table', 'principal');
     }
 }

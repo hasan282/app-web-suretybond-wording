@@ -5,7 +5,7 @@
         color: 'secondary',
         size: '2',
         loader: '#loading',
-        count: '#total_data',
+        count: '#count_data',
         pagenow: '#halaman',
         pagemax: '#halaman_max',
         first: 'first',

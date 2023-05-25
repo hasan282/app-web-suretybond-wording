@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class PrincipalRate extends Migration
+class MarketingRate extends Migration
 {
     public function up()
     {
@@ -13,9 +13,9 @@ class PrincipalRate extends Migration
                 'type' => 'INT',
                 'auto_increment' => true
             ),
-            'id_principal' => array(
+            'id_marketing' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 16,
+                'constraint' => 12,
                 'null' => true,
                 'default' => null
             ),
@@ -46,17 +46,17 @@ class PrincipalRate extends Migration
         ));
 
         $this->forge->addPrimaryKey('id', 'PRIMARY');
-        $this->forge->addKey('id_principal', false, false, 'PRINCIPAL');
+        $this->forge->addKey('id_marketing', false, false, 'PRINCIPAL');
         $this->forge->addKey('id_asuransi', false, false, 'ASURANSI');
         $this->forge->addKey('id_jenis', false, false, 'JENIS');
         $this->forge->addKey('id_proyek', false, false, 'PROYEK');
 
         $attribute = array('ENGINE' => 'InnoDB');
-        $this->forge->createTable('principal_rate', true, $attribute);
+        $this->forge->createTable('marketing_rate', true, $attribute);
     }
 
     public function down()
     {
-        $this->forge->dropTable('principal_rate', true);
+        $this->forge->dropTable('marketing_rate', true);
     }
 }

@@ -31,6 +31,8 @@ const defaultOption = (value, text, index) => '<option value="' + value + '" dat
 
 $(function () {
 
+    $('.select2selector').select2();
+
     $('#principal').on('change', function () {
         const VALS = $(this).val();
         $('#principal_alamat').html(PRADDRESS['pr_' + VALS]);
@@ -92,5 +94,9 @@ $(function () {
         $('#asuransi_jabatan').val(JSONDATA[INDEKS]['jabatan']);
         enableSubmit();
     });
+
+    if (typeof (PRSELECTD) != "undefined" && PRSELECTD !== null) {
+        $('#principal').val(PRSELECTD).trigger('change');
+    }
 
 });

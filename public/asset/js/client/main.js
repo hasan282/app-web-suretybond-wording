@@ -1,11 +1,39 @@
 $(function () {
 
+    let filter = {};
+
     $('#loading,#infoloader').setLoader({
         icon: 'fas fa-circle-notch'
     });
 
+    $('#datasearch').on('search', function () {
+        const VALS = $(this).val();
+        if (VALS == '') {
+            delete filter.search;
+        } else {
+            filter.search = VALS;
+        }
+        $('.data-nav[data-page="first"]').trigger('click');
+    });
+
+    $('#btn_search').on('click', function () {
+        $('#datasearch').trigger('search');
+    });
+
+    $('#marketing').on('change', function () {
+        $('#datasearch').val('');
+        const VALS = $(this).val();
+        delete filter.search;
+        if (VALS == 'ALLDATA') {
+            delete filter.filter;
+        } else {
+            filter.filter = VALS;
+        }
+        $('.data-nav[data-page="first"]').trigger('click');
+    });
+
     $('.data-nav').navTable(function (page) {
-        $('#principal').setContent(BaseURL + 'tb/client/' + page);
+        $('#principal').setContent(BaseURL + 'tb/client/' + page, filter);
     });
 
 });

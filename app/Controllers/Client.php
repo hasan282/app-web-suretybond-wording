@@ -55,7 +55,7 @@ class Client extends BaseController
         if (is_login() && $page > 0) {
             $table = new \App\Libraries\Tables;
             return $this->response->setJSON(
-                $table->clientPrincipal($page, userdata('office_id'))
+                $table->clientPrincipal($page)
             );
         } else {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();

@@ -69,29 +69,37 @@ $jaminanTipe = $modelJaminan->getTipe(['id', 'jenis'])->data();
 </div>
 <?php $maxWidth = 200 + (130 * sizeof($asuransi)); ?>
 <div id="inputrate" class="pt-4 mx-auto hide-content" style="max-width:<?= $maxWidth; ?>px;overflow-y:auto">
-    <table class="table table-borderless">
-        <tr>
-            <td class="p-0"></td>
-            <?php foreach ($asuransi as $ar) : ?>
-                <td class="p-2 text-center text-bold"><?= $ar['nickname']; ?></td>
-            <?php endforeach; ?>
-        </tr>
-        <?php foreach ($jaminanTipe as $jt) : ?>
-            <tr>
-                <td class="align-middle text-bold text-nowrap"><?= $jt['jenis']; ?></td>
-                <?php foreach ($asuransi as $as) : ?>
-                    <td class="p-2">
-                        <div class="input-group" style="min-width:100px">
-                            <input name="rates[AS<?= $as['id']; ?>][JT<?= $jt['id']; ?>]" type="text" class="form-control" data-inputmask="'alias':'numeric','groupSeparator':'.','radixPoint':','" data-mask>
-                            <div class="input-group-append">
-                                <span class="input-group-text"><i class="fas fa-percentage"></i></span>
-                            </div>
-                        </div>
-                    </td>
+    <?php foreach ($modelJaminan->refresh()->getProyek()->data() as $proyek) : ?>
+        <div class="border-fade px-2 pt-2 mt-3">
+            <div class="text-center pt-2">
+                <span class="text-bold text-secondary"><?= $proyek['proyek']; ?></span>
+                <hr class="mt-1">
+            </div>
+            <table class="table table-borderless">
+                <tr>
+                    <td class="p-0"></td>
+                    <?php foreach ($asuransi as $ar) : ?>
+                        <td class="p-2 text-center text-bold"><?= $ar['nickname']; ?></td>
+                    <?php endforeach; ?>
+                </tr>
+                <?php foreach ($jaminanTipe as $jt) : ?>
+                    <tr>
+                        <td class="align-middle text-bold text-nowrap"><?= $jt['jenis']; ?></td>
+                        <?php foreach ($asuransi as $as) : ?>
+                            <td class="p-2">
+                                <div class="input-group" style="min-width:100px">
+                                    <input name="rates[AS<?= $as['id']; ?>][JT<?= $jt['id']; ?>][PR<?= $proyek['id']; ?>]" type="text" class="form-control" data-inputmask="'alias':'numeric','groupSeparator':'.','radixPoint':','" data-mask>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-percentage"></i></span>
+                                    </div>
+                                </div>
+                            </td>
+                        <?php endforeach; ?>
+                    </tr>
                 <?php endforeach; ?>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+            </table>
+        </div>
+    <?php endforeach; ?>
 </div>
 <div class="text-center pt-3">
     <div class="icheck-primary text-secondary">

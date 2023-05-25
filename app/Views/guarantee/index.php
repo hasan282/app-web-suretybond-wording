@@ -36,7 +36,7 @@ $draft = url_is('guarantee/issued') ? $tables->guaranteeIssued(1) : $tables->gua
     <div class="overlay<?= $darkmode ? ' dark' : ''; ?>" id="loading"></div>
     <div class="card-header">
         <h3 class="card-title">
-            <span id="heads">Draft Jaminan</span> <strong id="total_data"><?= $draft->count; ?></strong> Data
+            <span id="heads">Draft Jaminan</span> <strong id="count_data"><?= $draft->count; ?></strong> Data
         </h3>
         <div class="card-tools">
             <button type="button" class="btn btn-tool btn-expand" data-expand="0">
