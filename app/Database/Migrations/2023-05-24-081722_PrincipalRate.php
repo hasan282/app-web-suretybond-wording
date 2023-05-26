@@ -42,6 +42,18 @@ class PrincipalRate extends Migration
                 'constraint' => '6,6',
                 'null' => true,
                 'default' => null
+            ),
+            'minimum' => array(
+                'type' => 'DECIMAL',
+                'constraint' => '15,2',
+                'null' => true,
+                'default' => null
+            ),
+            'admin_fee' => array(
+                'type' => 'DECIMAL',
+                'constraint' => '15,2',
+                'null' => true,
+                'default' => null
             )
         ));
 

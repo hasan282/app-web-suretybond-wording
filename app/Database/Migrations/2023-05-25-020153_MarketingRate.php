@@ -8,6 +8,11 @@ class MarketingRate extends Migration
 {
     public function up()
     {
+        // $this->_updb();
+    }
+
+    private function _updb()
+    {
         $this->forge->addField(array(
             'id' => array(
                 'type' => 'INT',
