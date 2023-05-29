@@ -50,6 +50,11 @@ $dataPeople = $modelPrincipal->getPeople(['nama', 'jabatan'])->where(
                 </table>
             </div>
         </div>
+        <div class="card">
+
+            <?= $this->include('client/detail/up2'); ?>
+
+        </div>
     </div>
     <div class="col-xl-7">
         <div class="card">

@@ -64,6 +64,10 @@ class Plugins
                 ['url' => '(base_url)/adminlte/plugins/select2/css/select2.min.css', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/plugins/select2/js/select2.full.min.js', 'tipe' => 'js|foot']
+            ),
+            'dropzone' => array(
+                ['url' => '(base_url)/adminlte/plugins/dropzone/min/dropzone.min.css', 'tipe' => 'css|head'],
+                ['url' => '(base_url)/adminlte/plugins/dropzone/min/dropzone.min.js', 'tipe' => 'js|foot']
             )
             /*
             'name' => array(

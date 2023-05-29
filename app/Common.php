@@ -27,6 +27,7 @@ function setAllRoutes($routes)
     $routes->get('/client/detail/(:hash)', 'Client::detail/$1');
 
     $routes->post('/client/add', 'Client::addNew');
+    $routes->post('/client/upload', 'Client::uploadFile');
 
     $routes->get('/insurance', 'Insurance::index');
 
