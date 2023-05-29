@@ -6,6 +6,7 @@ define('ASSET_URL', 'https://assets.ptjis.com/');
 function setAllRoutes($routes)
 {
     $routes->get('/', 'Login::index');
+
     $routes->post('/', 'Auth::user');
 
     $routes->get('/user', 'User::index');
@@ -23,6 +24,8 @@ function setAllRoutes($routes)
 
     $routes->get('/client', 'Client::index');
     $routes->get('/client/add', 'Client::add');
+    $routes->get('/client/detail/(:hash)', 'Client::detail/$1');
+
     $routes->post('/client/add', 'Client::addNew');
 
     $routes->get('/insurance', 'Insurance::index');

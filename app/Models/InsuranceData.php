@@ -42,6 +42,7 @@ class InsuranceData
                 )
             );
         }
+        unset($new);
         return $newData;
     }
 }

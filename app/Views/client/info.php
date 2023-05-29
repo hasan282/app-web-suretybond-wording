@@ -4,13 +4,11 @@ $people = $modelPrincipal->getPeople(['nama', 'jabatan'])->where(
     ['id_principal' => $principal['id']]
 )->data();
 ?>
-<!--  
 <div class="text-right">
-    <a href="/client/detail" class="btn btn-info btn-sm">
-        Lihat Detail Principal<i class="fas fa-arrow-circle-right ml-2"></i>
+    <a href="/client/detail/<?= $principal['enkrip']; ?>" target="_blank" class="btn btn-default btn-sm">
+        Detail dan Informasi Rate<i class="fas fa-external-link-alt ml-2"></i>
     </a>
 </div>
--->
 <p>
     <small class="text-info">Nama Principal</small><br>
     <span class="text-bold"><?= $principal['principal']; ?></span>

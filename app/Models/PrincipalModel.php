@@ -116,6 +116,33 @@ class PrincipalModel extends BaseModel
         return $this;
     }
 
+    public function getRate(array $select = [])
+    {
+        $fields = array(
+            'asuransi_id' => 'principal_rate.id_asuransi AS asuransi_id',
+            'asuransi' => 'asuransi.nama AS asuransi',
+            'proyek_id' => 'principal_rate.id_proyek AS proyek_id',
+            'proyek' => 'jaminan_proyek.proyek AS proyek',
+            'jenis_id' => 'principal_rate.id_jenis AS jenis_id',
+            'jenis' => 'jaminan_jenis.jenis AS jenis',
+            'rate' => 'principal_rate.rate_percent as rate',
+            'minimum' => 'principal_rate.minimum AS minimum',
+            'admin' => 'principal_rate.admin_fee AS admin'
+        );
+        $table = 'principal_rate INNER JOIN asuransi ON principal_rate.id_asuransi = asuransi.id';
+        $table = '(' . $table . ') INNER JOIN jaminan_jenis ON principal_rate.id_jenis = jaminan_jenis.id';
+        $table = '(' . $table . ') INNER JOIN jaminan_proyek ON principal_rate.id_proyek = jaminan_proyek.id';
+        $table = '(' . $table . ') INNER JOIN principal ON principal_rate.id_principal = principal.id';
+        $this->select($fields, $select);
+        $this->table = $table;
+        $this->order = array(
+            'principal_rate.id_asuransi ASC',
+            'principal_rate.id_proyek ASC',
+            'principal_rate.id_jenis ASC'
+        );
+        return $this;
+    }
+
     // ----- PARENT OVERRIDE ------------------------------------------------------
 
     public function where($where, array $addField = [])

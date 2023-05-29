@@ -11,7 +11,7 @@ class Client extends BaseController
         $data['title'] = 'Data Principal';
         $data['jscript'] = array('all/tables', 'client/main');
         $this->plugin->setup('scrollbar');
-        $this->view('client/index', $data);
+        return $this->view('client/index', $data, true);
     }
 
     public function add()
@@ -23,6 +23,25 @@ class Client extends BaseController
         $this->plugin->setup('scrollbar|icheck|dateinput');
         return $this->view('client/add/index', $data, true);
     }
+
+    public function detail($param)
+    {
+        if (!is_login())
+            return login_page(full_url(false));
+        $principal = new \App\Models\PrincipalModel;
+        $data['principal'] = $principal->getData(array(
+            'id', 'principal', 'telpon', 'email', 'alamat'
+        ), false)->where(array('enkrip' => $param))->data(false);
+        if ($data['principal'] === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+            $data['title'] = 'Detail Principal';
+            $data['bread'] = array('Principal|client', 'Detail');
+            return $this->view('client/detail', $data, true);
+        }
+    }
+
+    // -------- PROCESS -----------------------------------------------------------------
 
     public function addNew()
     {
@@ -48,6 +67,8 @@ class Client extends BaseController
             return redirect()->to($direct);
         }
     }
+
+    // -------- JSON Return -------------------------------------------------------------
 
     public function table($pageNumber)
     {

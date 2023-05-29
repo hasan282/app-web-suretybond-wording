@@ -19,6 +19,15 @@ if (!function_exists('nformat')) {
     }
 }
 
+if (!function_exists('to_decimal')) {
+    function to_decimal(string $number, $decimal = 'auto', $separator = ',')
+    {
+        $float = strval(floatval($number));
+        $float = str_replace('.', $separator, $float);
+        return $float;
+    }
+}
+
 if (!function_exists('unformat')) {
     function unformat($number, string $separator = '.', string $decimal = ',')
     {
