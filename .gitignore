@@ -2,7 +2,11 @@
 
 # public/image/*
 public/files/*
+!public/files/index.html
 public/adminlte/*
+!public/adminlte/index.html
+public/fonts/*
+!public/fonts/index.html
 
 # -------- frameworks --------
 

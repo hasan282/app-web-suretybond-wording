@@ -111,7 +111,7 @@ class PDFMake
 
     private function _fontList()
     {
-        $fontLocation = base_url('asset/font');
+        $fontLocation = base_url('fonts');
         $this->allFont = array(
             'Arial' => array(
                 'normal' => $fontLocation . '/arial.ttf',
