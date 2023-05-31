@@ -9,6 +9,7 @@ $modelPrincipal = new \App\Models\PrincipalModel;
 $dataPeople = $modelPrincipal->getPeople(['nama', 'jabatan'])->where(
     ['id_principal' => $principal['id']]
 )->data();
+$documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
 ?>
 <div class="row">
     <div class="col-xl-5">
@@ -40,20 +41,61 @@ $dataPeople = $modelPrincipal->getPeople(['nama', 'jabatan'])->where(
                         <th class="text-center">Nama</th>
                         <th class="text-center">Jabatan</th>
                     </thead>
-                    <?php foreach ($dataPeople as $num => $pl) : ?>
+                    <tbody>
+                        <?php foreach ($dataPeople as $num => $pl) : ?>
+                            <tr>
+                                <td class="text-bold fit px-2"><?= $num + 1; ?></td>
+                                <td class="px-2"><?= $pl['nama']; ?></td>
+                                <td><?= $pl['jabatan']; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <p class="mb-2 mt-3">
+                    <small class="text-info">Dokumen SPKMGR</small>
+                </p>
+                <table class="table table-bordered table-sm">
+                    <?php if (!empty($documents)) : ?>
+                        <thead>
+                            <th class="text-center">#</th>
+                            <th class="text-center">Tanggal Upload</th>
+                            <th class="text-center">Dokumen</th>
+                        </thead>
+                    <?php endif; ?>
+                    <tbody>
+                        <?php foreach ($documents as $nm => $doc) : ?>
+                            <tr>
+                                <td class="text-bold fit px-2"><?= $nm + 1; ?></td>
+                                <td class="px-2 text-center"><?= id2date($doc['id'], 'D/M/Y H.I'); ?></td>
+                                <td class="px-2 text-center text-sm text-nowrap align-middle">
+                                    <a href="<?= base_url('files/' . $doc['id_principal'] . '/' . $doc['filename']); ?>" target="_blank">Lihat Dokumen<i class="fas fa-external-link-alt ml-2"></i></a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
                         <tr>
-                            <td class="text-bold fit px-2"><?= $num + 1; ?></td>
-                            <td class="px-2"><?= $pl['nama']; ?></td>
-                            <td><?= $pl['jabatan']; ?></td>
+                            <td colspan="3" class="text-center">
+                                <?php if (empty($documents)) : ?>
+                                    <p class="text-sm text-secondary">Belum ada Dokumen</p>
+                                <?php endif; ?>
+                                <span class="btn btn-default btn-sm" id="btnupload" data-open="0">
+                                    <i class="fas fa-plus mr-2"></i>Upload Dokumen Baru
+                                </span>
+                            </td>
                         </tr>
-                    <?php endforeach; ?>
+                    </tbody>
                 </table>
             </div>
         </div>
-        <div class="card">
-
-            <?= $this->include('client/detail/up2'); ?>
-
+        <div class="card hide-content" id="boxupload">
+            <div class="card-body">
+                <div class="text-center text-muted">
+                    <p class="text-sm">File Extension PDF / JPG / JPEG / PNG</p>
+                </div>
+                <div id="uploadfile">
+                    <?= csrf_field(); ?>
+                </div>
+                <div id="uploadmsg" class="text-center"></div>
+            </div>
         </div>
     </div>
     <div class="col-xl-7">
@@ -92,4 +134,22 @@ $dataPeople = $modelPrincipal->getPeople(['nama', 'jabatan'])->where(
     </div>
 </div>
 
+<?= $this->endSection(); ?>
+
+<?= $this->section('jscript'); ?>
+<script>
+    $(function() {
+        $('#uploadfile').setDropZone(BaseURL + 'client/upload?pr=<?= $principal['enkrip']; ?>');
+        $('#btnupload').click(function() {
+            const OPEN = parseInt($(this).data('open'));
+            if (OPEN === 1) {
+                $('#boxupload').slideUp();
+                $(this).data('open', 0).html('<i class="fas fa-plus mr-2"></i>Upload Dokumen Baru');
+            } else {
+                $('#boxupload').slideDown();
+                $(this).data('open', 1).html('<i class="fas fa-times mr-2"></i>Batalkan');
+            }
+        });
+    });
+</script>
 <?= $this->endSection(); ?>

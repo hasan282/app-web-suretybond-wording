@@ -142,7 +142,7 @@ class PrincipalRate extends Seeder
                     'id' => $idpp,
                     'enkripsi' => sha3hash($idpp, 50),
                     'id_principal' => $idpr,
-                    'nama' => 'Sambo',
+                    'nama' => $this->_generate_name(),
                     'jabatan' => 'Direktur Utama',
                     'actives' => 1
                 );
@@ -206,5 +206,26 @@ class PrincipalRate extends Seeder
                 return null;
             }
         }
+    }
+
+    private function _generate_name()
+    {
+        $male_depan = array(
+            'Ahmad', 'Budi', 'Chandra', 'Eka', 'Hadi', 'Indra', 'Joko', 'Oscar', 'Tono'
+        );
+        $male_belakang = array(
+            'Santoso', 'Wijaya', 'Kusuma', 'Susanto', 'Halim', 'Yusuf', 'Hidayat', 'Nugroho', 'Wahyuni', 'Setiawan', 'Purnama', 'Suryadi'
+        );
+        $female_depan = array(
+            'Dewi', 'Eka', 'Fitri', 'Gita', 'Kartika', 'Lia', 'Mega', 'Nina', 'Putri', 'Rina', 'Siti', 'Wati'
+        );
+        $female_belakang = array(
+            'Wijayanti', 'Kusuma', 'Lestari', 'Susanti', 'Halimah', 'Pratiwi', 'Wahyuni', 'Puspitasari', 'Setiawati', 'Purnamasari', 'Utami'
+        );
+        $gender = array('male', 'female');
+        $gen = $gender[array_rand($gender)];
+        $depan = ${$gen . '_depan'}[array_rand(${$gen . '_depan'})];
+        $belakang = ${$gen . '_belakang'}[array_rand(${$gen . '_belakang'})];
+        return $depan . ' ' . $belakang;
     }
 }

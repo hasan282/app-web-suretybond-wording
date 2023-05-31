@@ -75,7 +75,7 @@ $jaminanTipe = $modelJaminan->getTipe(['id', 'jenis'])->data();
                 <span class="text-bold text-secondary"><?= $proyek['proyek']; ?></span>
                 <hr class="mt-1">
             </div>
-            <table class="table table-borderless">
+            <table class="table table-borderless table-responsive">
                 <tr>
                     <td class="p-0"></td>
                     <?php foreach ($asuransi as $ar) : ?>
@@ -92,6 +92,19 @@ $jaminanTipe = $modelJaminan->getTipe(['id', 'jenis'])->data();
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fas fa-percentage"></i></span>
                                     </div>
+                                </div>
+                            </td>
+                        <?php endforeach; ?>
+                    </tr>
+                <?php endforeach; ?>
+                <?php $footerInput = array('minimum' => 'Minimum Premi', 'admin' => 'Biaya Admin'); ?>
+                <?php foreach ($footerInput as $key => $txt) : ?>
+                    <tr>
+                        <td class="align-middle text-bold border-top"><?= $txt; ?></td>
+                        <?php foreach ($asuransi as $asr) : ?>
+                            <td class="p-2">
+                                <div style="min-width:100px">
+                                    <input name="<?= $key; ?>[AS<?= $asr['id']; ?>][PR<?= $proyek['id']; ?>]" type="text" class="form-control" data-inputmask="'alias':'numeric','groupSeparator':'.','radixPoint':','" data-mask>
                                 </div>
                             </td>
                         <?php endforeach; ?>

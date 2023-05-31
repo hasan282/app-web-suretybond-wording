@@ -21,7 +21,7 @@ class PrincipalModel extends BaseModel
         $insert = $this->transaction(function ($db) use ($data, $post) {
             $db->table('principal')->insert($data);
             $db->table('principal_people')->insert($this->_peopleData($data['id'], $post));
-            $dataRate = $this->_rateData($post['rates'], $data['id']);
+            $dataRate = $this->_rateData($post['rates'], $post['minimum'], $post['admin'], $data['id']);
             if (!empty($dataRate)) $db->table('principal_rate')->insertBatch($dataRate);
         });
         return $insert === false ? $insert : $data;
@@ -32,6 +32,18 @@ class PrincipalModel extends BaseModel
         $data = $this->_peopleData($principal, $post);
         $insert = $this->transaction(function ($db) use ($data) {
             $db->table('principal_people')->insert($data);
+        });
+        return $insert === false ? $insert : $data;
+    }
+
+    public function addDocument(string $principal, string $filename)
+    {
+        $data['id'] = create_id();
+        $data['id_principal'] = $principal;
+        $data['filename'] = $filename;
+        $data['actives'] = 1;
+        $insert = $this->transaction(function ($db) use ($data) {
+            $db->table('principal_document')->insert($data);
         });
         return $insert === false ? $insert : $data;
     }
@@ -48,7 +60,7 @@ class PrincipalModel extends BaseModel
         return $data;
     }
 
-    private function _rateData(array $rates, string $principal)
+    private function _rateData(array $rates, array $minimum, array $admin, string $principal)
     {
         $data = array();
         foreach ($rates as $asrid => $jt) {
@@ -56,13 +68,17 @@ class PrincipalModel extends BaseModel
             foreach ($jt as $jtid => $pro) {
                 $tipe = ltrim($jtid, 'JT');
                 foreach ($pro as $proid => $rt) {
+                    $val_minimum = unformat($minimum[$asrid][$proid]);
+                    $val_admin = unformat($admin[$asrid][$proid]);
                     $rate = unformat($rt);
                     if ($rate !== null) $data[] = array(
                         'id_principal' => $principal,
                         'id_asuransi' => $asuransi,
                         'id_jenis' => $tipe,
                         'id_proyek' => ltrim($proid, 'PR'),
-                        'rate_percent' => $rate
+                        'rate_percent' => $rate,
+                        'minimum' => $val_minimum,
+                        'admin_fee' => $val_admin
                     );
                 }
             }
@@ -140,6 +156,19 @@ class PrincipalModel extends BaseModel
             'principal_rate.id_proyek ASC',
             'principal_rate.id_jenis ASC'
         );
+        return $this;
+    }
+
+    public function getDocument(?string $principal = null)
+    {
+        $this->select = 'id, id_principal, filename';
+        $this->table = 'principal_document';
+        $where = 'actives = 1';
+        if ($principal !== null) {
+            $where .= ' AND id_principal = ?';
+            $this->bind = array($principal);
+        }
+        $this->where = $where;
         return $this;
     }
 

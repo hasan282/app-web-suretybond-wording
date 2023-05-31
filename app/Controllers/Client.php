@@ -30,7 +30,7 @@ class Client extends BaseController
             return login_page(full_url(false));
         $principal = new \App\Models\PrincipalModel;
         $data['principal'] = $principal->getData(array(
-            'id', 'principal', 'telpon', 'email', 'alamat'
+            'id', 'enkrip', 'principal', 'telpon', 'email', 'alamat'
         ), false)->where(array('enkrip' => $param))->data(false);
         if ($data['principal'] === null) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -71,56 +71,44 @@ class Client extends BaseController
 
     public function uploadFile()
     {
-        $data = array();
-
-        // Read new token and assign to $data['token']
-        $data['token'] = csrf_hash();
-
-        ## Validation
-        // $validation = \Config\Services::validation();
-
-        // $input = $validation->setRules([
-        //    'file' => 'uploaded[file]|max_size[file,2048]|ext_in[file,jpeg,jpg,png,pdf],'
-        // ]);
-
-        // if ($validation->withRequest($this->request)->run() == FALSE){
-
-        //     $data['success'] = 0;
-        //     $data['error'] = $validation->getError('file');// Error response
-
-        // }else{
-
-        if ($file = $this->request->getFile('file')) {
-            if ($file->isValid() && !$file->hasMoved()) {
-                // Get file name and extension
-                $name = $file->getName();
-                $ext = $file->getClientExtension();
-
-                // Get random file name
-                $newName = $file->getRandomName();
-
-                // Store file in public/uploads/ folder
-                // $file->move('../public/files', $newName);
-                $file->move('../public/files/new', $newName);
-
-                // Response
-                $data['success'] = 1;
-                $data['message'] = 'Uploaded Successfully!';
-            } else {
-                // Response
-                $data['success'] = 2;
-                $data['message'] = 'File not uploaded.';
-            }
+        $enkrip = $this->request->getGet('pr');
+        $principalModel = new \App\Models\PrincipalModel;
+        if ($enkrip === null) {
+            $principal = null;
         } else {
-            // Response
-            $data['success'] = 2;
-            $data['message'] = 'File not uploaded.';
+            $pData = $principalModel->getData(['id'])->where(['enkrip' => $enkrip])->data(false);
+            $principal = $pData['id'];
         }
-
-
-        // }
-
-
+        $data['token'] = csrf_hash();
+        $validateRules = array(
+            'file' => 'uploaded[file]|max_size[file,52048]|ext_in[file,jpeg,jpg,png,pdf]'
+        );
+        if (!$this->validate($validateRules) || $principal === null) {
+            $data['success'] = 0;
+            $data['message'] = 'upload ditolak';
+        } else {
+            if ($file = $this->request->getFile('file')) {
+                if ($file->isValid() && !$file->hasMoved()) {
+                    $newName = $file->getRandomName();
+                    $dirname = '../public/files/' . $principal;
+                    if (!is_dir($dirname)) mkdir($dirname);
+                    $file->move($dirname, $newName);
+                    if ($principalModel->refresh()->addDocument($principal, $newName) === false) {
+                        $data['success'] = 0;
+                        $data['message'] = 'terjadi kesalahan data';
+                    } else {
+                        $data['success'] = 1;
+                        $data['message'] = 'berhasil upload';
+                    }
+                } else {
+                    $data['success'] = 2;
+                    $data['message'] = 'file tidak terupload';
+                }
+            } else {
+                $data['success'] = 2;
+                $data['message'] = 'file tidak terupload';
+            }
+        }
         return $this->response->setJSON($data);
     }
 

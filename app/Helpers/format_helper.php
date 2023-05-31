@@ -109,4 +109,18 @@ if (!function_exists('fdate')) {
 }
 
 if (!function_exists('id2date')) {
+    function id2date(string $id, string $format = 'Y-M-D H:I:S')
+    {
+        $year = '20' . substr($id, 0, 2);
+        $month = substr($id, 2, 2);
+        $day = substr($id, 4, 2);
+        $hour = substr($id, 6, 2);
+        $minute = substr($id, 8, 2);
+        $second = substr($id, 10, 2);
+        return str_replace(array(
+            'Y', 'M', 'D', 'H', 'I', 'S'
+        ), array(
+            $year, $month, $day, $hour, $minute, $second
+        ), $format);
+    }
 }

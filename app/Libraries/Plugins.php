@@ -67,7 +67,8 @@ class Plugins
             ),
             'dropzone' => array(
                 ['url' => '(base_url)/adminlte/plugins/dropzone/min/dropzone.min.css', 'tipe' => 'css|head'],
-                ['url' => '(base_url)/adminlte/plugins/dropzone/min/dropzone.min.js', 'tipe' => 'js|foot']
+                ['url' => '(base_url)/adminlte/plugins/dropzone/min/dropzone.min.js', 'tipe' => 'js|foot'],
+                ['url' => '(base_url)/asset/js/all/upload.js(refresher)', 'tipe' => 'js|foot']
             )
             /*
             'name' => array(
