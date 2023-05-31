@@ -6,7 +6,7 @@ use App\Libraries\PDFMake;
 
 class WardingPDF extends PDFMake
 {
-    private $points, $number, $data;
+    private $points, $number, $data, $signs, $blanko;
 
     public function __construct()
     {
@@ -14,15 +14,55 @@ class WardingPDF extends PDFMake
         $this->number = 1;
         $this->points = array();
         $this->data = array();
+        $this->signs = array(
+            'margin' => 10,
+            'width' => 190,
+            'height' => 50,
+            'space' => 10
+        );
+        $this->blanko = false;
     }
 
-    protected function data(string $key, string $filter = '$1')
+    public function setting(array $setting)
     {
+        $this->setPageSize($setting['paper'] ?? 'A4');
+        $this->setPageMargin(array(
+            intval($setting['page_left'] ?? 60),
+            intval($setting['page_top'] ?? 60),
+            intval($setting['page_right'] ?? 60),
+            intval($setting['page_bottom'] ?? 10)
+        ));
+        $this->signs = array(
+            'margin' => intval($setting['sign_margin'] ?? 10),
+            'width' => intval($setting['sign_width'] ?? 190),
+            'height' => intval($setting['sign_height'] ?? 50),
+            'space' => intval($setting['sign_space'] ?? 10)
+        );
+        $this->setContent();
+    }
+
+    public function setBlanko(string $filename)
+    {
+        $this->blanko = true;
+        $this->images = array(
+            'blanko' => $filename
+        );
+        $this->setContent();
+    }
+
+    protected function data(string $key, string $filter = '$1', ?callable $callback = null)
+    {
+        $dataReturn = null;
         if (array_key_exists($key, $this->data)) {
-            return str_replace('$1', $this->data[$key], $filter);
-        } else {
-            return null;
+            $dataReturn = $this->data[$key];
         }
+        if ($callback !== null && $dataReturn !== null) {
+            $dataReturn = $callback($dataReturn);
+        }
+        if ($dataReturn !== null) {
+            $dataReturn = str_replace('$1', $dataReturn, $filter);
+        }
+        return $dataReturn;
     }
 
     protected function setData(array $data)
@@ -32,27 +72,33 @@ class WardingPDF extends PDFMake
 
     protected function setContent(array $content = [])
     {
-        $wardingContent = array(
-            array(
-                'text' => 'JAMINAN PELAKSANAAN',
-                'alignment' => 'center',
-                'fontSize' => 12,
-                'bold' => true,
-                'margin' => [0, 0, 0, 20]
-            ),
-            array(
-                'layout' => 'noBorders',
-                'table' => array(
-                    'body' => $this->_content()
-                )
-            ),
-            array(
-                'layout' => 'noBorders',
-                'table' => array(
-                    'widths' => [20, '*', 5, '*', 20],
-                    'heights' => [10, '*', '*', 50, '*'],
-                    'body' => $this->_signature()
-                )
+        $wardingContent = array();
+        if ($this->blanko) {
+            $wardingContent[] = array(
+                'image' => 'blanko',
+                'absolutePosition' => array('x' => 2, 'y' => 2),
+                'width' => 595.3
+            );
+        }
+        $wardingContent[] = array(
+            'text' => strtoupper($this->data('jenis')),
+            'alignment' => 'center',
+            'fontSize' => 12,
+            'bold' => true,
+            'margin' => [0, 0, 0, 20]
+        );
+        $wardingContent[] = array(
+            'layout' => 'noBorders',
+            'table' => array(
+                'body' => $this->_content()
+            )
+        );
+        $wardingContent[] = array(
+            'layout' => 'noBorders',
+            'table' => array(
+                'widths' => ['*', $this->signs['width'], $this->signs['space'], $this->signs['width'], '*'],
+                'heights' => [$this->signs['margin'], '*', '*', $this->signs['height'], '*'],
+                'body' => $this->_signature()
             )
         );
         parent::setContent($wardingContent);
@@ -118,8 +164,8 @@ class WardingPDF extends PDFMake
             array(
                 'colSpan' => 2,
                 'stack' => array(
-                    $this->parse('Dikeluarkan di <b>Bogor</b>'),
-                    $this->parse('Pada tanggal <b>24 Februari 2023</b>')
+                    $this->parse('Dikeluarkan di <b>' . $this->data('issued_place') . '</b>'),
+                    $this->parse('Pada tanggal <b>' . fdate($this->data('issued_date'), 'DD1 MM3 YY2') . '</b>')
                 )
             )
         );
@@ -151,13 +197,13 @@ class WardingPDF extends PDFMake
             array(
                 '',
                 array(
-                    'text' => 'CV. GARDENIA BAYANGKARA',
+                    'text' => $this->data('principal'),
                     'alignment' => 'center',
                     'bold' => true
                 ),
                 '',
                 array(
-                    'text' => 'PT. ASURANSI MAXIMUS GRAHA PERSADA Tbk, KANTOR CABANG BOGOR',
+                    'text' => $this->data('asuransi_print') . $this->data('cabang_print', ' $1'),
                     'alignment' => 'center',
                     'bold' => true
                 ),
@@ -171,11 +217,11 @@ class WardingPDF extends PDFMake
                 array(
                     'stack' => array(
                         array(
-                            'text' => 'WIWIN WIJAYANTI',
+                            'text' => $this->data('principal_pejabat'),
                             'bold' => true,
                             'decoration' => 'underline'
                         ),
-                        'Direktur',
+                        $this->data('principal_jabatan'),
                     ),
                     'alignment' => 'center'
                 ),
@@ -183,11 +229,11 @@ class WardingPDF extends PDFMake
                 array(
                     'stack' => array(
                         array(
-                            'text' => 'RICKY FIRMANSYAH',
+                            'text' => $this->data('cabang_pejabat'),
                             'bold' => true,
                             'decoration' => 'underline'
                         ),
-                        'Branch Manager',
+                        $this->data('cabang_jabatan'),
                     ),
                     'alignment' => 'center'
                 ),

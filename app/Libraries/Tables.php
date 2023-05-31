@@ -58,7 +58,7 @@ class Tables
     {
         $model = new \App\Models\JaminanModel;
         $model->getData(
-            ['enkrip', 'nomor', 'nilai', 'jenis_jaminan', 'principal']
+            ['enkrip', 'nomor', 'nilai', 'jenis', 'principal']
         )->where(['active' => 1]);
         $this->_setPage($page, $model->count('jaminan.id'));
         $this->dataList = $model->limit(

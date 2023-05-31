@@ -15,7 +15,7 @@ $jaminan = $jaminan ?? array();
         <?php foreach ($jaminan as $ls) : ?>
             <tr>
                 <td class="text-center border-right"><?= $ls['nomor'] ?? '-'; ?></td>
-                <td class="text-center"><?= $ls['jenis_jaminan'] ?? '-'; ?></td>
+                <td class="text-center"><?= $ls['jenis'] ?? '-'; ?></td>
                 <td><?= $ls['principal']; ?></td>
                 <td class="text-center border-left"><?= $ls['nilai'] === null ? '-' : nformat($ls['nilai']); ?></td>
                 <td class="py-0 align-middle text-center border-left">

@@ -6,6 +6,8 @@ class PDFMake
 {
     private $setting, $allFont, $content;
 
+    protected $images;
+
     public function __construct()
     {
         $this->_fontList();
@@ -23,12 +25,14 @@ class PDFMake
             'bold' => true,
             'alignment' => 'center'
         );
+        $this->images = array();
     }
 
     public function getPDF()
     {
         $pdf = $this->setting;
         $pdf['content'] = $this->content;
+        $pdf['images'] = $this->images;
         return $pdf;
     }
 

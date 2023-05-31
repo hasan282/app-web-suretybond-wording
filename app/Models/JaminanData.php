@@ -29,8 +29,10 @@ class JaminanData
     public function dataPrint(string $enkripsi)
     {
         $fields = array(
-            'jenis', 'nomor', 'nilai', 'currency', 'currency_2',
+            'jenis', 'nomor', 'nilai', 'currency', 'currency_2', 'issued_place', 'issued_date',
             'principal', 'principal_alamat', 'asuransi_print', 'cabang_print', 'cabang_alamat',
+            'principal_pejabat', 'principal_jabatan', 'cabang_pejabat', 'cabang_jabatan',
+            'proyek_nama', 'dokumen', 'dokumen_date', 'date_from', 'date_to', 'days',
             'obligee', 'obligee_alamat'
         );
         return $this->model->getData($fields)->where(

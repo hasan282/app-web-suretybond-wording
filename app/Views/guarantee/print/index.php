@@ -2,6 +2,19 @@
 
 <?= $this->section('content'); ?>
 
+<?php
+$pageSettings = array(
+    'paper' => 'A4',
+    'page_top' => '180',
+    'page_left' => '70',
+    'page_right' => '70',
+    'page_bottom' => '10',
+    'sign_margin' => '70',
+    'sign_width' => '190',
+    'sign_height' => '80',
+    'sign_space' => '35'
+);
+?>
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Pengaturan Halaman</h3>
@@ -17,34 +30,10 @@
 
     </div>
 </div>
-<!--  
-<div class="card collapsed-card">
-    <div class="card-header">
-        <h3 class="card-title">Preview</h3>
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-plus"></i>
-            </button>
-        </div>
-    </div>
-    <div class="card-body bg-light">
-        <div class="mx-auto mw-8">
-            <div class="card">
-                <div class="card-body">
-
-                    <?= '';
-                    // $this->include('guarantee/draft/mb_ind');
-                    ?>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
 <div class="card">
     <div class="card-body">
         <div class="row">
+            <div class="col-7"></div>
             <div class="col-5">
                 <div class="mx-auto mw-3 text-center pb-4">
                     <small class="text-secondary">Print dokumen dengan</small>
@@ -57,27 +46,17 @@
                     </button>
                 </div>
             </div>
-            <div class="col-7">
-                <!--  
-                <div class="border-fade px-3 text-center py-3">
-
-                    <?= '';
-                    // $this->include('guarantee/print/issued');
-                    ?>
-
-                </div>
-                -->
-            </div>
         </div>
-        <?php
-        var_dump($jaminan);
-        ?>
     </div>
 </div>
 
 <?= $this->endSection(); ?>
 
-<?php $export = new \App\Libraries\PDFExport\GonvPB($jaminan); ?>
+<?php
+$export = new \App\Libraries\PDFExport\GonvPB($jaminan);
+$export->setting($pageSettings);
+$export->setBlanko(base_url('image/content/blanko/MAXIMUS.jpg'));
+?>
 
 <?= $this->section('jscript'); ?>
 
