@@ -30,6 +30,27 @@ class Guarantee extends BaseController
         }
     }
 
+    public function print($param)
+    {
+        if (!is_login())
+            return login_page(full_url(false));
+        $jaminan = new \App\Models\JaminanData;
+        $data['jaminan'] = $jaminan->dataPrint($param);
+        if ($data['jaminan'] === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+            $data['title'] = 'Cetak Jaminan';
+            $data['bread'] = array(
+                'Jaminan|guarantee',
+                'Detail|guarantee/detail/' . $param,
+                'Cetak'
+            );
+            $data['jscript'] = 'guarantee/print';
+            $this->plugin->setup('scrollbar|pdfmake');
+            $this->view('guarantee/print/index', $data);
+        }
+    }
+
     public function add_phase1()
     {
         if (!is_login())
@@ -40,6 +61,25 @@ class Guarantee extends BaseController
         $this->plugin->setup('scrollbar|select2');
         $this->view('guarantee/add/phase1', $data);
     }
+
+    public function add_phase2($param)
+    {
+        if (!is_login())
+            return login_page(full_url(false));
+        $jaminan = new \App\Models\JaminanData;
+        $data['jaminan'] = $jaminan->dataInput($param);
+        if ($data['jaminan'] === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+            $data['title'] = 'Lengkapi Data Jaminan';
+            $data['bread'] = array('Jaminan|guarantee', 'Lengkapi Data');
+            $data['jscript'] = 'all/input';
+            $this->plugin->setup('scrollbar|dateinput');
+            $this->view('guarantee/add/phase2', $data);
+        }
+    }
+
+    // -------- PROCESS -----------------------------------------------------------------
 
     public function phase1_process()
     {
@@ -73,23 +113,6 @@ class Guarantee extends BaseController
         }
     }
 
-    public function add_phase2($param)
-    {
-        if (!is_login())
-            return login_page(full_url(false));
-        $jaminan = new \App\Models\JaminanData;
-        $data['jaminan'] = $jaminan->dataInput($param);
-        if ($data['jaminan'] === null) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
-        } else {
-            $data['title'] = 'Lengkapi Data Jaminan';
-            $data['bread'] = array('Jaminan|guarantee', 'Lengkapi Data');
-            $data['jscript'] = 'all/input';
-            $this->plugin->setup('scrollbar|dateinput');
-            $this->view('guarantee/add/phase2', $data);
-        }
-    }
-
     public function phase2_process($param)
     {
         if (!is_login())
@@ -112,25 +135,23 @@ class Guarantee extends BaseController
         return redirect()->to('guarantee/detail/' . $param);
     }
 
-    public function print($param)
+    public function settings($param)
     {
         if (!is_login())
             return login_page(full_url(false));
-        $jaminan = new \App\Models\JaminanData;
-        $data['jaminan'] = $jaminan->dataPrint($param);
-        if ($data['jaminan'] === null) {
-            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        $jaminan = new \App\Models\JaminanModel;
+        $jaminanData = $jaminan->getData(['id'])->where(
+            ['enkrip' => $param]
+        )->data(false);
+        if ($jaminanData === null) {
+            return redirect()->to('guarantee/print/' . $param);
         } else {
-            $data['title'] = 'Cetak Jaminan';
-            $data['bread'] = array(
-                'Jaminan|guarantee',
-                'Detail|guarantee/detail/' . $param,
-                'Cetak'
-            );
-            $this->plugin->setup('scrollbar|pdfmake');
-            $this->view('guarantee/print/index', $data);
+            $profileModel = new \App\Models\ProfileModel;
+            $profileModel->addNew($this->request->getPost(), $jaminanData['id']);
         }
     }
+
+    // -------- JSON Return -------------------------------------------------------------
 
     public function table($section, $page)
     {

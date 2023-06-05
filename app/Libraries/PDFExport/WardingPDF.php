@@ -6,7 +6,7 @@ use App\Libraries\PDFMake;
 
 class WardingPDF extends PDFMake
 {
-    private $points, $number, $data, $signs, $blanko;
+    private $points, $number, $data, $signs, $blanko, $lineHeight;
 
     public function __construct()
     {
@@ -21,23 +21,25 @@ class WardingPDF extends PDFMake
             'space' => 10
         );
         $this->blanko = false;
+        $this->lineHeight = 1;
     }
 
     public function setting(array $setting)
     {
         $this->setPageSize($setting['paper'] ?? 'A4');
         $this->setPageMargin(array(
-            intval($setting['page_left'] ?? 60),
-            intval($setting['page_top'] ?? 60),
-            intval($setting['page_right'] ?? 60),
-            intval($setting['page_bottom'] ?? 10)
+            $this->_mm_to_pt(intval($setting['page_left'] ?? 60)),
+            $this->_mm_to_pt(intval($setting['page_top'] ?? 60)),
+            $this->_mm_to_pt(intval($setting['page_right'] ?? 60)),
+            $this->_mm_to_pt(intval($setting['page_bottom'] ?? 10))
         ));
         $this->signs = array(
-            'margin' => intval($setting['sign_margin'] ?? 10),
-            'width' => intval($setting['sign_width'] ?? 190),
-            'height' => intval($setting['sign_height'] ?? 50),
-            'space' => intval($setting['sign_space'] ?? 10)
+            'margin' => $this->_mm_to_pt(intval($setting['sign_margin'] ?? 10)),
+            'width' => $this->_mm_to_pt(intval($setting['sign_width'] ?? 190)),
+            'height' => $this->_mm_to_pt(intval($setting['sign_height'] ?? 50)),
+            'space' => $this->_mm_to_pt(intval($setting['sign_space'] ?? 10))
         );
+        $this->lineHeight = intval($setting['spacing'] ?? 100) / 100;
         $this->setContent();
     }
 
@@ -76,8 +78,8 @@ class WardingPDF extends PDFMake
         if ($this->blanko) {
             $wardingContent[] = array(
                 'image' => 'blanko',
-                'absolutePosition' => array('x' => 2, 'y' => 2),
-                'width' => 595.3
+                'absolutePosition' => array('x' => 1, 'y' => 1),
+                'width' => $this->pageWidth
             );
         }
         $wardingContent[] = array(
@@ -112,7 +114,8 @@ class WardingPDF extends PDFMake
                 array(
                     'colSpan' => 2,
                     'text' => $this->parse($text),
-                    'alignment' => 'justify'
+                    'alignment' => 'justify',
+                    'lineHeight' => $this->lineHeight
                 )
             );
         } else {
@@ -129,7 +132,8 @@ class WardingPDF extends PDFMake
                             'ol' => $ol
                         )
                     ),
-                    'alignment' => 'justify'
+                    'alignment' => 'justify',
+                    'lineHeight' => $this->lineHeight
                 )
             );
         }
@@ -240,5 +244,11 @@ class WardingPDF extends PDFMake
                 ''
             )
         );
+    }
+
+    private function _mm_to_pt(int $mm)
+    {
+        $pt = 2.83465;
+        return round($mm * $pt, 2);
     }
 }

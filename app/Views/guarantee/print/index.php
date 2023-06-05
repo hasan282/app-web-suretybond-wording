@@ -3,18 +3,43 @@
 <?= $this->section('content'); ?>
 
 <?php
+$cookieBack = get_cookie('BGBLNK') ?? '0';
+$backBlanko = (intval($cookieBack) === 1);
 $pageSettings = array(
     'paper' => 'A4',
-    'page_top' => '180',
-    'page_left' => '70',
-    'page_right' => '70',
-    'page_bottom' => '10',
-    'sign_margin' => '70',
-    'sign_width' => '190',
-    'sign_height' => '80',
-    'sign_space' => '35'
+    'page_top' => '62',
+    'page_left' => '24',
+    'page_right' => '22',
+    'page_bottom' => '5',
+    'spacing' => '100',
+    'sign_margin' => '30',
+    'sign_width' => '70',
+    'sign_height' => '24',
+    'sign_space' => '18'
 );
 ?>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <p class="text-secondary mb-0">ASURANSI</p>
+                <p class="text-bold"><?= $jaminan['asuransi_print']; ?> <?= $jaminan['cabang_print']; ?></p>
+                <p class="text-secondary mb-0">PRINCIPAL</p>
+                <p class="text-bold mb-0"><?= $jaminan['principal']; ?></p>
+            </div>
+            <div class="col"></div>
+            <div class="col text-center">
+
+                <div class="custom-control custom-switch mt-4">
+                    <input <?= $backBlanko ? 'checked ' : ''; ?>type="checkbox" class="custom-control-input cursor-pointer" id="backmode">
+                    <label class="custom-control-label text-<?= $backBlanko ? 'primary ' : 'secondary'; ?> cursor-pointer" for="backmode">Background Blanko</label>
+                </div>
+                <small class="text-info"><i class="fas fa-info-circle mr-2"></i>Hidupkan untuk membantu pengaturan margin</small>
+
+            </div>
+        </div>
+    </div>
+</div>
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Pengaturan Halaman</h3>
@@ -55,14 +80,18 @@ $pageSettings = array(
 <?php
 $export = new \App\Libraries\PDFExport\GonvPB($jaminan);
 $export->setting($pageSettings);
-$export->setBlanko(base_url('image/content/blanko/MAXIMUS.jpg'));
+if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/MAXIMUS.jpg'));
 ?>
 
 <?= $this->section('jscript'); ?>
 
 <script>
+    const SETTINGS = <?= json_encode($pageSettings); ?>;
     pdfMake.fonts = <?= json_encode($export->getFont()); ?>;
     $(function() {
+        $.each(SETTINGS, function(id, val) {
+            $('#' + id).val(val);
+        });
         $('#buttonpdf').click(function() {
             pdfMake.createPdf(<?= json_encode($export->getPDF()); ?>).open();
         });
