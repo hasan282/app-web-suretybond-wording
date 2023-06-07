@@ -11,6 +11,7 @@ $(function () {
         $('#boxselectprofile').addClass('hide-content');
         $('#boxbuttonsave').removeClass('hide-content');
         $('#boxprofilename').removeClass('hide-content');
+        $('#boxbuttonapply').addClass('hide-content');
     });
 
     $('#profile_name').on('keyup', function () {
@@ -20,6 +21,11 @@ $(function () {
 
     $('#profile').on('change', function () {
         $('#boxbuttonapply').removeClass('hide-content');
+    });
+
+    $('#btnapply').click(function () {
+        $('#hid_profile').val($('#profile').val());
+        $('#hid_submit').trigger('click');
     });
 
 });

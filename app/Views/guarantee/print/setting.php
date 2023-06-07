@@ -1,3 +1,7 @@
+<?php
+$profiles = new \App\Models\ProfileModel;
+$uriString = explode('/', uri_string());
+?>
 <form method="POST">
     <div class="row">
         <div class="col-xl-4">
@@ -9,8 +13,10 @@
                 <div class="form-group">
                     <label for="profile">Profil Pengaturan</label>
                     <select id="profile" class="form-control">
-                        <option disabled selected>---</option>
-                        <option value="">zzz</option>
+                        <option selected disabled>---</option>
+                        <?php foreach ($profiles->listProfile()->data() as $pro) : ?>
+                            <option value="<?= $pro['enkripsi']; ?>"><?= $pro['profile']; ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <!--
@@ -117,7 +123,7 @@
                 </button>
             </div>
             <div class="hide-content" id="boxbuttonapply">
-                <button type="button" class="btn btn-primary" id="btnsave">
+                <button type="button" class="btn btn-primary" id="btnapply">
                     <i class="fas fa-check-circle mr-2"></i>Terapkan Profil
                 </button>
             </div>
@@ -125,3 +131,11 @@
     </div>
     <?= csrf_field(); ?>
 </form>
+<div class="hide-content">
+    <form action="<?= base_url('guarantee/profile/apply'); ?>" method="POST">
+        <input type="hidden" name="profile" id="hid_profile" value="">
+        <input type="hidden" name="jaminan" id="hid_jaminan" value="<?= end($uriString); ?>">
+        <?= csrf_field(); ?>
+        <button type="submit" id="hid_submit">save</button>
+    </form>
+</div>

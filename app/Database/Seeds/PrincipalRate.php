@@ -23,7 +23,6 @@ class PrincipalRate extends Seeder
                     'CV INDAH DWI JAYA',
                     'PT PALAPA TIMUR TELEMATIKA',
                     'PT PALAPA RING BARAT',
-                    'PT MORA TELEMATIKA INDONESIA',
                     'PT INDONESIA FERRY PROPERTI',
                     'CV KARYA MULIA',
                     'PT HARMONI PRIMA MEDIKA',
@@ -97,24 +96,84 @@ class PrincipalRate extends Seeder
                         'admin' => 60000
                     )
                 )
-            )
+            ),
 
-            /*
-            '' => array(
+            array(
+                'marketing' => 'MARTHIN',
                 'principal' => array(
-                    ''
+                    'PT BERCA HARDAYAPERKASA'
                 ),
                 'rate' => array(
                     array(
-                        'proyek' => array(''),
-                        'asuransi' => array(''),
-                        'rate' => array(),
-                        'minimum' => 0,
-                        'admin' => 0
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.125, 0.175, 0.2, 0.175),
+                        'minimum' => 120000,
+                        'admin' => 30000
+                    ),
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('BUMIDA'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.125, 0.175, 0.2, 0.175),
+                        'minimum' => 220000,
+                        'admin' => 30000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'DEWI',
+                'principal' => array(
+                    'CV ARUTAMA MANDIRI',
+                    'CV ASA KARYA',
+                    'CV BATAVIA PERDANA',
+                    'CV BENTO KARYA UTAMA',
+                    'CV BERKAH MADANI',
+                    'CV CAHYA LESTARI',
+                    'CV CITRA PERSADA',
+                    'CV DALLAH JAYA UTAMA',
+                    'CV DANIEL KARYA MANDIRI',
+                    'CV DERA CIPTA AGUNG',
+                    'CV ELLENA SUKSES MAKMUR',
+                    'CV GANESHA SENTOSA',
+                    'CV INSANI BERDIKARI',
+                    'CV KARYA USAHA BERSAMA',
+                    'CV MARGANDA JAYA',
+                    'CV MITRA JASA',
+                    'CV MITRA PEMBANGUNAN',
+                    'CV MULIA KARYA ABADI',
+                    'CV MULIARAJA SEJAHTERA',
+                    'CV NIKITA LUMBANBUTAR',
+                    'CV NOVITAMA SUKSES MANDIRI',
+                    'CV PIRMA MANDIRI',
+                    'CV PUTRA TAMSUNG SIGUMPAR',
+                    'CV PUTRA TANOTUR',
+                    'CV SAPTA PRIMA UTAMA',
+                    'CV SAYAGA MANDRAGUNA',
+                    'CV SRI OKTAPIANI AGUNG',
+                    'CV TIOMIN SIMON',
+                    'CV ZAHARA PERTIWI',
+                    'PT AULIA MITRA HAYATI',
+                    'PT BINA MUDA SEJAHTERA',
+                    'PT DINAYA SEJAHTERA ABADI',
+                    'PT KERTAU LINGKAR SELARAS',
+                    'PT RAPIK KARYA MANDIRI',
+                    'PT SINAR LAUT DUA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS', 'BINAGRIYA'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.15, 0.2, 0.2, 0.2),
+                        'minimum' => 70000,
+                        'admin' => 30000
                     )
                 )
             )
-            */
+
         );
         return $data;
     }
@@ -193,7 +252,9 @@ class PrincipalRate extends Seeder
             'ROCHMAN' => '230201125148',
             'ANAS' => '230505133926',
             'LUKMAN' => '230522124220',
-            'YANDI' => '230330192332'
+            'YANDI' => '230330192332',
+            'MARTHIN' => '230209115907',
+            'DEWI' => '230302235138'
         );
         if ($key === null) {
             $val = array_values($list);

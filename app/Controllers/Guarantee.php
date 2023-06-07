@@ -151,6 +151,28 @@ class Guarantee extends BaseController
         }
     }
 
+    public function applySetting()
+    {
+        if (!is_login())
+            return login_page(full_url(false));
+        $valJaminan = $this->request->getPost('jaminan');
+        $valPeofile = $this->request->getPost('profile');
+        $jaminan = new \App\Models\JaminanModel;
+        $jaminanData = $jaminan->getData(['id'])->where(
+            ['enkrip' => $valJaminan]
+        )->data(false);
+        $profile = new \App\Models\ProfileModel;
+        $profileData = $profile->getData(['id'])->where(
+            ['enkrip' => $valPeofile]
+        )->data(false);
+        if ($profile->refresh()->applyProfile($jaminanData['id'], $profileData['id'])) {
+            // success
+        } else {
+            // failed
+        }
+        return redirect()->to('guarantee/print/' . $valJaminan);
+    }
+
     // -------- JSON Return -------------------------------------------------------------
 
     public function table($section, $page)

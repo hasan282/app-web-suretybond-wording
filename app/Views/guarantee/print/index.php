@@ -7,16 +7,28 @@ $cookieBack = get_cookie('BGBLNK') ?? '0';
 $backBlanko = (intval($cookieBack) === 1);
 $pageSettings = array(
     'paper' => 'A4',
-    'page_top' => '62',
-    'page_left' => '24',
-    'page_right' => '22',
+    'page_top' => '50',
+    'page_left' => '25',
+    'page_right' => '25',
     'page_bottom' => '5',
     'spacing' => '100',
     'sign_margin' => '30',
-    'sign_width' => '70',
-    'sign_height' => '24',
-    'sign_space' => '18'
+    'sign_width' => '65',
+    'sign_height' => '25',
+    'sign_space' => '10'
 );
+$uriString = explode('/', uri_string());
+$profiles = new \App\Models\ProfileModel;
+$dataProfile = $profiles->getData([
+    'paper', 'page_top', 'page_bottom', 'page_left', 'page_right', 'spacing',
+    'sign_margin', 'sign_width', 'sign_height', 'sign_space', 'enkrip'
+], true)->where(['enkrip_jaminan' => end($uriString)])->data(false);
+$profileVal = null;
+if ($dataProfile !== null) {
+    $profileVal = $dataProfile['enkrip'];
+    unset($dataProfile['enkrip']);
+    $pageSettings = $dataProfile;
+}
 ?>
 <div class="card">
     <div class="card-body">
@@ -27,7 +39,13 @@ $pageSettings = array(
                 <p class="text-secondary mb-0">PRINCIPAL</p>
                 <p class="text-bold mb-0"><?= $jaminan['principal']; ?></p>
             </div>
-            <div class="col"></div>
+            <div class="col">
+                <div class="border-fade p-3 text-center">
+                    <p class="text-bold mb-0"><?= $jaminan['jenis']; ?></p>
+                    <p class="text-secondary"><?= $jaminan['nomor']; ?></p>
+                    <p class="text-secondary mb-0"><?= $jaminan['currency_2'] . nformat($jaminan['nilai']); ?></p>
+                </div>
+            </div>
             <div class="col text-center">
 
                 <div class="custom-control custom-switch mt-4">
@@ -95,6 +113,9 @@ if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/MAXIMUS.jpg')
         $('#buttonpdf').click(function() {
             pdfMake.createPdf(<?= json_encode($export->getPDF()); ?>).open();
         });
+        <?php if ($profileVal !== null) : ?>
+            $('#profile').val('<?= $profileVal; ?>');
+        <?php endif; ?>
     });
 </script>
 
