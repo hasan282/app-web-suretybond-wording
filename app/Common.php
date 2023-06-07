@@ -23,6 +23,9 @@ function setAllRoutes($routes)
     $routes->post('/guarantee/add/(:hash)', 'Guarantee::phase2_process/$1');
     $routes->post('/guarantee/print/(:hash)', 'Guarantee::settings/$1');
     $routes->post('/guarantee/profile/apply', 'Guarantee::applySetting');
+    $routes->post('/guarantee/profile/edit', 'Guarantee::editSetting');
+
+    $routes->get('/inforce', 'Inforce::index');
 
     $routes->get('/client', 'Client::index');
     $routes->get('/client/add', 'Client::add');
@@ -41,6 +44,7 @@ function setAllRoutes($routes)
 
     // --- JSON Table --------------------------------------------------------
     $routes->get('/tb/guarantee/(:segment)/(:num)', 'Guarantee::table/$1/$2');
+    $routes->get('/tb/inforce/(:num)', 'Inforce::table/$1');
     $routes->get('/tb/client/(:num)', 'Client::table/$1');
 
     // --- JSON Data ---------------------------------------------------------

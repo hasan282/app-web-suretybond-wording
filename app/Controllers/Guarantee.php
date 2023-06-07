@@ -122,14 +122,11 @@ class Guarantee extends BaseController
         $update = $jaminan->rowEdit($param);
         if ($update === false) {
             // failed or false
-            // echo 'failed';
         } else {
             if (empty($update)) {
                 // no update
-                // echo 'no update';
             } else {
                 // update success
-                // echo 'success';
             }
         }
         return redirect()->to('guarantee/detail/' . $param);
@@ -143,12 +140,46 @@ class Guarantee extends BaseController
         $jaminanData = $jaminan->getData(['id'])->where(
             ['enkrip' => $param]
         )->data(false);
-        if ($jaminanData === null) {
-            return redirect()->to('guarantee/print/' . $param);
-        } else {
+        if ($jaminanData !== null) {
             $profileModel = new \App\Models\ProfileModel;
-            $profileModel->addNew($this->request->getPost(), $jaminanData['id']);
+            $result = $profileModel->addNew($this->request->getPost(), $jaminanData['id']);
+            if ($result) {
+                // success
+            } else {
+                // failed
+            }
         }
+        return redirect()->to('guarantee/print/' . $param);
+    }
+
+    public function editSetting()
+    {
+        if (!is_login())
+            return login_page(full_url(false));
+        $model = new \App\Models\ProfileModel;
+        $enkriprofile = $this->request->getPost('enkriprofile');
+        $profile = $model->getTable()->where([
+            'enkrip' => $enkriprofile
+        ])->data(false);
+        if ($profile !== null) {
+            $change = array();
+            unset($profile['id']);
+            unset($profile['enkripsi']);
+            $profilename = $this->request->getPost('profile_name');
+            if ($profile['profile'] != $profilename)
+                $change['profile'] = $profilename;
+            unset($profile['profile']);
+            foreach ($profile as $key => $val) {
+                $postval = $this->request->getPost($key);
+                if ($val != $postval) $change[$key] = $postval;
+            }
+            if (!empty($change)) {
+                $model->transaction(function ($db) use ($change, $enkriprofile) {
+                    $db->table('print_profile')->update($change, ['enkripsi' => $enkriprofile]);
+                });
+            }
+        }
+        return redirect()->to('guarantee/print/' . $this->request->getPost('urihash'));
     }
 
     public function applySetting()
@@ -175,13 +206,14 @@ class Guarantee extends BaseController
 
     // -------- JSON Return -------------------------------------------------------------
 
-    public function table($section, $page)
+    public function table($section, $pagenumber)
     {
+        $page = intval($pagenumber);
         $functions = array(
             'draft' => 'guaranteeDraft',
             'issued' => 'guaranteeIssued'
         );
-        if (in_array($section, array_keys($functions))) {
+        if (in_array($section, array_keys($functions)) && $page > 0) {
             $tables = new \App\Libraries\Tables;
             return $this->response->setJSON($tables->{$functions[$section]}($page));
         } else {

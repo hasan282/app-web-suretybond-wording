@@ -2,10 +2,9 @@
 $profiles = new \App\Models\ProfileModel;
 $uriString = explode('/', uri_string());
 ?>
-<form method="POST">
+<form id="formsettings" method="POST">
     <div class="row">
         <div class="col-xl-4">
-
             <div class="pr-xl-3" id="boxselectprofile">
                 <button type="button" id="newprofile" class="btn btn-primary btn-sm mb-4">
                     <i class="fas fa-plus mr-2"></i>Buat Profil Pengaturan Baru
@@ -19,20 +18,18 @@ $uriString = explode('/', uri_string());
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <!--
-                <button type="button" class="btn btn-secondary btn-sm">
+                <button type="button" id="editprofile" class="btn btn-secondary btn-sm hide-content">
                     <i class="fas fa-edit mr-2"></i>Edit Pengaturan
                 </button>
-                -->
             </div>
-
             <div class="pr-xl-3 hide-content" id="boxprofilename">
                 <div class="form-group">
                     <label for="profile_name">Profil Pengaturan</label>
                     <input id="profile_name" name="profile_name" class="form-control" placeholder="Nama Profil">
                 </div>
+                <input type="hidden" name="enkriprofile" id="enkriprofile" value="">
+                <input type="hidden" name="urihash" value="<?= end($uriString); ?>">
             </div>
-
         </div>
         <div class="col-xl-4 col-md-6">
             <div class="form-group mw-2">
@@ -119,6 +116,11 @@ $uriString = explode('/', uri_string());
         <div class="col-12">
             <div class="hide-content" id="boxbuttonsave">
                 <button type="submit" class="btn btn-primary" id="btnsave" disabled>
+                    <i class="fas fa-plus mr-2"></i>Tambahkan Profil Pengaturan
+                </button>
+            </div>
+            <div class="hide-content" id="boxbuttonedit">
+                <button type="submit" class="btn btn-secondary" id="btnsavedit">
                     <i class="fas fa-save mr-2"></i>Simpan Profil Pengaturan
                 </button>
             </div>

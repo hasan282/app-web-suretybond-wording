@@ -61,6 +61,9 @@ $principal = $table->clientPrincipal(1);
 
             </div>
         </div>
+
+        <?= $table->footNavs($principal->page_now, $principal->page_max); ?>
+
     </div>
     <div class="col-xl-5 col-md-6">
         <div class="card">
@@ -76,11 +79,6 @@ $principal = $table->clientPrincipal(1);
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xl-7">
-        <?= $table->footNavs($principal->page_now, $principal->page_max); ?>
     </div>
 </div>
 

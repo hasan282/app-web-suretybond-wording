@@ -1,6 +1,6 @@
 # App SuretyBond Pembuatan Warding
 
-Build with [Codeigniter4] and [AdminLTE3] for [PTJIS]
+Build with [Codeigniter4] and [AdminLTE3] for [PTJIS].
 
 [Codeigniter4]: https://www.codeigniter.com/user_guide/index.html
 [AdminLTE3]: https://adminlte.io/docs/3.0/
@@ -10,9 +10,9 @@ Harap perhatikan [Server Requirement Codeigniter4](https://www.codeigniter.com/u
 
 ## Run di Lokal Komputer
 
-1. Download [AdminLTE Plugin](https://drive.google.com/file/d/1zVXp5QAJeWHQMBM0hYUBTRsOO6Py_g1O/view?usp=sharing), [Fonts](https://drive.google.com/file/d/1zVXp5QAJeWHQMBM0hYUBTRsOO6Py_g1O/view?usp=sharing) dan [Vendor CI4](https://drive.google.com/file/d/185bv0a0YmxEqXbYJusgtymmsAMwpi0e6/view?usp=sharing).
+1. Download [AdminLTE Plugins, Fonts](https://drive.google.com/file/d/1zVXp5QAJeWHQMBM0hYUBTRsOO6Py_g1O/view?usp=sharing), dan [Vendor CI4](https://drive.google.com/file/d/185bv0a0YmxEqXbYJusgtymmsAMwpi0e6/view?usp=sharing).
 2. Extract `adminlte` dan `fonts` pada folder `public/`.
-3. Extract `vendor` dan `fonts` pada folder utama.
+3. Extract `vendor` pada folder utama.
 4. Buat Database MySQL baru dengan nama `suretybond_warding` atau sesuaikan nama Database pada `.env`.
 
 ```bash
@@ -26,7 +26,7 @@ php spark migrate
 php spark db:seed AllSeeder
 ```
 
-5. Jalankan perintah pada terminal untuk Running Aplikasi.
+6. Jalankan perintah pada terminal untuk Running Aplikasi.
 
 ```bash
 php spark serve

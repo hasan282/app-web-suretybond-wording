@@ -10,6 +10,34 @@ class ProfileModel extends BaseModel
     {
         $data['id'] = create_id();
         $data['enkripsi'] = sha3hash($data['id'], 40);
+        $data['profile'] = trim($post['profile_name'] ?? 'UNKNOWN');
+        $data['paper'] = $post['paper'] ?? 'A4';
+        $data['page_top'] = intval($post['page_top'] ?? '0');
+        $data['page_bottom'] = intval($post['page_bottom'] ?? '0');
+        $data['page_left'] = intval($post['page_left'] ?? '0');
+        $data['page_right'] = intval($post['page_right'] ?? '0');
+        $data['spacing'] = intval($post['spacing'] ?? '100');
+        $data['sign_margin'] = intval($post['sign_margin'] ?? '0');
+        $data['sign_space'] = intval($post['sign_space'] ?? '0');
+        $data['sign_width'] = intval($post['sign_width'] ?? '0');
+        $data['sign_height'] = intval($post['sign_height'] ?? '0');
+        $this->select = '*';
+        $this->table = 'prints';
+        $check = $this->where(['jaminan' => $jaminan])->data();
+        return $this->transaction(function ($db) use ($check, $jaminan, $data) {
+            if (empty($check)) {
+                $db->table('prints')->insert(array(
+                    'id_jaminan' => $jaminan,
+                    'id_profile' => $data['id']
+                ));
+            } else {
+                $db->table('prints')->update(
+                    ['id_profile' => $data['id']],
+                    ['id_jaminan' => $jaminan]
+                );
+            }
+            $db->table('print_profile')->insert($data);
+        });
     }
 
     public function applyProfile(string $jaminan, string $profile)
@@ -34,6 +62,9 @@ class ProfileModel extends BaseModel
 
     public function getTable()
     {
+        $this->select = '*';
+        $this->table = 'print_profile';
+        return $this;
     }
 
     public function getData(array $select = [], $joins = false)

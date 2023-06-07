@@ -14,9 +14,21 @@ $(function () {
         $('#boxbuttonapply').addClass('hide-content');
     });
 
+    $('#editprofile').click(function () {
+        $('#formsettings').attr('action', BaseURL + 'guarantee/profile/edit');
+        $('.pagesettings').attr('disabled', false);
+        $('#boxselectprofile').addClass('hide-content');
+        $('#boxbuttonedit').removeClass('hide-content');
+        const PROFILENAME = $('option[value="' + $('#enkriprofile').val() + '"]').html();
+        $('#profile_name').val(PROFILENAME);
+        $('#boxprofilename').removeClass('hide-content');
+        $('#boxbuttonapply').addClass('hide-content');
+    });
+
     $('#profile_name').on('keyup', function () {
         const NAMEVAL = $(this).val();
         $('#btnsave').attr('disabled', NAMEVAL == '');
+        $('#btnsavedit').attr('disabled', NAMEVAL == '');
     });
 
     $('#profile').on('change', function () {

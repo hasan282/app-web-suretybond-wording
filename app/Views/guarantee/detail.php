@@ -2,27 +2,36 @@
 
 <?= $this->section('content'); ?>
 
+<?php
+$complete = true;
+$issued = true;
+$completeCheck = array(
+    'nomor', 'nilai', 'date_from', 'date_to', 'days', 'issued_place', 'issued_date',
+    'proyek', 'proyek_nama', 'dokumen', 'pekerjaan', 'obligee', 'obligee_alamat'
+);
+foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === null) $complete = false;
+?>
 <div class="card">
     <div class="card-header">
         <h3 class="card-title text-secondary">Detail Data Jaminan</h3>
         <div class="card-tools"> <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button> </div>
     </div>
     <div class="card-body">
-
-        <div class="callout callout-warning bg-light">
-            <div class="row">
-                <div class="col-md-7">
-                    <h5>Pengisian Data Jaminan Belum Lengkap!</h5>
-                    <p class="text-secondary">Silahkan lengkapi data jaminan terlebih dahulu.</p>
-                </div>
-                <div class="col-md-5 d-flex mt-3 mt-md-0">
-                    <button class="btn btn-primary my-auto ml-md-auto text-bold" onclick="window.location.href='/guarantee/add/<?= $jaminan['enkrip']; ?>'">
-                        <i class="fas fa-pen-square mr-2"></i>Lengkapi Data Jaminan
-                    </button>
+        <?php if (!$complete) : ?>
+            <div class="callout callout-warning bg-light">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h5>Pengisian Data Jaminan Belum Lengkap!</h5>
+                        <p class="text-secondary">Silahkan lengkapi data jaminan terlebih dahulu.</p>
+                    </div>
+                    <div class="col-md-5 d-flex mt-3 mt-md-0">
+                        <button class="btn btn-primary my-auto ml-md-auto text-bold" onclick="window.location.href='/guarantee/add/<?= $jaminan['enkrip']; ?>'">
+                            <i class="fas fa-pen-square mr-2"></i>Lengkapi Data Jaminan
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-
+        <?php endif; ?>
         <div class="row">
             <div class="col-xl-9 col-lg-8">
                 <div class="table-responsive">
@@ -164,28 +173,26 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4">
-
                 <div class="mw-2 mx-auto position-relative h-100 pt-3" style="min-height:200px">
-                    <button class="btn btn-secondary btn-sm btn-block">
-                        <i class="fas fa-edit mr-2"></i>Edit Data Jaminan
-                    </button>
-                    <button class="btn btn-danger btn-sm mt-2 btn-block">
-                        <i class="fas fa-trash-alt mr-2"></i>Hapus Data Jaminan
-                    </button>
-
+                    <?php if (!$issued) : ?>
+                        <button class="btn btn-secondary btn-sm btn-block">
+                            <i class="fas fa-edit mr-2"></i>Edit Data Jaminan
+                        </button>
+                        <button class="btn btn-danger btn-sm mt-2 btn-block">
+                            <i class="fas fa-trash-alt mr-2"></i>Hapus Data Jaminan
+                        </button>
+                    <?php endif; ?>
                     <div class="absolute-bottom pb-3 text-center w-100">
-                        <!--  
-                        <small class="text-danger"><i class="fas fa-info-circle mr-2"></i>Data Belum Lengkap</small>
-                        -->
-                        <a href="/guarantee/print/<?= $jaminan['enkrip']; ?>" class="btn btn-primary btn-lg mt-2 btn-block text-bold">
+                        <?php if (!$complete) : ?>
+                            <small class="text-danger"><i class="fas fa-info-circle mr-2"></i>Data Belum Lengkap</small>
+                        <?php endif; ?>
+                        <a href="/guarantee/print/<?= $jaminan['enkrip']; ?>" class="btn btn-primary btn-lg mt-2 btn-block text-bold<?= $complete ? '' : ' disabled'; ?>">
                             <i class="fas fa-print mr-2"></i>Cetak Jaminan
                         </a>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
 </div>
 

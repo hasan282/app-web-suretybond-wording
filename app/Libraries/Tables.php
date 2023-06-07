@@ -104,4 +104,19 @@ class Tables
         )->order('principal')->data();
         return $this->_objectReturn('client/table', 'principal');
     }
+
+    public function inforceList(int $page = 1)
+    {
+        $model = new \App\Models\JaminanModel;
+        $model->getData(
+            ['enkrip', 'asuransi_nick', 'nilai', 'currency_2', 'jenis', 'principal']
+        )->where(['active' => 1]);
+        // ->where('jaminan.nilai_jaminan > 0')
+        $this->_setPage($page, $model->count('jaminan.id'));
+        $this->dataList = $model->limit(
+            $this->limit,
+            $this->offset
+        )->order('newest')->data();
+        return $this->_objectReturn('inforce/table', 'jaminan');
+    }
 }
