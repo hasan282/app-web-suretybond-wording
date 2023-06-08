@@ -126,7 +126,7 @@ if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/MAXIMUS.jpg')
             $('#' + id).val(val);
         });
         $('#buttonpdf').click(function() {
-            pdfMake.createPdf(<?= json_encode($export->getPDF()); ?>).open();
+            pdfMake.createPdf(<?= json_encode($export->content()->getPDF()); ?>).open();
         });
         <?php if ($profileVal !== null) : ?>
             $('#profile').val('<?= $profileVal; ?>');
