@@ -57,6 +57,7 @@ class JaminanModel extends BaseModel
         );
         $fieldJoins = array(
             'jenis' => 'jaminan_jenis.jenis AS jenis',
+            'jenis_singkat' => 'jaminan_jenis.singkat AS jenis_singkat',
             'proyek' => 'jaminan_proyek.proyek AS proyek',
             'pekerjaan' => 'jaminan_pekerjaan.pekerjaan AS pekerjaan'
         );

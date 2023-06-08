@@ -4,9 +4,10 @@ namespace App\Libraries\PDFExport;
 
 use App\Libraries\PDFMake;
 
-class WardingPDF extends PDFMake
+class ExportWardingPDF extends PDFMake
 {
-    private $points, $number, $data, $signs, $blanko, $lineHeight;
+    private $points, $number, $data, $signs, $blanko, $lineHeight, $terbilang;
+    protected $footTipe = 1;
 
     public function __construct()
     {
@@ -22,6 +23,7 @@ class WardingPDF extends PDFMake
         );
         $this->blanko = false;
         $this->lineHeight = 1;
+        $this->terbilang = new \App\Libraries\Terbilang;
     }
 
     public function setting(array $setting)
@@ -50,6 +52,12 @@ class WardingPDF extends PDFMake
             'blanko' => $filename
         );
         $this->setContent();
+    }
+
+    protected function terbilang(string $key)
+    {
+        $data = $this->data($key);
+        return $data === null ? null : $this->terbilang->terbilang($data);
     }
 
     protected function data(string $key, string $filter = '$1', ?callable $callback = null)
@@ -163,7 +171,7 @@ class WardingPDF extends PDFMake
                 'fontSize' => 10
             )
         );
-        $foot = array(
+        $foot_1 = array(
             '',
             array(
                 'colSpan' => 2,
@@ -175,7 +183,8 @@ class WardingPDF extends PDFMake
         );
         $content[] = $head;
         foreach ($this->points as $pt) $content[] = $pt;
-        $content[] = $foot;
+        if ($this->footTipe === 1)
+            $content[] = $foot_1;
         return $content;
     }
 

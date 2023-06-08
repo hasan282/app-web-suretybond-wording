@@ -33,7 +33,7 @@ class JaminanData
             'principal', 'principal_alamat', 'asuransi_print', 'cabang_print', 'cabang_alamat',
             'principal_pejabat', 'principal_jabatan', 'cabang_pejabat', 'cabang_jabatan',
             'proyek_nama', 'dokumen', 'dokumen_date', 'date_from', 'date_to', 'days',
-            'obligee', 'obligee_alamat'
+            'obligee', 'obligee_alamat', 'jenis_singkat', 'proyek_id'
         );
         return $this->model->getData($fields)->where(
             ['enkrip' => $enkripsi]
@@ -59,23 +59,23 @@ class JaminanData
         $request = \Config\Services::request();
         $data = array(
             'id_proyek' => $request->getPost('proyek'),
-            'nama_proyek' => $request->getPost('proyek_nama'),
-            'alamat_proyek' => $request->getPost('proyek_alamat'),
+            'nama_proyek' => nl2space($request->getPost('proyek_nama')),
+            'alamat_proyek' => nl2space($request->getPost('proyek_alamat')),
             'nilai_proyek' => unformat($request->getPost('proyek_nilai')),
             'id_currency_proyek' => $request->getPost('currency_proyek'),
-            'dokumen' => $request->getPost('dokumen'),
+            'dokumen' => nl2space($request->getPost('dokumen')),
             'dokumen_date' => $request->getPost('dokumen_date'),
             'id_pekerjaan' => $request->getPost('pekerjaan'),
-            'obligee' => $request->getPost('obligee'),
-            'alamat_obligee' => $request->getPost('obligee_alamat'),
+            'obligee' => nl2space($request->getPost('obligee')),
+            'alamat_obligee' => nl2space($request->getPost('obligee_alamat')),
             'id_jenis' => $request->getPost('jaminan_tipe'),
-            'nomor' => $request->getPost('nomor'),
+            'nomor' => nl2space($request->getPost('nomor')),
             'nilai_jaminan' => unformat($request->getPost('nilai')),
             'id_currency_jaminan' => $request->getPost('currency'),
             'date_from' => $request->getPost('date_from'),
             'date_to' => $request->getPost('date_to'),
             'days' => $request->getPost('days'),
-            'issued_place' => $request->getPost('issued_place'),
+            'issued_place' => nl2space($request->getPost('issued_place')),
             'issued_date' => $request->getPost('issued_date'),
             'bahasa' => $request->getPost('bahasa')
         );

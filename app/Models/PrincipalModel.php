@@ -13,7 +13,7 @@ class PrincipalModel extends BaseModel
         $data['nama'] = trim($post['principal'] ?? '');
         $data['telpon'] = trim($post['telpon'] ?? '');
         $data['email'] = trim($post['email'] ?? '');
-        $data['alamat'] = trim(nl2space($post['alamat'] ?? ''));
+        $data['alamat'] = nl2space($post['alamat'] ?? '');
         if ($office !== null) $data['id_office'] = $office;
         $data['id_marketing'] = $post['marketing'] ?? '';
         $data['actives'] = 1;

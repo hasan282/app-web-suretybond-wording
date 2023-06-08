@@ -59,7 +59,6 @@ if ($dataProfile !== null) {
                 </div>
             </div>
             <div class="col-lg text-center d-flex">
-
                 <div class="w-100 my-auto">
                     <div class="custom-control custom-switch">
                         <input <?= $backBlanko ? 'checked ' : ''; ?>type="checkbox" class="custom-control-input cursor-pointer" id="backmode">
@@ -67,7 +66,6 @@ if ($dataProfile !== null) {
                     </div>
                     <small class="text-info"><i class="fas fa-info-circle mr-2"></i>Hidupkan untuk membantu pengaturan margin</small>
                 </div>
-
             </div>
         </div>
     </div>
@@ -112,7 +110,8 @@ if ($dataProfile !== null) {
 <?= $this->endSection(); ?>
 
 <?php
-$export = new \App\Libraries\PDFExport\GonvPB($jaminan);
+$className = '\App\Libraries\PDFExport\ward' . $jaminan['jenis_singkat'] . $jaminan['proyek_id'];
+$export = new $className($jaminan);
 $export->setting($pageSettings);
 if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/MAXIMUS.jpg'));
 ?>
