@@ -61,16 +61,11 @@ define(
     'FCPATH',
     !IS_HOSTING ?
         __DIR__ . DIRECTORY_SEPARATOR . PUBLIC_FOLDERNAME . DIRECTORY_SEPARATOR :
-        __DIR__ . '..' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . PUBLIC_FOLDERNAME . DIRECTORY_SEPARATOR
+        __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'public_html' . DIRECTORY_SEPARATOR . PUBLIC_FOLDERNAME . DIRECTORY_SEPARATOR
 );
 
 // path of config paths.php file
-define(
-    'PATHS_CONFIG_FILE',
-    !IS_HOSTING ?
-        '..' . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php' :
-        '..' . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . APP_FOLDERNAME . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php'
-);
+define('PATHS_CONFIG_FILE', __DIR__ . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Config' . DIRECTORY_SEPARATOR . 'Paths.php');
 
 // Ensure the current directory is pointing to the front controller's directory
 chdir(FCPATH);
@@ -87,7 +82,7 @@ chdir(FCPATH);
 // Load our paths config file
 // This is the line that might need to be changed, depending on your folder structure.
 
-require FCPATH . PATHS_CONFIG_FILE;
+require PATHS_CONFIG_FILE;
 
 // ^^^ Change this line if you move your application folder
 
