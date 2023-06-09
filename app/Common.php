@@ -2,6 +2,7 @@
 
 define('SURETY_DOMAIN', 'https://surety.ptjis.com/');
 define('ASSET_URL', 'https://assets.ptjis.com/');
+define('UPLOAD_PATH', FCPATH . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR);
 
 function setAllRoutes($routes)
 {

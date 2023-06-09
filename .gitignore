@@ -8,6 +8,8 @@ public/adminlte/*
 public/fonts/*
 !public/fonts/index.html
 
+.envhosting
+
 # -------- frameworks --------
 
 # OS X
