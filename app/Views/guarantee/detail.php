@@ -186,6 +186,9 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                         <?php if (!$complete) : ?>
                             <small class="text-danger"><i class="fas fa-info-circle mr-2"></i>Data Belum Lengkap</small>
                         <?php endif; ?>
+                        <button type="button" id="inforcerequest" <?= $complete ? '' : 'disabled '; ?>class="btn btn-default text-bold btn-sm btn-block mt-2 mb-3">
+                            <i class="fas fa-certificate mr-2"></i>Pengajuan Inforce
+                        </button>
                         <a href="/guarantee/print/<?= $jaminan['enkrip']; ?>" class="btn btn-primary btn-lg mt-2 btn-block text-bold<?= $complete ? '' : ' disabled'; ?>">
                             <i class="fas fa-print mr-2"></i>Cetak Jaminan
                         </a>
@@ -195,5 +198,30 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
         </div>
     </div>
 </div>
+
+<?= $this->endSection(); ?>
+
+<?= $this->section('jscript'); ?>
+
+<script>
+    $(function() {
+        $('#inforcerequest').click(function() {
+            Swal.fire({
+                title: 'Ajukan Inforce Jaminan?',
+                text: 'Pengajuan Inforce tidak dapat dibatalkan',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: '<i class="fas fa-check-circle mr-2"></i>Ajukan Inforce',
+                cancelButtonText: '<i class="fas fa-times mr-2"></i> Tidak',
+                showCloseButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = BaseURL + 'inforce/request/<?= $jaminan['enkrip']; ?>';
+                }
+            });
+        });
+    });
+</script>
 
 <?= $this->endSection(); ?>

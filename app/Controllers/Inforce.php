@@ -8,10 +8,20 @@ class Inforce extends BaseController
     {
         if (!is_login())
             return login_page(full_url(false));
-        $data['title'] = 'Aktivasi Jaminan';
+        $data['title'] = 'Inforce Jaminan';
         $data['jscript'] = 'all/tables';
         $this->plugin->setup('scrollbar|icheck');
         return $this->view('inforce/index', $data, true);
+    }
+
+    public function newRequest($param)
+    {
+        // var_dump($param);
+
+
+
+
+        return redirect()->to('guarantee/detail/' . $param);
     }
 
     public function table($pageNumber)

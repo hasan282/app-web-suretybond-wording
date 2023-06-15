@@ -25,7 +25,7 @@ class Guarantee extends BaseController
         } else {
             $data['title'] = 'Detail Jaminan';
             $data['bread'] = array('Data Jaminan|guarantee', 'Detail');
-            $this->plugin->setup('scrollbar');
+            $this->plugin->setup('scrollbar|sweetalert');
             return $this->view('guarantee/detail', $data, true);
         }
     }

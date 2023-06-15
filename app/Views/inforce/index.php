@@ -11,7 +11,7 @@ $inforce = $tables->inforceList(1);
 <div class="row mb-3">
     <div class="col-xl-4 col-md-5 col-sm-6">
 
-        <button type="button" class="btn btn-primary text-bold btn-block">
+        <button type="button" class="btn btn-primary text-bold btn-block" disabled>
             <i class="fas fa-check-circle mr-2"></i>Inforce Semua Data Terpilih
         </button>
 

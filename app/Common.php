@@ -27,6 +27,7 @@ function setAllRoutes($routes)
     $routes->post('/guarantee/profile/edit', 'Guarantee::editSetting');
 
     $routes->get('/inforce', 'Inforce::index');
+    $routes->get('/inforce/request/(:hash)', 'Inforce::newRequest/$1');
 
     $routes->get('/client', 'Client::index');
     $routes->get('/client/add', 'Client::add');

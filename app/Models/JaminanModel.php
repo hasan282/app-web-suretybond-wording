@@ -88,24 +88,24 @@ class JaminanModel extends BaseModel
             'currency_2' => 'currency_jaminan.symbol_2 AS currency_2'
         );
         $table = 'jaminan';
-        if (!empty(array_intersect(array_keys($fieldPrincipal), $select))) {
+        if ($this->includes($fieldPrincipal, $select)) {
             $fields = array_merge($fields, $fieldPrincipal);
             $table = '(' . $table . ' INNER JOIN principal_people ON principal_people.id = jaminan.id_principal_people)';
             $table = '(' . $table . ' INNER JOIN principal ON principal.id = principal_people.id_principal)';
         }
-        if (!empty(array_intersect(array_keys($fieldAsuransi), $select))) {
+        if ($this->includes($fieldAsuransi, $select)) {
             $fields = array_merge($fields, $fieldAsuransi);
             $table = '(' . $table . ' INNER JOIN asuransi_people ON asuransi_people.id = jaminan.id_asuransi_people)';
             $table = '(' . $table . ' INNER JOIN asuransi_cabang ON asuransi_cabang.id = asuransi_people.id_cabang)';
             $table = '(' . $table . ' INNER JOIN asuransi ON asuransi.id = asuransi_cabang.id_asuransi)';
         }
-        if (!empty(array_intersect(array_keys($fieldJoins), $select))) {
+        if ($this->includes($fieldJoins, $select)) {
             $fields = array_merge($fields, $fieldJoins);
             $table = '(' . $table . ' LEFT OUTER JOIN jaminan_jenis ON jaminan_jenis.id = jaminan.id_jenis)';
             $table = '(' . $table . ' LEFT OUTER JOIN jaminan_proyek ON jaminan_proyek.id = jaminan.id_proyek)';
             $table = '(' . $table . ' LEFT OUTER JOIN jaminan_pekerjaan ON jaminan_pekerjaan.id = jaminan.id_pekerjaan)';
         }
-        if (!empty(array_intersect(array_keys($fieldCurrency), $select))) {
+        if ($this->includes($fieldCurrency, $select)) {
             $fields = array_merge($fields, $fieldCurrency);
             $table = '(' . $table . ' LEFT OUTER JOIN currency AS currency_proyek ON jaminan.id_currency_proyek = currency_proyek.id)';
             $table = '(' . $table . ' LEFT OUTER JOIN currency AS currency_jaminan ON currency_jaminan.id = jaminan.id_currency_jaminan)';

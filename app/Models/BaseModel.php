@@ -22,16 +22,6 @@ class BaseModel
         return $this;
     }
 
-    private function _emptyValues()
-    {
-        $this->bind = array();
-        $this->select = null;
-        $this->table = null;
-        $this->where = null;
-        $this->group = null;
-        $this->order = null;
-    }
-
     public function transaction(?callable $callback)
     {
         $this->db->transBegin();
@@ -156,6 +146,22 @@ class BaseModel
             }
             if (!empty($selected)) $this->select = implode(', ', $selected);
         }
+    }
+
+    protected function includes(array $field, array $select = [])
+    {
+        $intersect = array_intersect(array_keys($field), $select);
+        return empty($intersect) ? false : true;
+    }
+
+    private function _emptyValues()
+    {
+        $this->bind = array();
+        $this->select = null;
+        $this->table = null;
+        $this->where = null;
+        $this->group = null;
+        $this->order = null;
     }
 
     private function _queryAssemble(?string $select, ?string $table)

@@ -1,7 +1,7 @@
 <?php
 $menuItems = array(
     ['menu' => 'Data Jaminan', 'url' => 'guarantee', 'icon' => 'fas fa-certificate'],
-    ['menu' => 'Aktivasi Jaminan', 'url' => 'inforce', 'icon' => 'fas fa-check-circle'],
+    ['menu' => 'Inforce Jaminan', 'url' => 'inforce', 'icon' => 'fas fa-check-circle'],
     ['menu' => 'Data Nasabah', 'url' => 'client', 'icon' => 'fas fa-user-shield'],
     ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt']
 );
