@@ -14,7 +14,7 @@ $jaminan = $jaminan ?? array();
     <tbody>
         <?php foreach ($jaminan as $ls) : ?>
             <tr>
-                <td class="text-center border-right"><?= $ls['nomor'] ?? '-'; ?></td>
+                <td class="text-center border-right"><?= str_replace('(--reg--)', '<span class="text-secondary">DRAFT</span>', $ls['nomor'] ?? '-'); ?></td>
                 <td class="text-center"><?= $ls['jenis'] ?? '-'; ?></td>
                 <td><?= $ls['principal']; ?></td>
                 <td class="text-center border-left"><?= $ls['nilai'] === null ? '-' : nformat($ls['nilai']); ?></td>

@@ -16,7 +16,8 @@ $currency = $db->query('SELECT id, symbol_1 AS curr FROM currency ORDER BY symbo
         </div>
         <div class="form-group">
             <label for="nomor">Nomor Jaminan</label>
-            <input id="nomor" name="nomor" class="form-control" placeholder="Nomor">
+            <input id="nomor" name="nomor" class="form-control" placeholder="Nomor" value="(--reg--)">
+            <small class="ml-2 text-secondary font-italic">Jadikan (--reg--) pada posisi Nomor Register Blanko</small>
         </div>
         <div class="form-group mw-3 pt-2">
             <label for="nilai">Nilai Jaminan<span class="btn btn-default btn-sm py-0 ml-2 text-bold mb-1">auto</span></label>

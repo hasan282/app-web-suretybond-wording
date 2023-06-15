@@ -24,12 +24,19 @@ class JaminanIssued extends Migration
                 'constraint' => 1,
                 'unsigned' => true,
                 'default' => 0
+            ),
+            'printed' => array(
+                'type' => 'INT',
+                'constraint' => 1,
+                'unsigned' => true,
+                'default' => 0
             )
         ));
 
         $this->forge->addPrimaryKey('id', 'PRIMARY');
-        $this->forge->addKey('id_jaminan', false, false, 'JAMINAN');
+        $this->forge->addUniqueKey('id_jaminan', 'JAMINAN');
         $this->forge->addKey('issued', false, false, 'ISSUED');
+        $this->forge->addKey('printed', false, false, 'PRINTED');
 
         $attribute = array('ENGINE' => 'InnoDB');
         $this->forge->createTable('jaminan_issued', true, $attribute);

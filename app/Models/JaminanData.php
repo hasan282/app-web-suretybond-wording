@@ -57,6 +57,8 @@ class JaminanData
     public function rowEdit(string $enkripsi)
     {
         $request = \Config\Services::request();
+        $nomor = nl2space($request->getPost('nomor'));
+        if (strpos($nomor, '(--reg--)') === false) $nomor .= '(--reg--)';
         $data = array(
             'id_proyek' => $request->getPost('proyek'),
             'nama_proyek' => nl2space($request->getPost('proyek_nama')),
@@ -69,7 +71,7 @@ class JaminanData
             'obligee' => nl2space($request->getPost('obligee')),
             'alamat_obligee' => nl2space($request->getPost('obligee_alamat')),
             'id_jenis' => $request->getPost('jaminan_tipe'),
-            'nomor' => nl2space($request->getPost('nomor')),
+            'nomor' => $nomor,
             'nilai_jaminan' => unformat($request->getPost('nilai')),
             'id_currency_jaminan' => $request->getPost('currency'),
             'date_from' => $request->getPost('date_from'),

@@ -29,6 +29,9 @@ if ($dataProfile !== null) {
     unset($dataProfile['enkrip']);
     $pageSettings = $dataProfile;
 }
+$regNumber = 'DRAFT';
+$jaminanNum = str_replace('(--reg--)', $regNumber, $jaminan['nomor'] ?? '-');
+$jaminan['nomor'] = $jaminanNum;
 ?>
 <div class="card">
     <div class="card-body">

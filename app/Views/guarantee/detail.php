@@ -42,7 +42,7 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Jenis Jaminan</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap"><?= $jaminan['jenis'] ?? '-'; ?></td>
+                            <td class="text-nowrap text-bold"><?= $jaminan['jenis'] ?? '-'; ?></td>
                         </tr>
                         <tr>
                             <?php $bahasa = array('ID' => 'Bahasa Indonesia', 'EN' => 'English'); ?>
@@ -53,7 +53,11 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nomor Jaminan</td>
                             <td class="text-bold">:</td>
-                            <td class="text-nowrap"><?= $jaminan['nomor'] ?? '-'; ?></td>
+                            <?php
+                            $regNumber = '<span class="text-secondary">DRAFT</span>';
+                            $replacer = '(--reg--)';
+                            ?>
+                            <td class="text-nowrap"><?= str_replace($replacer, $regNumber, $jaminan['nomor'] ?? '-'); ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nilai Jaminan</td>
@@ -89,7 +93,7 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nama Asuransi</td>
                             <td class="text-bold">:</td>
-                            <td><?= $jaminan['asuransi']; ?></td>
+                            <td class="text-bold"><?= $jaminan['asuransi']; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Alamat</td>
@@ -107,7 +111,7 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nama Principal</td>
                             <td class="text-bold">:</td>
-                            <td><?= $jaminan['principal']; ?></td>
+                            <td class="text-bold"><?= $jaminan['principal']; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Alamat</td>

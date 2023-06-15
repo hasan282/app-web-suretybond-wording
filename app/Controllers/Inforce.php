@@ -12,14 +12,15 @@ class Inforce extends BaseController
         $data['jscript'] = 'all/tables';
         $this->plugin->setup('scrollbar|icheck');
         return $this->view('inforce/index', $data, true);
+
+        // $id = create_id();
+        // var_dump($id);
+        // var_dump(sha3hash($id, 40));
     }
 
     public function newRequest($param)
     {
         // var_dump($param);
-
-
-
 
         return redirect()->to('guarantee/detail/' . $param);
     }

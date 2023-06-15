@@ -39,13 +39,23 @@ class AsuransiCabang extends Seeder
                 'deskripsi' => 'CABANG BINTARO',
                 'actives' => 1
             ),
-            // BINAGRIYA - JAKARTA
+            // BINAGRIYA - JAKARTA - WISMA
             array(
                 'id' => '2305041525528816',
                 'enkripsi' => '09d82f0be6aec2d9f986866c12947783ba486809',
                 'id_asuransi' => '221002154456',
                 'cabang' => 'JAKARTA',
                 'alamat' => 'Wisma Purna Batara Lt. 4-6, Jl. Kesehatan No. 56-58, Tanah Abang, Jakarta 10160',
+                'deskripsi' => 'CABANG JAKARTA',
+                'actives' => 0
+            ),
+            // BINAGRIYA - JAKARTA - TANAHABANG
+            array(
+                'id' => '2306151540477892',
+                'enkripsi' => 'f90a3739321e8990e2a1193d92c4067f06b292cd',
+                'id_asuransi' => '221002154456',
+                'cabang' => 'JAKARTA',
+                'alamat' => 'Jl. Kesehatan No. 36 A, Tanah Abang, Jakarta Pusat 10160',
                 'deskripsi' => 'CABANG JAKARTA',
                 'actives' => 1
             ),
