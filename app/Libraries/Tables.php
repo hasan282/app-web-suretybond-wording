@@ -109,9 +109,8 @@ class Tables
     {
         $model = new \App\Models\JaminanModel;
         $model->getData(
-            ['enkrip', 'asuransi_nick', 'nilai', 'currency_2', 'jenis', 'principal']
-        )->where(['active' => 1]);
-        // ->where('jaminan.nilai_jaminan > 0')
+            ['enkrip', 'asuransi_nick', 'nilai', 'currency_2', 'jenis', 'principal', 'issued']
+        )->where(['active' => 1, 'issued' => 0]);
         $this->_setPage($page, $model->count('jaminan.id'));
         $this->dataList = $model->limit(
             $this->limit,

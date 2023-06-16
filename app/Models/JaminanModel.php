@@ -87,11 +87,20 @@ class JaminanModel extends BaseModel
             'currency_1' => 'currency_jaminan.symbol_1 AS currency_1',
             'currency_2' => 'currency_jaminan.symbol_2 AS currency_2'
         );
+        $fieldIssued = array(
+            'request_id' => 'jaminan_issued.id AS request_id',
+            'issued' => 'jaminan_issued.issued AS issued',
+            'printed' => 'jaminan_issued.printed AS printed'
+        );
         $table = 'jaminan';
         if ($this->includes($fieldPrincipal, $select)) {
             $fields = array_merge($fields, $fieldPrincipal);
             $table = '(' . $table . ' INNER JOIN principal_people ON principal_people.id = jaminan.id_principal_people)';
             $table = '(' . $table . ' INNER JOIN principal ON principal.id = principal_people.id_principal)';
+        }
+        if ($this->includes($fieldIssued, $select)) {
+            $fields = array_merge($fields, $fieldIssued);
+            $table = '(' . $table . ' LEFT OUTER JOIN jaminan_issued ON jaminan.id = jaminan_issued.id_jaminan)';
         }
         if ($this->includes($fieldAsuransi, $select)) {
             $fields = array_merge($fields, $fieldAsuransi);
@@ -142,7 +151,8 @@ class JaminanModel extends BaseModel
     {
         $fields = array(
             'active' => 'jaminan.actives',
-            'enkrip' => 'jaminan.enkripsi'
+            'enkrip' => 'jaminan.enkripsi',
+            'issued' => 'jaminan_issued.issued'
         );
         if (!empty($addField)) $fields = array_merge($fields, $addField);
         return parent::where($where, $fields);

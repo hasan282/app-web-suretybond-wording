@@ -4,7 +4,7 @@
 
 <?php
 $complete = true;
-$issued = true;
+$issued = intval($jaminan['issued']) === 1;
 $completeCheck = array(
     'nomor', 'nilai', 'date_from', 'date_to', 'days', 'issued_place', 'issued_date',
     'proyek', 'proyek_nama', 'dokumen', 'pekerjaan', 'obligee', 'obligee_alamat'
@@ -177,12 +177,14 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4">
-                <div class="mw-2 mx-auto position-relative h-100 pt-3" style="min-height:200px">
-                    <?php if (!$issued) : ?>
-                        <button class="btn btn-secondary btn-sm btn-block">
+                <div class="mw-2 mx-auto position-relative h-100 pt-3" style="min-height:260px">
+                    <?php if (!$issued && $complete) : ?>
+                        <button class="btn btn-secondary btn-sm btn-block" disabled>
                             <i class="fas fa-edit mr-2"></i>Edit Data Jaminan
                         </button>
-                        <button class="btn btn-danger btn-sm mt-2 btn-block">
+                    <?php endif; ?>
+                    <?php if ($jaminan['issued'] === null) : ?>
+                        <button class="btn btn-danger btn-sm mt-2 btn-block" disabled>
                             <i class="fas fa-trash-alt mr-2"></i>Hapus Data Jaminan
                         </button>
                     <?php endif; ?>
@@ -190,9 +192,20 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                         <?php if (!$complete) : ?>
                             <small class="text-danger"><i class="fas fa-info-circle mr-2"></i>Data Belum Lengkap</small>
                         <?php endif; ?>
-                        <button type="button" id="inforcerequest" <?= $complete ? '' : 'disabled '; ?>class="btn btn-default text-bold btn-sm btn-block mt-2 mb-3">
-                            <i class="fas fa-certificate mr-2"></i>Pengajuan Inforce
-                        </button>
+                        <?php if ($jaminan['issued'] === null) : ?>
+                            <button type="button" id="inforcerequest" <?= $complete ? '' : 'disabled '; ?>class="btn btn-default text-bold btn-sm btn-block mt-2 mb-3">
+                                <i class="fas fa-certificate mr-2"></i>Pengajuan Inforce
+                            </button>
+                        <?php else : ?>
+                            <div class="border-fade">
+                                <p class="text-sm text-secondary mt-2">Inforce Status</p>
+                                <?php if (intval($jaminan['issued']) === 1) : ?>
+                                    <p class="text-bold text-success">Disetujui</p>
+                                <?php else : ?>
+                                    <p class="text-bold text-secondary">Menunggu Persetujuan</p>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
                         <a href="/guarantee/print/<?= $jaminan['enkrip']; ?>" class="btn btn-primary btn-lg mt-2 btn-block text-bold<?= $complete ? '' : ' disabled'; ?>">
                             <i class="fas fa-print mr-2"></i>Cetak Jaminan
                         </a>

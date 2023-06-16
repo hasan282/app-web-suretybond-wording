@@ -44,7 +44,7 @@
         });
     };
 
-    $.fn.setContent = function (url, params = {}, options = {}) {
+    $.fn.setContent = function (url, params = {}, options = {}, afterload = () => { }) {
         const failed = '<div class="d-flex" style="min-height:200px;height:30vh"><div class="w-100 my-auto text-center text-fade"><span>Failed to Get Content</span></div></div>';
         const container = this;
         for (const key in options) {
@@ -60,13 +60,14 @@
                         fillContent(container, failed, '0', '1', '1');
                     }
                     $(tbOption.loader).fadeOut();
+                    afterload();
                 }).fail(function () {
                     fillContent(container, failed, '0', '1', '1');
                     $(tbOption.loader).fadeOut();
                 });
             }, tbOption.timeout);
         });
-    }
+    };
 
     $.fn.navTable = function (callfunc, options = {}) {
         const navs = this;
@@ -98,6 +99,6 @@
             }
             callfunc(page);
         });
-    }
+    };
 
 })(jQuery);

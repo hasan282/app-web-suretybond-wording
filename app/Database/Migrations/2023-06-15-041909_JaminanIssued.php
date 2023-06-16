@@ -25,6 +25,12 @@ class JaminanIssued extends Migration
                 'unsigned' => true,
                 'default' => 0
             ),
+            'issued_stamp' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 12,
+                'null' => true,
+                'default' => null
+            ),
             'printed' => array(
                 'type' => 'INT',
                 'constraint' => 1,

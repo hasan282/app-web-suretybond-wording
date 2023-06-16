@@ -19,7 +19,8 @@ class JaminanData
             'asuransi', 'cabang', 'cabang_alamat', 'cabang_pejabat', 'cabang_jabatan',
             'principal', 'principal_alamat', 'principal_pejabat', 'principal_jabatan',
             'proyek', 'proyek_nama', 'proyek_alamat', 'proyek_nilai',
-            'dokumen', 'dokumen_date', 'pekerjaan', 'obligee', 'obligee_alamat'
+            'dokumen', 'dokumen_date', 'pekerjaan', 'obligee', 'obligee_alamat',
+            'issued', 'printed'
         );
         return $this->model->getData($fields)->where(
             ['enkrip' => $enkripsi]

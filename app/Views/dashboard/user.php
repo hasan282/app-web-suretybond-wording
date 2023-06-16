@@ -57,7 +57,7 @@ $widget = array(
                 <a href="/client/add" class="btn btn-info btn-block mt-2 text-bold">
                     <i class="fas fa-user-plus mr-2"></i>Principal Baru
                 </a>
-                <a href="/search" class="btn btn-default btn-block mt-2">
+                <a href="/search" class="btn btn-default btn-block mt-2 disabled">
                     <i class="fas fa-search mr-2"></i>Cari Data Jaminan
                 </a>
             </div>
