@@ -22,6 +22,42 @@ class Api
         }
     }
 
+    public function blankoAvailable(string $asuransi, int $rows = 1)
+    {
+        $this->url = 'http://localhost/blanko/';
+
+        $this->uri = 'data/blanko';
+        $data = $this->_curlGet(array(
+            'data' => 'available',
+            'asuransi' => $asuransi,
+            'office' => userdata('office_id'),
+            'rows' => $rows
+        ));
+        if ($data['code'] === 200 && $data['status']) {
+            return $data['data'];
+        } else {
+            return array();
+        }
+    }
+
+    public function blankoMark($blankoid)
+    {
+        $this->url = 'http://localhost/blanko/';
+
+        $this->uri = 'data/blanko';
+        $data = $this->_curlPost(
+            array('data' => 'marking'),
+            array('blanko' => $blankoid)
+        );
+        if ($data['code'] === 200 && $data['status']) {
+            return $data['data'];
+        } else {
+            return false;
+        }
+    }
+
+    // ----- CORE FUNCTIONS ------------------------------------------
+
     private function _curlGet(array $params = [], $raw_output = false)
     {
         $result = array();
@@ -36,6 +72,36 @@ class Api
             $result = array('code' => $result_code, 'output' => $out);
         } else {
             $decoded = json_decode($out);
+            $result_status = $decoded->status ?? false;
+            $result_data = $decoded->data ?? null;
+            $result = array(
+                'code' => $result_code,
+                'status' => $result_status,
+                'data' => $result_data
+            );
+        }
+        curl_close($curl);
+        return $result;
+    }
+
+    private function _curlPost(array $query = [], array $form_data = [], $raw_output = false)
+    {
+        $queryString = array_merge(
+            array('key' => $this->key),
+            $query
+        );
+        $url = $this->url . $this->uri . '?' . http_build_query($queryString);
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($form_data));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($curl);
+        $result_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        if ($raw_output) {
+            $result = array('code' => $result_code, 'output' => $output);
+        } else {
+            $decoded = json_decode($output);
             $result_status = $decoded->status ?? false;
             $result_data = $decoded->data ?? null;
             $result = array(

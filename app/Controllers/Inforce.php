@@ -12,10 +12,6 @@ class Inforce extends BaseController
         $data['jscript'] = ['all/tables', 'all/checklist'];
         $this->plugin->setup('scrollbar|icheck');
         return $this->view('inforce/index', $data, true);
-
-        // $id = create_id();
-        // var_dump($id);
-        // var_dump(sha3hash($id, 40));
     }
 
     public function newRequest($param)
@@ -43,6 +39,39 @@ class Inforce extends BaseController
             }
         }
         return redirect()->to('guarantee/detail/' . $param);
+    }
+
+    public function process()
+    {
+        if (!is_login())
+            return login_page(full_url(false));
+        helper('array');
+        $enkrip = prefix_key_filter($this->request->getPost(), 'check_', 'on');
+        if (!empty($enkrip)) {
+            $model = new \App\Models\JaminanModel;
+            $jaminan = $model->getData(['id', 'issued', 'asuransi_id'])->where([
+                'enkrip' => $enkrip, 'issued' => 0
+            ])->data();
+            $datamodel = new \App\Models\JaminanData;
+            $result = $datamodel->inforceProcess($jaminan);
+            switch ($result) {
+                case 0:
+                    // blanko empty
+                    break;
+                case 1:
+                    // all success
+                    break;
+                case 2:
+                    // not match
+                    break;
+                case 3:
+                    // empty jaminan
+                    break;
+                default:
+                    break;
+            }
+        }
+        return redirect()->to('inforce');
     }
 
     public function table($pageNumber)

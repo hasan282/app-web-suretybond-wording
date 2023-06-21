@@ -6,7 +6,7 @@
 $complete = true;
 $issued = intval($jaminan['issued']) === 1;
 $completeCheck = array(
-    'nomor', 'nilai', 'date_from', 'date_to', 'days', 'issued_place', 'issued_date',
+    'jenis', 'nomor', 'nilai', 'date_from', 'date_to', 'days', 'issued_place', 'issued_date',
     'proyek', 'proyek_nama', 'dokumen', 'pekerjaan', 'obligee', 'obligee_alamat'
 );
 foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === null) $complete = false;

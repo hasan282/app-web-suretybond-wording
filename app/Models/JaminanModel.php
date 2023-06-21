@@ -90,7 +90,11 @@ class JaminanModel extends BaseModel
         $fieldIssued = array(
             'request_id' => 'jaminan_issued.id AS request_id',
             'issued' => 'jaminan_issued.issued AS issued',
-            'printed' => 'jaminan_issued.printed AS printed'
+            'issued_stamp' => 'jaminan_issued.issued_stamp AS issued_stamp',
+            'printed' => 'jaminan_issued.printed AS printed',
+            'blanko_id' => 'blankodata.id_blanko AS blanko_id',
+            'prefix' => 'blankodata.prefix AS prefix',
+            'blanko_nomor' => 'blankodata.nomor AS blanko_nomor',
         );
         $table = 'jaminan';
         if ($this->includes($fieldPrincipal, $select)) {
@@ -101,6 +105,7 @@ class JaminanModel extends BaseModel
         if ($this->includes($fieldIssued, $select)) {
             $fields = array_merge($fields, $fieldIssued);
             $table = '(' . $table . ' LEFT OUTER JOIN jaminan_issued ON jaminan.id = jaminan_issued.id_jaminan)';
+            $table = '(' . $table . " LEFT OUTER JOIN (SELECT * FROM jaminan_blanko WHERE jaminan_blanko.status IS NULL OR jaminan_blanko.status = 'USED') AS blankodata ON jaminan.id = blankodata.id_jaminan)";
         }
         if ($this->includes($fieldAsuransi, $select)) {
             $fields = array_merge($fields, $fieldAsuransi);

@@ -14,10 +14,11 @@ $jaminan = $jaminan ?? array();
     <tbody>
         <?php foreach ($jaminan as $ls) : ?>
             <tr>
-                <td class="text-center border-right"><?= str_replace('(--reg--)', '<span class="text-secondary">DRAFT</span>', $ls['nomor'] ?? '-'); ?></td>
+                <?php $register = $ls['blanko_nomor'] ?? '<span class="text-secondary">DRAFT</span>'; ?>
+                <td class="text-center border-right"><?= str_replace('(--reg--)', $register, $ls['nomor'] ?? '-'); ?></td>
                 <td class="text-center"><?= $ls['jenis'] ?? '-'; ?></td>
                 <td><?= $ls['principal']; ?></td>
-                <td class="text-center border-left"><?= $ls['nilai'] === null ? '-' : nformat($ls['nilai']); ?></td>
+                <td class="text-center border-left"><?= $ls['nilai'] === null ? '-' : $ls['currency_2'] . nformat($ls['nilai']); ?></td>
                 <td class="py-0 align-middle text-center border-left">
                     <a href="/guarantee/detail/<?= $ls['enkrip']; ?>" class="btn btn-info btn-sm text-bold"><i class="fas fa-info-circle mr-2"></i>Detail</a>
                     <a href="" class="btn btn-danger ml-1 btn-sm disabled"><i class="fas fa-trash-alt"></i></a>

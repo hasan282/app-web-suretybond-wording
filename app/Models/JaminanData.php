@@ -99,4 +99,75 @@ class JaminanData
             return $update === false ? $update : $change;
         }
     }
+
+    public function inforceProcess(array $jaminan)
+    {
+        $blankodata = array();
+        $jaminanids = array();
+        $marked = array();
+        if (!empty($jaminan)) {
+            $jaminan = $this->_sort($jaminan);
+            $apiblanko = new \App\Libraries\Api();
+            foreach ($jaminan as $jam) {
+                $apidata = $apiblanko->blankoAvailable(
+                    $jam['asuransi'],
+                    sizeof($jam['jaminan'])
+                );
+                if (sizeof($apidata) === sizeof($jam['jaminan'])) {
+                    foreach ($apidata as $key => $api) {
+                        $blankodata[] = array(
+                            'id_blanko' => $api->id,
+                            'id_jaminan' => $jam['jaminan'][$key],
+                            'prefix' => $api->prefix,
+                            'nomor' => $api->nomor
+                        );
+                        $jaminanids[] = $jam['jaminan'][$key];
+                        $marked[] = $api->id;
+                    }
+                }
+            }
+        }
+        if (!empty($blankodata)) {
+            $trans_result = $this->model->transaction(function ($db) use ($blankodata, $jaminanids) {
+                $db->table('jaminan_blanko')->insertBatch($blankodata);
+                $db->table('jaminan_issued')->set(array(
+                    'issued' => 1, 'issued_stamp' => create_id(0)
+                ))->whereIn('id_jaminan', $jaminanids)->update();
+            });
+            $apiMark = $apiblanko->blankoMark($marked);
+            $mark_result = $apiMark !== false && $apiMark->rows === sizeof($marked);
+            if ($trans_result && $mark_result) {
+                // all success
+                return 1;
+            } else {
+                // not match
+                return 2;
+            }
+        } else {
+            // blanko empty
+            return 0;
+        }
+        // empty jaminan
+        return 3;
+    }
+
+    private function _sort(array $jaminan)
+    {
+        $data = array();
+        foreach ($jaminan as $jam) {
+            $asuransi = $jam['asuransi_id'];
+            foreach ($data as &$new) {
+                if ($new['asuransi'] == $asuransi) {
+                    $new['jaminan'][] = $jam['id'];
+                    continue 2;
+                }
+            }
+            $data[] = array(
+                'asuransi' => $asuransi,
+                'jaminan' => array($jam['id'])
+            );
+        }
+        unset($new);
+        return $data;
+    }
 }

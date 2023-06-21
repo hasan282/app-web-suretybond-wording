@@ -29,6 +29,8 @@ function setAllRoutes($routes)
     $routes->get('/inforce', 'Inforce::index');
     $routes->get('/inforce/request/(:hash)', 'Inforce::newRequest/$1');
 
+    $routes->post('/inforce', 'Inforce::process');
+
     $routes->get('/client', 'Client::index');
     $routes->get('/client/add', 'Client::add');
     $routes->get('/client/detail/(:hash)', 'Client::detail/$1');

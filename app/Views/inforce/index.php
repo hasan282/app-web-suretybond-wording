@@ -53,11 +53,14 @@ $inforce = $tables->inforceList(1);
             </button>
         </div>
     </div>
-    <div class="card-body table-responsive p-0" id="inforcetable">
+    <form method="POST" id="forminforce">
+        <?= csrf_field(); ?>
+        <div class="card-body table-responsive p-0" id="inforcetable">
 
-        <?= $inforce->content; ?>
+            <?= $inforce->content; ?>
 
-    </div>
+        </div>
+    </form>
 </div>
 
 <?= $tables->footNavs($inforce->page_now, $inforce->page_max); ?>
@@ -75,6 +78,9 @@ $inforce = $tables->inforceList(1);
             $('#inforcetable').setContent(BaseURL + 'tb/inforce/' + page, {}, {}, function() {
                 set_checklist();
             });
+        });
+        $('#btn_inforce').click(function() {
+            $('#forminforce').trigger('submit');
         });
         set_checklist();
     });
