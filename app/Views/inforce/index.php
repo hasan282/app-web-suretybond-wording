@@ -80,6 +80,7 @@ $inforce = $tables->inforceList(1);
             });
         });
         $('#btn_inforce').click(function() {
+            $(this).attr('disabled', true);
             $('#forminforce').trigger('submit');
         });
         set_checklist();

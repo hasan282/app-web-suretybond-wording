@@ -5,7 +5,7 @@ define('IS_HOSTING', false);
 // ---------------- dont forget to change spark
 
 // folder name on public_html
-define('PUBLIC_FOLDERNAME', !IS_HOSTING ? 'public' : 'suretybond_warding');
+define('PUBLIC_FOLDERNAME', !IS_HOSTING ? 'public' : 'ptjis_suretybond');
 // ------------------------------------------------- dont forget to change spark
 
 // folder name on root directory

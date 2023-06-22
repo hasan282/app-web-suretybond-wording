@@ -54,7 +54,7 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                             <td class="fit pr-3 text-bold pl-4">Nomor Jaminan</td>
                             <td class="text-bold">:</td>
                             <?php
-                            $regNumber = '<span class="text-secondary">DRAFT</span>';
+                            $regNumber = $jaminan['blanko_nomor'] ?? '<span class="text-secondary">DRAFT</span>';
                             $replacer = '(--reg--)';
                             ?>
                             <td class="text-nowrap"><?= str_replace($replacer, $regNumber, $jaminan['nomor'] ?? '-'); ?></td>

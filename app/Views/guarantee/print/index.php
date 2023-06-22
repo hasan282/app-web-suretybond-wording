@@ -29,7 +29,7 @@ if ($dataProfile !== null) {
     unset($dataProfile['enkrip']);
     $pageSettings = $dataProfile;
 }
-$regNumber = 'DRAFT';
+$regNumber = $jaminan['blanko_nomor'] ?? 'DRAFT';
 $jaminanNum = str_replace('(--reg--)', $regNumber, $jaminan['nomor'] ?? '-');
 $jaminan['nomor'] = $jaminanNum;
 ?>
