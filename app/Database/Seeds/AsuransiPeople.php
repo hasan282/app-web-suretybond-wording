@@ -36,12 +36,21 @@ class AsuransiPeople extends Seeder
                 'jabatan' => 'Kepala Cabang',
                 'actives' => 1
             ),
-            // BINAGRIYA - JAKARTA
+            // BINAGRIYA - JAKARTA - WISMA
             array(
                 'id' => '2305050858089849',
                 'enkripsi' => 'ebe3910caac4fb05d643d04f243164affba8cbdb',
                 'id_cabang' => '2305041525528816',
                 'nama' => 'Alim Hidayat',
+                'jabatan' => 'Kepala Cabang',
+                'actives' => 1
+            ),
+            // BINAGRIYA - JAKARTA - TANAHABANG
+            array(
+                'id' => '2306151543343059',
+                'enkripsi' => '7120cc5350b0ffdf1652cbb5d8a6c31479327221',
+                'id_cabang' => '2306151540477892',
+                'nama' => 'Arizal Junidarta',
                 'jabatan' => 'Kepala Cabang',
                 'actives' => 1
             ),

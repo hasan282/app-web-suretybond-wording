@@ -1,7 +1,9 @@
 <?php
 
-define('SURETY_DOMAIN', 'https://surety.ptjis.com/');
-define('ASSET_URL', 'https://assets.ptjis.com/');
+define('SURETY_DOMAIN', 'https://suretyblanko.ptjis.id/');
+define('SURETY_LOCALHOST', 'http://localhost/blanko/');
+define('UPLOAD_PATH', FCPATH . DIRECTORY_SEPARATOR . 'files' . DIRECTORY_SEPARATOR);
+define('REGISTER_SECTION', '{(register)}');
 
 function setAllRoutes($routes)
 {
@@ -26,6 +28,9 @@ function setAllRoutes($routes)
     $routes->post('/guarantee/profile/edit', 'Guarantee::editSetting');
 
     $routes->get('/inforce', 'Inforce::index');
+    $routes->get('/inforce/request/(:hash)', 'Inforce::newRequest/$1');
+
+    $routes->post('/inforce', 'Inforce::process');
 
     $routes->get('/client', 'Client::index');
     $routes->get('/client/add', 'Client::add');

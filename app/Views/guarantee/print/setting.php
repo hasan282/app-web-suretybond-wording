@@ -13,7 +13,7 @@ $uriString = explode('/', uri_string());
                     <label for="profile">Profil Pengaturan</label>
                     <select id="profile" class="form-control">
                         <option selected disabled>---</option>
-                        <?php foreach ($profiles->listProfile()->data() as $pro) : ?>
+                        <?php foreach ($profiles->listProfile()->where(['active' => 1])->data() as $pro) : ?>
                             <option value="<?= $pro['enkripsi']; ?>"><?= $pro['profile']; ?></option>
                         <?php endforeach; ?>
                     </select>
@@ -134,7 +134,7 @@ $uriString = explode('/', uri_string());
     <?= csrf_field(); ?>
 </form>
 <div class="hide-content">
-    <form action="<?= base_url('guarantee/profile/apply'); ?>" method="POST">
+    <form action="/guarantee/profile/apply" method="POST">
         <input type="hidden" name="profile" id="hid_profile" value="">
         <input type="hidden" name="jaminan" id="hid_jaminan" value="<?= end($uriString); ?>">
         <?= csrf_field(); ?>

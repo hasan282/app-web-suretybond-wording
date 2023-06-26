@@ -69,6 +69,9 @@ class Plugins
                 ['url' => '(base_url)/adminlte/plugins/dropzone/min/dropzone.min.css', 'tipe' => 'css|head'],
                 ['url' => '(base_url)/adminlte/plugins/dropzone/min/dropzone.min.js', 'tipe' => 'js|foot'],
                 ['url' => '(base_url)/asset/js/all/upload.js(refresher)', 'tipe' => 'js|foot']
+            ),
+            'sweetalert' => array(
+                ['url' => '(base_url)/adminlte/plugins/sweetalert2/sweetalert2.all.min.js', 'tipe' => 'js|foot']
             )
             /*
             'name' => array(

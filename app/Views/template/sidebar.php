@@ -1,7 +1,7 @@
 <?php
 $menuItems = array(
     ['menu' => 'Data Jaminan', 'url' => 'guarantee', 'icon' => 'fas fa-certificate'],
-    ['menu' => 'Aktivasi Jaminan', 'url' => 'inforce', 'icon' => 'fas fa-check-circle'],
+    ['menu' => 'Inforce Jaminan', 'url' => 'inforce', 'icon' => 'fas fa-check-circle'],
     ['menu' => 'Data Nasabah', 'url' => 'client', 'icon' => 'fas fa-user-shield'],
     ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt']
 );
@@ -38,12 +38,14 @@ $menuItems = array(
                     </li>
                 <?php endforeach; ?>
                 <li class="nav-header">USER</li>
-                <li class="nav-item">
-                    <a href="/setting" class="nav-link<?= url_is('setting') ? ' active' : ''; ?>">
-                        <i class="nav-icon fas fa-cog"></i>
-                        <p>Pengaturan Akun</p>
-                    </a>
-                </li>
+                <!--
+                    <li class="nav-item">
+                        <a href="/setting" class="nav-link<?= url_is('setting') ? ' active' : ''; ?>">
+                            <i class="nav-icon fas fa-cog"></i>
+                            <p>Pengaturan Akun</p>
+                        </a>
+                    </li>
+                -->
                 <li class="nav-item">
                     <a href="/user/logout" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

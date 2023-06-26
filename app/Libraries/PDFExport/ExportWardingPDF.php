@@ -42,7 +42,6 @@ class ExportWardingPDF extends PDFMake
             'space' => $this->_mm_to_pt(intval($setting['sign_space'] ?? 10))
         );
         $this->lineHeight = intval($setting['spacing'] ?? 100) / 100;
-        $this->setContent();
     }
 
     public function setBlanko(string $filename)
@@ -51,7 +50,6 @@ class ExportWardingPDF extends PDFMake
         $this->images = array(
             'blanko' => $filename
         );
-        $this->setContent();
     }
 
     protected function terbilang(string $key)

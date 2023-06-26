@@ -90,7 +90,7 @@ class Client extends BaseController
             if ($file = $this->request->getFile('file')) {
                 if ($file->isValid() && !$file->hasMoved()) {
                     $newName = $file->getRandomName();
-                    $dirname = '../public/files/' . $principal;
+                    $dirname = UPLOAD_PATH . $principal;
                     if (!is_dir($dirname)) mkdir($dirname);
                     $file->move($dirname, $newName);
                     if ($principalModel->refresh()->addDocument($principal, $newName) === false) {

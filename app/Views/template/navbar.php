@@ -3,8 +3,8 @@ $userName = userdata('nama');
 $userImage = userdata('foto');
 $navMenu = array(
     ['menu' => 'Dashboard', 'url' => 'dashboard', 'icon' => 'fas fa-tachometer-alt'],
-    ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt'],
-    ['menu' => 'Pencarian', 'url' => 'search', 'icon' => 'fas fa-search']
+    ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt']
+    // ['menu' => 'Pencarian', 'url' => 'search', 'icon' => 'fas fa-search']
 );
 $dark = get_cookie('DRKMOD') ?? '0';
 $darkmode = (intval($dark) === 1);

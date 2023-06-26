@@ -11,7 +11,7 @@ $inforce = $tables->inforceList(1);
 <div class="row mb-3">
     <div class="col-xl-4 col-md-5 col-sm-6">
 
-        <button type="button" class="btn btn-primary text-bold btn-block">
+        <button type="button" id="btn_inforce" class="btn btn-primary text-bold btn-block" disabled>
             <i class="fas fa-check-circle mr-2"></i>Inforce Semua Data Terpilih
         </button>
 
@@ -53,11 +53,14 @@ $inforce = $tables->inforceList(1);
             </button>
         </div>
     </div>
-    <div class="card-body table-responsive p-0" id="inforcetable">
+    <form method="POST" id="forminforce">
+        <?= csrf_field(); ?>
+        <div class="card-body table-responsive p-0" id="inforcetable">
 
-        <?= $inforce->content; ?>
+            <?= $inforce->content; ?>
 
-    </div>
+        </div>
+    </form>
 </div>
 
 <?= $tables->footNavs($inforce->page_now, $inforce->page_max); ?>
@@ -65,14 +68,29 @@ $inforce = $tables->inforceList(1);
 <?= $this->endSection(); ?>
 
 <?= $this->section('jscript'); ?>
+
 <script>
     $(function() {
         $('#loading').setLoader({
             icon: 'fas fa-circle-notch'
         });
         $('.data-nav').navTable(function(page) {
-            $('#inforcetable').setContent(BaseURL + 'tb/inforce/' + page);
+            $('#inforcetable').setContent(BaseURL + 'tb/inforce/' + page, {}, {}, function() {
+                set_checklist();
+            });
         });
+        $('#btn_inforce').click(function() {
+            $(this).attr('disabled', true);
+            $('#forminforce').trigger('submit');
+        });
+        set_checklist();
     });
+
+    function set_checklist() {
+        $('#checkall').checkList('.checkone', function(checkone) {
+            $('#btn_inforce').attr('disabled', !checkone);
+        });
+    }
 </script>
+
 <?= $this->endSection(); ?>

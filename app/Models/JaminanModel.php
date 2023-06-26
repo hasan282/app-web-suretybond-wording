@@ -87,25 +87,47 @@ class JaminanModel extends BaseModel
             'currency_1' => 'currency_jaminan.symbol_1 AS currency_1',
             'currency_2' => 'currency_jaminan.symbol_2 AS currency_2'
         );
+        $fieldIssued = array(
+            'request_id' => 'jaminan_issued.id AS request_id',
+            'issued' => 'jaminan_issued.issued AS issued',
+            'issued_stamp' => 'jaminan_issued.issued_stamp AS issued_stamp',
+            'printed' => 'jaminan_issued.printed AS printed',
+            'blanko_id' => 'blankodata.id_blanko AS blanko_id',
+            'prefix' => 'blankodata.prefix AS prefix',
+            'blanko_nomor' => 'blankodata.nomor AS blanko_nomor'
+        );
+        $fieldPrint = array(
+            'prefix_print' => 'blankoprint.prefix AS prefix_print',
+            'blanko_print' => 'blankoprint.nomor AS blanko_print'
+        );
         $table = 'jaminan';
-        if (!empty(array_intersect(array_keys($fieldPrincipal), $select))) {
+        if ($this->includes($fieldPrincipal, $select)) {
             $fields = array_merge($fields, $fieldPrincipal);
             $table = '(' . $table . ' INNER JOIN principal_people ON principal_people.id = jaminan.id_principal_people)';
             $table = '(' . $table . ' INNER JOIN principal ON principal.id = principal_people.id_principal)';
         }
-        if (!empty(array_intersect(array_keys($fieldAsuransi), $select))) {
+        if ($this->includes($fieldIssued, $select)) {
+            $fields = array_merge($fields, $fieldIssued);
+            $table = '(' . $table . ' LEFT OUTER JOIN jaminan_issued ON jaminan.id = jaminan_issued.id_jaminan)';
+            $table = '(' . $table . ' LEFT OUTER JOIN (SELECT * FROM jaminan_blanko WHERE id IN (SELECT MIN(id) FROM jaminan_blanko GROUP BY id_jaminan)) AS blankodata ON jaminan.id = blankodata.id_jaminan)';
+        }
+        if ($this->includes($fieldPrint, $select)) {
+            $fields = array_merge($fields, $fieldPrint);
+            $table = '(' . $table . ' LEFT OUTER JOIN (SELECT * FROM jaminan_blanko WHERE id IN (SELECT MAX(id) FROM jaminan_blanko GROUP BY id_jaminan)) AS blankoprint ON jaminan.id = blankoprint.id_jaminan)';
+        }
+        if ($this->includes($fieldAsuransi, $select)) {
             $fields = array_merge($fields, $fieldAsuransi);
             $table = '(' . $table . ' INNER JOIN asuransi_people ON asuransi_people.id = jaminan.id_asuransi_people)';
             $table = '(' . $table . ' INNER JOIN asuransi_cabang ON asuransi_cabang.id = asuransi_people.id_cabang)';
             $table = '(' . $table . ' INNER JOIN asuransi ON asuransi.id = asuransi_cabang.id_asuransi)';
         }
-        if (!empty(array_intersect(array_keys($fieldJoins), $select))) {
+        if ($this->includes($fieldJoins, $select)) {
             $fields = array_merge($fields, $fieldJoins);
             $table = '(' . $table . ' LEFT OUTER JOIN jaminan_jenis ON jaminan_jenis.id = jaminan.id_jenis)';
             $table = '(' . $table . ' LEFT OUTER JOIN jaminan_proyek ON jaminan_proyek.id = jaminan.id_proyek)';
             $table = '(' . $table . ' LEFT OUTER JOIN jaminan_pekerjaan ON jaminan_pekerjaan.id = jaminan.id_pekerjaan)';
         }
-        if (!empty(array_intersect(array_keys($fieldCurrency), $select))) {
+        if ($this->includes($fieldCurrency, $select)) {
             $fields = array_merge($fields, $fieldCurrency);
             $table = '(' . $table . ' LEFT OUTER JOIN currency AS currency_proyek ON jaminan.id_currency_proyek = currency_proyek.id)';
             $table = '(' . $table . ' LEFT OUTER JOIN currency AS currency_jaminan ON currency_jaminan.id = jaminan.id_currency_jaminan)';
@@ -142,7 +164,8 @@ class JaminanModel extends BaseModel
     {
         $fields = array(
             'active' => 'jaminan.actives',
-            'enkrip' => 'jaminan.enkripsi'
+            'enkrip' => 'jaminan.enkripsi',
+            'issued' => 'jaminan_issued.issued'
         );
         if (!empty($addField)) $fields = array_merge($fields, $addField);
         return parent::where($where, $fields);
