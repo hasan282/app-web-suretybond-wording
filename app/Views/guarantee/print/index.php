@@ -30,7 +30,7 @@ if ($dataProfile !== null) {
     $pageSettings = $dataProfile;
 }
 $regNumber = $jaminan['blanko_nomor'] ?? 'DRAFT';
-$jaminanNum = str_replace('(--reg--)', $regNumber, $jaminan['nomor'] ?? '-');
+$jaminanNum = str_replace(REGISTER_SECTION, $regNumber, $jaminan['nomor'] ?? '-');
 $jaminan['nomor'] = $jaminanNum;
 ?>
 <div class="card">
@@ -92,7 +92,16 @@ $jaminan['nomor'] = $jaminanNum;
     <div class="card-body">
         <div class="row">
             <div class="col-7">
-
+                <?php if (intval($jaminan['issued']) === 1) : ?>
+                    <div class="border-fade px-3 pt-2 text-center">
+                        <p class="mb-1 text-info">Pastikan cetak Jaminan dengan nomor Blanko :</p>
+                        <h3 class="mb-2"><span class="text-secondary"><?= $jaminan['prefix_print']; ?></span><strong><?= $jaminan['blanko_print']; ?></strong></h3>
+                        <div class="text-center my-3 pt-4">
+                            <button class="btn btn-primary btn-sm mx-1" id="buttonused"><i class="fas fa-check-circle mr-2"></i>Konfirmasi Cetak</button>
+                            <button class="btn btn-danger btn-sm mx-1" id="buttoncrash"><i class="fas fa-exclamation-triangle mr-2"></i>Lapor Blanko Rusak</button>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
             <div class="col-5">
                 <div class="mx-auto mw-3 text-center pb-4">
@@ -136,7 +145,47 @@ if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/MAXIMUS.jpg')
             $('#enkriprofile').val('<?= $profileVal; ?>');
             $('#editprofile').fadeIn();
         <?php endif; ?>
+        $('#buttonused').click(function() {
+            Swal.fire({
+                title: 'Konfirmasi Cetak Blanko',
+                text: 'Apakah Jaminan sudah dicetak menggunakan Blanko dengan nomor <?= $jaminan['prefix_print'] . $jaminan['blanko_print']; ?> ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: '<i class="fas fa-check-circle mr-2"></i>Sudah dicetak',
+                cancelButtonText: '<i class="fas fa-times mr-2"></i> Tidak',
+                showCloseButton: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    disablebuttons();
+                    // window.location.href = BaseURL + '';
+                }
+            });
+        });
+        $('#buttoncrash').click(function() {
+            Swal.fire({
+                title: 'Laporkan Blanko Rusak',
+                text: 'Ubah status Blanko <?= $jaminan['prefix_print'] . $jaminan['blanko_print']; ?> menjadi rusak dan cetak Jaminan dengan nomor Blanko lainnya ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#DC3545',
+                confirmButtonText: '<i class="fas fa-exclamation-circle mr-2"></i>Laporkan rusak',
+                cancelButtonText: '<i class="fas fa-times mr-2"></i> Tidak',
+                showCloseButton: true,
+                focusCancel: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    disablebuttons();
+                    // window.location.href = BaseURL + '';
+                }
+            });
+        });
     });
+
+    function disablebuttons() {
+        $('#buttonused').attr('disabled', true);
+        $('#buttoncrash').attr('disabled', true);
+    }
 </script>
 
 <?= $this->endSection(); ?>

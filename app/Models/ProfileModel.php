@@ -21,6 +21,7 @@ class ProfileModel extends BaseModel
         $data['sign_space'] = intval($post['sign_space'] ?? '0');
         $data['sign_width'] = intval($post['sign_width'] ?? '0');
         $data['sign_height'] = intval($post['sign_height'] ?? '0');
+        $data['actives'] = 1;
         $this->select = '*';
         $this->table = 'prints';
         $check = $this->where(['jaminan' => $jaminan])->data();
@@ -105,6 +106,7 @@ class ProfileModel extends BaseModel
     {
         $fields = array(
             'enkrip' => 'print_profile.enkripsi',
+            'active' => 'print_profile.actives',
             'enkrip_jaminan' => 'jaminan.enkripsi',
             'jaminan' => 'prints.id_jaminan'
         );

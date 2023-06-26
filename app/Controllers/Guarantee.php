@@ -46,7 +46,7 @@ class Guarantee extends BaseController
                 'Cetak'
             );
             $data['jscript'] = 'guarantee/print';
-            $this->plugin->setup('scrollbar|pdfmake');
+            $this->plugin->setup('scrollbar|pdfmake|sweetalert');
             $this->view('guarantee/print/index', $data);
         }
     }
@@ -165,6 +165,7 @@ class Guarantee extends BaseController
             $change = array();
             unset($profile['id']);
             unset($profile['enkripsi']);
+            unset($profile['actives']);
             $profilename = $this->request->getPost('profile_name');
             if ($profile['profile'] != $profilename)
                 $change['profile'] = $profilename;

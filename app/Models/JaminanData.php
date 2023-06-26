@@ -34,7 +34,8 @@ class JaminanData
             'principal', 'principal_alamat', 'asuransi_print', 'cabang_print', 'cabang_alamat',
             'principal_pejabat', 'principal_jabatan', 'cabang_pejabat', 'cabang_jabatan',
             'proyek_nama', 'dokumen', 'dokumen_date', 'date_from', 'date_to', 'days',
-            'obligee', 'obligee_alamat', 'jenis_singkat', 'proyek_id', 'blanko_nomor'
+            'obligee', 'obligee_alamat', 'jenis_singkat', 'proyek_id',
+            'issued', 'blanko_nomor', 'prefix_print', 'blanko_print'
         );
         return $this->model->getData($fields)->where(
             ['enkrip' => $enkripsi]
@@ -59,7 +60,7 @@ class JaminanData
     {
         $request = \Config\Services::request();
         $nomor = nl2space($request->getPost('nomor'));
-        if (strpos($nomor, '(--reg--)') === false) $nomor .= '(--reg--)';
+        if (strpos($nomor, REGISTER_SECTION) === false) $nomor .= REGISTER_SECTION;
         $data = array(
             'id_proyek' => $request->getPost('proyek'),
             'nama_proyek' => nl2space($request->getPost('proyek_nama')),

@@ -25,7 +25,7 @@ class Api
     public function blankoAvailable(string $asuransi, int $rows = 1)
     {
         if (!env_is('production'))
-            $this->url = 'http://localhost/blanko/';
+            $this->url = SURETY_LOCALHOST;
         $this->uri = 'data/blanko';
         $data = $this->_curlGet(array(
             'data' => 'available',
@@ -43,7 +43,7 @@ class Api
     public function blankoMark($blankoid)
     {
         if (!env_is('production'))
-            $this->url = 'http://localhost/blanko/';
+            $this->url = SURETY_LOCALHOST;
         $this->uri = 'data/blanko';
         $data = $this->_curlPost(
             array('data' => 'marking'),

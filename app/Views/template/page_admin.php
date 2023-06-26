@@ -58,7 +58,7 @@ $darkmode = (intval($dark) === 1);
         </div>
         <footer class="main-footer text-sm">
             <div class="text-center">
-                <strong>&copy; <?= date('Y'); ?> <a href="https://ptjis.com" target="_blank">PTJIS</a></strong> All rights reserved
+                <strong>&copy; <?= date('Y'); ?> <a href="https://ptjis.id" target="_blank">PTJIS</a></strong> All rights reserved
             </div>
         </footer>
     </div>

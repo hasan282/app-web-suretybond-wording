@@ -94,7 +94,11 @@ class JaminanModel extends BaseModel
             'printed' => 'jaminan_issued.printed AS printed',
             'blanko_id' => 'blankodata.id_blanko AS blanko_id',
             'prefix' => 'blankodata.prefix AS prefix',
-            'blanko_nomor' => 'blankodata.nomor AS blanko_nomor',
+            'blanko_nomor' => 'blankodata.nomor AS blanko_nomor'
+        );
+        $fieldPrint = array(
+            'prefix_print' => 'blankoprint.prefix AS prefix_print',
+            'blanko_print' => 'blankoprint.nomor AS blanko_print'
         );
         $table = 'jaminan';
         if ($this->includes($fieldPrincipal, $select)) {
@@ -105,7 +109,11 @@ class JaminanModel extends BaseModel
         if ($this->includes($fieldIssued, $select)) {
             $fields = array_merge($fields, $fieldIssued);
             $table = '(' . $table . ' LEFT OUTER JOIN jaminan_issued ON jaminan.id = jaminan_issued.id_jaminan)';
-            $table = '(' . $table . " LEFT OUTER JOIN (SELECT * FROM jaminan_blanko WHERE jaminan_blanko.status IS NULL OR jaminan_blanko.status = 'USED') AS blankodata ON jaminan.id = blankodata.id_jaminan)";
+            $table = '(' . $table . ' LEFT OUTER JOIN (SELECT * FROM jaminan_blanko WHERE id IN (SELECT MIN(id) FROM jaminan_blanko GROUP BY id_jaminan)) AS blankodata ON jaminan.id = blankodata.id_jaminan)';
+        }
+        if ($this->includes($fieldPrint, $select)) {
+            $fields = array_merge($fields, $fieldPrint);
+            $table = '(' . $table . ' LEFT OUTER JOIN (SELECT * FROM jaminan_blanko WHERE id IN (SELECT MAX(id) FROM jaminan_blanko GROUP BY id_jaminan)) AS blankoprint ON jaminan.id = blankoprint.id_jaminan)';
         }
         if ($this->includes($fieldAsuransi, $select)) {
             $fields = array_merge($fields, $fieldAsuransi);

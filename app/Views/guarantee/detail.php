@@ -53,11 +53,8 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nomor Jaminan</td>
                             <td class="text-bold">:</td>
-                            <?php
-                            $regNumber = $jaminan['blanko_nomor'] ?? '<span class="text-secondary">DRAFT</span>';
-                            $replacer = '(--reg--)';
-                            ?>
-                            <td class="text-nowrap"><?= str_replace($replacer, $regNumber, $jaminan['nomor'] ?? '-'); ?></td>
+                            <?php $regNumber = $jaminan['blanko_nomor'] ?? '<span class="text-secondary">DRAFT</span>'; ?>
+                            <td class="text-nowrap"><?= str_replace(REGISTER_SECTION, $regNumber, $jaminan['nomor'] ?? '-'); ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Nilai Jaminan</td>
@@ -222,22 +219,24 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
 
 <script>
     $(function() {
-        $('#inforcerequest').click(function() {
-            Swal.fire({
-                title: 'Ajukan Inforce Jaminan?',
-                text: 'Pengajuan Inforce tidak dapat dibatalkan',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: '<i class="fas fa-check-circle mr-2"></i>Ajukan Inforce',
-                cancelButtonText: '<i class="fas fa-times mr-2"></i> Tidak',
-                showCloseButton: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = BaseURL + 'inforce/request/<?= $jaminan['enkrip']; ?>';
-                }
+        <?php if ($jaminan['issued'] === null) : ?>
+            $('#inforcerequest').click(function() {
+                Swal.fire({
+                    title: 'Ajukan Inforce Jaminan?',
+                    text: 'Pengajuan Inforce tidak dapat dibatalkan',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: '<i class="fas fa-check-circle mr-2"></i>Ajukan Inforce',
+                    cancelButtonText: '<i class="fas fa-times mr-2"></i> Tidak',
+                    showCloseButton: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = BaseURL + 'inforce/request/<?= $jaminan['enkrip']; ?>';
+                    }
+                });
             });
-        });
+        <?php endif; ?>
     });
 </script>
 

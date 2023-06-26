@@ -20,7 +20,8 @@ class PrintProfile extends Seeder
                 'sign_margin' => 30,
                 'sign_width' => 70,
                 'sign_height' => 24,
-                'sign_space' => 18
+                'sign_space' => 18,
+                'actives' => 1
             )
         );
         $this->_running($data);

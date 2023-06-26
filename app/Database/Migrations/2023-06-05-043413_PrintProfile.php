@@ -84,11 +84,18 @@ class PrintProfile extends Migration
                 'constraint' => 4,
                 'unsigned' => true,
                 'default' => 0
+            ),
+            'actives' => array(
+                'type' => 'INT',
+                'constraint' => 1,
+                'unsigned' => true,
+                'default' => 0
             )
         ));
 
         $this->forge->addPrimaryKey('id', 'PRIMARY');
         $this->forge->addUniqueKey('enkripsi', 'ID');
+        $this->forge->addKey('actives', false, false, 'ACTIVE');
 
         $attribute = array('ENGINE' => 'InnoDB');
         $this->forge->createTable('print_profile', true, $attribute);
