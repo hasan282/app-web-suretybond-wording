@@ -56,6 +56,22 @@ class Api
         }
     }
 
+    public function blankoUse(string $blanko, array $data)
+    {
+        if (!env_is('production'))
+            $this->url = SURETY_LOCALHOST;
+        $this->uri = 'data/blanko';
+        $data = $this->_curlPost(
+            array('data' => 'use', 'blanko' => $blanko),
+            $data
+        );
+        if ($data['code'] === 200 && $data['status']) {
+            return $data['data'];
+        } else {
+            return false;
+        }
+    }
+
     // ----- CORE FUNCTIONS ------------------------------------------
 
     private function _curlGet(array $params = [], $raw_output = false)

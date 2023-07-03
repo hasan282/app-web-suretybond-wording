@@ -45,6 +45,7 @@ class Guarantee extends BaseController
                 'Detail|guarantee/detail/' . $param,
                 'Cetak'
             );
+            $data['params'] = $param;
             $data['jscript'] = 'guarantee/print';
             $this->plugin->setup('scrollbar|pdfmake|sweetalert');
             $this->view('guarantee/print/index', $data);
@@ -203,6 +204,20 @@ class Guarantee extends BaseController
             // failed
         }
         return redirect()->to('guarantee/print/' . $valJaminan);
+    }
+
+    public function blankoUse()
+    {
+        $model = new \App\Models\JaminanData;
+        $result = $model->blankoUse($this->request->getPost('jaminan'));
+
+        var_dump($result);
+    }
+
+    public function blankoCrash()
+    {
+        $jaminan = null;
+        $params = $this->request->getPost('jaminan');
     }
 
     // -------- JSON Return -------------------------------------------------------------

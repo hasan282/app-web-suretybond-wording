@@ -101,6 +101,10 @@ $jaminan['nomor'] = $jaminanNum;
                             <button class="btn btn-danger btn-sm mx-1" id="buttoncrash"><i class="fas fa-exclamation-triangle mr-2"></i>Lapor Blanko Rusak</button>
                         </div>
                     </div>
+                    <form id="printforms" method="POST">
+                        <?= csrf_field(); ?>
+                        <input type="hidden" name="jaminan" value="<?= $params; ?>">
+                    </form>
                 <?php endif; ?>
             </div>
             <div class="col-5">
@@ -158,7 +162,7 @@ if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/MAXIMUS.jpg')
             }).then((result) => {
                 if (result.isConfirmed) {
                     disablebuttons();
-                    // window.location.href = BaseURL + '';
+                    $('#printforms').attr('action', '/blanko/used').trigger('submit');
                 }
             });
         });
@@ -176,7 +180,7 @@ if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/MAXIMUS.jpg')
             }).then((result) => {
                 if (result.isConfirmed) {
                     disablebuttons();
-                    // window.location.href = BaseURL + '';
+                    $('#printforms').attr('action', '/blanko/crash').trigger('submit');
                 }
             });
         });

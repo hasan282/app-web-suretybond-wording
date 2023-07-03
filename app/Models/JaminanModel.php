@@ -97,6 +97,7 @@ class JaminanModel extends BaseModel
             'blanko_nomor' => 'blankodata.nomor AS blanko_nomor'
         );
         $fieldPrint = array(
+            'blankoprint_id' => 'blankoprint.id_blanko AS blankoprint_id',
             'prefix_print' => 'blankoprint.prefix AS prefix_print',
             'blanko_print' => 'blankoprint.nomor AS blanko_print'
         );

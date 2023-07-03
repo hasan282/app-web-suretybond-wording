@@ -101,6 +101,49 @@ class JaminanData
         }
     }
 
+    public function blankoUse(?string $params)
+    {
+        $jaminan = null;
+        if ($params !== null) {
+            $model = new \App\Models\JaminanModel;
+            $jaminan = $model->getData(array(
+                'jenis_id', 'nomor', 'principal_id', 'principal', 'obligee',
+                'currency_id', 'nilai', 'dokumen', 'dokumen_date', 'proyek_nama',
+                'date_from', 'date_to', 'days', 'blanko_nomor', 'blankoprint_id'
+            ))->where(
+                ['enkrip' => $params]
+            )->data(false);
+        }
+        if ($jaminan === null) {
+            return false;
+        } else {
+            $data = array(
+                'id_tipe' => substr($jaminan['jenis_id'], -1),
+                'nomor' => str_replace(REGISTER_SECTION, $jaminan['blanko_nomor'], $jaminan['nomor']),
+                'id_principal' => $jaminan['principal_id'],
+                'principal' => $jaminan['principal'],
+                'obligee' => $jaminan['obligee'],
+                'id_currency' => $jaminan['currency_id'],
+                'nilai' => $jaminan['nilai'],
+                'kontrak' => $jaminan['dokumen'],
+                'pekerjaan' => $jaminan['proyek_nama'],
+                'apply_date' => $jaminan['date_from'],
+                'end_date' => $jaminan['date_to'],
+                'apply_days' => $jaminan['days'],
+                'user' => userdata('id'),
+                'office' => userdata('office_id')
+            );
+            $docDate = fdate($jaminan['dokumen_date'], 'DD1 MM3 YY2');
+            if ($docDate !== null) $data['kontrak'] .= ' tanggal ' . $docDate;
+            $apiLib = new \App\Libraries\Api();
+            $apiResult = $apiLib->blankoUse($jaminan['blankoprint_id'], $data);
+
+
+
+            return $apiResult;
+        }
+    }
+
     public function inforceProcess(array $jaminan)
     {
         $blankodata = array();

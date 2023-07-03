@@ -27,6 +27,9 @@ function setAllRoutes($routes)
     $routes->post('/guarantee/profile/apply', 'Guarantee::applySetting');
     $routes->post('/guarantee/profile/edit', 'Guarantee::editSetting');
 
+    $routes->post('/blanko/used', 'Guarantee::blankoUse');
+    $routes->post('/blanko/crash', 'Guarantee::blankoCrash');
+
     $routes->get('/inforce', 'Inforce::index');
     $routes->get('/inforce/request/(:hash)', 'Inforce::newRequest/$1');
 
