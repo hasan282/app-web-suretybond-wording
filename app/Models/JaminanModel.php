@@ -166,7 +166,8 @@ class JaminanModel extends BaseModel
         $fields = array(
             'active' => 'jaminan.actives',
             'enkrip' => 'jaminan.enkripsi',
-            'issued' => 'jaminan_issued.issued'
+            'issued' => 'jaminan_issued.issued',
+            'print' => 'jaminan_issued.printed'
         );
         if (!empty($addField)) $fields = array_merge($fields, $addField);
         return parent::where($where, $fields);

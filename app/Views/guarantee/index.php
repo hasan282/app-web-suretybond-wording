@@ -77,5 +77,23 @@ $draft = url_is('guarantee/issued') ? $tables->guaranteeIssued(1) : $tables->gua
             $('#guarantee').setContent(BaseURL + 'tb/guarantee/' + section + '/1');
         });
     });
+
+    function deleterow(params) {
+        Swal.fire({
+            title: 'Hapus Data Jaminan',
+            text: 'Yakin ingin menghapus Data Jaminan ini ?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#DC3545',
+            confirmButtonText: '<i class="fas fa-trash-alt mr-2"></i>Hapus Data',
+            cancelButtonText: '<i class="fas fa-times mr-2"></i> Tidak',
+            showCloseButton: true,
+            focusCancel: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+            }
+        });
+    }
 </script>
 <?= $this->endSection(); ?>

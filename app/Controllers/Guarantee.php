@@ -10,7 +10,7 @@ class Guarantee extends BaseController
             return login_page(full_url(false));
         $data['title'] = 'Data Jaminan';
         $data['jscript'] = 'all/tables';
-        $this->plugin->setup('scrollbar');
+        $this->plugin->setup('scrollbar|sweetalert');
         return $this->view('guarantee/index', $data, true);
     }
 
@@ -208,10 +208,20 @@ class Guarantee extends BaseController
 
     public function blankoUse()
     {
+        $params = $this->request->getPost('jaminan');
         $model = new \App\Models\JaminanData;
-        $result = $model->blankoUse($this->request->getPost('jaminan'));
-
-        var_dump($result);
+        $result = $model->blankoUse($params);
+        if ($result === false) {
+            // process denied
+            return redirect()->to('guarantee/print/' . $params);
+        } else {
+            if ($result['update']) {
+                // all success
+            } else {
+                // update failed
+            }
+            return redirect()->to('guarantee/detail/' . $params);
+        }
     }
 
     public function blankoCrash()

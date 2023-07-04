@@ -58,8 +58,8 @@ class Tables
     {
         $model = new \App\Models\JaminanModel;
         $model->getData(
-            ['enkrip', 'nomor', 'currency_2', 'nilai', 'jenis', 'principal', 'blanko_nomor']
-        )->where(['active' => 1]);
+            ['enkrip', 'nomor', 'currency_2', 'nilai', 'jenis', 'principal', 'issued', 'blanko_nomor']
+        )->where(['active' => 1])->where('(jaminan_issued.printed = 0 OR jaminan_issued.printed IS NULL)');
         $this->_setPage($page, $model->count('jaminan.id'));
         $this->dataList = $model->limit(
             $this->limit,
@@ -70,19 +70,16 @@ class Tables
 
     public function guaranteeIssued(int $page = 1)
     {
-        // $model = new \App\Models\DataModel;
-        // $data['list'] = $model->dataIssued();
-        // return (object) [
-        //     'page_now' => $page,
-        //     'page_max' => 32,
-        //     'count' => 572,
-        //     'limit' => 10,
-        //     'content' => nl2space(view('guarantee/table/issued', $data))
-        // ];
-
-        $this->_setPage($page, 0);
-        $this->dataList = [];
-        return $this->_objectReturn('guarantee/table/issued');
+        $model = new \App\Models\JaminanModel;
+        $model->getData(array(
+            'enkrip', 'prefix_print', 'blanko_print', 'nomor', 'jenis', 'principal', 'blanko_nomor'
+        ))->where(['active' => 1, 'print' => 1]);
+        $this->_setPage($page, $model->count('jaminan.id'));
+        $this->dataList = $model->limit(
+            $this->limit,
+            $this->offset
+        )->order('newest')->data();
+        return $this->_objectReturn('guarantee/table/issued', 'jaminan');
     }
 
     public function clientPrincipal(int $page = 1)

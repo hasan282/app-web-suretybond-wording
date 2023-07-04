@@ -11,6 +11,23 @@ class JaminanData
         $this->model = new \App\Models\JaminanModel;
     }
 
+    public function infoDashboard()
+    {
+        $data['draft'] = $this->model->getData(
+            ['id', 'printed']
+        )->where(
+            ['active' => 1]
+        )->where(
+            '(jaminan_issued.printed = 0 OR jaminan_issued.printed IS NULL)'
+        )->count('jaminan.id');
+        $data['issued'] = $this->model->refresh()->getData(
+            ['id', 'printed']
+        )->where(
+            ['active' => 1, 'print' => 1]
+        )->count('jaminan.id');
+        return $data;
+    }
+
     public function getDetail(string $enkripsi)
     {
         $fields = array(
@@ -107,7 +124,7 @@ class JaminanData
         if ($params !== null) {
             $model = new \App\Models\JaminanModel;
             $jaminan = $model->getData(array(
-                'jenis_id', 'nomor', 'principal_id', 'principal', 'obligee',
+                'id', 'jenis_id', 'nomor', 'principal_id', 'principal', 'obligee',
                 'currency_id', 'nilai', 'dokumen', 'dokumen_date', 'proyek_nama',
                 'date_from', 'date_to', 'days', 'blanko_nomor', 'blankoprint_id'
             ))->where(
@@ -137,10 +154,26 @@ class JaminanData
             if ($docDate !== null) $data['kontrak'] .= ' tanggal ' . $docDate;
             $apiLib = new \App\Libraries\Api();
             $apiResult = $apiLib->blankoUse($jaminan['blankoprint_id'], $data);
-
-
-
-            return $apiResult;
+            if ($apiResult->all) {
+                $updates = $this->model->transaction(function ($db) use ($jaminan) {
+                    $db->table('jaminan_blanko')->update(
+                        ['status' => 'USED'],
+                        ['id_blanko' => $jaminan['blankoprint_id']]
+                    );
+                    $db->table('jaminan_issued')->update(
+                        ['printed' => 1],
+                        ['id_jaminan' => $jaminan['id']]
+                    );
+                });
+                return array(
+                    'update' => $updates,
+                    'api_blanko' => $apiResult->blanko,
+                    'api_jaminan' => $apiResult->jaminan,
+                    'api_used' => $apiResult->used
+                );
+            } else {
+                return false;
+            }
         }
     }
 

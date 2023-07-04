@@ -3,22 +3,23 @@
 <?= $this->section('content'); ?>
 
 <?php
-$jaminan = new \App\Models\JaminanModel;
+$jaminan = new \App\Models\JaminanData;
 $principal = new \App\Models\PrincipalModel;
+$jaminanRecap = $jaminan->infoDashboard();
 $widget = array(
     [
         'title' => 'Draft Jaminan',
         'icon' => 'fas fa-file-alt',
         'link' => 'guarantee',
         'color' => 'secondary',
-        'data' => $jaminan->getData()->where(['active' => 1])->count()
+        'data' => $jaminanRecap['draft']
     ],
     [
         'title' => 'Jaminan Diterbitkan',
         'icon' => 'fas fa-certificate',
         'link' => 'guarantee/issued',
         'color' => 'olive',
-        'data' => '0'
+        'data' => $jaminanRecap['issued']
     ],
     [
         'title' => 'Data Nasabah',

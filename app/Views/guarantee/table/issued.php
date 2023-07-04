@@ -1,5 +1,5 @@
 <?php
-$list = $list ?? array();
+$jaminan = $jaminan ?? array();
 ?>
 <table class="table table-hover text-nowrap">
     <thead>
@@ -12,16 +12,16 @@ $list = $list ?? array();
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($list as $ls) : ?>
+        <?php foreach ($jaminan as $ls) : ?>
             <tr>
                 <td class="text-center border-right">
-                    <span class="text-secondary"><?= $ls['prefix']; ?></span><strong><?= $ls['register']; ?></strong>
+                    <span class="text-secondary"><?= $ls['prefix_print']; ?></span><strong><?= $ls['blanko_print']; ?></strong>
                 </td>
-                <td class="text-center"><?= $ls['nomor']; ?></td>
+                <td class="text-center"><?= str_replace(REGISTER_SECTION, $ls['blanko_nomor'], $ls['nomor']); ?></td>
                 <td class="text-center"><?= $ls['jenis']; ?></td>
                 <td class="border-left"><?= $ls['principal']; ?></td>
                 <td class="py-0 align-middle text-center border-left">
-                    <a href="/guarantee/detail" class="btn btn-info btn-sm text-bold">
+                    <a href="/guarantee/detail/<?= $ls['enkrip']; ?>" class="btn btn-info btn-sm text-bold">
                         <i class="fas fa-info-circle mr-2"></i>Detail
                     </a>
                 </td>
