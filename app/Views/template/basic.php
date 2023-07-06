@@ -10,6 +10,17 @@
     <link rel="icon" href="/image/icon/icon32.png" sizes="32x32" type="image/png">
     <link rel="icon" href="/image/icon/icon64.png" sizes="64x64" type="image/png">
     <link rel="apple-touch-icon" href="/image/icon/icon128.png">
+    <style>
+        .bg-pattern {
+            background-image: url("<?= base_url(); ?>/image/content/patterns/pattern_two_light.jpg");
+            background-color: #F4F6F9;
+        }
+
+        .bg-pattern-dark {
+            background-image: url("<?= base_url(); ?>/image/content/patterns/pattern_two_dark.jpg");
+            background-color: #454D55;
+        }
+    </style>
 
     <?= $adminPlugins->head(); ?>
 

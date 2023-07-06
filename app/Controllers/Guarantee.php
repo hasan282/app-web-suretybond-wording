@@ -226,8 +226,11 @@ class Guarantee extends BaseController
 
     public function blankoCrash()
     {
-        $jaminan = null;
         $params = $this->request->getPost('jaminan');
+        $model = new \App\Models\JaminanData;
+        $result = $model->blankoCrash($params);
+
+        var_dump($result);
     }
 
     // -------- JSON Return -------------------------------------------------------------

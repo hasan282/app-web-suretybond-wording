@@ -16,7 +16,7 @@ $darkmode = (intval($dark) === 1);
 
         <?= $this->include('template/sidebar'); ?>
 
-        <div class="content-wrapper">
+        <div class="content-wrapper bg-pattern<?= $darkmode ? '-dark' : ''; ?>" id="contentwrapper">
             <div class="content-header">
                 <div class="container content-box">
                     <div class="row mb-2">
