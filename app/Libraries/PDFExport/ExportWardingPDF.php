@@ -114,35 +114,38 @@ class ExportWardingPDF extends PDFMake
 
     protected function setPoint(string $text, ?array $subpoint = [])
     {
+        $point = array(
+            'colSpan' => 2,
+            'alignment' => 'justify',
+            'lineHeight' => $this->lineHeight
+        );
         if (empty($subpoint) || $subpoint === null) {
-            $this->points[] = array(
-                $this->number . '.',
-                array(
-                    'colSpan' => 2,
-                    'text' => $this->parse($text),
-                    'alignment' => 'justify',
-                    'lineHeight' => $this->lineHeight
-                )
-            );
+            $point['text'] = $this->parse($text);
         } else {
             $ol = array();
-            foreach ($subpoint as $sp) $ol[] = $this->parse($sp);
-            $this->points[] = array(
-                $this->number . '.',
+            foreach ($subpoint as $sp) {
+                if (is_string($sp)) $ol[] = $this->parse($sp);
+                if (is_array($sp)) {
+                    $subs = $sp;
+                    $subzero = array_shift($subs);
+                    foreach ($subs as $skey => $sval) $subs[$skey] = $this->parse($sval);
+                    if (!empty($subs)) {
+                        $ol[] = array(
+                            $this->parse($subzero),
+                            array('type' => 'lower-alpha', 'ol' => $subs)
+                        );
+                    }
+                }
+            }
+            $point['stack'] = array(
+                $this->parse($text),
                 array(
-                    'colSpan' => 2,
-                    'stack' => array(
-                        $this->parse($text),
-                        array(
-                            'type' => 'lower-alpha',
-                            'ol' => $ol
-                        )
-                    ),
-                    'alignment' => 'justify',
-                    'lineHeight' => $this->lineHeight
+                    'type' => 'lower-alpha',
+                    'ol' => $ol
                 )
             );
         }
+        $this->points[] = array($this->number . '.', $point);
         $this->number++;
     }
 
@@ -179,10 +182,16 @@ class ExportWardingPDF extends PDFMake
                 )
             )
         );
+        $foot_2 = array(
+            '',
+            array(
+                'colSpan' => 2,
+                'text' => $this->parse('Ditandatangani serta dibubuhi materai di <b>' . $this->data('issued_place') . '</b>, pada tanggal <b>' . fdate($this->data('issued_date'), 'DD1 MM3 YY2') . '</b>.')
+            )
+        );
         $content[] = $head;
         foreach ($this->points as $pt) $content[] = $pt;
-        if ($this->footTipe === 1)
-            $content[] = $foot_1;
+        $content[] = ${'foot_' . $this->footTipe};
         return $content;
     }
 

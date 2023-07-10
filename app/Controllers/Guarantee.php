@@ -23,10 +23,18 @@ class Guarantee extends BaseController
         if ($data['jaminan'] === null) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         } else {
+            $printed = intval($data['jaminan']['printed']) === 1;
             $data['title'] = 'Detail Jaminan';
-            $data['bread'] = array('Data Jaminan|guarantee', 'Detail');
+            $data['bread'] = array(
+                'Data Jaminan|guarantee' . ($printed ? '/issued' : ''),
+                'Detail'
+            );
             $this->plugin->setup('scrollbar|sweetalert');
-            return $this->view('guarantee/detail', $data, true);
+            return $this->view(
+                'guarantee/detail/' . ($printed ? 'printed' : 'draft'),
+                $data,
+                true
+            );
         }
     }
 
@@ -48,7 +56,7 @@ class Guarantee extends BaseController
             $data['params'] = $param;
             $data['jscript'] = 'guarantee/print';
             $this->plugin->setup('scrollbar|pdfmake|sweetalert');
-            $this->view('guarantee/print/index', $data);
+            return $this->view('guarantee/print/index', $data, true);
         }
     }
 
@@ -229,8 +237,17 @@ class Guarantee extends BaseController
         $params = $this->request->getPost('jaminan');
         $model = new \App\Models\JaminanData;
         $result = $model->blankoCrash($params);
-
-        var_dump($result);
+        if ($result === false) {
+            // process denied
+        } else {
+            if (!$result['update']) {
+                // update failed
+            }
+            if (empty($result['api_new'])) {
+                // empty blanko
+            }
+        }
+        return redirect()->to('guarantee/print/' . $params);
     }
 
     // -------- JSON Return -------------------------------------------------------------

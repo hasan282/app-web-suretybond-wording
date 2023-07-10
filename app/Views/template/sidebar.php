@@ -1,10 +1,8 @@
 <?php
-$menuItems = array(
-    ['menu' => 'Data Jaminan', 'url' => 'guarantee', 'icon' => 'fas fa-certificate'],
-    ['menu' => 'Inforce Jaminan', 'url' => 'inforce', 'icon' => 'fas fa-check-circle'],
-    ['menu' => 'Data Nasabah', 'url' => 'client', 'icon' => 'fas fa-user-shield'],
-    ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt']
-);
+$menuItems[] = ['menu' => 'Data Jaminan', 'url' => 'guarantee', 'icon' => 'fas fa-certificate'];
+$menuItems[] = ['menu' => 'Inforce Jaminan', 'url' => 'inforce', 'icon' => 'fas fa-check-circle'];
+$menuItems[] = ['menu' => 'Data Nasabah', 'url' => 'client', 'icon' => 'fas fa-user-shield'];
+$menuItems[] = ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt'];
 ?>
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <a href="/" class="brand-link link-transparent">
@@ -38,14 +36,6 @@ $menuItems = array(
                     </li>
                 <?php endforeach; ?>
                 <li class="nav-header">USER</li>
-                <!--
-                    <li class="nav-item">
-                        <a href="/setting" class="nav-link<?= url_is('setting') ? ' active' : ''; ?>">
-                            <i class="nav-icon fas fa-cog"></i>
-                            <p>Pengaturan Akun</p>
-                        </a>
-                    </li>
-                -->
                 <li class="nav-item">
                     <a href="/user/logout" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

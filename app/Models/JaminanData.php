@@ -161,9 +161,33 @@ class JaminanData
             $data = $apidata['data'];
             $apiLib = new \App\Libraries\Api();
             $apiResult = $apiLib->blankoCrash($jaminan['blankoprint_id'], $data);
-
-
-            return $apiResult;
+            if ($apiResult->all) {
+                $blanko = $apiResult->new;
+                $transactions = $this->model->transaction(function ($db) use ($jaminan, $blanko) {
+                    $db->table('jaminan_blanko')->update(
+                        ['status' => 'CRASH'],
+                        ['id_blanko' => $jaminan['blankoprint_id']]
+                    );
+                    if (!empty($blanko)) {
+                        $db->table('jaminan_blanko')->insert(array(
+                            'id_blanko' => $blanko->id,
+                            'id_jaminan' => $jaminan['id'],
+                            'prefix' => $blanko->prefix,
+                            'nomor' => $blanko->nomor
+                        ));
+                    }
+                });
+                return array(
+                    'update' => $transactions,
+                    'api_new' => $blanko,
+                    'api_blanko' => $apiResult->blanko,
+                    'api_jaminan' => $apiResult->jaminan,
+                    'api_used' => $apiResult->used,
+                    'api_crash' => $apiResult->crash
+                );
+            } else {
+                return false;
+            }
         }
     }
 
