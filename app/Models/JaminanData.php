@@ -51,8 +51,8 @@ class JaminanData
             'principal', 'principal_alamat', 'asuransi_print', 'cabang_print', 'cabang_alamat',
             'principal_pejabat', 'principal_jabatan', 'cabang_pejabat', 'cabang_jabatan',
             'proyek_nama', 'dokumen', 'dokumen_date', 'date_from', 'date_to', 'days',
-            'obligee', 'obligee_alamat', 'jenis_singkat', 'proyek_id',
-            'issued', 'blanko_nomor', 'prefix_print', 'blanko_print'
+            'obligee', 'obligee_alamat', 'jenis_english', 'jenis_singkat', 'proyek_id',
+            'issued', 'blanko_nomor', 'prefix_print', 'blanko_print', 'asuransi_nick'
         );
         return $this->model->getData($fields)->where(
             ['enkrip' => $enkripsi]

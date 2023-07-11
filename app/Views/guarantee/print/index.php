@@ -44,7 +44,8 @@ $jaminan['nomor'] = $jaminanNum;
             </div>
             <div class="col-lg mb-4 mb-lg-0">
                 <div class="border-fade pt-3 text-center h-100">
-                    <p class="text-bold"><?= $jaminan['jenis']; ?></p>
+                    <p class="text-bold mb-0"><?= $jaminan['jenis']; ?></p>
+                    <p class="text-sm mt-0 text-secondary"><i><?= $jaminan['jenis_english']; ?></i></p>
                     <table class="table table-borderless table-sm text-left">
                         <tr>
                             <td></td>
@@ -126,10 +127,10 @@ $jaminan['nomor'] = $jaminanNum;
 <?= $this->endSection(); ?>
 
 <?php
-$className = '\App\Libraries\PDFExport\MAXIMUS_' . $jaminan['jenis_singkat'] . '_' . $jaminan['proyek_id'];
+$className = '\App\Libraries\PDFExport\\' . $jaminan['asuransi_nick'] . '_' . $jaminan['jenis_singkat'] . '_' . $jaminan['proyek_id'];
 $export = new $className($jaminan);
 $export->setting($pageSettings);
-if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/MAXIMUS.jpg'));
+if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/' . $jaminan['asuransi_nick'] . '.jpg'));
 ?>
 
 <?= $this->section('jscript'); ?>
