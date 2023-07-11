@@ -2,7 +2,7 @@
 
 namespace App\Libraries\PDFExport;
 
-class wardBB101 extends ExportWardingPDF
+class MAXIMUS_BB_101 extends ExportWardingPDF
 // Bid Bond - Pemerintah
 {
     public function __construct(array $data = [])

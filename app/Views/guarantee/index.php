@@ -91,7 +91,7 @@ $draft = url_is('guarantee/issued') ? $tables->guaranteeIssued(1) : $tables->gua
             focusCancel: true
         }).then((result) => {
             if (result.isConfirmed) {
-
+                window.location.href = BaseURL + 'guarantee/delete/' + params;
             }
         });
     }

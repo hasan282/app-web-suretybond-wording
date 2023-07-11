@@ -20,6 +20,7 @@ function setAllRoutes($routes)
     $routes->get('/guarantee/add', 'Guarantee::add_phase1');
     $routes->get('/guarantee/add/(:hash)', 'Guarantee::add_phase2/$1');
     $routes->get('/guarantee/print/(:hash)', 'Guarantee::print/$1');
+    $routes->get('/guarantee/delete/(:hash)', 'Guarantee::delete/$1');
 
     $routes->post('/guarantee/add', 'Guarantee::phase1_process');
     $routes->post('/guarantee/add/(:hash)', 'Guarantee::phase2_process/$1');

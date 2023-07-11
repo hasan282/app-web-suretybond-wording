@@ -2,7 +2,7 @@
 
 namespace App\Libraries\PDFExport;
 
-class wardAPB101 extends ExportWardingPDF
+class MAXIMUS_APB_101 extends ExportWardingPDF
 // Advance Payment Bond - Pemerintah
 {
     public function __construct(array $data = [])

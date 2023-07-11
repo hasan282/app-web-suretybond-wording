@@ -2,7 +2,7 @@
 
 namespace App\Libraries\PDFExport;
 
-class wardAPB102 extends ExportWardingPDF
+class MAXIMUS_APB_102 extends ExportWardingPDF
 // Advance Payment Bond - Swasta
 {
     public function __construct(array $data = [])

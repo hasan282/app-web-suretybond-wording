@@ -141,6 +141,29 @@ class Guarantee extends BaseController
         return redirect()->to('guarantee/detail/' . $param);
     }
 
+    public function delete($param)
+    {
+        if (!is_login())
+            return login_page(full_url(false));
+        $jaminan = new \App\Models\JaminanModel;
+        $data = $jaminan->getData(array('id', 'request_id'))->where(['enkrip' => $param])->data(false);
+        if ($data === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+            if ($data['request_id'] === null) {
+                $delete = $jaminan->transaction(function ($db) use ($data) {
+                    $db->table('jaminan')->update(array('actives' => 0), ['id' => $data['id']]);
+                });
+                if ($delete) {
+                    // delete success
+                } else {
+                    // delete failed
+                }
+            }
+            return redirect()->to('guarantee');
+        }
+    }
+
     public function settings($param)
     {
         if (!is_login())

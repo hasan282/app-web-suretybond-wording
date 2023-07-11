@@ -126,7 +126,7 @@ $jaminan['nomor'] = $jaminanNum;
 <?= $this->endSection(); ?>
 
 <?php
-$className = '\App\Libraries\PDFExport\ward' . $jaminan['jenis_singkat'] . $jaminan['proyek_id'];
+$className = '\App\Libraries\PDFExport\MAXIMUS_' . $jaminan['jenis_singkat'] . '_' . $jaminan['proyek_id'];
 $export = new $className($jaminan);
 $export->setting($pageSettings);
 if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/MAXIMUS.jpg'));

@@ -2,8 +2,8 @@
 
 namespace App\Libraries\PDFExport;
 
-class wardPB102 extends ExportWardingPDF
-// Performance Bond - Swasta
+class MAXIMUS_PB_101 extends ExportWardingPDF
+// Performance Bond - Pemerintah
 {
     public function __construct(array $data = [])
     {
