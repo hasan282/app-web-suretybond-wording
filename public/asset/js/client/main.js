@@ -36,6 +36,10 @@ $(function () {
         $('#principal').setContent(BaseURL + 'tb/client/' + page, filter);
     });
 
+    if (typeof TOASTMESSAGE !== 'undefined') {
+        toastr[TOASTMESSAGE.type](TOASTMESSAGE.text);
+    }
+
 });
 
 function showinfo(element) {

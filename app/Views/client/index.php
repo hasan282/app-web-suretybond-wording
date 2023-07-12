@@ -8,7 +8,13 @@ $darkmode = (intval($dark) === 1);
 $table = new \App\Libraries\Tables;
 $modelMkt = new \App\Models\MarketingModel;
 $principal = $table->clientPrincipal(1);
+$message = session()->getFlashdata('message');
+if ($message !== null) :
 ?>
+    <script>
+        const TOASTMESSAGE = <?= json_encode($message); ?>;
+    </script>
+<?php endif; ?>
 <div class="row mb-3">
     <div class="col-md">
         <div class="input-group mb-3 mb-md-0">

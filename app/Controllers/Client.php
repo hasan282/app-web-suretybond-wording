@@ -10,7 +10,7 @@ class Client extends BaseController
             return login_page(full_url(false));
         $data['title'] = 'Data Principal';
         $data['jscript'] = array('all/tables', 'client/main');
-        $this->plugin->setup('scrollbar');
+        $this->plugin->setup('scrollbar|toastr');
         return $this->view('client/index', $data, true);
     }
 
@@ -62,6 +62,10 @@ class Client extends BaseController
         if ($dataClient === false) {
             echo 'FAILED';
         } else {
+            $this->session->setFlashdata('message', array(
+                'type' => 'success',
+                'text' => 'Data ' . $dataClient['nama'] . ' telah ditambahkan'
+            ));
             $direct = $this->request->getPost(
                 'continues'
             ) == 'on' ? 'guarantee/add?client=' . $dataClient['enkripsi'] : 'client';

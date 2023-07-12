@@ -102,6 +102,11 @@ $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
         <div class="card">
             <div class="card-body">
                 <h6 class="text-center text-bold text-secondary">Rate Principal</h6>
+                <?php if (empty($dataRate)) : ?>
+                    <div class="border-fade px-3 text-center py-4 mt-4">
+                        <p class="text-secondary mb-0">Tidak Ada Data Rate</p>
+                    </div>
+                <?php endif; ?>
                 <?php foreach ($dataRate as $dr) : ?>
                     <h6 class="mt-4 text-bold"><?= $dr['asuransi']; ?></h6>
                     <?php foreach ($dr['proyek'] as $pro) : ?>
