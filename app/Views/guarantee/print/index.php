@@ -127,7 +127,7 @@ $jaminan['nomor'] = $jaminanNum;
 <?= $this->endSection(); ?>
 
 <?php
-$className = '\App\Libraries\PDFExport\\' . $jaminan['asuransi_nick'] . '_' . $jaminan['jenis_singkat'] . '_' . $jaminan['proyek_id'];
+$className = '\App\Libraries\PDFExport\MAXIMUS_' . $jaminan['jenis_singkat'] . '_' . $jaminan['proyek_id'];
 $export = new $className($jaminan);
 $export->setting($pageSettings);
 if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/' . $jaminan['asuransi_nick'] . '.jpg'));
