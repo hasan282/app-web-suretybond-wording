@@ -47,6 +47,8 @@ class Guarantee extends BaseController
         if ($data['jaminan'] === null) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         } else {
+            if (intval($data['jaminan']['printed']) === 1)
+                return redirect()->to('guarantee/detail/' . $param);
             $data['title'] = 'Cetak Jaminan';
             $data['bread'] = array(
                 'Jaminan|guarantee',
@@ -89,6 +91,17 @@ class Guarantee extends BaseController
     }
 
     // -------- PROCESS -----------------------------------------------------------------
+
+    public function dummyJaminanData()
+    {
+        $lib = new \App\Libraries\DummyData;
+        $model = new \App\Models\BaseModel;
+        $data = $lib->jaminanDraft();
+        $result = $model->transaction(function ($db) use ($data) {
+            $db->table('jaminan')->insertBatch($data);
+        });
+        var_dump($result);
+    }
 
     public function phase1_process()
     {

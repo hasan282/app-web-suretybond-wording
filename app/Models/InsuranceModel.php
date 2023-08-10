@@ -44,7 +44,10 @@ class InsuranceModel extends BaseModel
             'active' => 'asuransi_people.actives AS active'
         );
         $table = 'asuransi_people';
-        if ($join) $table .= ' INNER JOIN asuransi_cabang ON asuransi_cabang.id = asuransi_people.id_cabang';
+        if ($join) {
+            $table = '(' . $table . ' INNER JOIN asuransi_cabang ON asuransi_cabang.id = asuransi_people.id_cabang)';
+            $table = '(' . $table . ' INNER JOIN asuransi ON asuransi_cabang.id_asuransi = asuransi.id)';
+        }
         $this->select($fields, $select);
         $this->table = $table;
         return $this;

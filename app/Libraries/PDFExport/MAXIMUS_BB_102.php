@@ -39,9 +39,3 @@ class MAXIMUS_BB_102 extends ExportWardingPDF
         return $this;
     }
 }
-
-/*
-
-<b>'.$this->data('days').' ('.$this->terbilang('days').')</b>
-
-*/

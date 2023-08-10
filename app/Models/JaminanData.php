@@ -53,7 +53,7 @@ class JaminanData
             'proyek_nama', 'proyek_nilai', 'dokumen', 'dokumen_date', 'date_from', 'date_to', 'days',
             'obligee', 'obligee_alamat', 'jenis_english', 'jenis_singkat', 'proyek_id',
             'issued', 'blanko_nomor', 'prefix_print', 'blanko_print', 'asuransi_nick',
-            'currency_proyek', 'currency_proyek_2'
+            'currency_proyek', 'currency_proyek_2', 'printed'
         );
         return $this->model->getData($fields)->where(
             ['enkrip' => $enkripsi]

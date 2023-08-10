@@ -22,6 +22,8 @@ function setAllRoutes($routes)
     $routes->get('/guarantee/print/(:hash)', 'Guarantee::print/$1');
     $routes->get('/guarantee/delete/(:hash)', 'Guarantee::delete/$1');
 
+    $routes->get('/guarantee/insertdummy', 'Guarantee::dummyJaminanData');
+
     $routes->post('/guarantee/add', 'Guarantee::phase1_process');
     $routes->post('/guarantee/add/(:hash)', 'Guarantee::phase2_process/$1');
     $routes->post('/guarantee/print/(:hash)', 'Guarantee::settings/$1');
