@@ -5,7 +5,9 @@
 <?php
 $dataModel = new \App\Models\PrincipalData;
 $dataRate = $dataModel->getNestRate($principal['id']);
+$modelAsuransi = new \App\Models\InsuranceModel;
 $modelPrincipal = new \App\Models\PrincipalModel;
+$asuransi = $modelAsuransi->getData(['id', 'nickname'])->where(['active' => 1])->data();
 $dataPeople = $modelPrincipal->getPeople(['nama', 'jabatan'])->where(
     ['id_principal' => $principal['id']]
 )->data();
@@ -133,7 +135,32 @@ $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
                             </table>
                         </div>
                     <?php endforeach; ?>
-                <?php endforeach; ?>
+                    <?php $getAsuransi = null;
+                    foreach ($asuransi as $key => $asr) {
+                        if ($asr['id'] == $dr['id']) {
+                            $getAsuransi = $asuransi[$key];
+                            unset($asuransi[$key]);
+                        }
+                    } ?>
+                    <?php if ($getAsuransi !== null) : ?>
+                        <div class="text-right">
+                            <a href="" class="btn btn-secondary btn-sm disabled">
+                                <i class="fas fa-edit mr-2"></i>Ubah Data Rate <?= $getAsuransi['nickname']; ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach;
+                $noRate = array_values($asuransi); ?>
+                <?php if (!empty($noRate)) : ?>
+                    <hr class="mt-4">
+                    <?php foreach ($noRate as $nr) : ?>
+                        <div class="mw-3 mx-auto pt-2">
+                            <a href="" class="btn btn-sm btn-primary btn-block disabled">
+                                <i class="fas fa-plus-circle mr-2"></i>Tambah Data Rate <?= $nr['nickname']; ?>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>
