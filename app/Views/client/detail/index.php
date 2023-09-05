@@ -34,6 +34,11 @@ $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
                     <small class="text-info">Email</small><br>
                     <span><?= $principal['email'] ?? '-'; ?></span>
                 </p>
+                <div class="text-right">
+                    <a href="/client/info/edit/<?= $principal['enkrip']; ?>" class="btn btn-sm btn-default">
+                        <i class="fas fa-edit mr-2"></i>Edit Informasi Principal
+                    </a>
+                </div>
                 <p class="mb-2">
                     <small class="text-info">Pejabat Penandatangan</small>
                 </p>
@@ -144,7 +149,7 @@ $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
                     } ?>
                     <?php if ($getAsuransi !== null) : ?>
                         <div class="text-right">
-                            <a href="" class="btn btn-secondary btn-sm disabled">
+                            <a href="" class="btn btn-default btn-sm disabled">
                                 <i class="fas fa-edit mr-2"></i>Ubah Data Rate <?= $getAsuransi['nickname']; ?>
                             </a>
                         </div>

@@ -2,12 +2,8 @@
 
 <?= $this->section('content'); ?>
 
-<div class="card">
-    <div class="card-body">
+<?= $this->endSection(); ?>
 
-        <?php var_dump(userdata()); ?>
-
-    </div>
-</div>
+<?= $this->section('jscript'); ?>
 
 <?= $this->endSection(); ?>

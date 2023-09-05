@@ -42,6 +42,25 @@ class Client extends BaseController
         }
     }
 
+    public function edit_info($param)
+    {
+        if (!is_login())
+            return login_page(full_url(false));
+        $principal = new \App\Models\PrincipalModel;
+        $data['principal'] = $principal->getData(array(
+            'enkrip', 'principal', 'telpon', 'email', 'alamat'
+        ), false)->where(array('enkrip' => $param))->data(false);
+        if ($data['principal'] === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+            $detail_url = 'client/detail/' . $data['principal']['enkrip'];
+            $data['title'] = 'Edit Informasi Principal';
+            $data['bread'] = array('Principal|client', 'Detail|' . $detail_url, 'Edit Informasi');
+            $this->plugin->setup('scrollbar|dropzone');
+            return $this->view('client/detail/edit_info', $data, true);
+        }
+    }
+
     // -------- PROCESS -----------------------------------------------------------------
 
     public function addNew()

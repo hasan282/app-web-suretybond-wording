@@ -4,35 +4,35 @@ $menuItems[] = ['menu' => 'Inforce Jaminan', 'url' => 'inforce', 'icon' => 'fas 
 $menuItems[] = ['menu' => 'Data Nasabah', 'url' => 'client', 'icon' => 'fas fa-user-shield'];
 $menuItems[] = ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt'];
 
-$userAccess = 201;
+$userAccess = userdata('role_id') . '01';
+
+// ----- MENU LIST -------------------------------------------
 /*
 $ideNavs[] = array('text' => '', 'icon' => '', 'url' => '', 'access' => null);
 $ideNavs[] = array('text' => '', 'icon' => '', 'child' => array(
     ['text' => '', 'icon' => '', 'url' => '', 'access' => null]
 ), 'access' => null);
 */
-function accessGrant(int $accessId, ?string $canAccess)
-{
-    if ($canAccess === null) {
-        return true;
-    } else {
-        $granted = false;
-        $ids = explode('|', $canAccess);
-        foreach ($ids as $id) if (intval($id) === $accessId) $granted = true;
-        return $granted;
-    }
-}
-$ideNavs[] = array('text' => 'Blanko', 'icon' => 'fas fa-certificate', 'child' => array(
-    ['text' => 'Data Blanko', 'icon' => 'fas fa-certificate', 'url' => '#']
+$ideNavs[] = array('text' => 'Database', 'icon' => 'fas fa-database', 'child' => array(
+    ['text' => 'User Account', 'icon' => 'fas fa-user-alt', 'url' => '#'],
+    ['text' => 'Asuransi', 'icon' => 'fas fa-shield-alt', 'url' => '#']
+), 'access' => '101');
+$ideNavs[] = array('text' => 'Blanko', 'icon' => 'fas fa-file', 'child' => array(
+    ['text' => 'Data Blanko', 'icon' => 'fas fa-database', 'url' => '#'],
+    ['text' => 'Pengiriman', 'icon' => 'fas fa-archive', 'url' => '#'],
+    ['text' => 'Rekap Blanko', 'icon' => 'fas fa-list-ul', 'url' => '#']
 ));
 $ideNavs[] = array('text' => 'Jaminan', 'icon' => 'fas fa-certificate', 'child' => array(
     ['text' => 'Data Jaminan', 'icon' => 'fas fa-database', 'url' => 'guarantee'],
     ['text' => 'Inforce', 'icon' => 'fas fa-check-circle', 'url' => 'inforce']
 ));
 $ideNavs[] = array('text' => 'Data Nasabah', 'icon' => 'fas fa-user-shield', 'url' => 'client');
-$ideNavs[] = array('text' => 'Asuransi', 'icon' => 'fas fa-shield-alt', 'url' => 'insurance');
+$ideNavs[] = array('text' => 'Data Asuransi', 'icon' => 'fas fa-shield-alt', 'url' => 'insurance');
+
+// ----- LOOPING MENU ----------------------------------------
 foreach ($ideNavs as $key => $navs) {
     $active = false;
+    $navAccess = $navs['access'] ?? null;
     $url = $navs['url'] ?? null;
     $child = $navs['child'] ?? array();
     if ($url !== null && url_is($url . '*')) $active = true;
@@ -43,11 +43,16 @@ foreach ($ideNavs as $key => $navs) {
             $activeChild = true;
         }
         $ideNavs[$key]['child'][$ky]['active'] = $activeChild;
+        $childAccess = $ch['access'] ?? null;
+        if ($childAccess !== null && $childAccess != $userAccess) {
+            unset($ideNavs[$key]['child'][$ky]);
+        }
     }
     $ideNavs[$key]['active'] = $active;
-}
-// dd($ideNavs);
-?>
+    if ($navAccess !== null && $navAccess != $userAccess) {
+        unset($ideNavs[$key]);
+    }
+} ?>
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <a href="/" class="brand-link link-transparent">
         <img src="<?= SURETY_DOMAIN; ?>asset/img/icon/emblem_for_dark.svg" alt="" class="brand-image">
@@ -94,6 +99,12 @@ foreach ($ideNavs as $key => $navs) {
                     </li>
                 <?php endforeach; ?>
                 <li class="nav-header">USER</li>
+                <li class="nav-item">
+                    <a href="/setting" class="nav-link <?= url_is('setting*') ? ' active' : ''; ?>">
+                        <i class="nav-icon fas fa-cog"></i>
+                        <p>Pengaturan Akun</p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="/user/logout" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>

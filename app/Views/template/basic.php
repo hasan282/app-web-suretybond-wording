@@ -12,12 +12,12 @@
     <link rel="apple-touch-icon" href="/image/icon/icon128.png">
     <style>
         .bg-pattern {
-            background-image: url("<?= base_url(); ?>/image/content/patterns/pattern_two_light.jpg");
+            background-image: url("<?= base_url(); ?>/img/pattern/light");
             background-color: #F4F6F9;
         }
 
         .bg-pattern-dark {
-            background-image: url("<?= base_url(); ?>/image/content/patterns/pattern_two_dark.jpg");
+            background-image: url("<?= base_url(); ?>/img/pattern/dark");
             background-color: #454D55;
         }
     </style>

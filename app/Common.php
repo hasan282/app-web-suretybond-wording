@@ -41,11 +41,15 @@ function setAllRoutes($routes)
     $routes->get('/client', 'Client::index');
     $routes->get('/client/add', 'Client::add');
     $routes->get('/client/detail/(:hash)', 'Client::detail/$1');
+    $routes->get('/client/info/edit/(:hash)', 'Client::edit_info/$1');
 
     $routes->post('/client/add', 'Client::addNew');
     $routes->post('/client/upload', 'Client::uploadFile');
 
     $routes->get('/insurance', 'Insurance::index');
+
+    // $routes->get('/img/(:hash)', 'Image::index/$1');
+    $routes->get('/img/pattern/(:segment)', 'Image::show_pattern/$1');
 
     $routes->get('/dashboard', 'Dashboard::index');
 
