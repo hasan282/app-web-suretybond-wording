@@ -12,12 +12,12 @@
     <link rel="apple-touch-icon" href="/image/icon/icon128.png">
     <style>
         .bg-pattern {
-            background-image: url("<?= base_url(); ?>/img/pattern/light");
+            background-image: url("<?= base_url('img/pattern/light'); ?>");
             background-color: #F4F6F9;
         }
 
         .bg-pattern-dark {
-            background-image: url("<?= base_url(); ?>/img/pattern/dark");
+            background-image: url("<?= base_url('img/pattern/dark'); ?>");
             background-color: #454D55;
         }
     </style>
@@ -29,7 +29,7 @@
 <?= $this->renderSection('body'); ?>
 
 <script>
-    const BaseURL = "<?= base_url(); ?>/";
+    const BaseURL = "<?= base_url(); ?>";
 </script>
 
 <?= $adminPlugins->foot(); ?>

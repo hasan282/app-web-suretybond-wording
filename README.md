@@ -10,7 +10,7 @@ Harap perhatikan [Server Requirement Codeigniter4](https://www.codeigniter.com/u
 
 ## Run di Lokal Komputer
 
-1. Download [AdminLTE Plugins, Fonts](https://drive.google.com/file/d/1zVXp5QAJeWHQMBM0hYUBTRsOO6Py_g1O/view?usp=sharing), dan [Vendor CI4](https://drive.google.com/file/d/185bv0a0YmxEqXbYJusgtymmsAMwpi0e6/view?usp=sharing).
+1. Download [AdminLTE Plugins, Fonts](https://drive.google.com/file/d/1zVXp5QAJeWHQMBM0hYUBTRsOO6Py_g1O/view), dan [Vendor CI4](https://drive.google.com/file/d/1IsA6iExoi8uQdOLYYX0TiE7zXp2M1NRp/view).
 2. Extract `adminlte` dan `fonts` pada folder `public/`.
 3. Extract `vendor` pada folder utama.
 4. Buat Database MySQL baru dengan nama `suretybond_wording` atau sesuaikan nama Database pada `.env`.
