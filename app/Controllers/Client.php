@@ -135,6 +135,25 @@ class Client extends BaseController
         return $this->response->setJSON($data);
     }
 
+    public function editInfo($param)
+    {
+        $data = array(
+            'telpon' => nl2space($this->request->getPost('telpon'), false),
+            'email' => strtolower(nl2space($this->request->getPost('email'), false)),
+            'alamat' => nl2space($this->request->getPost('alamat'))
+        );
+        if ($data['alamat'] == '') return $this->edit_info($param);
+        foreach ($data as $key => $val) if ($val == '') $data[$key] = null;
+        $principal = new \App\Models\PrincipalData;
+        $result = $principal->editRow($param, $data);
+        if ($result === false) {
+            // failed or invalid param
+        } else {
+            // result 1 is success, 0 is failed edit
+        }
+        return redirect()->to('client/detail/' . $param);
+    }
+
     // -------- JSON Return -------------------------------------------------------------
 
     public function table($pageNumber)

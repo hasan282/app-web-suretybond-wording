@@ -29,3 +29,4 @@ $routes->post('/inforce', 'Inforce::process');
 
 $routes->post('/client/add', 'Client::addNew');
 $routes->post('/client/upload', 'Client::uploadFile');
+$routes->post('/client/info/edit/(:hash)', 'Client::editInfo/$1');

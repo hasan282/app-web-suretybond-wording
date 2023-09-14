@@ -71,4 +71,28 @@ class PrincipalData
         unset($insurance);
         return $newData;
     }
+
+    public function editRow(string $enkrip, array $dataEdit = [])
+    {
+        $data = $this->model->getData(array(
+            'id', 'principal', 'telpon', 'email', 'alamat'
+        ))->where(['enkrip' => $enkrip])->data(false);
+        if ($data === null) return false;
+        $principalID = $data['id'];
+        unset($data['id']);
+        $changeData = array();
+        foreach ($dataEdit as $field => $value)
+            if (array_key_exists($field, $data) && $data[$field] != $value)
+                $changeData[$field] = $value;
+        if (empty($changeData)) {
+            return 0;
+        } else {
+            $result = $this->model->transaction(
+                function ($db) use ($changeData, $principalID) {
+                    $db->table('principal')->update($changeData, ['id' => $principalID]);
+                }
+            );
+            return $result ? 1 : false;
+        }
+    }
 }
