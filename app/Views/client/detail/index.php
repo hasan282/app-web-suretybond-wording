@@ -58,6 +58,35 @@ $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
                         <?php endforeach; ?>
                     </tbody>
                 </table>
+                <div class="text-center pt-2 hide-content">
+                    <button class="btn btn-sm btn-default" id="btn_addpeople">
+                        <i class="fas fa-plus mr-2"></i>Tambah Penandatangan Baru
+                    </button>
+                </div>
+                <div class="py-3 hide-content">
+                    <form method="POST" class="row">
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="pejabat">Nama Lengkap</label>
+                                <input id="pejabat" name="pejabat" class="form-control" placeholder="Nama">
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="form-group">
+                                <label for="jabatan">Jabatan</label>
+                                <input id="jabatan" name="jabatan" class="form-control" placeholder="Jabatan">
+                            </div>
+                        </div>
+                        <div class="text-center col-12">
+                            <button type="submit" class="btn btn-primary mr-1">
+                                <i class="fas fa-plus mr-2"></i>Tambahkan Data
+                            </button>
+                            <button type="button" class="btn btn-default">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
                 <p class="mb-2 mt-3">
                     <small class="text-info">Dokumen SPKMGR</small>
                 </p>
@@ -72,8 +101,9 @@ $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
                     <tbody>
                         <?php foreach ($documents as $nm => $doc) : ?>
                             <tr>
+                                <?php $datedoc = explode('@', id2date($doc['id'], 'Y-M-D@H : I')); ?>
                                 <td class="text-bold fit px-2"><?= $nm + 1; ?></td>
-                                <td class="px-2 text-center"><?= id2date($doc['id'], 'D/M/Y H.I'); ?></td>
+                                <td class="px-2 text-center"><?= fdate($datedoc[0], 'DD1-MM2-YY2'); ?> ( <?= $datedoc[1]; ?> )</td>
                                 <td class="px-2 text-center text-sm text-nowrap align-middle">
                                     <a href="<?= base_url('files/' . $doc['id_principal'] . '/' . $doc['filename']); ?>" target="_blank">Lihat Dokumen<i class="fas fa-external-link-alt ml-2"></i></a>
                                 </td>

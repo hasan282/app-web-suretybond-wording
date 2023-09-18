@@ -55,8 +55,8 @@ foreach ($ideNavs as $key => $navs) {
 } ?>
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <a href="/" class="brand-link link-transparent">
-        <img src="<?= SURETY_DOMAIN; ?>asset/img/icon/emblem_for_dark.svg" alt="" class="brand-image">
-        <span class="brand-text font-weight-light">SuretyBond <strong>Apps</strong></span>
+        <img src="/image/icon/jis_icon.svg" alt="" class="brand-image">
+        <span class="brand-text font-weight-lighter">SuretyBond <strong>Apps</strong></span>
     </a>
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">

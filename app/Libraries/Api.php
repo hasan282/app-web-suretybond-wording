@@ -24,8 +24,6 @@ class Api
 
     public function blankoAvailable(string $asuransi, int $rows = 1)
     {
-        if (!env_is('production'))
-            $this->url = SURETY_LOCALHOST;
         $this->uri = 'data/blanko';
         $data = $this->_curlGet(array(
             'data' => 'available',
@@ -42,8 +40,6 @@ class Api
 
     public function blankoMark($blankoid)
     {
-        if (!env_is('production'))
-            $this->url = SURETY_LOCALHOST;
         $this->uri = 'data/blanko';
         $data = $this->_curlPost(
             array('data' => 'marking'),
@@ -58,8 +54,6 @@ class Api
 
     public function blankoUse(string $blanko, array $data)
     {
-        if (!env_is('production'))
-            $this->url = SURETY_LOCALHOST;
         $this->uri = 'data/blanko';
         $data = $this->_curlPost(
             array('data' => 'use', 'blanko' => $blanko),
@@ -74,8 +68,6 @@ class Api
 
     public function blankoCrash(string $blanko, array $data)
     {
-        if (!env_is('production'))
-            $this->url = SURETY_LOCALHOST;
         $this->uri = 'data/blanko';
         $data = $this->_curlPost(
             array('data' => 'crash', 'blanko' => $blanko),
@@ -150,7 +142,7 @@ class Api
     {
         $setting = array(
             'key' => '71f87404ce4103f6211d220131ef5b10',
-            'url' => SURETY_DOMAIN,
+            'url' => env_is('production') ? SURETY_DOMAIN : SURETY_LOCALHOST,
             'uri' => ''
         );
         foreach ($setting as $k => $v) $this->{$k} = $v;

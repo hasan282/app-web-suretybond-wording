@@ -10,7 +10,7 @@ $darkmode = (intval($dark) === 1);
 ?>
 <a href="/" class="link-transparent">
     <div class="mx-auto mb-2" style="max-width:300px">
-        <img class="img-fluid surety-logo" src="/image/icon/jis_suretybond<?= $darkmode ? '_dark' : ''; ?>.png" alt="">
+        <img class="img-fluid surety-logo" src="/image/icon/suretybond<?= $darkmode ? '_dark' : ''; ?>.png" alt="">
     </div>
 </a>
 <div class="card">

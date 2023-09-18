@@ -29,5 +29,3 @@ $routes->get('/guarantee/detail/(:hash)', 'Guarantee::detail/$1');
 $routes->get('/guarantee/add', 'Guarantee::add_phase1');
 $routes->get('/guarantee/add/(:hash)', 'Guarantee::add_phase2/$1');
 $routes->get('/guarantee/print/(:hash)', 'Guarantee::print/$1');
-
-$routes->get('/img/pattern/(:segment)', 'Image::show_pattern/$1');
