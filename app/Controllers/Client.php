@@ -154,6 +154,11 @@ class Client extends BaseController
         return redirect()->to('client/detail/' . $param);
     }
 
+    public function addPeople($param)
+    {
+        var_dump($_POST);
+    }
+
     // -------- JSON Return -------------------------------------------------------------
 
     public function table($pageNumber)

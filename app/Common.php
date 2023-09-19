@@ -29,3 +29,10 @@ if (!function_exists('nl2space')) {
         return trim(preg_replace('/\s+/', $replacer, $string));
     }
 }
+
+if (!function_exists('tooltip')) {
+    function tooltip(string $selector = '.show-tooltip')
+    {
+        return "$('" . $selector . "').tooltip({placement:'top',trigger:'hover'});";
+    }
+}

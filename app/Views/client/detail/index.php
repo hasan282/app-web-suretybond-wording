@@ -58,30 +58,31 @@ $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <div class="text-center pt-2 hide-content">
+                <div class="text-center pt-2" id="btn_addpeople_box">
                     <button class="btn btn-sm btn-default" id="btn_addpeople">
                         <i class="fas fa-plus mr-2"></i>Tambah Penandatangan Baru
                     </button>
                 </div>
-                <div class="py-3 hide-content">
+                <div class="py-3 hide-content" id="form_box">
                     <form method="POST" class="row">
+                        <?= csrf_field(); ?>
                         <div class="col-sm">
                             <div class="form-group">
                                 <label for="pejabat">Nama Lengkap</label>
-                                <input id="pejabat" name="pejabat" class="form-control" placeholder="Nama">
+                                <input id="pejabat" name="pejabat" class="form-control input-people" placeholder="Nama">
                             </div>
                         </div>
                         <div class="col-sm">
                             <div class="form-group">
                                 <label for="jabatan">Jabatan</label>
-                                <input id="jabatan" name="jabatan" class="form-control" placeholder="Jabatan">
+                                <input id="jabatan" name="jabatan" class="form-control input-people" placeholder="Jabatan">
                             </div>
                         </div>
                         <div class="text-center col-12">
-                            <button type="submit" class="btn btn-primary mr-1">
+                            <button type="submit" class="btn btn-primary mr-1" id="submit_people" disabled>
                                 <i class="fas fa-plus mr-2"></i>Tambahkan Data
                             </button>
-                            <button type="button" class="btn btn-default">
+                            <button type="button" class="btn btn-default show-tooltip" id="cancel_submit" title="Batalkan">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
@@ -217,6 +218,22 @@ $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
                 $(this).data('open', 1).html('<i class="fas fa-times mr-2"></i>Batalkan');
             }
         });
+        $('#btn_addpeople').click(function() {
+            $('#btn_addpeople_box').addClass('hide-content');
+            $('#form_box').removeClass('hide-content');
+        });
+        $('#cancel_submit').click(function() {
+            $('#btn_addpeople_box').removeClass('hide-content');
+            $('#form_box').addClass('hide-content');
+            $('#pejabat').val('');
+            $('#jabatan').val('').trigger('keyup');
+        });
+        $('.input-people').on('keyup', function() {
+            const PEJABAT = $('#pejabat').val();
+            const JABATAN = $('#jabatan').val();
+            $('#submit_people').attr('disabled', (PEJABAT == '' || JABATAN == ''));
+        });
+        <?= tooltip(); ?>
     });
 </script>
 <?= $this->endSection(); ?>
