@@ -86,7 +86,7 @@ $draft = url_is('guarantee/issued') ? $tables->guaranteeIssued(1) : $tables->gua
             showCancelButton: true,
             confirmButtonColor: '#DC3545',
             confirmButtonText: '<i class="fas fa-trash-alt mr-2"></i>Hapus Data',
-            cancelButtonText: '<i class="fas fa-times mr-2"></i> Tidak',
+            cancelButtonText: '<i class="fas fa-times mr-2"></i>Tidak',
             showCloseButton: true,
             focusCancel: true
         }).then((result) => {

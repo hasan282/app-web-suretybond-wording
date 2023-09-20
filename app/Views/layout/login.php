@@ -9,7 +9,7 @@ $dark = get_cookie('DRKMOD') ?? '0';
 $darkmode = (intval($dark) === 1);
 ?>
 <a href="/" class="link-transparent">
-    <div class="mx-auto mb-2" style="max-width:300px">
+    <div class="mx-auto mb-3" style="max-width:360px">
         <img class="img-fluid surety-logo" src="/image/icon/suretybond<?= $darkmode ? '_dark' : ''; ?>.png" alt="">
     </div>
 </a>

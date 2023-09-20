@@ -37,7 +37,7 @@ class Client extends BaseController
         } else {
             $data['title'] = 'Detail Principal';
             $data['bread'] = array('Principal|client', 'Detail');
-            $this->plugin->setup('scrollbar|dropzone');
+            $this->plugin->setup('scrollbar|dropzone|sweetalert');
             return $this->view('client/detail/index', $data, true);
         }
     }
@@ -156,7 +156,48 @@ class Client extends BaseController
 
     public function addPeople($param)
     {
-        var_dump($_POST);
+        $principal = new \App\Models\PrincipalModel;
+        $principalData = $principal->getData(['id'], false)->where(
+            ['enkrip' => $param]
+        )->data(false);
+        if ($principalData === null) {
+            // invalid principal param
+        } else {
+            $result = $principal->addPeople(
+                $principalData['id'],
+                $this->request->getPost()
+            );
+            if ($result === false) {
+                // insert failed
+            } else {
+                // insert success
+            }
+        }
+        return redirect()->to('client/detail/' . $param);
+    }
+
+    public function deletePeople($param)
+    {
+        $model = new \App\Models\PrincipalModel;
+        $peopleData = $model->getList(
+            ['enkrip', 'people_id', 'people_nama']
+        )->where(['enkrip_people' => $param])->data(false);
+        if ($peopleData === null) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+        } else {
+            $update = $model->transaction(function ($db) use ($peopleData) {
+                $db->table('principal_people')->update(
+                    array('actives' => 0),
+                    ['id' => $peopleData['people_id']]
+                );
+            });
+            if ($update) {
+                // update success
+            } else {
+                // update failed
+            }
+            return redirect()->to('client/detail/' . $peopleData['enkrip']);
+        }
     }
 
     // -------- JSON Return -------------------------------------------------------------

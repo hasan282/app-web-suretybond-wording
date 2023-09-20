@@ -8,10 +8,11 @@ $dataRate = $dataModel->getNestRate($principal['id']);
 $modelAsuransi = new \App\Models\InsuranceModel;
 $modelPrincipal = new \App\Models\PrincipalModel;
 $asuransi = $modelAsuransi->getData(['id', 'nickname'])->where(['active' => 1])->data();
-$dataPeople = $modelPrincipal->getPeople(['nama', 'jabatan'])->where(
+$dataPeople = $modelPrincipal->getPeople(['enkrip', 'nama', 'jabatan'])->where(
     ['id_principal' => $principal['id']]
 )->data();
 $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
+$allowDelPeople = sizeof($dataPeople) > 1;
 ?>
 <div class="row">
     <div class="col-xl-5">
@@ -47,13 +48,23 @@ $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
                         <th class="text-center">#</th>
                         <th class="text-center">Nama</th>
                         <th class="text-center">Jabatan</th>
+                        <?php if ($allowDelPeople) : ?>
+                            <th class="text-center"><i class="fas fa-cog"></i></th>
+                        <?php endif; ?>
                     </thead>
                     <tbody>
                         <?php foreach ($dataPeople as $num => $pl) : ?>
                             <tr>
                                 <td class="text-bold fit px-2"><?= $num + 1; ?></td>
-                                <td class="px-2"><?= $pl['nama']; ?></td>
+                                <td class="px-2 peoplename"><?= $pl['nama']; ?></td>
                                 <td><?= $pl['jabatan']; ?></td>
+                                <?php if ($allowDelPeople) : ?>
+                                    <td class="p-0 align-middle text-center">
+                                        <button class="btn btn-link btn-sm py-0 px-0 deletepeople" data-enkrip="<?= $pl['enkrip']; ?>">
+                                            <i class="fas fa-times-circle"></i>
+                                        </button>
+                                    </td>
+                                <?php endif; ?>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -79,6 +90,9 @@ $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
                             </div>
                         </div>
                         <div class="text-center col-12">
+                            <div class="text-sm">
+                                <p class="text-info"><i class="fas fa-info-circle mr-2"></i>Perhatikan penulisan dan huruf kapital pada nama dan jabatan!</p>
+                            </div>
                             <button type="submit" class="btn btn-primary mr-1" id="submit_people" disabled>
                                 <i class="fas fa-plus mr-2"></i>Tambahkan Data
                             </button>
@@ -232,6 +246,25 @@ $documents = $modelPrincipal->refresh()->getDocument($principal['id'])->data();
             const PEJABAT = $('#pejabat').val();
             const JABATAN = $('#jabatan').val();
             $('#submit_people').attr('disabled', (PEJABAT == '' || JABATAN == ''));
+        });
+        $('.deletepeople').click(function() {
+            const ENKRIP = $(this).data('enkrip');
+            const PEOPLENAME = $(this).parent().siblings('.peoplename').html();
+            Swal.fire({
+                title: 'Hapus Penandatangan',
+                html: 'Hapus data <strong class="text-danger">' + PEOPLENAME + '</strong> dari penandatangan ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#DC3545',
+                confirmButtonText: '<i class="fas fa-trash-alt mr-2"></i>Hapus Data',
+                cancelButtonText: '<i class="fas fa-times mr-2"></i>Tidak',
+                showCloseButton: true,
+                focusCancel: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = BaseURL + 'client/people/delete/' + ENKRIP;
+                }
+            });
         });
         <?= tooltip(); ?>
     });

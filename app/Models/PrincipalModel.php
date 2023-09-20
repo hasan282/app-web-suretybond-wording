@@ -132,6 +132,36 @@ class PrincipalModel extends BaseModel
         return $this;
     }
 
+    public function getList(array $select = [])
+    {
+        $fields = array(
+            'id' => 'principal.id AS id',
+            'enkrip' => 'principal.enkripsi AS enkrip',
+            'nama' => 'principal.nama AS nama',
+            'telpon' => 'principal.telpon AS telpon',
+            'email' => 'principal.email AS email',
+            'alamat' => 'principal.alamat AS alamat',
+            'office_id' => 'principal.id_office AS office_id',
+            'marketing_id' => 'principal.id_marketing AS marketing_id',
+            'active' => 'principal.actives AS active'
+        );
+        $fieldsPeople = array(
+            'people_id' => 'principal_people.id AS people_id',
+            'people_enkrip' => 'principal_people.enkripsi AS people_enkrip',
+            'people_nama' => 'principal_people.nama AS people_nama',
+            'jabatan' => 'principal_people.jabatan AS jabatan',
+            'people_active' => 'principal_people.actives AS people_active'
+        );
+        $table = 'principal';
+        if ($this->includes($fieldsPeople, $select)) {
+            $fields = array_merge($fields, $fieldsPeople);
+            $table = '(' . $table . ' INNER JOIN principal_people ON principal.id = principal_people.id_principal)';
+        }
+        $this->select($fields, $select);
+        $this->table = $table;
+        return $this;
+    }
+
     public function getRate(array $select = [])
     {
         $fields = array(
