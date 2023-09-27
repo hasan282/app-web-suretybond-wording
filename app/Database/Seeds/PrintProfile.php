@@ -10,7 +10,7 @@ class PrintProfile extends Seeder
     {
         $data = array(
             array(
-                'profile' => 'MAXIMUS-DEFAULT',
+                'profile' => 'MAXIMUS-BOGOR-DEFAULT',
                 'paper' => 'LEGAL',
                 'page_top' => 62,
                 'page_left' => 24,

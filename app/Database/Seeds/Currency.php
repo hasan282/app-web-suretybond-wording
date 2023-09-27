@@ -26,7 +26,7 @@ class Currency extends Seeder
                 'nama' => 'Euro',
                 'symbol_1' => 'EUR',
                 'symbol_2' => '€'
-            ),
+            )
         );
         $this->db->table('currency')->insertBatch($data);
     }

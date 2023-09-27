@@ -36,7 +36,7 @@ class JaminanJenis extends Seeder
                 'jenis_eng' => 'Maintenance Bond',
                 'singkat' => 'MB',
                 'actives' => 1
-            ),
+            )
         );
         $this->db->table('jaminan_jenis')->insertBatch($data);
     }

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class MarketingRate extends Migration
+class JaminanNumber extends Migration
 {
     public function up()
     {
@@ -13,15 +13,9 @@ class MarketingRate extends Migration
                 'type' => 'INT',
                 'auto_increment' => true
             ),
-            'id_marketing' => array(
+            'id_cabang' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 12,
-                'null' => true,
-                'default' => null
-            ),
-            'id_asuransi' => array(
-                'type' => 'VARCHAR',
-                'constraint' => 12,
+                'constraint' => 16,
                 'null' => true,
                 'default' => null
             ),
@@ -31,44 +25,50 @@ class MarketingRate extends Migration
                 'null' => true,
                 'default' => null
             ),
-            'id_proyek' => array(
+            'conditions' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 256,
+                'null' => true,
+                'default' => null
+            ),
+            'templates' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+                'null' => true,
+                'default' => null
+            ),
+            'registers' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 8,
+                'null' => true,
+                'default' => null
+            ),
+            'wording' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 32,
+                'null' => true,
+                'default' => null
+            ),
+            'actives' => array(
                 'type' => 'INT',
-                'constraint' => 3,
-                'null' => true,
-                'default' => null
-            ),
-            'rate_percent' => array(
-                'type' => 'DECIMAL',
-                'constraint' => '7,6',
-                'null' => true,
-                'default' => null
-            ),
-            'minimum' => array(
-                'type' => 'DECIMAL',
-                'constraint' => '15,2',
-                'null' => true,
-                'default' => null
-            ),
-            'admin_fee' => array(
-                'type' => 'DECIMAL',
-                'constraint' => '15,2',
-                'null' => true,
-                'default' => null
+                'constraint' => 1,
+                'unsigned' => true,
+                'default' => 0
             )
         ));
 
         $this->forge->addPrimaryKey('id', 'PRIMARY');
-        $this->forge->addKey('id_marketing', false, false, 'MARKETING');
-        $this->forge->addKey('id_asuransi', false, false, 'ASURANSI');
+        $this->forge->addKey('id_cabang', false, false, 'ASURANSI');
         $this->forge->addKey('id_jenis', false, false, 'JENIS');
-        $this->forge->addKey('id_proyek', false, false, 'PROYEK');
+        $this->forge->addKey('conditions', false, false, 'CONDITION');
+        $this->forge->addKey('actives', false, false, 'ACTIVE');
 
         $attribute = array('ENGINE' => 'InnoDB');
-        $this->forge->createTable('marketing_rate', true, $attribute);
+        $this->forge->createTable('jaminan_number', true, $attribute);
     }
 
     public function down()
     {
-        $this->forge->dropTable('marketing_rate', true);
+        $this->forge->dropTable('jaminan_number', true);
     }
 }

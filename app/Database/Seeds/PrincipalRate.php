@@ -124,6 +124,25 @@ class PrincipalRate extends Seeder
             ),
 
             array(
+                'marketing' => 'LUKMAN',
+                'principal' => array(
+                    'PT INFITECH SOLUSI INDONESIA',
+                    'PT MORASHA INTI SHABIRA',
+                    'PT FIMAR BERDAYA SINERGITAMA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.125, 0.2, 0.25, 0.2),
+                        'minimum' => 60000,
+                        'admin' => 20000
+                    )
+                )
+            ),
+
+            array(
                 'marketing' => 'DEWI',
                 'principal' => array(
                     'CV ARUTAMA MANDIRI',
@@ -161,6 +180,53 @@ class PrincipalRate extends Seeder
                     'PT KERTAU LINGKAR SELARAS',
                     'PT RAPIK KARYA MANDIRI',
                     'PT SINAR LAUT DUA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS', 'BINAGRIYA'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.15, 0.2, 0.2, 0.2),
+                        'minimum' => 70000,
+                        'admin' => 30000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'YANDI',
+                'principal' => array(
+                    'CV ALEKSA MENCO ABADI',
+                    'CV BINAFHIR SEJAHTERA',
+                    'CV DUAPUTRI BERKAH SEJAHTERA',
+                    'CV FIRAZ ADIRAJASA',
+                    'CV KUNTUM KESUMA',
+                    'CV MAHAKARYA BANGUN JAYA',
+                    'CV MEDITYA KARYA',
+                    'CV NINDYA UTAMA MANDIRI',
+                    'CV PARUNG BINGUNG SEJAHTERA',
+                    'CV SRI REJEKI SEJAHTERA',
+                    'CV VIRGO ADITAMA',
+                    'PT HUTAMA MANGGALA PERSADA',
+                    'PT PELITA KARYA PERKASA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS', 'BINAGRIYA'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.15, 0.2, 0.2, 0.2),
+                        'minimum' => 70000,
+                        'admin' => 30000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'ICHSAN',
+                'principal' => array(
+                    'PT LESTARI SAMUDRA KSO',
+                    'CV RAJA BANGUN PRADANA'
                 ),
                 'rate' => array(
                     array(
@@ -254,7 +320,8 @@ class PrincipalRate extends Seeder
             'LUKMAN' => '230522124220',
             'YANDI' => '230330192332',
             'MARTHIN' => '230209115907',
-            'DEWI' => '230302235138'
+            'DEWI' => '230302235138',
+            'ICHSAN' => '230405051206'
         );
         if ($key === null) {
             $val = array_values($list);

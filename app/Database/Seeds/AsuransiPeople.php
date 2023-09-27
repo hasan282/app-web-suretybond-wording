@@ -62,7 +62,7 @@ class AsuransiPeople extends Seeder
                 'nama' => 'Jatmiko JP',
                 'jabatan' => 'Kepala Cabang',
                 'actives' => 1
-            ),
+            )
         );
         $this->db->table('asuransi_people')->insertBatch($data);
     }

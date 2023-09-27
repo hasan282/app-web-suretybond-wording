@@ -39,7 +39,7 @@ class PrincipalRate extends Migration
             ),
             'rate_percent' => array(
                 'type' => 'DECIMAL',
-                'constraint' => '6,6',
+                'constraint' => '7,6',
                 'null' => true,
                 'default' => null
             ),

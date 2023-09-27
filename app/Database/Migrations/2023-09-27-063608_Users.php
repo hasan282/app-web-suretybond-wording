@@ -4,14 +4,14 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Principal extends Migration
+class Users extends Migration
 {
     public function up()
     {
         $this->forge->addField(array(
             'id' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 16
+                'constraint' => 12
             ),
             'enkripsi' => array(
                 'type' => 'VARCHAR',
@@ -19,39 +19,33 @@ class Principal extends Migration
                 'null' => true,
                 'default' => null
             ),
-            'nama' => array(
-                'type' => 'VARCHAR',
-                'constraint' => 128,
-                'null' => true,
-                'default' => null
-            ),
-            'telpon' => array(
+            'username' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 32,
                 'null' => true,
                 'default' => null
             ),
-            'email' => array(
+            'password' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 64,
+                'constraint' => 40,
                 'null' => true,
                 'default' => null
             ),
-            'alamat' => array(
+            'nama' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 256,
+                'constraint' => 32,
                 'null' => true,
                 'default' => null
             ),
             'id_office' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 12,
+                'constraint' => 32,
                 'null' => true,
                 'default' => null
             ),
-            'id_marketing' => array(
-                'type' => 'VARCHAR',
-                'constraint' => 12,
+            'id_access' => array(
+                'type' => 'INT',
+                'constraint' => 3,
                 'null' => true,
                 'default' => null
             ),
@@ -65,17 +59,17 @@ class Principal extends Migration
 
         $this->forge->addPrimaryKey('id', 'PRIMARY');
         $this->forge->addUniqueKey('enkripsi', 'ID');
-        $this->forge->addKey('nama', false, false, 'PRINCIPAL');
+        $this->forge->addUniqueKey('username', 'USER');
         $this->forge->addKey('id_office', false, false, 'OFFICE');
-        $this->forge->addKey('id_marketing', false, false, 'MARKETING');
+        $this->forge->addKey('id_access', false, false, 'ACCESS');
         $this->forge->addKey('actives', false, false, 'ACTIVE');
 
         $attribute = array('ENGINE' => 'InnoDB');
-        $this->forge->createTable('principal', true, $attribute);
+        $this->forge->createTable('users', true, $attribute);
     }
 
     public function down()
     {
-        $this->forge->dropTable('principal', true);
+        $this->forge->dropTable('users', true);
     }
 }
