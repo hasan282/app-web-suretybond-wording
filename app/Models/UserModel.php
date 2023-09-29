@@ -16,10 +16,27 @@ class UserModel extends BaseModel
             'pass' => 'users.password AS pass',
             'nama' => 'users.nama AS nama',
             'office_id' => 'users.id_office AS office_id',
-            'access_id' => 'users.id_access AS access_id',
+            'role_id' => 'users.id_role AS role_id',
             'active' => 'users.actives AS active'
         );
+        $fieldImage = array(
+            'image_id' => 'user_image.id AS image_id',
+            'image_enkrip' => 'user_image.enkripsi AS image_enkrip',
+            'image' => 'user_image.image_name AS image',
+            'image_path' => 'user_image.image_path AS image_path'
+        );
+        $fieldRole = array(
+            'role' => 'user_role.role AS role'
+        );
         $table = 'users';
+        if ($this->includes($fieldImage, $select)) {
+            $fields = array_merge($fields, $fieldImage);
+            $table = '(' . $table . ' LEFT OUTER JOIN user_image ON users.id_image = user_image.id)';
+        }
+        if ($this->includes($fieldRole, $select)) {
+            $fields = array_merge($fields, $fieldRole);
+            $table = '(' . $table . ' INNER JOIN user_role ON users.id_role = user_role.id)';
+        }
         $this->select($fields, $select);
         $this->table = $table;
         return $this;
@@ -32,7 +49,8 @@ class UserModel extends BaseModel
         $fields = array(
             'id' => 'users.id',
             'enkrip' => 'users.enkripsi',
-            'user' => 'users.username'
+            'user' => 'users.username',
+            'active' => 'users.actives'
         );
         if (!empty($addField)) $fields = array_merge($fields, $addField);
         return parent::where($where, $fields);

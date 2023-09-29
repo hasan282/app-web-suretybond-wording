@@ -33,10 +33,11 @@ class Auth extends BaseController
         $password = (string) $this->request->getPost('in_pass');
         $requesturi = (string) $this->request->getPost('requested_url');
         $model = new \App\Models\UserModel;
-        $data = $model->getData(
-            ['id', 'user', 'pass', 'nama', 'office_id', 'access_id', 'active']
-        )->where(
-            ['user' => $username]
+        $data = $model->getData([
+            'id', 'user', 'pass', 'nama', 'office_id',
+            'role_id', 'role', 'image', 'image_path'
+        ])->where(
+            ['user' => $username, 'active' => 1]
         )->data(false);
         if ($data === null) {
             // false username
@@ -46,11 +47,11 @@ class Auth extends BaseController
                 'id' => $data['id'],
                 'user' => $data['user'],
                 'nama' => $data['nama'],
-                'foto' => '/image/user/default_male.jpg',
+                'foto' => '/' . $data['image_path'] . '/' . $data['image'],
                 'office_id' => $data['office_id'],
                 'office' => 'PT Jasmine Indah Servistama',
-                'role_id' => $data['access_id'],
-                'role' => 'Admin'
+                'role_id' => $data['role_id'],
+                'role' => $data['role']
             );
             if ($data['pass'] === sha3hash($password, 40)) {
                 set_userdata($userdata);
