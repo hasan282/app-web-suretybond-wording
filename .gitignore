@@ -1,6 +1,9 @@
 # -------- me --------
 
-# public/image/*
+public/image/user/*
+!public/image/user/index.html
+!public/image/user/USER000F.jpg
+!public/image/user/USER000M.jpg
 public/files/*
 !public/files/index.html
 public/adminlte/*
