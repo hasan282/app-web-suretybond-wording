@@ -37,13 +37,19 @@ class Users extends Migration
                 'null' => true,
                 'default' => null
             ),
+            'id_image' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 16,
+                'null' => true,
+                'default' => null
+            ),
             'id_office' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 32,
                 'null' => true,
                 'default' => null
             ),
-            'id_access' => array(
+            'id_role' => array(
                 'type' => 'INT',
                 'constraint' => 3,
                 'null' => true,
@@ -61,7 +67,7 @@ class Users extends Migration
         $this->forge->addUniqueKey('enkripsi', 'ID');
         $this->forge->addUniqueKey('username', 'USER');
         $this->forge->addKey('id_office', false, false, 'OFFICE');
-        $this->forge->addKey('id_access', false, false, 'ACCESS');
+        $this->forge->addKey('id_role', false, false, 'ACCESS');
         $this->forge->addKey('actives', false, false, 'ACTIVE');
 
         $attribute = array('ENGINE' => 'InnoDB');

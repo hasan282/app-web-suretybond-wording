@@ -5,6 +5,8 @@
 <?php
 $session = session();
 $loginFail = ($session->getFlashdata('login_status') == 'failed');
+$userName = $session->getFlashdata('username');
+$invalidInput = $session->getFlashdata('is_invalid');
 $dark = get_cookie('DRKMOD') ?? '0';
 $darkmode = (intval($dark) === 1);
 ?>
@@ -17,7 +19,8 @@ $darkmode = (intval($dark) === 1);
     <div class="card-body login-card-body">
         <?php if ($loginFail) : ?>
             <p class="login-box-msg text-danger">
-                <i class="fas fa-exclamation-triangle mr-2"></i>Data User Tidak Sesuai
+                <?php $failedMessage = $session->getFlashdata('fail_message') ?? 'Data User Tidak Sesuai'; ?>
+                <i class="fas fa-exclamation-triangle mr-2"></i><?= $failedMessage; ?>
             </p>
         <?php else : ?>
             <p class="login-box-msg">Login sebagai User</p>
@@ -26,7 +29,7 @@ $darkmode = (intval($dark) === 1);
             <?= csrf_field(); ?>
             <input type="hidden" name="requested_url" value="<?= $session->getFlashdata('requested_url'); ?>">
             <div class="input-group mb-3">
-                <input type="text" name="in_user" id="in_user" class="form-control" placeholder="Username">
+                <input type="text" name="in_user" id="in_user" class="form-control<?= ($invalidInput == 'user') ? ' is-invalid' : ''; ?>" placeholder="Username" value="<?= $userName; ?>">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-fw fa-user"></span>
@@ -34,7 +37,7 @@ $darkmode = (intval($dark) === 1);
                 </div>
             </div>
             <div class="input-group mb-3">
-                <input type="password" name="in_pass" id="in_pass" class="form-control" placeholder="Password">
+                <input type="password" name="in_pass" id="in_pass" class="form-control<?= ($invalidInput == 'password') ? ' is-invalid' : ''; ?>" placeholder="Password">
                 <div class="input-group-append">
                     <div class="input-group-text cursor-pointer showpass" data-target="in_pass" data-show="0">
                         <span class="fas fa-fw fa-eye"></span>
@@ -60,13 +63,16 @@ $darkmode = (intval($dark) === 1);
 
 <?= $this->section('jscript'); ?>
 <script>
+    let messageChange = 0;
     $(function() {
-        <?php if ($loginFail) : ?>
-            setTimeout(() => {
-                $('.login-box-msg').removeClass('text-danger').html('Login sebagai User');
-            }, 5000);
-        <?php endif; ?>
         $('input.form-control').on('keyup', function() {
+            <?php if ($loginFail) : ?>
+                if (messageChange === 0) {
+                    $('.login-box-msg').removeClass('text-danger').html('Login sebagai User');
+                    messageChange = 1;
+                }
+            <?php endif; ?>
+            $(this).removeClass('is-invalid');
             $('button[type="submit"]').attr('disabled', ($('#in_user').val() == '' || $('#in_pass').val() == ''));
         });
         $('.showpass').on('click', function() {
