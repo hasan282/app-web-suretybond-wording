@@ -19,6 +19,15 @@ class UserModel extends BaseModel
             'role_id' => 'users.id_role AS role_id',
             'active' => 'users.actives AS active'
         );
+        $fieldOffice = array(
+            'office_enkrip' => 'user_office.enkripsi AS office_enkrip',
+            'office' => 'user_office.nama AS office',
+            'office_nick' => 'user_office.nickname AS office_nick',
+            'alamat' => 'user_office.alamat AS alamat',
+            'telpon' => 'user_office.telpon AS telpon',
+            'tipe_id' => 'user_office.id_tipe AS tipe_id',
+            'office_active' => 'user_office.actives AS office_active'
+        );
         $fieldImage = array(
             'image_id' => 'user_image.id AS image_id',
             'image_enkrip' => 'user_image.enkripsi AS image_enkrip',
@@ -36,6 +45,10 @@ class UserModel extends BaseModel
         if ($this->includes($fieldRole, $select)) {
             $fields = array_merge($fields, $fieldRole);
             $table = '(' . $table . ' INNER JOIN user_role ON users.id_role = user_role.id)';
+        }
+        if ($this->includes($fieldOffice, $select)) {
+            $fields = array_merge($fields, $fieldOffice);
+            $table = '(' . $table . ' INNER JOIN user_office ON users.id_office = user_office.id)';
         }
         $this->select($fields, $select);
         $this->table = $table;

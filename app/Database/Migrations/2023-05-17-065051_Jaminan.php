@@ -164,6 +164,9 @@ class Jaminan extends Migration
         $this->forge->addKey('id_pekerjaan', false, false, 'PEKERJAAN');
         $this->forge->addKey('id_currency_proyek', false, false, 'CURRENCY1');
         $this->forge->addKey('id_currency_jaminan', false, false, 'CURRENCY2');
+        $this->forge->addKey('date_from', false, false, 'DATEFROM');
+        $this->forge->addKey('date_to', false, false, 'DATETO');
+        $this->forge->addKey('issued_date', false, false, 'ISSUED');
         $this->forge->addKey('actives', false, false, 'ACTIVE');
 
         $attribute = array('ENGINE' => 'InnoDB');

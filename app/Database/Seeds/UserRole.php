@@ -19,6 +19,14 @@ class UserRole extends Seeder
             ),
             array(
                 'id' => 201,
+                'role' => 'Head Office Manager'
+            ),
+            array(
+                'id' => 202,
+                'role' => 'Head Office Supervisor'
+            ),
+            array(
+                'id' => 203,
                 'role' => 'Head Office User'
             ),
             array(

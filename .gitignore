@@ -1,5 +1,7 @@
 # -------- me --------
 
+app/Database/Datas/*
+
 public/image/user/*
 !public/image/user/index.html
 !public/image/user/USER000F.jpg

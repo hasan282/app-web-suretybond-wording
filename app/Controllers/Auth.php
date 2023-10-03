@@ -35,7 +35,7 @@ class Auth extends BaseController
         $redirect = redirect()->to('' . $requesturi);
         $model = new \App\Models\UserModel;
         $data = $model->getData([
-            'id', 'enkrip', 'user', 'pass', 'nama', 'office_id',
+            'id', 'enkrip', 'user', 'pass', 'nama', 'office_id', 'office',
             'role_id', 'role', 'image', 'image_path'
         ])->where(
             ['user' => $username, 'active' => 1]
@@ -52,7 +52,7 @@ class Auth extends BaseController
                 'nama' => $data['nama'],
                 'foto' => '/' . $data['image_path'] . '/' . $data['image'],
                 'office_id' => $data['office_id'],
-                'office' => 'PT Jasmine Indah Servistama',
+                'office' => $data['office'],
                 'role_id' => $data['role_id'],
                 'role' => $data['role']
             );
