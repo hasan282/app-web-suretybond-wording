@@ -39,7 +39,7 @@ class JaminanNumber extends Migration
             ),
             'registers' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 8,
+                'constraint' => 128,
                 'null' => true,
                 'default' => null
             ),

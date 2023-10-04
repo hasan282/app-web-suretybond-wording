@@ -11,7 +11,7 @@ class JaminanData
         $this->model = new \App\Models\JaminanModel;
     }
 
-    public function infoDashboard()
+    public function infoDashboard(): array
     {
         $data['draft'] = $this->model->getData(
             ['id', 'printed']
