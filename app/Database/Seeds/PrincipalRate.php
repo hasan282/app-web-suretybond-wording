@@ -238,7 +238,223 @@ class PrincipalRate extends Seeder
                         'admin' => 30000
                     )
                 )
-            )
+            ),
+
+            // --------------------------------------------------------------------
+
+            array(
+                'marketing' => 'ROCHMAN',
+                'principal' => array(
+                    'CV ADYAWINSA TELECOMMUNICATION & ELECTRICAL'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.2, 0.3, 0.35, 0.3),
+                        'minimum' => 300000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'HILMAN',
+                'principal' => array(
+                    'CV GOLDEN BRIDGE SYNERGY'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.25, 0.25, 0.25, 0.25),
+                        'minimum' => 350000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'ROCHMAN',
+                'principal' => array(
+                    'CV JEMBAR UTAMA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.25, 0.35, 0.4, 0.35),
+                        'minimum' => 350000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'ROCHMAN',
+                'principal' => array(
+                    'CV PEMBANGUNAN PERUMAHAN TIRTA RIAU'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.3, 0.3, 0.3, 0.3),
+                        'minimum' => 350000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'ROCHMAN',
+                'principal' => array(
+                    'CV TAMA TELEMATIKA NUSANTARA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.2, 0.35, 0.4, 0.35),
+                        'minimum' => 300000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'ROCHMAN',
+                'principal' => array(
+                    'CV SISTEM INTEGRASI NUSANTARA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.25, 0.35, 0.4, 0.35),
+                        'minimum' => 300000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'ROCHMAN',
+                'principal' => array(
+                    'CV TANATO MAKMUR LESTARI'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.2, 0.3, 0.35, 0.3),
+                        'minimum' => 360000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'INDRA',
+                'principal' => array(
+                    'CV ALUPHI HIJAU LUMINA',
+                    'CV MANDALA PUTERA PRIMA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.12, 0.15, 0.175, 0.15),
+                        'minimum' => 300000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'ROCHMAN',
+                'principal' => array(
+                    'CV ZEEMAH KARYA UTAMA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.2, 0.35, 0.4, 0.35),
+                        'minimum' => 350000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'ROCHMAN',
+                'principal' => array(
+                    'CV ASTON PRIMA RAYA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.2, 0.3, 0.35, 0.3),
+                        'minimum' => 300000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'ROCHMAN',
+                'principal' => array(
+                    'CV ZMG TELEKOMUNIKASI SERVISE INDONESIA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.2, 0.3, 0.35, 0.3),
+                        'minimum' => 300000,
+                        'admin' => 60000
+                    ),
+                    array(
+                        'proyek' => array('SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.3, 0.4, 0.5, 0.4),
+                        'minimum' => 450000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
+            array(
+                'marketing' => 'ROCHMAN',
+                'principal' => array(
+                    'CV WIDEBAND MEDIA INDONESIA'
+                ),
+                'rate' => array(
+                    array(
+                        'proyek' => array('PM', 'SW'),
+                        'asuransi' => array('MAXIMUS'),
+                        // BB, PB, APB, MB
+                        'rate' => array(0.2, 0.3, 0.35, 0.3),
+                        'minimum' => 300000,
+                        'admin' => 60000
+                    )
+                )
+            ),
+
 
         );
         return $data;
