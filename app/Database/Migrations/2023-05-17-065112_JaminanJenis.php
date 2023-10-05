@@ -10,7 +10,8 @@ class JaminanJenis extends Migration
     {
         $this->forge->addField(array(
             'id' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
+                'unsigned' => true,
                 'constraint' => 3
             ),
             'jenis' => array(
@@ -32,7 +33,7 @@ class JaminanJenis extends Migration
                 'default' => null
             ),
             'actives' => array(
-                'type' => 'INT',
+                'type' => 'TINYINT',
                 'constraint' => 1,
                 'unsigned' => true,
                 'default' => 0

@@ -10,22 +10,19 @@ class Currency extends Seeder
     {
         $data = array(
             array(
-                'id' => 1,
                 'nama' => 'Rupiah',
-                'symbol_1' => 'IDR',
-                'symbol_2' => 'Rp'
+                'codename' => 'IDR',
+                'symbol' => 'Rp'
             ),
             array(
-                'id' => 2,
                 'nama' => 'US Dollar',
-                'symbol_1' => 'USD',
-                'symbol_2' => '$'
+                'codename' => 'USD',
+                'symbol' => '$'
             ),
             array(
-                'id' => 3,
                 'nama' => 'Euro',
-                'symbol_1' => 'EUR',
-                'symbol_2' => '€'
+                'codename' => 'EUR',
+                'symbol' => '€'
             )
         );
         $this->db->table('currency')->insertBatch($data);

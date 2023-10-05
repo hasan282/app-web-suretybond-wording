@@ -10,8 +10,10 @@ class Currency extends Migration
     {
         $this->forge->addField(array(
             'id' => array(
-                'type' => 'INT',
-                'constraint' => 4
+                'type' => 'SMALLINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'auto_increment' => true
             ),
             'nama' => array(
                 'type' => 'VARCHAR',
@@ -19,13 +21,13 @@ class Currency extends Migration
                 'null' => true,
                 'default' => null
             ),
-            'symbol_1' => array(
+            'codename' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 8,
                 'null' => true,
                 'default' => null
             ),
-            'symbol_2' => array(
+            'symbol' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 8,
                 'null' => true,

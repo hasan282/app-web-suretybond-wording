@@ -32,8 +32,9 @@ class Jaminan extends Migration
                 'default' => null
             ),
             'id_proyek' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
                 'constraint' => 3,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -61,8 +62,9 @@ class Jaminan extends Migration
                 'default' => null
             ),
             'id_pekerjaan' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
                 'constraint' => 3,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -79,8 +81,9 @@ class Jaminan extends Migration
                 'default' => null
             ),
             'id_jenis' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
                 'constraint' => 3,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -91,8 +94,9 @@ class Jaminan extends Migration
                 'default' => null
             ),
             'id_currency' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
                 'constraint' => 4,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -109,8 +113,9 @@ class Jaminan extends Migration
                 'default' => null
             ),
             'conditional' => array(
-                'type' => 'INT',
+                'type' => 'TINYINT',
                 'constraint' => 1,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -127,6 +132,7 @@ class Jaminan extends Migration
             'days' => array(
                 'type' => 'INT',
                 'constraint' => 8,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -148,7 +154,7 @@ class Jaminan extends Migration
                 'default' => null
             ),
             'actives' => array(
-                'type' => 'INT',
+                'type' => 'TINYINT',
                 'constraint' => 1,
                 'unsigned' => true,
                 'default' => 0

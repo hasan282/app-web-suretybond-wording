@@ -11,6 +11,7 @@ class JaminanBlanko extends Migration
         $this->forge->addField(array(
             'id' => array(
                 'type' => 'INT',
+                'unsigned' => true,
                 'auto_increment' => true
             ),
             'id_blanko' => array(

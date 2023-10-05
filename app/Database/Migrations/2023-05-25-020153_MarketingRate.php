@@ -11,6 +11,7 @@ class MarketingRate extends Migration
         $this->forge->addField(array(
             'id' => array(
                 'type' => 'INT',
+                'unsigned' => true,
                 'auto_increment' => true
             ),
             'id_marketing' => array(
@@ -26,14 +27,16 @@ class MarketingRate extends Migration
                 'default' => null
             ),
             'id_jenis' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
                 'constraint' => 3,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
             'id_proyek' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
                 'constraint' => 3,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
