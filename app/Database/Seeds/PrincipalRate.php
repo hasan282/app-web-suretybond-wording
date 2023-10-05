@@ -240,8 +240,6 @@ class PrincipalRate extends Seeder
                 )
             ),
 
-            // --------------------------------------------------------------------
-
             array(
                 'marketing' => 'ROCHMAN',
                 'principal' => array(
@@ -370,7 +368,7 @@ class PrincipalRate extends Seeder
                 'rate' => array(
                     array(
                         'proyek' => array('PM', 'SW'),
-                        'asuransi' => array('MAXIMUS'),
+                        'asuransi' => array('MAXIMUS', 'BUMIDA', 'BINAGRIYA'),
                         // BB, PB, APB, MB
                         'rate' => array(0.12, 0.15, 0.175, 0.15),
                         'minimum' => 300000,
@@ -456,7 +454,7 @@ class PrincipalRate extends Seeder
             ),
         );
         return $data;
-    }   
+    }
 
     private function _running()
     {
@@ -535,7 +533,9 @@ class PrincipalRate extends Seeder
             'YANDI' => '230330192332',
             'MARTHIN' => '230209115907',
             'DEWI' => '230302235138',
-            'ICHSAN' => '230405051206'
+            'ICHSAN' => '230405051206',
+            'INDRA' => '230315031535',
+            'HILMAN' => '230426140232'
         );
         if ($key === null) {
             $val = array_values($list);
