@@ -454,11 +454,9 @@ class PrincipalRate extends Seeder
                     )
                 )
             ),
-
-
         );
         return $data;
-    }
+    }   
 
     private function _running()
     {
