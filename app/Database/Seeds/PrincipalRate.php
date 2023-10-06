@@ -243,7 +243,7 @@ class PrincipalRate extends Seeder
             array(
                 'marketing' => 'ROCHMAN',
                 'principal' => array(
-                    'CV ADYAWINSA TELECOMMUNICATION & ELECTRICAL'
+                    'PT ADYAWINSA TELECOMMUNICATION & ELECTRICAL'
                 ),
                 'rate' => array(
                     array(
@@ -260,7 +260,7 @@ class PrincipalRate extends Seeder
             array(
                 'marketing' => 'HILMAN',
                 'principal' => array(
-                    'CV GOLDEN BRIDGE SYNERGY'
+                    'PT GOLDEN BRIDGE SYNERGY'
                 ),
                 'rate' => array(
                     array(
@@ -277,7 +277,7 @@ class PrincipalRate extends Seeder
             array(
                 'marketing' => 'ROCHMAN',
                 'principal' => array(
-                    'CV JEMBAR UTAMA'
+                    'PT JEMBAR UTAMA'
                 ),
                 'rate' => array(
                     array(
@@ -294,7 +294,7 @@ class PrincipalRate extends Seeder
             array(
                 'marketing' => 'ROCHMAN',
                 'principal' => array(
-                    'CV PEMBANGUNAN PERUMAHAN TIRTA RIAU'
+                    'PT PEMBANGUNAN PERUMAHAN TIRTA RIAU'
                 ),
                 'rate' => array(
                     array(
@@ -311,7 +311,7 @@ class PrincipalRate extends Seeder
             array(
                 'marketing' => 'ROCHMAN',
                 'principal' => array(
-                    'CV TAMA TELEMATIKA NUSANTARA'
+                    'PT TAMA TELEMATIKA NUSANTARA'
                 ),
                 'rate' => array(
                     array(
@@ -328,7 +328,7 @@ class PrincipalRate extends Seeder
             array(
                 'marketing' => 'ROCHMAN',
                 'principal' => array(
-                    'CV SISTEM INTEGRASI NUSANTARA'
+                    'PT SISTEM INTEGRASI NUSANTARA'
                 ),
                 'rate' => array(
                     array(
@@ -345,7 +345,7 @@ class PrincipalRate extends Seeder
             array(
                 'marketing' => 'ROCHMAN',
                 'principal' => array(
-                    'CV TANATO MAKMUR LESTARI'
+                    'PT TANATO MAKMUR LESTARI'
                 ),
                 'rate' => array(
                     array(
@@ -362,8 +362,8 @@ class PrincipalRate extends Seeder
             array(
                 'marketing' => 'INDRA',
                 'principal' => array(
-                    'CV ALUPHI HIJAU LUMINA',
-                    'CV MANDALA PUTERA PRIMA'
+                    'PT ALUPHI HIJAU LUMINA',
+                    'PT MANDALA PUTERA PRIMA'
                 ),
                 'rate' => array(
                     array(
@@ -397,7 +397,7 @@ class PrincipalRate extends Seeder
             array(
                 'marketing' => 'ROCHMAN',
                 'principal' => array(
-                    'CV ASTON PRIMA RAYA'
+                    'PT ASTON PRIMA RAYA'
                 ),
                 'rate' => array(
                     array(
@@ -414,7 +414,7 @@ class PrincipalRate extends Seeder
             array(
                 'marketing' => 'ROCHMAN',
                 'principal' => array(
-                    'CV ZMG TELEKOMUNIKASI SERVISE INDONESIA'
+                    'PT ZMG TELEKOMUNIKASI SERVISE INDONESIA'
                 ),
                 'rate' => array(
                     array(
@@ -439,7 +439,7 @@ class PrincipalRate extends Seeder
             array(
                 'marketing' => 'ROCHMAN',
                 'principal' => array(
-                    'CV WIDEBAND MEDIA INDONESIA'
+                    'PT WIDEBAND MEDIA INDONESIA'
                 ),
                 'rate' => array(
                     array(
