@@ -2,7 +2,7 @@
 $db = \Config\Database::connect();
 $proyek = $db->table('jaminan_proyek')->get()->getResultArray();
 $pekerjaan = $db->table('jaminan_pekerjaan')->get()->getResultArray();
-$currency = $db->query('SELECT id, symbol_1 AS curr FROM currency ORDER BY symbol_1 ASC')->getResultArray();
+$currency = $db->query('SELECT codename AS curr FROM currency ORDER BY codename ASC')->getResultArray();
 ?>
 <div class="row px-md-2 px-lg-3 px-xl-5">
     <div class="col-md">
@@ -51,9 +51,9 @@ $currency = $db->query('SELECT id, symbol_1 AS curr FROM currency ORDER BY symbo
             <div class="form-group mw-3">
                 <label for="proyek_nilai">Nilai Kontrak</label>
                 <div class="input-group">
-                    <select name="currency_proyek" id="currency_proyek" class="form-control mw-1">
+                    <select name="currency" id="currency" class="form-control mw-1">
                         <?php foreach ($currency as $cr) : ?>
-                            <option <?= $cr['id'] == '1' ? 'selected ' : ''; ?>value="<?= $cr['id']; ?>"><?= $cr['curr']; ?></option>
+                            <option <?= $cr['curr'] == 'IDR' ? 'selected ' : ''; ?>value="<?= $cr['curr']; ?>"><?= $cr['curr']; ?></option>
                         <?php endforeach; ?>
                     </select>
                     <input type="text" name="proyek_nilai" id="proyek_nilai" class="form-control" data-inputmask="'alias':'numeric','groupSeparator':'.','radixPoint':','" data-mask>

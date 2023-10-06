@@ -85,7 +85,7 @@ class Guarantee extends BaseController
             $data['title'] = 'Lengkapi Data Jaminan';
             $data['bread'] = array('Jaminan|guarantee', 'Lengkapi Data');
             $data['jscript'] = 'all/input';
-            $this->plugin->setup('scrollbar|dateinput');
+            $this->plugin->setup('scrollbar|dateinput|icheck');
             $this->view('guarantee/add/phase2', $data);
         }
     }

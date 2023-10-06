@@ -66,7 +66,7 @@ $dataField = array(
     'proyek_nama' => [$jaminan['proyek_nama'], 'val'],
     'pekerjaan' => [$jaminan['pekerjaan_id'], 'val'],
     'proyek_alamat' => [$jaminan['proyek_alamat'], 'val'],
-    'currency_proyek' => [$jaminan['currency_proyek_id'], 'val'],
+    // 'currency_proyek' => [$jaminan['currency_proyek_id'], 'val'],
     'proyek_nilai' => [nformat($jaminan['proyek_nilai']), 'val'],
     'dokumen' => [$jaminan['dokumen'], 'val'],
     'dokumen_date' => [$jaminan['dokumen_date'], 'dateValue'],
@@ -95,6 +95,10 @@ foreach ($dataField as $key => $arr) if ($arr[0] === null) unset($dataField[$key
         $('#dokumen_date').inputDate();
         $('.inputdate').inputDate();
         $('#issued_date').inputDate();
+        $('#currency').on('change', function() {
+            const CURVAL = $(this).val();
+            $('#currency_jaminan').val(CURVAL);
+        });
         for (const ID in INPUTVAL) $('#' + ID)[INPUTVAL[ID][1]](INPUTVAL[ID][0]);
         $('#days').rangeFrom('date_from', 'date_to');
     });
