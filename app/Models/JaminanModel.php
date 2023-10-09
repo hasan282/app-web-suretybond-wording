@@ -43,6 +43,7 @@ class JaminanModel extends BaseModel
             'date_from' => 'jaminan.date_from AS date_from',
             'date_to' => 'jaminan.date_to AS date_to',
             'days' => 'jaminan.days AS days',
+            'conditional' => 'jaminan.conditional AS conditional',
             'issued_place' => 'jaminan.issued_place AS issued_place',
             'issued_date' => 'jaminan.issued_date AS issued_date',
             'bahasa' => 'jaminan.bahasa AS bahasa',

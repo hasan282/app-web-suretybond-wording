@@ -1,7 +1,7 @@
 <?php
 $db = \Config\Database::connect();
 $jaminan = $db->query('SELECT id, jenis FROM jaminan_jenis WHERE actives = 1')->getResultArray();
-$currency = $db->query('SELECT codename AS curr FROM currency ORDER BY codename ASC')->getResultArray();
+$currency = $db->query('SELECT id, codename AS code FROM currency ORDER BY codename ASC')->getResultArray();
 ?>
 <div class="row px-md-2 px-lg-3 px-xl-5">
     <div class="col-md">
@@ -15,15 +15,15 @@ $currency = $db->query('SELECT codename AS curr FROM currency ORDER BY codename 
             </select>
         </div>
         <div class="form-group">
-            <label for="">Pencairan Klaim</label>
+            <label>Pencairan Klaim</label>
             <div class="pt-2">
                 <div class="icheck-primary d-inline pr-4">
-                    <input type="radio" id="conditional_0" name="conditional">
-                    <label for="conditional_0">CONDITIONAL</label>
+                    <input type="radio" id="conditional_1" name="conditional" value="1">
+                    <label for="conditional_1">CONDITIONAL</label>
                 </div>
                 <div class="icheck-primary d-inline">
-                    <input type="radio" id="conditional_1" name="conditional">
-                    <label for="conditional_1">UNCONDITIONAL</label>
+                    <input type="radio" id="conditional_0" name="conditional" value="0">
+                    <label for="conditional_0">UNCONDITIONAL</label>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@ $currency = $db->query('SELECT codename AS curr FROM currency ORDER BY codename 
             <div class="input-group">
                 <select id="currency_jaminan" class="form-control mw-1" disabled>
                     <?php foreach ($currency as $cr) : ?>
-                        <option <?= $cr['curr'] == 'IDR' ? 'selected ' : ''; ?>value="<?= $cr['curr']; ?>"><?= $cr['curr']; ?></option>
+                        <option <?= $cr['code'] == 'IDR' ? 'selected ' : ''; ?>value="<?= $cr['id']; ?>"><?= $cr['code']; ?></option>
                     <?php endforeach; ?>
                 </select>
                 <input type="text" name="nilai" id="nilai" class="form-control" data-inputmask="'alias':'numeric','groupSeparator':'.','radixPoint':','" data-mask>
@@ -79,7 +79,7 @@ $currency = $db->query('SELECT codename AS curr FROM currency ORDER BY codename 
             </div>
             <div class="form-group row">
                 <label class="col-xl-4 col-form-label text-xl-right text-nowrap">Tanggal Terbit</label>
-                <div class="col-xl-8" id="issued_date"></div>
+                <div class="col-xl-8 inputdate" id="issued_date"></div>
             </div>
         </div>
     </div>

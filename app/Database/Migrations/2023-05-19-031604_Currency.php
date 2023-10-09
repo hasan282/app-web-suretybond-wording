@@ -36,6 +36,7 @@ class Currency extends Migration
         ));
 
         $this->forge->addPrimaryKey('id', 'PRIMARY');
+        $this->forge->addUniqueKey('codename', 'CODE');
 
         $attribute = array('ENGINE' => 'InnoDB');
         $this->forge->createTable('currency', true, $attribute);

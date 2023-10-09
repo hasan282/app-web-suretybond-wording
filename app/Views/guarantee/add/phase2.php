@@ -92,15 +92,17 @@ foreach ($dataField as $key => $arr) if ($arr[0] === null) unset($dataField[$key
     const INPUTVAL = <?= json_encode($dataField); ?>;
     $(function() {
         $("[data-mask]").inputmask();
-        $('#dokumen_date').inputDate();
         $('.inputdate').inputDate();
-        $('#issued_date').inputDate();
         $('#currency').on('change', function() {
             const CURVAL = $(this).val();
             $('#currency_jaminan').val(CURVAL);
         });
         for (const ID in INPUTVAL) $('#' + ID)[INPUTVAL[ID][1]](INPUTVAL[ID][0]);
         $('#days').rangeFrom('date_from', 'date_to');
+        $('#currency').trigger('change');
+        <?php if ($jaminan['conditional'] !== null) : ?>
+            $('#conditional_' + '<?= $jaminan['conditional']; ?>').trigger('click');
+        <?php endif; ?>
     });
 </script>
 
