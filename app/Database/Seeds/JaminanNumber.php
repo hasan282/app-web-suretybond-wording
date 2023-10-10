@@ -9,7 +9,7 @@ class JaminanNumber extends Seeder
     public function run()
     {
         $data = array(
-            // BUMIDA -----------------------------------------
+            // BUMIDA -------------------------------------------------------------------
             // Jaminan Penawaran
             array(
                 'id_cabang' => '2305041529071588',
@@ -156,6 +156,26 @@ class JaminanNumber extends Seeder
                 'templates' => 'PSP10441128(:Y1)(:M2)(:reg)',
                 'registers' => 'offset=-4',
                 'wording' => 'BUMIDA_MB4_NKUC',
+                'actives' => 1
+            ),
+            // MAXIMUS -------------------------------------------------------------------------------
+            // Jaminan Penawaran
+            array(
+                'id_cabang' => '2305041504511821',
+                'id_jenis' => 101,
+                'conditions' => 'proyek=negara,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '(:Y1).(:M2).02.1103.(:reg)',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_BB_PM',
+                'actives' => 1
+            ),
+            array(
+                'id_cabang' => '2305041504511821',
+                'id_jenis' => 101,
+                'conditions' => 'proyek=swasta,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '(:Y1).(:M2).02.1103.(:reg)',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_BB_SW',
                 'actives' => 1
             )
         );
