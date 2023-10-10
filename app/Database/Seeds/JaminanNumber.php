@@ -177,7 +177,149 @@ class JaminanNumber extends Seeder
                 'registers' => 'offset=0',
                 'wording' => 'WORDING_BB_SW',
                 'actives' => 1
-            )
+            ),
+
+            // Jaminan Pelaksanaan
+            array(
+                'id_cabang' => '2305041504511821',
+                'id_jenis' => 102,
+                'conditions' => 'proyek=negara,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '(:Y1).(:M2).02.1105.(:reg)',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_PB_PM',
+                'actives' => 1
+            ),
+            array(
+                'id_cabang' => '2305041504511821',
+                'id_jenis' => 102,
+                'conditions' => 'proyek=swasta,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '(:Y1).(:M2).02.1105.(:reg)',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_PB_SW',
+                'actives' => 1
+            ),
+
+            // Jaminan Uang Muka
+            array(
+                'id_cabang' => '2305041504511821',
+                'id_jenis' => 103,
+                'conditions' => 'proyek=negara,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '(:Y1).(:M2).02.1104.(:reg)',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_APB_PM',
+                'actives' => 1
+            ),
+            array(
+                'id_cabang' => '2305041504511821',
+                'id_jenis' => 103,
+                'conditions' => 'proyek=swasta,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '(:Y1).(:M2).02.1104.(:reg)',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_APB_SW',
+                'actives' => 1
+            ),
+
+            // Jaminan Pemeliharaan
+            array(
+                'id_cabang' => '2305041504511821',
+                'id_jenis' => 104,
+                'conditions' => 'proyek=negara,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '(:Y1).(:M2).02.1106.(:reg)',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_MB_PM',
+                'actives' => 1
+            ),
+            array(
+                'id_cabang' => '2305041504511821',
+                'id_jenis' => 104,
+                'conditions' => 'proyek=swasta,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '(:Y1).(:M2).02.1106.(:reg)',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_MB_SW',
+                'actives' => 1
+            ),
+
+            // BINAGRIYA -------------------------------------------------------------------------------
+            // Jaminan Penawaran
+            array(
+                'id_cabang' => '2305041517287910',
+                'id_jenis' => 101,
+                'conditions' => 'proyek=negara,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '1161401(:Y1)(:reg)/M01JI00002',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_BB_PM',
+                'actives' => 1
+            ),
+            array(
+                'id_cabang' => '2305041517287910',
+                'id_jenis' => 101,
+                'conditions' => 'proyek=swasta,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '1161401(:Y1)(:reg)/M01JI00002',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_BB_SW',
+                'actives' => 1
+            ),
+
+            // Jaminan Pelaksanaan
+            array(
+                'id_cabang' => '2305041517287910',
+                'id_jenis' => 102,
+                'conditions' => 'proyek=negara,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '1161402(:Y1)(:reg)/M01JI00002',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_PB_PM',
+                'actives' => 1
+            ),
+            array(
+                'id_cabang' => '2305041517287910',
+                'id_jenis' => 102,
+                'conditions' => 'proyek=swasta,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '1161402(:Y1)(:reg)/M01JI00002',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_PB_SW',
+                'actives' => 1
+            ),
+
+            // Jaminan Uang Muka
+            array(
+                'id_cabang' => '2305041517287910',
+                'id_jenis' => 103,
+                'conditions' => 'proyek=negara,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '1161403(:Y1)(:reg)/M01JI00002',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_APB_PM',
+                'actives' => 1
+            ),
+            array(
+                'id_cabang' => '2305041517287910',
+                'id_jenis' => 103,
+                'conditions' => 'proyek=swasta,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '1161403(:Y1)(:reg)/M01JI00002',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_APB_SW',
+                'actives' => 1
+            ),
+
+            // Jaminan Pemeliharaan
+            array(
+                'id_cabang' => '2305041517287910',
+                'id_jenis' => 104,
+                'conditions' => 'proyek=negara,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '1161404(:Y1)(:reg)/M01JI00002',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_MB_PM',
+                'actives' => 1
+            ),
+            array(
+                'id_cabang' => '2305041517287910',
+                'id_jenis' => 104,
+                'conditions' => 'proyek=swasta,konstruksi=0,konstruksi=1,conditional=0,conditional=1',
+                'templates' => '1161404(:Y1)(:reg)/M01JI00002',
+                'registers' => 'offset=0',
+                'wording' => 'WORDING_MB_SW',
+                'actives' => 1
+            ),
+
         );
         $this->db->table('jaminan_number')->insertBatch($data);
     }
