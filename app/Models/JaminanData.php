@@ -86,7 +86,6 @@ class JaminanData
             'obligee' => nl2space($request->getPost('obligee')),
             'alamat_obligee' => nl2space($request->getPost('obligee_alamat')),
             'id_jenis' => $request->getPost('jaminan_tipe'),
-            // 'nomor' => $nomor,
             'id_currency' => $request->getPost('currency'),
             'nilai_proyek' => unformat($request->getPost('proyek_nilai')),
             'nilai_jaminan' => unformat($request->getPost('nilai')),
@@ -103,6 +102,7 @@ class JaminanData
         }, $data);
         $row = $this->model->getTable()->where(['enkrip' => $enkripsi])->data(false);
         if ($row === null) return false;
+        $data['nomor'] = $this->_getNumber($data, $row);
         $change = array();
         foreach ($data as $key => $val)
             if (array_key_exists($key, $row) && $row[$key] !== $val) $change[$key] = $val;
@@ -114,6 +114,17 @@ class JaminanData
             });
             return $update === false ? $update : $change;
         }
+    }
+
+    private function _getNumber(array $data, array $row): ?string
+    {
+        $model = new \App\Models\JaminanNumber;
+        $model->setCabang($model->getCabang($row['id_asuransi_people'] ?? ''))
+            ->setIssueDate($data['issued_date'])
+            ->setJenis($data['id_jenis'])->setProyek($data['id_proyek'])
+            ->isKonstruksi($data['id_pekerjaan'] === null ? null : ($data['id_pekerjaan'] == '110'))
+            ->isConditional($data['conditional'] === null ? null : ($data['conditional'] == '1'));
+        return $model->getNomor();
     }
 
     public function blankoUse(?string $params)

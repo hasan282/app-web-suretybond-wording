@@ -28,7 +28,7 @@ $currency = $db->query('SELECT id, codename AS code FROM currency ORDER BY coden
             </div>
         </div>
         <div class="form-group mw-3 pt-2">
-            <label for="nilai">Nilai Jaminan<span class="btn btn-default btn-sm py-0 ml-2 text-bold mb-1">auto</span></label>
+            <label for="nilai">Nilai Jaminan<span id="auto_button" class="btn btn-default btn-sm py-0 ml-2 text-bold mb-1">auto</span></label>
             <div class="input-group">
                 <select id="currency_jaminan" class="form-control mw-1" disabled>
                     <?php foreach ($currency as $cr) : ?>

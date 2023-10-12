@@ -178,7 +178,6 @@ class JaminanNumber extends Seeder
                 'wording' => 'WORDING_BB_SW',
                 'actives' => 1
             ),
-
             // Jaminan Pelaksanaan
             array(
                 'id_cabang' => '2305041504511821',
@@ -198,7 +197,6 @@ class JaminanNumber extends Seeder
                 'wording' => 'WORDING_PB_SW',
                 'actives' => 1
             ),
-
             // Jaminan Uang Muka
             array(
                 'id_cabang' => '2305041504511821',
@@ -218,7 +216,6 @@ class JaminanNumber extends Seeder
                 'wording' => 'WORDING_APB_SW',
                 'actives' => 1
             ),
-
             // Jaminan Pemeliharaan
             array(
                 'id_cabang' => '2305041504511821',
@@ -238,7 +235,6 @@ class JaminanNumber extends Seeder
                 'wording' => 'WORDING_MB_SW',
                 'actives' => 1
             ),
-
             // BINAGRIYA -------------------------------------------------------------------------------
             // Jaminan Penawaran
             array(
@@ -259,7 +255,6 @@ class JaminanNumber extends Seeder
                 'wording' => 'WORDING_BB_SW',
                 'actives' => 1
             ),
-
             // Jaminan Pelaksanaan
             array(
                 'id_cabang' => '2305041517287910',
@@ -279,7 +274,6 @@ class JaminanNumber extends Seeder
                 'wording' => 'WORDING_PB_SW',
                 'actives' => 1
             ),
-
             // Jaminan Uang Muka
             array(
                 'id_cabang' => '2305041517287910',
@@ -299,7 +293,6 @@ class JaminanNumber extends Seeder
                 'wording' => 'WORDING_APB_SW',
                 'actives' => 1
             ),
-
             // Jaminan Pemeliharaan
             array(
                 'id_cabang' => '2305041517287910',
@@ -319,7 +312,6 @@ class JaminanNumber extends Seeder
                 'wording' => 'WORDING_MB_SW',
                 'actives' => 1
             ),
-
         );
         $this->db->table('jaminan_number')->insertBatch($data);
     }

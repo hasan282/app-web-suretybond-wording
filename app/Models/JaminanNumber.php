@@ -28,25 +28,110 @@ class JaminanNumber extends BaseModel
         $this->_setup($data);
     }
 
-    public function isKonstruksi(bool $value)
+    public function isKonstruksi(?bool $value)
     {
         $this->konstruksi = $value;
         $this->getdata = false;
         return $this;
     }
 
-    public function isConditional(bool $value)
+    public function isConditional(?bool $value)
     {
         $this->conditional = $value;
         $this->getdata = false;
         return $this;
     }
 
+    public function setCabang(?string $value)
+    {
+        $this->cabang = $value;
+        $this->getdata = false;
+        return $this;
+    }
+
+    public function setJenis(?string $value)
+    {
+        $this->jenis = $value;
+        $this->getdata = false;
+        return $this;
+    }
+
+    public function setProyek(?string $value)
+    {
+        if ($value !== null) {
+            $proyek = array('101' => 'negara', '102' => 'swasta');
+            if (array_key_exists($value, $proyek)) $this->proyek = $proyek[$value];
+            $this->getdata = false;
+        }
+        return $this;
+    }
+
+    public function setIssueDate(?string $value)
+    {
+        $this->issued = $value;
+        $this->getdata = false;
+        return $this;
+    }
+
+    public function setRegNumber(?string $value)
+    {
+        $this->register = $value;
+        $this->getdata = false;
+        return $this;
+    }
+
     public function setData(array $data = [])
     {
-        if (!empty($data)) $this->getdata = false;
-        $this->_setup($data);
+        if (!empty($data)) {
+            $this->getdata = false;
+            $this->_setup($data);
+        }
         return $this;
+    }
+
+    public function getCabang(string $people): ?string
+    {
+        $this->refresh();
+        $this->select = 'id_cabang';
+        $this->table = 'asuransi_people';
+        $this->where(['id' => $people], ['id' => 'id']);
+        $result = $this->data(false);
+        return $result === null ? null : $result['id_cabang'];
+    }
+
+    public function getNomor(): ?string
+    {
+        if ($this->_isComplete() && !$this->getdata) $this->refresh()->_getData();
+        return $this->nomor;
+    }
+
+    public function getClassName(): ?string
+    {
+        if ($this->_isComplete() && !$this->getdata) $this->refresh()->_getData();
+        return $this->classname;
+    }
+
+    public function getMessage(): ?string
+    {
+        if ($this->_isComplete() && !$this->getdata) $this->refresh()->_getData();
+        return $this->message;
+    }
+
+    public function getVariables(): array
+    {
+        return array(
+            'cabang' => $this->cabang,
+            'jenis' => $this->jenis,
+            'konstruksi' => $this->konstruksi,
+            'conditional' => $this->conditional,
+            'proyek' => $this->proyek,
+            'issued' => $this->issued,
+            'register' => $this->register,
+            'nomor' => $this->nomor,
+            'classname' => $this->classname,
+            'message' => $this->message,
+            'getdata' => $this->getdata
+        );
     }
 
     private function _setup(array $data)
@@ -66,30 +151,6 @@ class JaminanNumber extends BaseModel
             $this->konstruksi = $data['konstruksi'];
         if (array_key_exists('conditional', $data) && is_bool($data['conditional']))
             $this->conditional = $data['conditional'];
-    }
-
-    public function setCabang(string $value)
-    {
-        $this->cabang = $value;
-        return $this;
-    }
-
-    public function getNomor(): ?string
-    {
-        if ($this->_isComplete() && !$this->getdata) $this->refresh()->_getData();
-        return $this->nomor;
-    }
-
-    public function getClassName(): ?string
-    {
-        if ($this->_isComplete() && !$this->getdata) $this->refresh()->_getData();
-        return $this->classname;
-    }
-
-    public function getMessage(): ?string
-    {
-        if ($this->_isComplete() && !$this->getdata) $this->refresh()->_getData();
-        return $this->message;
     }
 
     private function _getData()
