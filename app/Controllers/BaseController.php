@@ -47,7 +47,10 @@ abstract class BaseController extends Controller
      */
     protected function view(string $view, array $data = [], $return = false)
     {
-        $data['adminPlugins'] = $this->plugin;
+        $data['adminPlugins'] = array(
+            'head' => $this->plugin->head(),
+            'foot' => $this->plugin->foot()
+        );
         $source = view($view, $data);
         if (env_is('production')) $source = nl2space($source);
         if ($return) {
