@@ -31,6 +31,12 @@ class AsuransiCabang extends Migration
                 'null' => true,
                 'default' => null
             ),
+            'issued_place' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 32,
+                'null' => true,
+                'default' => null
+            ),
             'alamat' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 256,

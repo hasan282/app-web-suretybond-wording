@@ -15,6 +15,7 @@ class AsuransiCabang extends Seeder
                 'enkripsi' => '04e2e8aaeea51ad21158c661e59481baabb7a718',
                 'id_asuransi' => '221006103529',
                 'cabang' => 'BOGOR',
+                'issued_place' => 'Bogor',
                 'alamat' => 'Ruko VIP No. 88 B, Jl. Raya Pajajaran, Bogor 16128',
                 'deskripsi' => 'KANTOR CABANG BOGOR',
                 'actives' => 1
@@ -25,6 +26,7 @@ class AsuransiCabang extends Seeder
                 'enkripsi' => '73f29a15d9daf2909c455df1b89b4846b102616a',
                 'id_asuransi' => '221006103529',
                 'cabang' => 'JAKARTA',
+                'issued_place' => 'Jakarta',
                 'alamat' => 'Gedung Graha Kirana Lt.6, Jl. Yos Sudarso 88, Sunter, Jakarta 14350',
                 'deskripsi' => null,
                 'actives' => 1
@@ -35,6 +37,7 @@ class AsuransiCabang extends Seeder
                 'enkripsi' => '5f865d89fcf0b45fc762bb725786ccd575440256',
                 'id_asuransi' => '221002154456',
                 'cabang' => 'BINTARO',
+                'issued_place' => 'Jakarta',
                 'alamat' => 'Jl. R.C. Veteran No. 11 A, Bintaro, Jakarta Selatan 12330',
                 'deskripsi' => 'CABANG BINTARO',
                 'actives' => 1
@@ -45,6 +48,7 @@ class AsuransiCabang extends Seeder
                 'enkripsi' => '09d82f0be6aec2d9f986866c12947783ba486809',
                 'id_asuransi' => '221002154456',
                 'cabang' => 'JAKARTA',
+                'issued_place' => 'Jakarta',
                 'alamat' => 'Wisma Purna Batara Lt. 4-6, Jl. Kesehatan No. 56-58, Tanah Abang, Jakarta 10160',
                 'deskripsi' => 'CABANG JAKARTA',
                 'actives' => 0
@@ -55,6 +59,7 @@ class AsuransiCabang extends Seeder
                 'enkripsi' => 'f90a3739321e8990e2a1193d92c4067f06b292cd',
                 'id_asuransi' => '221002154456',
                 'cabang' => 'JAKARTA',
+                'issued_place' => 'Jakarta',
                 'alamat' => 'Jl. Kesehatan No. 36 A, Tanah Abang, Jakarta Pusat 10160',
                 'deskripsi' => 'CABANG JAKARTA',
                 'actives' => 1
@@ -65,6 +70,7 @@ class AsuransiCabang extends Seeder
                 'enkripsi' => '999445dc354c62753e65396e57fe2109904c2f0d',
                 'id_asuransi' => '221005201325',
                 'cabang' => 'JAKARTA',
+                'issued_place' => 'Jakarta',
                 'alamat' => 'Rukan Artha Niaga Blok G No. 6, Jl. Boulevard Artha Gading, Jakarta Utara 14240',
                 'deskripsi' => null,
                 'actives' => 1

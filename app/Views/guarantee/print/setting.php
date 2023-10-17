@@ -1,6 +1,5 @@
 <?php
 $profiles = new \App\Models\ProfileModel;
-$uriString = explode('/', uri_string());
 ?>
 <form id="formsettings" method="POST">
     <div class="row">
@@ -28,7 +27,7 @@ $uriString = explode('/', uri_string());
                     <input id="profile_name" name="profile_name" class="form-control" placeholder="Nama Profil">
                 </div>
                 <input type="hidden" name="enkriprofile" id="enkriprofile" value="">
-                <input type="hidden" name="urihash" value="<?= end($uriString); ?>">
+                <input type="hidden" name="urihash" value="<?= $jaminan['enkrip']; ?>">
             </div>
         </div>
         <div class="col-xl-4 col-md-6">
@@ -136,7 +135,7 @@ $uriString = explode('/', uri_string());
 <div class="hide-content">
     <form action="/guarantee/profile/apply" method="POST">
         <input type="hidden" name="profile" id="hid_profile" value="">
-        <input type="hidden" name="jaminan" id="hid_jaminan" value="<?= end($uriString); ?>">
+        <input type="hidden" name="jaminan" id="hid_jaminan" value="<?= $jaminan['enkrip']; ?>">
         <?= csrf_field(); ?>
         <button type="submit" id="hid_submit">save</button>
     </form>

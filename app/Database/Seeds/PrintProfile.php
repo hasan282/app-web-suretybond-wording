@@ -13,14 +13,28 @@ class PrintProfile extends Seeder
                 'profile' => 'MAXIMUS-BOGOR-DEFAULT',
                 'paper' => 'LEGAL',
                 'page_top' => 62,
-                'page_left' => 24,
-                'page_right' => 22,
+                'page_left' => 28,
+                'page_right' => 26,
                 'page_bottom' => 5,
                 'spacing' => 100,
-                'sign_margin' => 30,
+                'sign_margin' => 20,
                 'sign_width' => 70,
-                'sign_height' => 24,
-                'sign_space' => 18,
+                'sign_height' => 31,
+                'sign_space' => 8,
+                'actives' => 1
+            ),
+            array(
+                'profile' => 'BUMIDA-DEFAULT',
+                'paper' => 'A4',
+                'page_top' => 35,
+                'page_left' => 17,
+                'page_right' => 16,
+                'page_bottom' => 5,
+                'spacing' => 100,
+                'sign_margin' => 52,
+                'sign_width' => 55,
+                'sign_height' => 28,
+                'sign_space' => 3,
                 'actives' => 1
             )
         );
