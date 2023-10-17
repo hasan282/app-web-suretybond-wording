@@ -11,6 +11,7 @@ class JaminanNumber extends Migration
         $this->forge->addField(array(
             'id' => array(
                 'type' => 'INT',
+                'unsigned' => true,
                 'auto_increment' => true
             ),
             'id_cabang' => array(
@@ -20,8 +21,9 @@ class JaminanNumber extends Migration
                 'default' => null
             ),
             'id_jenis' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
                 'constraint' => 3,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -39,7 +41,7 @@ class JaminanNumber extends Migration
             ),
             'registers' => array(
                 'type' => 'VARCHAR',
-                'constraint' => 8,
+                'constraint' => 128,
                 'null' => true,
                 'default' => null
             ),
@@ -50,7 +52,7 @@ class JaminanNumber extends Migration
                 'default' => null
             ),
             'actives' => array(
-                'type' => 'INT',
+                'type' => 'TINYINT',
                 'constraint' => 1,
                 'unsigned' => true,
                 'default' => 0

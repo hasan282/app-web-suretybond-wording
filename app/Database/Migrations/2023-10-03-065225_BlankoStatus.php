@@ -10,8 +10,9 @@ class BlankoStatus extends Migration
     {
         $this->forge->addField(array(
             'id' => array(
-                'type' => 'INT',
-                'constraint' => 1
+                'type' => 'SMALLINT',
+                'unsigned' => true,
+                'constraint' => 3
             ),
             'status' => array(
                 'type' => 'VARCHAR',

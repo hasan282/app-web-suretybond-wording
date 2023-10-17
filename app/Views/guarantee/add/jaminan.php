@@ -1,7 +1,7 @@
 <?php
 $db = \Config\Database::connect();
 $jaminan = $db->query('SELECT id, jenis FROM jaminan_jenis WHERE actives = 1')->getResultArray();
-$currency = $db->query('SELECT id, symbol_1 AS curr FROM currency ORDER BY symbol_1 ASC')->getResultArray();
+$currency = $db->query('SELECT id, codename AS code FROM currency ORDER BY codename ASC')->getResultArray();
 ?>
 <div class="row px-md-2 px-lg-3 px-xl-5">
     <div class="col-md">
@@ -15,16 +15,24 @@ $currency = $db->query('SELECT id, symbol_1 AS curr FROM currency ORDER BY symbo
             </select>
         </div>
         <div class="form-group">
-            <label for="nomor">Nomor Jaminan</label>
-            <input id="nomor" name="nomor" class="form-control" placeholder="Nomor" value="<?= REGISTER_SECTION; ?>">
-            <small class="ml-2 text-secondary font-italic">Posisikan <?= REGISTER_SECTION; ?> untuk Nomor Register Blanko</small>
+            <label>Pencairan Klaim</label>
+            <div class="pt-2">
+                <div class="icheck-primary d-inline pr-4">
+                    <input type="radio" id="conditional_1" name="conditional" value="1">
+                    <label for="conditional_1">CONDITIONAL</label>
+                </div>
+                <div class="icheck-primary d-inline">
+                    <input type="radio" id="conditional_0" name="conditional" value="0">
+                    <label for="conditional_0">UNCONDITIONAL</label>
+                </div>
+            </div>
         </div>
         <div class="form-group mw-3 pt-2">
-            <label for="nilai">Nilai Jaminan<span class="btn btn-default btn-sm py-0 ml-2 text-bold mb-1">auto</span></label>
+            <label for="nilai">Nilai Jaminan<span id="auto_button" class="btn btn-default btn-sm py-0 ml-2 text-bold mb-1">auto</span></label>
             <div class="input-group">
-                <select name="currency" id="currency" class="form-control mw-1">
+                <select id="currency_jaminan" class="form-control mw-1" disabled>
                     <?php foreach ($currency as $cr) : ?>
-                        <option <?= $cr['id'] == '1' ? 'selected ' : ''; ?>value="<?= $cr['id']; ?>"><?= $cr['curr']; ?></option>
+                        <option <?= $cr['code'] == 'IDR' ? 'selected ' : ''; ?>value="<?= $cr['id']; ?>"><?= $cr['code']; ?></option>
                     <?php endforeach; ?>
                 </select>
                 <input type="text" name="nilai" id="nilai" class="form-control" data-inputmask="'alias':'numeric','groupSeparator':'.','radixPoint':','" data-mask>
@@ -71,7 +79,7 @@ $currency = $db->query('SELECT id, symbol_1 AS curr FROM currency ORDER BY symbo
             </div>
             <div class="form-group row">
                 <label class="col-xl-4 col-form-label text-xl-right text-nowrap">Tanggal Terbit</label>
-                <div class="col-xl-8" id="issued_date"></div>
+                <div class="col-xl-8 inputdate" id="issued_date"></div>
             </div>
         </div>
     </div>

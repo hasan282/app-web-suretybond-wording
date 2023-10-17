@@ -29,7 +29,7 @@ $jaminan = $jaminan ?? array();
                 <td class="text-center border-right text-bold"><?= $ls['asuransi_nick'] ?? '-'; ?></td>
                 <td class="text-center"><?= $ls['jenis'] ?? '-'; ?></td>
                 <td><?= $ls['principal']; ?></td>
-                <td class="text-center border-left"><?= $ls['nilai'] === null ? '-' : $ls['currency_2'] . nformat($ls['nilai']); ?></td>
+                <td class="text-center border-left"><?= $ls['nilai'] === null ? '-' : $ls['symbol'] . nformat($ls['nilai']); ?></td>
                 <td class="py-0 align-middle text-center border-left">
                     <a href="/guarantee/detail/<?= $ls['enkrip']; ?>" target="_blank" class="btn btn-default btn-sm text-bold">Info Detail<i class="fas fa-external-link-alt ml-2"></i></a>
                 </td>

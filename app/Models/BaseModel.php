@@ -22,7 +22,7 @@ class BaseModel
         return $this;
     }
 
-    public function transaction(?callable $callback)
+    public function transaction(?callable $callback): bool
     {
         $this->db->transBegin();
         $callback($this->db);
@@ -30,7 +30,7 @@ class BaseModel
         return $this->db->transStatus();
     }
 
-    public function data(bool $alwaysList = true)
+    public function data(bool $alwaysList = true): ?array
     {
         if (!is_string($this->select) || !is_string($this->table)) {
             return null;
@@ -53,7 +53,7 @@ class BaseModel
         }
     }
 
-    public function count(string $field = 'id')
+    public function count(string $field = 'id'): int
     {
         if (!is_string($this->table)) {
             return 0;
@@ -129,7 +129,7 @@ class BaseModel
         return $this;
     }
 
-    public function sql()
+    public function sql(): string
     {
         $this->_queryAssemble($this->select, $this->table);
         return $this->query;
@@ -148,7 +148,7 @@ class BaseModel
         }
     }
 
-    protected function includes(array $field, array $select = [])
+    protected function includes(array $field, array $select = []): bool
     {
         $intersect = array_intersect(array_keys($field), $select);
         return empty($intersect) ? false : true;

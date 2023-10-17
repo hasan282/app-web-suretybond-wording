@@ -53,6 +53,7 @@ $(function () {
         }).pop().replace('icheck-', '');
         const METHOD = CHECKBOX.children('input').is(':checked') ? 'addClass' : 'removeClass';
         CHECKBOX.children('label')[METHOD]('text-' + COLOR);
+        if (CHECKBOX.children('input').attr('type') == 'radio') CHECKBOX.siblings().children('label').removeClass('text-' + COLOR);
     });
 
 });

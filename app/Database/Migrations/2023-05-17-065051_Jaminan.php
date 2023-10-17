@@ -32,8 +32,9 @@ class Jaminan extends Migration
                 'default' => null
             ),
             'id_proyek' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
                 'constraint' => 3,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -49,18 +50,6 @@ class Jaminan extends Migration
                 'null' => true,
                 'default' => null
             ),
-            'nilai_proyek' => array(
-                'type' => 'DECIMAL',
-                'constraint' => '15,2',
-                'null' => true,
-                'default' => null
-            ),
-            'id_currency_proyek' => array(
-                'type' => 'INT',
-                'constraint' => 4,
-                'null' => true,
-                'default' => null
-            ),
             'dokumen' => array(
                 'type' => 'VARCHAR',
                 'constraint' => 512,
@@ -73,8 +62,9 @@ class Jaminan extends Migration
                 'default' => null
             ),
             'id_pekerjaan' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
                 'constraint' => 3,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -91,8 +81,9 @@ class Jaminan extends Migration
                 'default' => null
             ),
             'id_jenis' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
                 'constraint' => 3,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -102,15 +93,29 @@ class Jaminan extends Migration
                 'null' => true,
                 'default' => null
             ),
+            'id_currency' => array(
+                'type' => 'SMALLINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'null' => true,
+                'default' => null
+            ),
+            'nilai_proyek' => array(
+                'type' => 'DECIMAL',
+                'constraint' => '15,2',
+                'null' => true,
+                'default' => null
+            ),
             'nilai_jaminan' => array(
                 'type' => 'DECIMAL',
                 'constraint' => '15,2',
                 'null' => true,
                 'default' => null
             ),
-            'id_currency_jaminan' => array(
-                'type' => 'INT',
-                'constraint' => 4,
+            'conditional' => array(
+                'type' => 'TINYINT',
+                'constraint' => 1,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -127,6 +132,7 @@ class Jaminan extends Migration
             'days' => array(
                 'type' => 'INT',
                 'constraint' => 8,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
@@ -148,7 +154,7 @@ class Jaminan extends Migration
                 'default' => null
             ),
             'actives' => array(
-                'type' => 'INT',
+                'type' => 'TINYINT',
                 'constraint' => 1,
                 'unsigned' => true,
                 'default' => 0
@@ -162,8 +168,7 @@ class Jaminan extends Migration
         $this->forge->addKey('id_proyek', false, false, 'PROYEK');
         $this->forge->addKey('id_jenis', false, false, 'JENIS');
         $this->forge->addKey('id_pekerjaan', false, false, 'PEKERJAAN');
-        $this->forge->addKey('id_currency_proyek', false, false, 'CURRENCY1');
-        $this->forge->addKey('id_currency_jaminan', false, false, 'CURRENCY2');
+        $this->forge->addKey('id_currency', false, false, 'CURRENCY');
         $this->forge->addKey('date_from', false, false, 'DATEFROM');
         $this->forge->addKey('date_to', false, false, 'DATETO');
         $this->forge->addKey('issued_date', false, false, 'ISSUED');

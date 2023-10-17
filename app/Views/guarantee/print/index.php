@@ -3,8 +3,7 @@
 <?= $this->section('content'); ?>
 
 <?php
-$cookieBack = get_cookie('BGBLNK') ?? '0';
-$backBlanko = (intval($cookieBack) === 1);
+$className = 'MAXIMUS_MB_102';
 $pageSettings = array(
     'paper' => 'A4',
     'page_top' => '50',
@@ -17,61 +16,19 @@ $pageSettings = array(
     'sign_height' => '25',
     'sign_space' => '10'
 );
-$uriString = explode('/', uri_string());
-$profiles = new \App\Models\ProfileModel;
-$dataProfile = $profiles->getData([
-    'paper', 'page_top', 'page_bottom', 'page_left', 'page_right', 'spacing',
-    'sign_margin', 'sign_width', 'sign_height', 'sign_space', 'enkrip'
-], true)->where(['enkrip_jaminan' => end($uriString)])->data(false);
+$dataProfile = $profile ?? null;
 $profileVal = null;
 if ($dataProfile !== null) {
     $profileVal = $dataProfile['enkrip'];
-    unset($dataProfile['enkrip']);
     $pageSettings = $dataProfile;
+    unset($pageSettings['enkrip']);
 }
-$regNumber = $jaminan['blanko_nomor'] ?? 'DRAFT';
-$jaminanNum = str_replace(REGISTER_SECTION, $regNumber, $jaminan['nomor'] ?? '-');
-$jaminan['nomor'] = $jaminanNum;
 ?>
 <div class="card">
     <div class="card-body">
-        <div class="row">
-            <div class="col-lg mb-4 mb-lg-0">
-                <p class="text-secondary mb-0">ASURANSI</p>
-                <p class="text-bold"><?= $jaminan['asuransi_print']; ?> <?= $jaminan['cabang_print']; ?></p>
-                <p class="text-secondary mb-0">PRINCIPAL</p>
-                <p class="text-bold mb-0"><?= $jaminan['principal']; ?></p>
-            </div>
-            <div class="col-lg mb-4 mb-lg-0">
-                <div class="border-fade pt-3 text-center h-100">
-                    <p class="text-bold mb-0"><?= $jaminan['jenis']; ?></p>
-                    <p class="text-sm mt-0 text-secondary"><i><?= $jaminan['jenis_english']; ?></i></p>
-                    <table class="table table-borderless table-sm text-left">
-                        <tr>
-                            <td></td>
-                            <td class="py-0 fit text-secondary">Nomor</td>
-                            <td class="py-0 fit"><span class="text-secondary mr-2">:</span><strong><?= $jaminan['nomor'] ?? '-'; ?></strong></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td class="py-0 fit text-secondary">Nilai</td>
-                            <td class="py-0 fit"><span class="text-secondary mr-2">:</span><strong><?= $jaminan['currency_2'] . ' ' . nformat($jaminan['nilai']); ?></strong></td>
-                            <td></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="col-lg text-center d-flex">
-                <div class="w-100 my-auto">
-                    <div class="custom-control custom-switch">
-                        <input <?= $backBlanko ? 'checked ' : ''; ?>type="checkbox" class="custom-control-input cursor-pointer" id="backmode">
-                        <label class="custom-control-label text-<?= $backBlanko ? 'primary ' : 'secondary'; ?> cursor-pointer" for="backmode">Background Blanko</label>
-                    </div>
-                    <small class="text-info"><i class="fas fa-info-circle mr-2"></i>Hidupkan untuk membantu pengaturan margin</small>
-                </div>
-            </div>
-        </div>
+
+        <?= $this->include('guarantee/print/header'); ?>
+
     </div>
 </div>
 <div class="card">
@@ -127,10 +84,11 @@ $jaminan['nomor'] = $jaminanNum;
 <?= $this->endSection(); ?>
 
 <?php
-$className = '\App\Libraries\PDFExport\MAXIMUS_' . $jaminan['jenis_singkat'] . '_' . $jaminan['proyek_id'];
-$export = new $className($jaminan);
+// $availableClass = file_exists(APPPATH . 'Libraries/Wordings/WORDONG.php');
+// $className = '\App\Libraries\PDFExport\MAXIMUS_' . $jaminan['jenis_singkat'] . '_' . $jaminan['proyek_id'];
+$export = new ('\App\Libraries\PDFExport\\' . $className)($jaminan);
 $export->setting($pageSettings);
-if ($backBlanko) $export->setBlanko(base_url('image/content/blanko/' . $jaminan['asuransi_nick'] . '.jpg'));
+if ((get_cookie('BGBLNK') ?? '0') == '1') $export->setBlanko(base_url('image/content/blanko/' . $jaminan['asuransi_nick'] . '.jpg'));
 ?>
 
 <?= $this->section('jscript'); ?>

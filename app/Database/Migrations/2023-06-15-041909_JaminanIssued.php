@@ -20,7 +20,7 @@ class JaminanIssued extends Migration
                 'default' => null
             ),
             'issued' => array(
-                'type' => 'INT',
+                'type' => 'TINYINT',
                 'constraint' => 1,
                 'unsigned' => true,
                 'default' => 0
@@ -32,7 +32,7 @@ class JaminanIssued extends Migration
                 'default' => null
             ),
             'printed' => array(
-                'type' => 'INT',
+                'type' => 'TINYINT',
                 'constraint' => 1,
                 'unsigned' => true,
                 'default' => 0

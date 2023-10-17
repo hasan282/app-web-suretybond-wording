@@ -10,7 +10,8 @@ class UserRole extends Migration
     {
         $this->forge->addField(array(
             'id' => array(
-                'type' => 'INT',
+                'type' => 'SMALLINT',
+                'unsigned' => true,
                 'constraint' => 3
             ),
             'role' => array(

@@ -11,7 +11,7 @@ class JaminanData
         $this->model = new \App\Models\JaminanModel;
     }
 
-    public function infoDashboard()
+    public function infoDashboard(): array
     {
         $data['draft'] = $this->model->getData(
             ['id', 'printed']
@@ -32,7 +32,7 @@ class JaminanData
     {
         $fields = array(
             'jenis', 'bahasa', 'nomor', 'nilai', 'date_from', 'date_to', 'days',
-            'issued_place', 'issued_date', 'enkrip', 'currency_proyek_2', 'currency_2',
+            'issued_place', 'issued_date', 'enkrip', 'currency', 'symbol', 'conditional',
             'asuransi', 'cabang', 'cabang_alamat', 'cabang_pejabat', 'cabang_jabatan',
             'principal', 'principal_alamat', 'principal_pejabat', 'principal_jabatan',
             'proyek', 'proyek_nama', 'proyek_alamat', 'proyek_nilai',
@@ -47,13 +47,12 @@ class JaminanData
     public function dataPrint(string $enkripsi)
     {
         $fields = array(
-            'jenis', 'nomor', 'nilai', 'currency', 'currency_2', 'issued_place', 'issued_date',
+            'jenis', 'nomor', 'nilai', 'currency', 'symbol', 'issued_place', 'issued_date',
             'principal', 'principal_alamat', 'asuransi_print', 'cabang_print', 'cabang_alamat',
             'principal_pejabat', 'principal_jabatan', 'cabang_pejabat', 'cabang_jabatan',
             'proyek_nama', 'proyek_nilai', 'dokumen', 'dokumen_date', 'date_from', 'date_to', 'days',
-            'obligee', 'obligee_alamat', 'jenis_english', 'jenis_singkat', 'proyek_id',
-            'issued', 'blanko_nomor', 'prefix_print', 'blanko_print', 'asuransi_nick',
-            'currency_proyek', 'currency_proyek_2', 'printed'
+            'obligee', 'obligee_alamat', 'jenis_english', 'jenis_singkat', 'proyek_id', 'enkrip',
+            'issued', 'blanko_nomor', 'prefix_print', 'blanko_print', 'asuransi_nick', 'printed'
         );
         return $this->model->getData($fields)->where(
             ['enkrip' => $enkripsi]
@@ -66,7 +65,7 @@ class JaminanData
             'obligee', 'obligee_alamat', 'proyek_id', 'proyek_nama', 'pekerjaan_id',
             'proyek_alamat', 'currency_proyek_id', 'proyek_nilai', 'dokumen', 'dokumen_date',
             'jenis_id', 'nomor', 'currency_id', 'nilai', 'bahasa', 'date_from', 'date_to', 'days',
-            'issued_place', 'issued_date', 'asuransi', 'cabang', 'principal'
+            'issued_place', 'issued_date', 'asuransi', 'cabang', 'principal', 'conditional'
         );
         if (!empty($exclude)) $fields = array_diff($fields, $exclude);
         return $this->model->getData($fields)->where(
@@ -77,23 +76,20 @@ class JaminanData
     public function rowEdit(string $enkripsi)
     {
         $request = \Config\Services::request();
-        $nomor = nl2space($request->getPost('nomor'));
-        if (strpos($nomor, REGISTER_SECTION) === false) $nomor .= REGISTER_SECTION;
         $data = array(
             'id_proyek' => $request->getPost('proyek'),
             'nama_proyek' => nl2space($request->getPost('proyek_nama')),
             'alamat_proyek' => nl2space($request->getPost('proyek_alamat')),
-            'nilai_proyek' => unformat($request->getPost('proyek_nilai')),
-            'id_currency_proyek' => $request->getPost('currency_proyek'),
             'dokumen' => nl2space($request->getPost('dokumen')),
             'dokumen_date' => $request->getPost('dokumen_date'),
             'id_pekerjaan' => $request->getPost('pekerjaan'),
             'obligee' => nl2space($request->getPost('obligee')),
             'alamat_obligee' => nl2space($request->getPost('obligee_alamat')),
             'id_jenis' => $request->getPost('jaminan_tipe'),
-            'nomor' => $nomor,
+            'id_currency' => $request->getPost('currency'),
+            'nilai_proyek' => unformat($request->getPost('proyek_nilai')),
             'nilai_jaminan' => unformat($request->getPost('nilai')),
-            'id_currency_jaminan' => $request->getPost('currency'),
+            'conditional' => unformat($request->getPost('conditional')),
             'date_from' => $request->getPost('date_from'),
             'date_to' => $request->getPost('date_to'),
             'days' => $request->getPost('days'),
@@ -106,6 +102,7 @@ class JaminanData
         }, $data);
         $row = $this->model->getTable()->where(['enkrip' => $enkripsi])->data(false);
         if ($row === null) return false;
+        $data['nomor'] = $this->_getNumber($data, $row);
         $change = array();
         foreach ($data as $key => $val)
             if (array_key_exists($key, $row) && $row[$key] !== $val) $change[$key] = $val;
@@ -117,6 +114,17 @@ class JaminanData
             });
             return $update === false ? $update : $change;
         }
+    }
+
+    private function _getNumber(array $data, array $row): ?string
+    {
+        $model = new \App\Models\JaminanNumber;
+        $model->setCabang($model->getCabang($row['id_asuransi_people'] ?? ''))
+            ->setIssueDate($data['issued_date'])
+            ->setJenis($data['id_jenis'])->setProyek($data['id_proyek'])
+            ->isKonstruksi($data['id_pekerjaan'] === null ? null : ($data['id_pekerjaan'] == '110'))
+            ->isConditional($data['conditional'] === null ? null : ($data['conditional'] == '1'));
+        return $model->getNomor();
     }
 
     public function blankoUse(?string $params)

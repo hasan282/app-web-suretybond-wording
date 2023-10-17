@@ -33,60 +33,60 @@ class PrintProfile extends Migration
             ),
             'page_top' => array(
                 'type' => 'INT',
-                'constraint' => 4,
+                'constraint' => 8,
                 'unsigned' => true,
                 'default' => 0
             ),
             'page_bottom' => array(
                 'type' => 'INT',
-                'constraint' => 4,
+                'constraint' => 8,
                 'unsigned' => true,
                 'default' => 0
             ),
             'page_left' => array(
                 'type' => 'INT',
-                'constraint' => 4,
+                'constraint' => 8,
                 'unsigned' => true,
                 'default' => 0
             ),
             'page_right' => array(
                 'type' => 'INT',
-                'constraint' => 4,
+                'constraint' => 8,
                 'unsigned' => true,
                 'default' => 0
             ),
             'spacing' => array(
                 'type' => 'INT',
-                'constraint' => 3,
+                'constraint' => 8,
                 'unsigned' => true,
                 'default' => 100
             ),
             'sign_margin' => array(
                 'type' => 'INT',
-                'constraint' => 4,
+                'constraint' => 8,
                 'unsigned' => true,
                 'default' => 0
             ),
             'sign_width' => array(
                 'type' => 'INT',
-                'constraint' => 4,
+                'constraint' => 8,
                 'unsigned' => true,
                 'default' => 0
             ),
             'sign_height' => array(
                 'type' => 'INT',
-                'constraint' => 4,
+                'constraint' => 8,
                 'unsigned' => true,
                 'default' => 0
             ),
             'sign_space' => array(
                 'type' => 'INT',
-                'constraint' => 4,
+                'constraint' => 8,
                 'unsigned' => true,
                 'default' => 0
             ),
             'actives' => array(
-                'type' => 'INT',
+                'type' => 'TINYINT',
                 'constraint' => 1,
                 'unsigned' => true,
                 'default' => 0

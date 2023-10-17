@@ -38,7 +38,7 @@ class PrincipalPeople extends Migration
                 'default' => null
             ),
             'actives' => array(
-                'type' => 'INT',
+                'type' => 'TINYINT',
                 'constraint' => 1,
                 'unsigned' => true,
                 'default' => 0

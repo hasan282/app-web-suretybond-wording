@@ -58,7 +58,7 @@ class Tables
     {
         $model = new \App\Models\JaminanModel;
         $model->getData(
-            ['enkrip', 'nomor', 'currency_2', 'nilai', 'jenis', 'principal', 'issued', 'blanko_nomor']
+            ['enkrip', 'nomor', 'symbol', 'nilai', 'jenis', 'principal', 'issued', 'blanko_nomor']
         )->where(['active' => 1])->where('(jaminan_issued.printed = 0 OR jaminan_issued.printed IS NULL)');
         $this->_setPage($page, $model->count('jaminan.id'));
         $this->dataList = $model->limit(
@@ -106,7 +106,7 @@ class Tables
     {
         $model = new \App\Models\JaminanModel;
         $model->getData(
-            ['enkrip', 'asuransi_nick', 'nilai', 'currency_2', 'jenis', 'principal', 'issued']
+            ['enkrip', 'asuransi_nick', 'nilai', 'symbol', 'jenis', 'principal', 'issued']
         )->where(['active' => 1, 'issued' => 0]);
         $this->_setPage($page, $model->count('jaminan.id'));
         $this->dataList = $model->limit(

@@ -14,6 +14,7 @@ class AllSeeder extends Seeder
         $this->call('BlankoStatus');
         $this->call('Currency');
         $this->call('JaminanJenis');
+        $this->call('JaminanNumber');
         $this->call('JaminanPekerjaan');
         $this->call('JaminanProyek');
         $this->call('Marketing');

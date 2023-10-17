@@ -66,7 +66,6 @@ $dataField = array(
     'proyek_nama' => [$jaminan['proyek_nama'], 'val'],
     'pekerjaan' => [$jaminan['pekerjaan_id'], 'val'],
     'proyek_alamat' => [$jaminan['proyek_alamat'], 'val'],
-    'currency_proyek' => [$jaminan['currency_proyek_id'], 'val'],
     'proyek_nilai' => [nformat($jaminan['proyek_nilai']), 'val'],
     'dokumen' => [$jaminan['dokumen'], 'val'],
     'dokumen_date' => [$jaminan['dokumen_date'], 'dateValue'],
@@ -92,11 +91,21 @@ foreach ($dataField as $key => $arr) if ($arr[0] === null) unset($dataField[$key
     const INPUTVAL = <?= json_encode($dataField); ?>;
     $(function() {
         $("[data-mask]").inputmask();
-        $('#dokumen_date').inputDate();
         $('.inputdate').inputDate();
-        $('#issued_date').inputDate();
+        $('#currency').on('change', function() {
+            const CURVAL = $(this).val();
+            $('#currency_jaminan').val(CURVAL);
+        });
         for (const ID in INPUTVAL) $('#' + ID)[INPUTVAL[ID][1]](INPUTVAL[ID][0]);
         $('#days').rangeFrom('date_from', 'date_to');
+        $('#currency').trigger('change');
+        <?php if ($jaminan['conditional'] !== null) : ?>
+            $('#conditional_' + '<?= $jaminan['conditional']; ?>').trigger('click');
+        <?php endif; ?>
+        $('#auto_button').click(function() {
+            const PROYEK = $('#proyek_nilai').val().replace(/\./g, '').replace(',', '.');
+            $('#nilai').val(('' + (parseFloat(PROYEK) / 5)).replace('.', ','));
+        });
     });
 </script>
 

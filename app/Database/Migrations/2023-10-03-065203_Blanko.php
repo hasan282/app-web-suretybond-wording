@@ -44,8 +44,9 @@ class Blanko extends Migration
                 'default' => null
             ),
             'id_status' => array(
-                'type' => 'INT',
-                'constraint' => 1,
+                'type' => 'SMALLINT',
+                'constraint' => 3,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),

@@ -44,13 +44,14 @@ class UserOffice extends Migration
                 'default' => null
             ),
             'id_tipe' => array(
-                'type' => 'INT',
-                'constraint' => 1,
+                'type' => 'SMALLINT',
+                'constraint' => 3,
+                'unsigned' => true,
                 'null' => true,
                 'default' => null
             ),
             'actives' => array(
-                'type' => 'INT',
+                'type' => 'TINYINT',
                 'constraint' => 1,
                 'unsigned' => true,
                 'default' => 0

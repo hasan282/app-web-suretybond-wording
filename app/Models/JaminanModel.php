@@ -43,6 +43,7 @@ class JaminanModel extends BaseModel
             'date_from' => 'jaminan.date_from AS date_from',
             'date_to' => 'jaminan.date_to AS date_to',
             'days' => 'jaminan.days AS days',
+            'conditional' => 'jaminan.conditional AS conditional',
             'issued_place' => 'jaminan.issued_place AS issued_place',
             'issued_date' => 'jaminan.issued_date AS issued_date',
             'bahasa' => 'jaminan.bahasa AS bahasa',
@@ -50,10 +51,9 @@ class JaminanModel extends BaseModel
             'principal_pejabat_id' => 'jaminan.id_principal_people AS principal_pejabat_id',
             'asuransi_pejabat_id' => 'jaminan.id_asuransi_people AS asuransi_pejabat_id',
             'proyek_id' => 'jaminan.id_proyek AS proyek_id',
-            'currency_proyek_id' => 'jaminan.id_currency_proyek AS currency_proyek_id',
             'pekerjaan_id' => 'jaminan.id_pekerjaan AS pekerjaan_id',
             'jenis_id' => 'jaminan.id_jenis AS jenis_id',
-            'currency_id' => 'jaminan.id_currency_jaminan AS currency_id'
+            'currency_id' => 'jaminan.id_currency AS currency_id'
         );
         $fieldJoins = array(
             'jenis' => 'jaminan_jenis.jenis AS jenis',
@@ -81,13 +81,18 @@ class JaminanModel extends BaseModel
             'principal_jabatan' => 'principal_people.jabatan AS principal_jabatan'
         );
         $fieldCurrency = array(
-            'currency_proyek' => 'currency_proyek.nama AS currency_proyek',
-            'currency_proyek_1' => 'currency_proyek.symbol_1 AS currency_proyek_1',
-            'currency_proyek_2' => 'currency_proyek.symbol_2 AS currency_proyek_2',
-            'currency' => 'currency_jaminan.nama AS currency',
-            'currency_1' => 'currency_jaminan.symbol_1 AS currency_1',
-            'currency_2' => 'currency_jaminan.symbol_2 AS currency_2'
+            'currency' => 'currency.nama AS currency',
+            'codename' => 'currency.codename AS codename',
+            'symbol' => 'currency.symbol AS symbol'
         );
+        // $fieldCurrency = array(
+        //     'currency_proyek' => 'currency_proyek.nama AS currency_proyek',
+        //     'currency_proyek_1' => 'currency_proyek.symbol_1 AS currency_proyek_1',
+        //     'currency_proyek_2' => 'currency_proyek.symbol_2 AS currency_proyek_2',
+        //     'currency' => 'currency_jaminan.nama AS currency',
+        //     'currency_1' => 'currency_jaminan.symbol_1 AS currency_1',
+        //     'currency_2' => 'currency_jaminan.symbol_2 AS currency_2'
+        // );
         $fieldIssued = array(
             'request_id' => 'jaminan_issued.id AS request_id',
             'issued' => 'jaminan_issued.issued AS issued',
@@ -131,9 +136,13 @@ class JaminanModel extends BaseModel
         }
         if ($this->includes($fieldCurrency, $select)) {
             $fields = array_merge($fields, $fieldCurrency);
-            $table = '(' . $table . ' LEFT OUTER JOIN currency AS currency_proyek ON jaminan.id_currency_proyek = currency_proyek.id)';
-            $table = '(' . $table . ' LEFT OUTER JOIN currency AS currency_jaminan ON currency_jaminan.id = jaminan.id_currency_jaminan)';
+            $table = '(' . $table . ' LEFT OUTER JOIN currency ON currency.id = jaminan.id_currency)';
         }
+        // if ($this->includes($fieldCurrency, $select)) {
+        //     $fields = array_merge($fields, $fieldCurrency);
+        //     $table = '(' . $table . ' LEFT OUTER JOIN currency AS currency_proyek ON jaminan.id_currency_proyek = currency_proyek.id)';
+        //     $table = '(' . $table . ' LEFT OUTER JOIN currency AS currency_jaminan ON currency_jaminan.id = jaminan.id_currency_jaminan)';
+        // }
         $this->select($fields, $select);
         $this->table = $table;
         return $this;

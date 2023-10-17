@@ -60,7 +60,7 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                             <td class="fit pr-3 text-bold pl-4">Nilai Jaminan</td>
                             <td class="text-bold">:</td>
                             <td class="text-nowrap">
-                                <?= $jaminan['currency_2']; ?>
+                                <?= $jaminan['symbol']; ?>
                                 <?= nformat($jaminan['nilai']); ?>
                             </td>
                         </tr>
@@ -78,6 +78,12 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                             <td class="fit pr-3 text-bold pl-4">Sampai Tanggal</td>
                             <td class="text-bold">:</td>
                             <td class="text-nowrap"><?= fdate($jaminan['date_to']) ?? '-'; ?></td>
+                        </tr>
+                        <tr>
+                            <?php $conditions = array('UNCONDITIONAL (tanpa syarat)', 'CONDITIONAL (dengan syarat)', '-'); ?>
+                            <td class="fit pr-3 text-bold pl-4">Pencairan Klaim</td>
+                            <td class="text-bold">:</td>
+                            <td class="text-nowrap"><?= $conditions[intval($jaminan['conditional'] ?? '2')]; ?></td>
                         </tr>
                         <tr>
                             <td class="fit pr-3 text-bold pl-4">Tanggal Penerbitan</td>
@@ -143,7 +149,7 @@ foreach ($completeCheck as $cc) if (!isset($jaminan[$cc]) || $jaminan[$cc] === n
                             <td class="fit pr-3 text-bold pl-4">Nilai Proyek</td>
                             <td class="text-bold">:</td>
                             <td>
-                                <?= $jaminan['currency_proyek_2']; ?>
+                                <?= $jaminan['symbol']; ?>
                                 <?= nformat($jaminan['proyek_nilai']); ?>
                             </td>
                         </tr>

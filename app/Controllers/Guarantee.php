@@ -25,16 +25,9 @@ class Guarantee extends BaseController
         } else {
             $printed = intval($data['jaminan']['printed']) === 1;
             $data['title'] = 'Detail Jaminan';
-            $data['bread'] = array(
-                'Data Jaminan|guarantee' . ($printed ? '/issued' : ''),
-                'Detail'
-            );
+            $data['bread'] = array('Data Jaminan|guarantee' . ($printed ? '/issued' : ''), 'Detail');
             $this->plugin->setup('scrollbar|sweetalert');
-            return $this->view(
-                'guarantee/detail/' . ($printed ? 'printed' : 'draft'),
-                $data,
-                true
-            );
+            return $this->view('guarantee/detail/' . ($printed ? 'printed' : 'draft'), $data, true);
         }
     }
 
@@ -43,6 +36,7 @@ class Guarantee extends BaseController
         if (!is_login())
             return login_page(full_url(false));
         $jaminan = new \App\Models\JaminanData;
+        $profile = new \App\Models\ProfileModel;
         $data['jaminan'] = $jaminan->dataPrint($param);
         if ($data['jaminan'] === null) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
@@ -50,12 +44,11 @@ class Guarantee extends BaseController
             if (intval($data['jaminan']['printed']) === 1)
                 return redirect()->to('guarantee/detail/' . $param);
             $data['title'] = 'Cetak Jaminan';
-            $data['bread'] = array(
-                'Jaminan|guarantee',
-                'Detail|guarantee/detail/' . $param,
-                'Cetak'
-            );
-            $data['params'] = $param;
+            $data['bread'] = array('Jaminan|guarantee', 'Detail|guarantee/detail/' . $param, 'Cetak');
+            $data['profile'] = $profile->getData(array(
+                'paper', 'page_top', 'page_bottom', 'page_left', 'page_right', 'spacing',
+                'sign_margin', 'sign_width', 'sign_height', 'sign_space', 'enkrip'
+            ), true)->where(['enkrip_jaminan' => $param])->data(false);
             $data['jscript'] = 'guarantee/print';
             $this->plugin->setup('scrollbar|pdfmake|sweetalert');
             return $this->view('guarantee/print/index', $data, true);
@@ -85,7 +78,7 @@ class Guarantee extends BaseController
             $data['title'] = 'Lengkapi Data Jaminan';
             $data['bread'] = array('Jaminan|guarantee', 'Lengkapi Data');
             $data['jscript'] = 'all/input';
-            $this->plugin->setup('scrollbar|dateinput');
+            $this->plugin->setup('scrollbar|dateinput|icheck');
             $this->view('guarantee/add/phase2', $data);
         }
     }
@@ -140,7 +133,6 @@ class Guarantee extends BaseController
         if (!is_login())
             return login_page(full_url(false));
         $jaminan = new \App\Models\JaminanData;
-        $jaminan->rowEdit($param);
         $update = $jaminan->rowEdit($param);
         if ($update === false) {
             // failed or false

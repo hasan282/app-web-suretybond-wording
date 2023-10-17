@@ -65,6 +65,11 @@ class PDFMake
                 $this->pageHeight = $paper[$size][1];
             }
         }
+        if (is_array($size) && sizeof($size) === 2) {
+            $this->setting['pageSize'] = 'OTHER';
+            $this->pageWidth = $size[0];
+            $this->pageHeight = $size[1];
+        }
         return $this;
     }
 
