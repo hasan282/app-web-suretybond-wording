@@ -111,10 +111,10 @@ class JaminanNumber extends BaseModel
         return $this->classname;
     }
 
-    public function getMessage(): ?string
+    public function getMessage(string $prefix = '', string $suffix = ''): ?string
     {
         if ($this->_isComplete() && !$this->getdata) $this->refresh()->_getData();
-        return $this->message;
+        return $this->message === null ? null : $prefix . $this->message . $suffix;
     }
 
     public function getVariables(): array
@@ -184,9 +184,9 @@ class JaminanNumber extends BaseModel
             $this->_makeNumber($result[0]['templates'], $result[0]['registers']);
         } else {
             if (empty($result)) {
-                $this->message = 'result tidak ditemukan';
+                $this->message = 'tidak ditemukan';
             } else {
-                $this->message = 'result lebih dari satu';
+                $this->message = 'lebih dari satu';
             }
         }
         $this->getdata = true;

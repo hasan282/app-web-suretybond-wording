@@ -35,9 +35,9 @@ class JaminanData
             'issued_place', 'issued_date', 'enkrip', 'currency', 'symbol', 'conditional',
             'asuransi', 'cabang', 'cabang_alamat', 'cabang_pejabat', 'cabang_jabatan',
             'principal', 'principal_alamat', 'principal_pejabat', 'principal_jabatan',
-            'proyek', 'proyek_nama', 'proyek_alamat', 'proyek_nilai',
+            'proyek', 'proyek_nama', 'proyek_alamat', 'proyek_nilai', 'pekerjaan_id',
             'dokumen', 'dokumen_date', 'pekerjaan', 'obligee', 'obligee_alamat',
-            'issued', 'printed', 'blanko_nomor'
+            'issued', 'printed', 'blanko_nomor', 'cabang_id', 'jenis_id', 'proyek_id'
         );
         return $this->model->getData($fields)->where(
             ['enkrip' => $enkripsi]
@@ -52,7 +52,8 @@ class JaminanData
             'principal_pejabat', 'principal_jabatan', 'cabang_pejabat', 'cabang_jabatan',
             'proyek_nama', 'proyek_nilai', 'dokumen', 'dokumen_date', 'date_from', 'date_to', 'days',
             'obligee', 'obligee_alamat', 'jenis_english', 'jenis_singkat', 'proyek_id', 'enkrip',
-            'issued', 'blanko_nomor', 'prefix_print', 'blanko_print', 'asuransi_nick', 'printed'
+            'issued', 'blanko_nomor', 'prefix_print', 'blanko_print', 'asuransi_nick', 'printed',
+            'jenis_id', 'conditional', 'asuransi'
         );
         return $this->model->getData($fields)->where(
             ['enkrip' => $enkripsi]
@@ -62,7 +63,7 @@ class JaminanData
     public function dataInput(string $enkripsi, array $exclude = [])
     {
         $fields = array(
-            'obligee', 'obligee_alamat', 'proyek_id', 'proyek_nama', 'pekerjaan_id',
+            'obligee', 'obligee_alamat', 'proyek_id', 'proyek_nama', 'pekerjaan_id', 'default_place',
             'proyek_alamat', 'currency_proyek_id', 'proyek_nilai', 'dokumen', 'dokumen_date',
             'jenis_id', 'nomor', 'currency_id', 'nilai', 'bahasa', 'date_from', 'date_to', 'days',
             'issued_place', 'issued_date', 'asuransi', 'cabang', 'principal', 'conditional'
