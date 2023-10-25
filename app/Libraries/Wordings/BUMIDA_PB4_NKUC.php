@@ -11,6 +11,7 @@ class BUMIDA_PB4_NKUC extends BaseWording
         $this->setPageSize('LETTER');
         $this->setData($data);
     }
+
     public function content()
     {
         $this->setPoint('Dengan ini dinyatakan, bahwa kami : PT. ' . $this->data('obligee') . ', Alamat : ' . $this->data('obligee_alamat') . ' sebagai Peserta, selanjutnya disebut PRINCIPAL, dan PT. ASURANSI UMUM BUMIPUTERA MUDA 1967 Alamat : ' . $this->data('principal_alamat') . 'Telp. 021-4514038/24520189 Fax. 021- 4514043 sebagai Penjamin, selanjutnya disebut sebagai SURETY, bertanggung jawab dan dengan tegas terikat pada ' . $this->data('principal') . ', Alamat : ' . $this->data('obligee_alamat') . 'sebagai Pemilik, selanjutnya disebut OBLIGEE atas uang sejumlah Rp  29,418,345.00 (DUA PULUH SEMBILAN JUTA EMPAT RATUS DELAPAN BELAS RIBU TIGA RATUS EMPAT PULUH LIMA  RUPIAH)');

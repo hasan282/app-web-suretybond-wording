@@ -8,8 +8,10 @@ class Blanko extends Seeder
 {
     public function run()
     {
-        $this->_insertAll();
-        $this->_updateInsurance();
+        if ($this->_exists('blanko')) {
+            $this->_insertAll();
+            $this->_updateInsurance();
+        }
     }
 
     private function _insertAll()
@@ -44,5 +46,10 @@ class Blanko extends Seeder
         // Binagriya Jakarta Tanah Abang
         $this->db->table('blanko')->update(['id_cabang' => '2306151540477892'], ['id_cabang' => '221002154557']);
         $this->db->transComplete();
+    }
+
+    private function _exists(string $file): bool
+    {
+        return file_exists(APPPATH . 'Database/Datas/' . $file . '.php');
     }
 }

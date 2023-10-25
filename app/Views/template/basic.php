@@ -22,7 +22,7 @@
         }
     </style>
 
-    <?= $adminPlugins->head(); ?>
+    <?= $adminPlugins['head']; ?>
 
 </head>
 
@@ -32,7 +32,7 @@
     const BaseURL = "<?= base_url(); ?>";
 </script>
 
-<?= $adminPlugins->foot(); ?>
+<?= $adminPlugins['foot']; ?>
 
 <?php $jscript = $jscript ?? array();
 if (is_string($jscript)) $jscript = explode('|', $jscript);
