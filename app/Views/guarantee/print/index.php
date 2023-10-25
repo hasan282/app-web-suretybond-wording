@@ -3,7 +3,7 @@
 <?= $this->section('content'); ?>
 
 <?php
-$className = 'MAXIMUS_MB_102';
+$className = 'BUMIDA_BB1_KC';
 $pageSettings = array(
     'paper' => 'A4',
     'page_top' => '50',
@@ -86,7 +86,7 @@ if ($dataProfile !== null) {
 <?php
 // $availableClass = file_exists(APPPATH . 'Libraries/Wordings/WORDONG.php');
 // $className = '\App\Libraries\PDFExport\MAXIMUS_' . $jaminan['jenis_singkat'] . '_' . $jaminan['proyek_id'];
-$export = new ('\App\Libraries\PDFExport\\' . $className)($jaminan);
+$export = new ('\App\Libraries\Wordings\\' . $className)($jaminan);
 $export->setting($pageSettings);
 if ((get_cookie('BGBLNK') ?? '0') == '1') $export->setBlanko(base_url('image/content/blanko/' . $jaminan['asuransi_nick'] . '.jpg'));
 ?>

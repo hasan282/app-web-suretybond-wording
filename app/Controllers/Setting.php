@@ -12,4 +12,19 @@ class Setting extends BaseController
         $this->plugin->setup('scrollbar');
         $this->view('setting/index', $data);
     }
+    public function photo()
+    {
+        $data['title'] = 'Edit Avatar';
+        $this->view('user/edit_profile_image', $data);
+    }
+    public function profile()
+    {
+        $data['title'] = 'Edit Profile';
+        $this->view('user/edit_profile', $data);
+    }
+    public function change()
+    {
+        $data['title'] = 'Change Password';
+        $this->view('user/change_pass', $data);
+    }
 }
