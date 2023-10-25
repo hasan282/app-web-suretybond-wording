@@ -7,8 +7,7 @@ $numberModel = new \App\Models\JaminanNumber([
 ]);
 $numberModel->isConditional(
     $jaminan['conditional'] === null ? null : intval($jaminan['conditional']) === 1
-);
-$numberModel->isKonstruksi(
+)->isKonstruksi(
     $jaminan['pekerjaan_id'] === null ? null : intval($jaminan['pekerjaan_id']) === 110
 );
 $jaminanNumber = $numberModel->getNomor();
@@ -33,7 +32,7 @@ $jaminanNumber = $numberModel->getNomor();
             <td class="fit pr-3 text-bold pl-4">Nomor Jaminan</td>
             <td class="text-bold">:</td>
             <td class="text-nowrap">
-                <?= $jaminan['nomor'] ?? ($numberModel->getMessage('<span class="text-danger"><i class="fas fa-exclamation-circle mr-2"></i>penomoran ', '</span>') ?? '-'); ?>
+                <?= $jaminan['nomor'] ?? ($numberModel->getMessage('<span class="text-danger"><i class="fas fa-exclamation-circle mr-2"></i>', '</span>') ?? '-'); ?>
             </td>
         </tr>
         <tr>

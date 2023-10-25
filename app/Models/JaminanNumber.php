@@ -179,14 +179,14 @@ class JaminanNumber extends BaseModel
         ), $fields);
         $result = $this->data();
         if (sizeof($result) === 1) {
-            $this->message = 'result ditemukan';
+            $this->message = 'ditemukan classname';
             $this->classname = $result[0]['wording'];
             $this->_makeNumber($result[0]['templates'], $result[0]['registers']);
         } else {
             if (empty($result)) {
-                $this->message = 'tidak ditemukan';
+                $this->message = 'record tidak ditemukan';
             } else {
-                $this->message = 'lebih dari satu';
+                $this->message = 'record lebih dari satu';
             }
         }
         $this->getdata = true;
@@ -234,6 +234,7 @@ class JaminanNumber extends BaseModel
             $this->nomor = str_replace(array_map(function ($val) {
                 return '(:' . $val . ')';
             }, array_keys($replacer)), array_values($replacer), $template);
+            $this->message = $this->message . ' dan penomoran';
         }
     }
 }

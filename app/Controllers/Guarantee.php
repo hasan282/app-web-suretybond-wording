@@ -51,6 +51,7 @@ class Guarantee extends BaseController
                 'sign_margin', 'sign_width', 'sign_height', 'sign_space', 'enkrip'
             ), true)->where(['enkrip_jaminan' => $param])->data(false);
             $data['jscript'] = 'guarantee/print';
+            $data['bg_blanko'] = intval(get_cookie('BGBLNK') ?? '0') === 1;
             $this->plugin->setup('scrollbar|pdfmake|sweetalert');
             return $this->view('guarantee/print/index', $data, true);
         }
