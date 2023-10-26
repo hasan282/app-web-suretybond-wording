@@ -12,6 +12,7 @@ class BUMIDA_PB4_NKUC extends BaseWording
         $this->setData($data);
         $this->footTipe = 2;
     }
+
     public function content()
     {
         $this->setPoint('Dengan ini dinyatakan, bahwa kami : <b>' . $this->data('principal') . ', Alamat : ' . $this->data('principal') . ' sebagai Peserta, selanjutnya disebut <b>PRINCIPAL</b>, dan <b>' . $this->data('asuransi_print') . '</b> Alamat : ' . $this->data('cabang_alamat') . ' sebagai Penjamin, selanjutnya disebut sebagai <b>SURETY</b>, bertanggung jawab dan dengan tegas terikat pada ' . $this->data('obligee') . ', Alamat : ' . $this->data('obligee_alamat') . 'sebagai Pemilik, selanjutnya disebut <b>OBLIGEE</b> atas uang sejumlah  <bi>' . $this->data('symbol') . ' ' . nformat($this->data('nilai')) . ' </bi> <bi>(' . $this->terbilang('nilai') . ' ' . $this->data('currency') . ')</bi>.');

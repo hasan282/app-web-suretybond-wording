@@ -14,7 +14,7 @@ class InsuranceData
     public function getNestData()
     {
         $data = $this->model->getData([
-            'id', 'asuransi', 'nickname', 'cabang', 'alamat'
+            'id', 'asuransi', 'nickname', 'cabang', 'alamat', 'pejabat_concat'
         ])->where([
             'active' => 1, 'active_cabang' => 1
         ])->order('nickname')->data();
@@ -25,7 +25,8 @@ class InsuranceData
                 if ($new['id'] == $id) {
                     $new['branch'][] = array(
                         'cabang' => $ins['cabang'],
-                        'alamat' => $ins['alamat']
+                        'alamat' => $ins['alamat'],
+                        'pejabat' => $ins['pejabat_concat']
                     );
                     continue 2;
                 }
@@ -37,7 +38,8 @@ class InsuranceData
                 'branch' => array(
                     array(
                         'cabang' => $ins['cabang'],
-                        'alamat' => $ins['alamat']
+                        'alamat' => $ins['alamat'],
+                        'pejabat' => $ins['pejabat_concat']
                     )
                 )
             );

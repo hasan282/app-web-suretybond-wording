@@ -77,7 +77,7 @@ $dataField = array(
     'date_from' => [$jaminan['date_from'], 'dateValue'],
     'date_to' => [$jaminan['date_to'], 'dateValue'],
     'days' => [$jaminan['days'], 'val'],
-    'issued_place' => [$jaminan['issued_place'], 'val'],
+    'issued_place' => [$jaminan['issued_place'] ?? $jaminan['default_place'], 'val'],
     'issued_date' => [$jaminan['issued_date'], 'dateValue']
 );
 foreach ($dataField as $key => $arr) if ($arr[0] === null) unset($dataField[$key]);
