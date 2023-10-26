@@ -16,7 +16,7 @@ $modelNumber->isConditional(
 );
 $className = $modelNumber->getClassName();
 if (!file_exists(APPPATH . 'Libraries/Wordings/' . $className . '.php')) $className = null;
-// $className = 'WORDING_BB_PM';
+// $className = 'WORDING_APB_SW';
 $pageSettings = array(
     'paper' => 'A4',
     'page_top' => '50',

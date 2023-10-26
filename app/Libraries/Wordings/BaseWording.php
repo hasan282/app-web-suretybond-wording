@@ -3,11 +3,13 @@
 namespace App\Libraries\Wordings;
 
 use App\Libraries\PDFMake;
+use tidy;
 
 class BaseWording extends PDFMake
 {
     private $points, $number, $data, $signs, $blanko, $lineHeight, $terbilang;
     protected $footTipe = 1;
+    protected $titleNumber = 'Nomor Jaminan';
 
     public function __construct()
     {
@@ -112,7 +114,7 @@ class BaseWording extends PDFMake
         parent::setContent($wardingContent);
     }
 
-    protected function setPoint(string $text, ?array $subpoint = [])
+    protected function setPoint(string $text, ?array $subpoint = [], ?string $endpoint = null)
     {
         $point = array(
             'colSpan' => 2,
@@ -137,16 +139,29 @@ class BaseWording extends PDFMake
                     }
                 }
             }
-            $point['stack'] = array(
+            $stackpoint = array(
                 $this->parse($text),
                 array(
                     'type' => 'lower-alpha',
                     'ol' => $ol
                 )
             );
+            if ($endpoint !== null) array_push($stackpoint, $this->parse($endpoint));
+            $point['stack'] = $stackpoint;
         }
         $this->points[] = array($this->number . '.', $point);
         $this->number++;
+    }
+
+    protected function conditional(?int $value = null): ?string
+    {
+        if (!array_key_exists('conditional', $this->data) || $this->data['conditional'] === null)
+            return null;
+        $condition = intval($this->data['conditional']);
+        if ($value !== null) $condition = $value;
+        if ($condition === 0) return 'tanpa syarat <i>(UNCONDITIONAL)</i>';
+        if ($condition === 1) return 'dengan syarat <i>(CONDITIONAL)</i>';
+        return null;
     }
 
     private function _content()
@@ -157,7 +172,7 @@ class BaseWording extends PDFMake
             array(
                 'stack' => array(
                     array(
-                        'text' => $this->parse('Nomor Jaminan : <b>' . $this->data('nomor') . '</b>'),
+                        'text' => $this->parse($this->titleNumber . ' : <b>' . $this->data('nomor') . '</b>'),
                         'fontSize' => 10
                     ),
                     array(
@@ -167,32 +182,41 @@ class BaseWording extends PDFMake
                 )
             ),
             array(
-                'text' => $this->parse('Nilai : <b>' . $this->data('currency_2') . ' ' . nformat($this->data('nilai')) . '</b>'),
+                'text' => $this->parse('Nilai : <b>' . $this->data('symbol') . ' ' . nformat($this->data('nilai')) . '</b>'),
                 'alignment' => 'right',
                 'fontSize' => 10
             )
         );
-        $foot_1 = array(
-            '',
+        $content[] = $head;
+        foreach ($this->points as $pt) $content[] = $pt;
+        $content[] = $this->_foot($this->footTipe);
+        return $content;
+    }
+
+    private function _foot(int $type): array
+    {
+        $foot = array(
+            // tipe 1
             array(
-                'colSpan' => 2,
-                'stack' => array(
+                'key' => 'stack',
+                'value' => array(
                     $this->parse('Dikeluarkan di <b>' . $this->data('issued_place') . '</b>'),
                     $this->parse('Pada tanggal <b>' . fdate($this->data('issued_date'), 'DD1 MM3 YY2') . '</b>')
                 )
-            )
-        );
-        $foot_2 = array(
-            '',
+            ),
+            // tipe 2
             array(
-                'colSpan' => 2,
-                'text' => $this->parse('Ditandatangani serta dibubuhi materai di <b>' . $this->data('issued_place') . '</b>, pada tanggal <b>' . fdate($this->data('issued_date'), 'DD1 MM3 YY2') . '</b>.')
+                'key' => 'text',
+                'value' => $this->parse('Ditandatangani serta dibubuhi materai di <b>' . $this->data('issued_place') . '</b>, pada tanggal <b>' . fdate($this->data('issued_date'), 'DD1 MM3 YY2') . '</b>.')
             )
         );
-        $content[] = $head;
-        foreach ($this->points as $pt) $content[] = $pt;
-        $content[] = ${'foot_' . $this->footTipe};
-        return $content;
+        $footer = array('colSpan' => 2);
+        if ($type <= sizeof($foot)) {
+            $footer[$foot[$type - 1]['key']] = $foot[$type - 1]['value'];
+        } else {
+            $footer['text'] = '';
+        }
+        return array('', $footer);
     }
 
     private function _signature()
