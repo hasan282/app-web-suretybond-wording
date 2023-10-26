@@ -10,10 +10,11 @@ class BUMIDA_APB1_KC extends BaseWording
         $this->setDefaultFont('Arial', 9);
         $this->setPageSize('LETTER');
         $this->setData($data);
+        $this->footTipe = 2;
     }
     public function content()
     {
-        $this->setPoint('Dengan ini dinyatakan, bahwa kami : <b> ' . $this->data('principal') . ', Alamat : ' . $this->data('principal_alamat') . '</b> sebagai Kontraktor, selanjutnya disebut <b>PRINCIPAL</b>, dan <b>' . $this->data('asuransi_print') . '<b> Alamat : ' . $this->data('cabang_alamat') . ' sebagai Penjamin, selanjutnya disebut sebagai <b>SURETY</b>, bertanggung jawab dan dengan tegas terikat pada <b>' . $this->data('obligee') . ', </b>Alamat : ' . $this->data('obligee_alamat') . ' sebagai Pemilik Pekerjaan, selanjutnya disebut <b>OBLIGEE</b> atas uang sejumlah <b>' . $this->data('symbol') . ' ' . nformat($this->data('nilai')) . '</b> <bi>(' . $this->terbilang('nilai') . ' ' . $this->data('currency') . ')</bi>.');
+        $this->setPoint('Dengan ini dinyatakan, bahwa kami : <b> ' . $this->data('principal') . '</b>, Alamat : ' . $this->data('principal_alamat') . ' sebagai Kontraktor, selanjutnya disebut <b>PRINCIPAL</b>, dan <b>' . $this->data('asuransi_print') . '</b> Alamat : ' . $this->data('cabang_alamat') . ' sebagai Penjamin, selanjutnya disebut sebagai <b>SURETY</b>, bertanggung jawab dan dengan tegas terikat pada <b>' . $this->data('obligee') . ', </b>Alamat : ' . $this->data('obligee_alamat') . ' sebagai Pemilik Pekerjaan, selanjutnya disebut <b>OBLIGEE</b> atas uang sejumlah <b>' . $this->data('symbol') . ' ' . nformat($this->data('nilai')) . '</b> <bi>(' . $this->terbilang('nilai') . ' ' . $this->data('currency') . ')</bi>.');
         $this->setPoint('Maka kami, <b>PRINCIPAL</b> dan <b>SURETY</b> dengan ini mengikatkan diri untuk melakukan pembayaran maksimal jumlah tersebut di atas dengan baik dan benar.');
         $this->setPoint('Bahwa <b>PRINCIPAL</b> dengan suatu perjanjian tertulis <b> ' . $this->data('dokumen') . '</b> telah mengadakan kontrak dengan <b>OBLIGEE</b> untuk pekerjaan <b>"' . $this->data('proyek_nama') . '"</b> Tahun Anggaran 2015 dengan Harga Kontrak yang telah disetujui sebesar <bi>' . $this->data('currency2') . ' ' . nformat($this->data('nilai')) . '</bi> <bi>(' . $this->terbilang('nilai') . ' ' . $this->data('currency') . ') </bi> dan kontrak tersebut merupakan bagian yang tidak terpisahkan dari jaminan ini.');
         $this->setPoint('Bahwa untuk Kontrak tersebut diatas, <b>OBLIGEE</b> setuju membayar kepada <b>PRINCIPAL</b> uang sebesar <bi>' . $this->data('currency2') . ' ' . nformat($this->data('nilai')) . '</bi> <bi>(' . $this->terbilang('nilai') . ' ' . $this->data('currency') . ')</bi> sebagai pembayaran uang muka sebelum Pekerjaan menurut Kontrak diatas dimulai. Sebagai jaminan terhadap pembayaran Uang Muka itu <b>SURETY</b> memberikan jaminan dengan ketentuan tersebut dibawah ini.');
@@ -22,7 +23,6 @@ class BUMIDA_APB1_KC extends BaseWording
         $this->setPoint('<b>SURETY</b> akan membayar kepada <b>OBLIGEE</b> Uang Muka atau sisa Uang Muka yang berdasarkan kontrak belum dikembalikan oleh <b>PRINCIPAL</b> setelah menerima tuntutan penagihan (Klaim) dari <b>OBLIGEE.</b>');
         $this->setPoint('Menunjuk pada pasal 1832 KUH Perdata dengan ini ditegaskan kembali bahwa <b>SURETY</b> melepaskan hak-hak istimewanya untuk menuntut supaya harta benda pihak yang dijamin lebih dahulu disita dan dijual guna melunasi hutangnya sebagaimana dimaksud dalam pasal 1831 KUH Perdata');
         $this->setPoint('Setiap pengajuan ganti rugi terhadap <b>SURETY</b> berdasarkan Jaminan ini harus sudah diajukan selambat-lambatnya dalam waktu <bi> (tiga puluh) hari </bi> kalender sesudah berakhirnya masa laku jaminan ini.');
-        $this->setPoint('Ditandatangani serta dibubuhi materai di ' . $this->data('issued_place') . ' pada tanggal ' . $this->data('issued_date') . ' PRINCIPAL <b>' . $this->data('principal') . '</b> SURETY <b> PT. ' . $this->data('asuransi_print') . '. </b>');
         $this->setContent();
         return $this;
     }
