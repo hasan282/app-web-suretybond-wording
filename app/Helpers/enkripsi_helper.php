@@ -30,3 +30,33 @@ if (!function_exists('sha3hash')) {
         return substr($result, $offset, $chars);
     }
 }
+
+if (!function_exists('myhash')) {
+    function myhash(string $text, bool $randomize = false, ?string $key = null): string
+    {
+        $alpha = str_split('0123456789abcdefghijklmnopqrstuvwxyz');
+        $beta = str_split('0aA1bB2cC3dD4eE5fF6gG7hH8i9jJ0kKLmMnNopPqQrRsStTuUvVwWxXyYzZ');
+        $hashkey = md5($key ?? 'J4smine1ndah');
+        $shahash = hash_hmac('sha3-256', $text, $hashkey);
+        $splithash = array_map(function ($val) use ($alpha) {
+            return array_search($val, $alpha);
+        }, str_split($shahash));
+        $splitkey = array_map(function ($val) use ($alpha) {
+            return array_search($val, $alpha);
+        }, str_split($hashkey));
+        $combine = array();
+        for ($com = 0; $com < (sizeof($splithash) / 2); $com++) {
+            $combine1 = $splithash[$com];
+            $combine2 = $splithash[($com + (sizeof($splithash) / 2))];
+            $combine[] = $combine1 + $combine2 + $splitkey[$com];
+        }
+        $newhash = '';
+        foreach ($combine as $cm) {
+            $key = $cm > (sizeof($beta) - 1) ? $cm - sizeof($beta) : $cm;
+            if ($randomize)
+                $key = $cm < 5 ? mt_rand($cm, (sizeof($beta) - 1)) : mt_rand(0, $cm);
+            $newhash = $newhash . $beta[$key];
+        }
+        return $newhash;
+    }
+}

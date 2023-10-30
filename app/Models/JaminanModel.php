@@ -6,17 +6,33 @@ use App\Models\BaseModel;
 
 class JaminanModel extends BaseModel
 {
-    public function addNew(?string $principal, ?string $asuransi)
+    private $userid;
+
+    public function addNew(?string $principal, ?string $asuransi, ?string $office)
     {
         $data['id'] = create_id(6);
         $data['enkripsi'] = sha3hash($data['id'], 60);
         $data['id_principal_people'] = $principal;
         $data['id_asuransi_people'] = $asuransi;
+        $data['id_office'] = $office;
         $data['actives'] = 1;
-        $insert = $this->transaction(function ($db) use ($data) {
+        $log = array(
+            'logstamp' => date('ymdHis'),
+            'id_user' => $this->userid ?? null,
+            'id_tipe' => 211,
+            'data_id18' => $data['id']
+        );
+        $insert = $this->transaction(function ($db) use ($data, $log) {
             $db->table('jaminan')->insert($data);
+            $db->table('user_log')->insert($log);
         });
         return $insert === false ? $insert : $data;
+    }
+
+    public function setUserID(string $id)
+    {
+        $this->userid = $id;
+        return $this;
     }
 
     public function getTable()

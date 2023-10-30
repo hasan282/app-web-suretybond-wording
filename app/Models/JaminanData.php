@@ -74,7 +74,7 @@ class JaminanData
         )->data(false);
     }
 
-    public function rowEdit(string $enkripsi)
+    public function rowEdit(string $enkripsi, ?string $userid = null)
     {
         $request = \Config\Services::request();
         $data = array(
@@ -110,8 +110,15 @@ class JaminanData
         if (empty($change)) {
             return $change;
         } else {
-            $update = $this->model->transaction(function ($db) use ($change, $enkripsi) {
+            $logdata = array(
+                'logstamp' => date('ymdHis'),
+                'id_user' => $userid,
+                'id_tipe' => 212,
+                'data_id18' => $row['id']
+            );
+            $update = $this->model->transaction(function ($db) use ($change, $enkripsi, $logdata) {
                 $db->table('jaminan')->update($change, ['enkripsi' => $enkripsi]);
+                $db->table('user_log')->insert($logdata);
             });
             return $update === false ? $update : $change;
         }

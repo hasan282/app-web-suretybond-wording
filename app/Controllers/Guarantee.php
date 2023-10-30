@@ -140,7 +140,8 @@ class Guarantee extends BaseController
         $dataJaminan = false;
         if ($peoplePrincipal !== null && $peopleAsuransi !== null) {
             $jaminan = new \App\Models\JaminanModel;
-            $dataJaminan = $jaminan->addNew($peoplePrincipal['id'], $peopleAsuransi['id']);
+            $dataJaminan = $jaminan->setUserID(userdata('id'))
+                ->addNew($peoplePrincipal['id'], $peopleAsuransi['id'], userdata('office_id'));
         }
         if ($dataJaminan === false) {
             echo 'FAILED';
@@ -154,7 +155,7 @@ class Guarantee extends BaseController
         if (!is_login())
             return login_page(full_url(false));
         $jaminan = new \App\Models\JaminanData;
-        $update = $jaminan->rowEdit($param);
+        $update = $jaminan->rowEdit($param, userdata('id'));
         if ($update === false) {
             // failed or false
         } else {
