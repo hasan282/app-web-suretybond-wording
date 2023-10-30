@@ -26,6 +26,7 @@ class Guarantee extends BaseController
             $printed = intval($data['jaminan']['printed']) === 1;
             $data['title'] = 'Detail Jaminan';
             $data['bread'] = array('Data Jaminan|guarantee' . ($printed ? '/issued' : ''), 'Detail');
+            $data['complete'] = $this->_isComplete($data['jaminan']);
             $this->plugin->setup('scrollbar|sweetalert');
             return $this->view('guarantee/detail/' . ($printed ? 'printed' : 'draft'), $data, true);
         }
@@ -41,7 +42,7 @@ class Guarantee extends BaseController
         if ($data['jaminan'] === null) {
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         } else {
-            if (intval($data['jaminan']['printed']) === 1)
+            if (intval($data['jaminan']['printed']) === 1 || !$this->_isComplete($data['jaminan']))
                 return redirect()->to('guarantee/detail/' . $param);
             $data['title'] = 'Cetak Jaminan';
             $data['bread'] = array('Jaminan|guarantee', 'Detail|guarantee/detail/' . $param, 'Cetak');
@@ -50,6 +51,7 @@ class Guarantee extends BaseController
                 'sign_margin', 'sign_width', 'sign_height', 'sign_space', 'enkrip'
             ), true)->where(['enkrip_jaminan' => $param])->data(false);
             $data['jscript'] = 'guarantee/print';
+            $data['bg_blanko'] = intval(get_cookie('BGBLNK') ?? '0') === 1;
             $this->plugin->setup('scrollbar|pdfmake|sweetalert');
             return $this->view('guarantee/print/index', $data, true);
         }
@@ -81,6 +83,25 @@ class Guarantee extends BaseController
             $this->plugin->setup('scrollbar|dateinput|icheck');
             $this->view('guarantee/add/phase2', $data);
         }
+    }
+
+    private function _isComplete(array $data): bool
+    {
+        $check = array();
+        $fieldCheck = array(
+            'nomor', 'principal', 'asuransi', 'obligee', 'obligee_alamat',
+            'proyek_id', 'proyek_nama', 'currency', 'proyek_nilai', 'dokumen',
+            'jenis_id', 'conditional', 'nilai', 'date_from', 'date_to', 'days',
+            'issued_place', 'issued_date'
+        );
+        foreach ($fieldCheck as $fc) {
+            if (array_key_exists($fc, $data)) {
+                $check[] = ($data[$fc] !== null && $data[$fc] != '');
+            } else {
+                $check[] = false;
+            }
+        }
+        return (!empty($check) && !in_array(false, $check, true));
     }
 
     // -------- PROCESS -----------------------------------------------------------------
@@ -119,7 +140,8 @@ class Guarantee extends BaseController
         $dataJaminan = false;
         if ($peoplePrincipal !== null && $peopleAsuransi !== null) {
             $jaminan = new \App\Models\JaminanModel;
-            $dataJaminan = $jaminan->addNew($peoplePrincipal['id'], $peopleAsuransi['id']);
+            $dataJaminan = $jaminan->setUserID(userdata('id'))
+                ->addNew($peoplePrincipal['id'], $peopleAsuransi['id'], userdata('office_id'));
         }
         if ($dataJaminan === false) {
             echo 'FAILED';
@@ -133,7 +155,7 @@ class Guarantee extends BaseController
         if (!is_login())
             return login_page(full_url(false));
         $jaminan = new \App\Models\JaminanData;
-        $update = $jaminan->rowEdit($param);
+        $update = $jaminan->rowEdit($param, userdata('id'));
         if ($update === false) {
             // failed or false
         } else {

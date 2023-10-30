@@ -6,17 +6,33 @@ use App\Models\BaseModel;
 
 class JaminanModel extends BaseModel
 {
-    public function addNew(?string $principal, ?string $asuransi)
+    private $userid;
+
+    public function addNew(?string $principal, ?string $asuransi, ?string $office)
     {
         $data['id'] = create_id(6);
         $data['enkripsi'] = sha3hash($data['id'], 60);
         $data['id_principal_people'] = $principal;
         $data['id_asuransi_people'] = $asuransi;
+        $data['id_office'] = $office;
         $data['actives'] = 1;
-        $insert = $this->transaction(function ($db) use ($data) {
+        $log = array(
+            'logstamp' => date('ymdHis'),
+            'id_user' => $this->userid ?? null,
+            'id_tipe' => 211,
+            'data_id18' => $data['id']
+        );
+        $insert = $this->transaction(function ($db) use ($data, $log) {
             $db->table('jaminan')->insert($data);
+            $db->table('user_log')->insert($log);
         });
         return $insert === false ? $insert : $data;
+    }
+
+    public function setUserID(string $id)
+    {
+        $this->userid = $id;
+        return $this;
     }
 
     public function getTable()
@@ -68,10 +84,12 @@ class JaminanModel extends BaseModel
             'asuransi_id' => 'asuransi.id AS asuransi_id',
             'asuransi_nick' => 'asuransi.nickname AS asuransi_nick',
             'cabang' => 'asuransi_cabang.cabang AS cabang',
+            'cabang_id' => 'asuransi_cabang.id AS cabang_id',
             'cabang_print' => 'asuransi_cabang.deskripsi AS cabang_print',
             'cabang_alamat' => 'asuransi_cabang.alamat AS cabang_alamat',
             'cabang_pejabat' => 'asuransi_people.nama AS cabang_pejabat',
-            'cabang_jabatan' => 'asuransi_people.jabatan AS cabang_jabatan'
+            'cabang_jabatan' => 'asuransi_people.jabatan AS cabang_jabatan',
+            'default_place' => 'asuransi_cabang.issued_place AS default_place'
         );
         $fieldPrincipal = array(
             'principal' => 'principal.nama AS principal',
@@ -85,14 +103,6 @@ class JaminanModel extends BaseModel
             'codename' => 'currency.codename AS codename',
             'symbol' => 'currency.symbol AS symbol'
         );
-        // $fieldCurrency = array(
-        //     'currency_proyek' => 'currency_proyek.nama AS currency_proyek',
-        //     'currency_proyek_1' => 'currency_proyek.symbol_1 AS currency_proyek_1',
-        //     'currency_proyek_2' => 'currency_proyek.symbol_2 AS currency_proyek_2',
-        //     'currency' => 'currency_jaminan.nama AS currency',
-        //     'currency_1' => 'currency_jaminan.symbol_1 AS currency_1',
-        //     'currency_2' => 'currency_jaminan.symbol_2 AS currency_2'
-        // );
         $fieldIssued = array(
             'request_id' => 'jaminan_issued.id AS request_id',
             'issued' => 'jaminan_issued.issued AS issued',
@@ -138,11 +148,6 @@ class JaminanModel extends BaseModel
             $fields = array_merge($fields, $fieldCurrency);
             $table = '(' . $table . ' LEFT OUTER JOIN currency ON currency.id = jaminan.id_currency)';
         }
-        // if ($this->includes($fieldCurrency, $select)) {
-        //     $fields = array_merge($fields, $fieldCurrency);
-        //     $table = '(' . $table . ' LEFT OUTER JOIN currency AS currency_proyek ON jaminan.id_currency_proyek = currency_proyek.id)';
-        //     $table = '(' . $table . ' LEFT OUTER JOIN currency AS currency_jaminan ON currency_jaminan.id = jaminan.id_currency_jaminan)';
-        // }
         $this->select($fields, $select);
         $this->table = $table;
         return $this;

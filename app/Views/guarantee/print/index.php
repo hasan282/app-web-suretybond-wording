@@ -3,7 +3,20 @@
 <?= $this->section('content'); ?>
 
 <?php
-$className = 'MAXIMUS_MB_102';
+$modelNumber = new \App\Models\JaminanNumber(array(
+    'cabang' => $jaminan['cabang_id'],
+    'jenis' => $jaminan['jenis_id'],
+    'proyek' => $jaminan['proyek_id'],
+    'issued' => $jaminan['issued_date']
+));
+$modelNumber->isConditional(
+    $jaminan['conditional'] === null ? null : intval($jaminan['conditional']) === 1
+)->isKonstruksi(
+    $jaminan['pekerjaan_id'] === null ? null : intval($jaminan['pekerjaan_id']) === 110
+);
+$className = $modelNumber->getClassName();
+if (!file_exists(APPPATH . 'Libraries/Wordings/' . $className . '.php')) $className = null;
+// $className = 'WORDING_APB_SW';
 $pageSettings = array(
     'paper' => 'A4',
     'page_top' => '50',
@@ -22,6 +35,11 @@ if ($dataProfile !== null) {
     $profileVal = $dataProfile['enkrip'];
     $pageSettings = $dataProfile;
     unset($pageSettings['enkrip']);
+}
+if ($className !== null) {
+    $export = new ('\App\Libraries\Wordings\\' . $className)($jaminan);
+    $export->setting($pageSettings);
+    if ($bg_blanko) $export->setBlanko(base_url('image/content/blanko/' . $jaminan['asuransi_nick'] . '.jpg'));
 }
 ?>
 <div class="card">
@@ -46,62 +64,40 @@ if ($dataProfile !== null) {
 
     </div>
 </div>
+<?php if ($className !== null) : ?>
+    <script>
+        const PDFCONTENT = <?= json_encode($export->content()->getPDF()); ?>;
+        const PDFFONTS = <?= json_encode($export->getFont()); ?>;
+    </script>
+<?php endif; ?>
 <div class="card">
     <div class="card-body">
-        <div class="row">
-            <div class="col-7">
-                <?php if (intval($jaminan['issued']) === 1) : ?>
-                    <div class="border-fade px-3 pt-2 text-center">
-                        <p class="mb-1 text-info">Pastikan cetak Jaminan dengan nomor Blanko :</p>
-                        <h3 class="mb-2"><span class="text-secondary"><?= $jaminan['prefix_print']; ?></span><strong><?= $jaminan['blanko_print']; ?></strong></h3>
-                        <div class="text-center my-3 pt-4">
-                            <button class="btn btn-primary btn-sm mx-1" id="buttonused"><i class="fas fa-check-circle mr-2"></i>Konfirmasi Cetak</button>
-                            <button class="btn btn-danger btn-sm mx-1" id="buttoncrash"><i class="fas fa-exclamation-triangle mr-2"></i>Lapor Blanko Rusak</button>
-                        </div>
-                    </div>
-                    <form id="printforms" method="POST">
-                        <?= csrf_field(); ?>
-                        <input type="hidden" name="jaminan" value="<?= $params; ?>">
-                    </form>
-                <?php endif; ?>
-            </div>
-            <div class="col-5">
-                <div class="mx-auto mw-3 text-center pb-4">
-                    <small class="text-secondary">Print dokumen dengan</small>
-                    <button type="button" id="buttonpdf" class="btn btn-danger btn-lg btn-block">
-                        Jadikan <strong>PDF</strong>
-                    </button>
-                    <small class="text-secondary">atau</small>
-                    <button type="button" class="btn btn-primary btn-block" disabled>
-                        Download File <strong>Word</strong>
-                    </button>
+        <?php if ($className === null) : ?>
+            <div class="d-flex" style="min-height:100px;height:20vh">
+                <div class="w-100 my-auto text-center text-danger">
+                    <i class="fas fa-exclamation-triangle fa-2x mb-3"></i>
+                    <h5 class="text-bold">Draft Wording Tidak Ditemukan</h5>
                 </div>
             </div>
-        </div>
+        <?php else : ?>
+            <?= $this->include('guarantee/print/printexport'); ?>
+        <?php endif; ?>
     </div>
 </div>
 
 <?= $this->endSection(); ?>
 
-<?php
-// $availableClass = file_exists(APPPATH . 'Libraries/Wordings/WORDONG.php');
-// $className = '\App\Libraries\PDFExport\MAXIMUS_' . $jaminan['jenis_singkat'] . '_' . $jaminan['proyek_id'];
-$export = new ('\App\Libraries\PDFExport\\' . $className)($jaminan);
-$export->setting($pageSettings);
-if ((get_cookie('BGBLNK') ?? '0') == '1') $export->setBlanko(base_url('image/content/blanko/' . $jaminan['asuransi_nick'] . '.jpg'));
-?>
-
 <?= $this->section('jscript'); ?>
 
 <script>
     const SETTINGS = <?= json_encode($pageSettings); ?>;
-    pdfMake.fonts = <?= json_encode($export->getFont()); ?>;
+    if (typeof PDFFONTS !== 'undefined') pdfMake.fonts = PDFFONTS;
     $(function() {
         $.each(SETTINGS, function(id, val) {
             $('#' + id).val(val);
         });
         $('#buttonpdf').click(function() {
-            pdfMake.createPdf(<?= json_encode($export->content()->getPDF()); ?>).open();
+            if (typeof PDFCONTENT !== 'undefined') pdfMake.createPdf(PDFCONTENT).open();
         });
         <?php if ($profileVal !== null) : ?>
             $('#profile').val('<?= $profileVal; ?>');

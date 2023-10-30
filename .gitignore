@@ -1,6 +1,7 @@
 # -------- me --------
 
 app/Database/Datas/*
+!app/Database/Datas/.gitkeep
 
 public/image/user/*
 !public/image/user/index.html

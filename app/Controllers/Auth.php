@@ -57,8 +57,14 @@ class Auth extends BaseController
                 'role' => $data['role']
             );
             if ($data['pass'] === sha3hash($password, 40)) {
-                set_userdata($userdata);
-                $redirect->setCookie('USRLOG', $data['enkrip'], 432000);
+                if ($model->addLogs($userdata['id'])) {
+                    set_userdata($userdata);
+                    $redirect->setCookie('USRLOG', $data['enkrip'], 432000);
+                } else {
+                    $this->session->setFlashdata('login_status', 'failed');
+                    $this->session->setFlashdata('fail_message', 'Terjadi Kesalahan Pada Login');
+                    $this->session->setFlashdata('username', $data['user']);
+                }
             } else {
                 // false password
                 $this->session->setFlashdata('login_status', 'failed');

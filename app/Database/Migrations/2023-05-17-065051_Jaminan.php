@@ -153,6 +153,12 @@ class Jaminan extends Migration
                 'null' => true,
                 'default' => null
             ),
+            'id_office' => array(
+                'type' => 'VARCHAR',
+                'constraint' => 12,
+                'null' => true,
+                'default' => null
+            ),
             'actives' => array(
                 'type' => 'TINYINT',
                 'constraint' => 1,
@@ -172,6 +178,7 @@ class Jaminan extends Migration
         $this->forge->addKey('date_from', false, false, 'DATEFROM');
         $this->forge->addKey('date_to', false, false, 'DATETO');
         $this->forge->addKey('issued_date', false, false, 'ISSUED');
+        $this->forge->addKey('id_office', false, false, 'OFFICE');
         $this->forge->addKey('actives', false, false, 'ACTIVE');
 
         $attribute = array('ENGINE' => 'InnoDB');

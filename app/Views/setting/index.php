@@ -1,16 +1,13 @@
 <?= $this->extend('template/page_admin'); ?>
 
 <?= $this->section('content'); ?>
-<?php $userName = userdata('nama'); ?>
+
 
 <div class="content">
     <div class="card">
         <div class="card-header">
-            <b>Avatar</b>
-            <div style="display: flex; gap: 1em">
-                <a href="" class="txt-red">Remove Avatar</a>
-                <a href="">Change Avatar</a>
-            </div>
+            <b>Profile</b>
+            <a href="<?= base_url('/user/edit_profile_image'); ?>"><i class="fas fa-edit fa-fw mr-1"></i>Change Photo Profile</a>
         </div>
         <div class="card-body">
             <img src="/image/user/USER000M.jpg" alt="" height="80" width="80">
@@ -19,18 +16,22 @@
     <div class="card">
         <div class="card-header">
             <b>Profile Settings</b>
-            <a href="">Edit Profile</a>
+            <a href="<?= base_url('/user/edit_profile'); ?>"><i class="fas fa-edit fa-fw mr-1"></i>Edit Profile</a>
         </div>
         <div class="card-body">
-            Name: <?= $userName ?> <span class="text-gray"></span>
+            Name: <span class="text-gray"><?= userdata('nama'); ?></span>
             <br>
-            Email: <span class="text-gray"></span>
+            Username: <span class="text-gray"><?= userdata('user'); ?></span>
+            <br>
+            Kantor: <span class="text-gray"><?= userdata('office'); ?></span>
+            <br>
+            Jabatan: <span class="text-gray"><?= userdata('role'); ?></span>
         </div>
     </div>
     <div class="card">
         <div class="card-header">
             <b>Security & Password</b>
-            <a href="">Edit Password</a>
+            <a href="<?= base_url('/user/change_pass'); ?>"><i class="fas fa-edit fa-fw mr-1"></i>Edit Password</a>
         </div>
         <div class="card-body">
             Your Password: <span class="text-gray">******</span>
@@ -38,6 +39,7 @@
             Last Changed: <span class="text-gray">22-08-2020</span>
         </div>
     </div>
+
 </div>
 </main>
 

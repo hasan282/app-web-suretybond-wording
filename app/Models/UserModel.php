@@ -55,6 +55,19 @@ class UserModel extends BaseModel
         return $this;
     }
 
+    public function addLogs(string $id): bool
+    {
+        $data = array(
+            'logstamp' => date('ymdHis'),
+            'id_user' => $id,
+            'id_tipe' => 101,
+            'data_id12' => $id
+        );
+        return $this->transaction(function ($db) use ($data) {
+            $db->table('user_log')->insert($data);
+        });
+    }
+
     // ----- PARENT OVERRIDE ------------------------------------------------------
 
     public function where($where, array $addField = [])
