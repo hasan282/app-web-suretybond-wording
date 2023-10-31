@@ -1,10 +1,18 @@
+
 const TITLELOADER = '<i class="fas fa-spinner fa-pulse text-info"></i>';
-const ERRORMESSAGE = '<span class="text-sm text-danger"><i class="fas fa-exclamation-circle mr-1"></i>tidak dapat memuat data, periksa koneksi.</span>';
+
+let PRADDRESS = [];
+
+const errorMessage = (message = 'tidak dapat memuat data, periksa koneksi.') => '<span class="text-sm text-danger"><i class="fas fa-exclamation-circle mr-1"></i>' + message + '</span>';
+
 const enableSubmit = function () {
     const PRINCIPALVAL = $('#principal_people').val();
     const ASURANSIVAL = $('#asuransi_pejabat').val();
     $('button[type="submit"]').attr('disabled', (PRINCIPALVAL === null || ASURANSIVAL === null));
 };
+
+const defaultOption = (value, text, index) => '<option value="' + value + '" data-index="' + index + '">' + text + '</option>';
+
 const dataLoader = function (loaderPlace, errorPlace, urlGet, target, selectOption) {
     $(loaderPlace).html(TITLELOADER);
     $(target).html('').attr('disabled', true);
@@ -19,34 +27,63 @@ const dataLoader = function (loaderPlace, errorPlace, urlGet, target, selectOpti
                 });
                 $(target).data('json', data).html(options).attr('disabled', false).trigger('change');
             } else {
-                $(errorPlace).html(ERRORMESSAGE);
+                $(errorPlace).html(errorMessage());
             }
         }).fail(function () {
-            $(errorPlace).html(ERRORMESSAGE);
+            $(errorPlace).html(errorMessage());
         });
         $(loaderPlace).html('');
     }, 100);
 };
-const defaultOption = (value, text, index) => '<option value="' + value + '" data-index="' + index + '">' + text + '</option>';
 
-$(function () {
-
-    $('.select2selector').select2();
-
-    $('#principal').on('change', function () {
-        const VALS = $(this).val();
-        $('#principal_alamat').html(PRADDRESS['pr_' + VALS]);
+const loadPrincipal = function (selector) {
+    let selectedValue = null;
+    if (typeof (PRSELECTD) != "undefined" && PRSELECTD !== null) {
+        selectedValue = PRSELECTD;
+    }
+    $(selector).on('change', function () {
+        const INDEX = $(this).children('option:selected').data('index');
+        const JSONDATA = $(this).data('json');
+        $('#principal_alamat').html(JSONDATA[INDEX]['alamat']);
         $('#principal_position').val('');
         dataLoader(
             '#people_loader',
             '#errorpeople',
-            'd/client/person/' + VALS,
+            'd/client/person/' + JSONDATA[INDEX]['enkrip'],
             '#principal_people',
             function (index, value) {
                 return defaultOption(value.enkrip, value.nama, index);
             }
         );
     });
+    $('#principal_loader').html(TITLELOADER);
+    setTimeout(() => {
+        $.get(BaseURL + 'd/client', function (data, status) {
+            if (status == 'success' && data.status) {
+                let options = '<option selected disabled>---</option>';
+                let selected = null;
+                $.each(data.data, function (index, value) {
+                    PRADDRESS[index] = value.alamat;
+                    options = options + defaultOption(value.enkrip, value.nama, index);
+                    if (selectedValue == value.enkrip) selected = value.enkrip;
+                });
+                $(selector).data('json', data.data).html(options).attr('disabled', false);
+                if (selected !== null) $(selector).val(selected).trigger('change');
+            } else {
+                $('#errorloadprincipal').html(errorMessage('gagal memuat data, periksa koneksi dan refresh halaman.'));
+            }
+        }).fail(function () {
+            $('#errorloadprincipal').html(errorMessage('gagal memuat data, periksa koneksi dan refresh halaman.'));
+        });
+        $('#principal_loader').html('');
+    }, 100);
+};
+
+$(function () {
+
+    $('.select2selector').select2();
+
+    loadPrincipal('#principal');
 
     $('#asuransi').on('change', function () {
         const VALS = $(this).val();
@@ -94,9 +131,5 @@ $(function () {
         $('#asuransi_jabatan').val(JSONDATA[INDEKS]['jabatan']);
         enableSubmit();
     });
-
-    if (typeof (PRSELECTD) != "undefined" && PRSELECTD !== null) {
-        $('#principal').val(PRSELECTD).trigger('change');
-    }
 
 });

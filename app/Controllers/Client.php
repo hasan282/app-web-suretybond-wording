@@ -215,6 +215,23 @@ class Client extends BaseController
         }
     }
 
+    public function dataList()
+    {
+        if (!is_login())
+            return $this->response->setJSON(array('status' => false));
+        $model = new \App\Models\PrincipalModel;
+        return $this->response->setJSON(
+            array(
+                'status' => true,
+                'data' => $model->getList(
+                    ['enkrip', 'nama', 'alamat']
+                )->where(
+                    ['office' => userdata('office_id')]
+                )->order('principal')->data()
+            )
+        );
+    }
+
     public function info($enkripsi)
     {
         $principal = new \App\Models\PrincipalModel;
