@@ -35,7 +35,7 @@ if (!function_exists('myhash')) {
     function myhash(string $text, bool $randomize = false, ?string $key = null): string
     {
         $alpha = str_split('0123456789abcdefghijklmnopqrstuvwxyz');
-        $beta = str_split('0aA1bB2cC3dD4eE5fF6gG7hH8i9jJ0kKLmMnNopPqQrRsStTuUvVwWxXyYzZ');
+        $beta = str_split('aAbB1cCdD2eEfF3gGhH4ijJ5kKL6mMnN7opP8qQrR9sStT0uUvVwWxXyYzZ');
         $hashkey = md5($key ?? 'J4smine1ndah');
         $shahash = hash_hmac('sha3-256', $text, $hashkey);
         $splithash = array_map(function ($val) use ($alpha) {
