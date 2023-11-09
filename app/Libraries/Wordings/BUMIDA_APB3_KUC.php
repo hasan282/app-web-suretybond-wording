@@ -12,6 +12,7 @@ class BUMIDA_APB3_KUC extends BaseWording
         $this->setData($data);
         $this->footTipe = 2;
     }
+
     public function content()
     {
         $this->setPoint('Dengan ini dinyatakan, bahwa kami : <b> ' . $this->data('principal') . ' </b>, Alamat : ' . $this->data('principal_alamat') . ' sebagai Penyedia, selanjutnya disebut <b>TERJAMIN</b>, dan <b>' . $this->data('asuransi_print') . ' </b>,   berkedudukan di Alamat :  ' . $this->data('cabang_alamat') . '</bi>sebagai penjamin, selanjutnya disebut <b>PENJAMIN</b>, bertanggung jawab dan dengan tegas terikat pada <b> ' . $this->data('obligee') . ' </b>,' . $this->data('obligee_alamat') . ' sebagai pemilik pekerjaan, selanjutnya disebut <b>PENERIMA JAMINAN</b> atas uang sejumlah <bi>' . $this->data('symbol') . ' ' . nformat($this->data('nilai')) . ' </bi> <bi>(' . $this->terbilang('nilai') . ' ' . $this->data('currency') . ')</bi>');
