@@ -19,6 +19,10 @@ class AllSeeder extends Seeder
         $this->call('JaminanProyek');
         $this->call('LogTipe');
         $this->call('Marketing');
+        $this->call('Menu');
+        $this->call('MenuAccess');
+        $this->call('MenuSubs');
+        $this->call('PrintProfile');
         $this->call('UserImage');
         $this->call('UserRole');
     }

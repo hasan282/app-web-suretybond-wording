@@ -9,7 +9,7 @@ if (!function_exists('env_is')) {
     /** Cek Environment saat ini
      * @param string $env tipe environtment
      */
-    function env_is(string $env)
+    function env_is(string $env): bool
     {
         $environtment = getenv('CI_ENVIRONMENT') ?: 'production';
         return ($env == $environtment);
@@ -22,7 +22,7 @@ if (!function_exists('nl2space')) {
      * @param bool $toSpace Jadikan false jika ingin tanpa spasi
      * @return string Content tanpa New Line
      */
-    function nl2space(?string $str, bool $toSpace = true)
+    function nl2space(?string $str, bool $toSpace = true): string
     {
         $string = '' . $str;
         $replacer = $toSpace ? ' ' : '';
@@ -31,7 +31,7 @@ if (!function_exists('nl2space')) {
 }
 
 if (!function_exists('tooltip')) {
-    function tooltip(string $selector = '.show-tooltip')
+    function tooltip(string $selector = '.show-tooltip'): string
     {
         return "$('" . $selector . "').tooltip({placement:'top',trigger:'hover'});";
     }

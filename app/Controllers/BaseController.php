@@ -65,7 +65,7 @@ abstract class BaseController extends Controller
         $this->session = \Config\Services::session();
         $this->validation = \Config\Services::validation();
         $this->plugin = new \App\Libraries\Plugins(array(
-            'refresher' => true, 'autoload' => 'basic|fontawesome'
+            'refresher' => env_is('development'), 'autoload' => 'basic|fontawesome'
         ));
     }
 }

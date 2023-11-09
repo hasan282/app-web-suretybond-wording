@@ -1,38 +1,7 @@
-<?php
-$menuItems[] = ['menu' => 'Data Jaminan', 'url' => 'guarantee', 'icon' => 'fas fa-certificate'];
-$menuItems[] = ['menu' => 'Inforce Jaminan', 'url' => 'inforce', 'icon' => 'fas fa-check-circle'];
-$menuItems[] = ['menu' => 'Data Nasabah', 'url' => 'client', 'icon' => 'fas fa-user-shield'];
-$menuItems[] = ['menu' => 'Asuransi', 'url' => 'insurance', 'icon' => 'fas fa-shield-alt'];
-
-$userAccess = userdata('role_id') . '01';
-
-// ----- MENU LIST -------------------------------------------
-/*
-$ideNavs[] = array('text' => '', 'icon' => '', 'url' => '', 'access' => null);
-$ideNavs[] = array('text' => '', 'icon' => '', 'child' => array(
-    ['text' => '', 'icon' => '', 'url' => '', 'access' => null]
-), 'access' => null);
-*/
-$ideNavs[] = array('text' => 'Database', 'icon' => 'fas fa-database', 'child' => array(
-    ['text' => 'User Account', 'icon' => 'fas fa-user-alt', 'url' => '#'],
-    ['text' => 'Asuransi', 'icon' => 'fas fa-shield-alt', 'url' => '#']
-), 'access' => '101');
-$ideNavs[] = array('text' => 'Blanko', 'icon' => 'fas fa-file', 'child' => array(
-    ['text' => 'Data Blanko', 'icon' => 'fas fa-database', 'url' => '#'],
-    ['text' => 'Pengiriman', 'icon' => 'fas fa-archive', 'url' => '#'],
-    ['text' => 'Rekap Blanko', 'icon' => 'fas fa-list-ul', 'url' => '#']
-));
-$ideNavs[] = array('text' => 'Jaminan', 'icon' => 'fas fa-certificate', 'child' => array(
-    ['text' => 'Data Jaminan', 'icon' => 'fas fa-database', 'url' => 'guarantee'],
-    ['text' => 'Inforce', 'icon' => 'fas fa-check-circle', 'url' => 'inforce']
-));
-$ideNavs[] = array('text' => 'Data Nasabah', 'icon' => 'fas fa-user-shield', 'url' => 'client');
-$ideNavs[] = array('text' => 'Data Asuransi', 'icon' => 'fas fa-shield-alt', 'url' => 'insurance');
-
-// ----- LOOPING MENU ----------------------------------------
+<?php $menuModel = new \App\Models\MenuModel;
+$ideNavs = $menuModel->getCompileData(intval(userdata('role_id')));
 foreach ($ideNavs as $key => $navs) {
     $active = false;
-    $navAccess = $navs['access'] ?? null;
     $url = $navs['url'] ?? null;
     $child = $navs['child'] ?? array();
     if ($url !== null && url_is($url . '*')) $active = true;
@@ -43,15 +12,8 @@ foreach ($ideNavs as $key => $navs) {
             $activeChild = true;
         }
         $ideNavs[$key]['child'][$ky]['active'] = $activeChild;
-        $childAccess = $ch['access'] ?? null;
-        if ($childAccess !== null && $childAccess != $userAccess) {
-            unset($ideNavs[$key]['child'][$ky]);
-        }
     }
     $ideNavs[$key]['active'] = $active;
-    if ($navAccess !== null && $navAccess != $userAccess) {
-        unset($ideNavs[$key]);
-    }
 } ?>
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <a href="/" class="brand-link link-transparent">

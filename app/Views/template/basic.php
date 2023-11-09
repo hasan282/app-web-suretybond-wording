@@ -37,7 +37,7 @@
 <?php $jscript = $jscript ?? array();
 if (is_string($jscript)) $jscript = explode('|', $jscript);
 foreach ($jscript as $js) : ?>
-    <script src="/asset/js/<?= $js; ?>.js"></script>
+    <script src="/asset/js/<?= $js; ?>.js<?= !env_is('production') ? '?j=s' . mt_rand(1000, 9999) : ''; ?>"></script>
 <?php endforeach; ?>
 
 <?= $this->renderSection('jscript'); ?>

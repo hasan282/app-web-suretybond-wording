@@ -12,6 +12,7 @@ $routes->get('/tb/inforce/(:num)', 'Inforce::table/$1');
 $routes->get('/tb/client/(:num)', 'Client::table/$1');
 
 // --- JSON Data ---------------------------------------------------------
+$routes->get('/d/client', 'Client::dataList');
 $routes->get('/d/client/person/(:hash)', 'Client::people/$1');
 $routes->get('/d/insurance/(:hash)', 'Insurance::dataCabang/$1');
 $routes->get('/d/insurance/person/(:hash)', 'Insurance::dataPeople/$1');
