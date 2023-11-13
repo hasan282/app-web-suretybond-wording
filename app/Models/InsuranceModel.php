@@ -24,10 +24,17 @@ class InsuranceModel extends BaseModel
             'suffix' => 'asuransi_cabang.deskripsi AS suffix',
             'cabang_active' => 'asuransi_cabang.actives AS cabang_active'
         );
+        $fieldPeopleGroup = array(
+            'pejabat_concat' => 'peoples.pejabat_concat AS pejabat_concat'
+        );
         $table = 'asuransi';
         if (!empty(array_intersect(array_keys($fieldCabang), $select))) {
             $fields = array_merge($fields, $fieldCabang);
-            $table .= ' INNER JOIN asuransi_cabang ON asuransi.id = asuransi_cabang.id_asuransi';
+            $table = '(' . $table . ' INNER JOIN asuransi_cabang ON asuransi.id = asuransi_cabang.id_asuransi)';
+        }
+        if ($this->includes($fieldPeopleGroup, $select)) {
+            $fields = array_merge($fields, $fieldPeopleGroup);
+            $table = "(" . $table . " INNER JOIN (SELECT asuransi_people.id_cabang, GROUP_CONCAT(CONCAT(jabatan,' : ',nama) SEPARATOR '@8@') AS pejabat_concat FROM asuransi_people GROUP BY id_cabang) AS peoples ON asuransi_cabang.id = peoples.id_cabang)";
         }
         $this->select($fields, $select);
         $this->table = $table;
