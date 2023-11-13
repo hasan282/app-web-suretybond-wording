@@ -27,9 +27,9 @@ $routes->post('/blanko/crash', 'Guarantee::blankoCrash');
 $routes->get('/inforce/request/(:hash)', 'Inforce::newRequest/$1');
 
 $routes->post('/inforce', 'Inforce::process');
-$routes->get('user/edit_profile_image', 'Setting::photo');
-$routes->get('user/edit_profile', 'Setting::profile');
-$routes->get('user/change_pass', 'Setting::change');
+$routes->get('user/editImage', 'Setting::photo');
+$routes->get('user/editProfile', 'Setting::profile');
+$routes->get('user/changePass', 'Setting::change');
 
 $routes->post('/client/add', 'Client::addNew');
 $routes->post('/client/upload', 'Client::uploadFile');

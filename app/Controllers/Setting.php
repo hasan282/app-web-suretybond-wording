@@ -15,16 +15,17 @@ class Setting extends BaseController
     public function photo()
     {
         $data['title'] = 'Edit Avatar';
-        $this->view('user/edit_profile_image', $data);
+        $this->view('user/editImage', $data);
     }
     public function profile()
     {
         $data['title'] = 'Edit Profile';
-        $this->view('user/edit_profile', $data);
+        $this->view('user/editProfile', $data);
     }
     public function change()
     {
+        $userModel =  new \App\Models\UserModel;
         $data['title'] = 'Change Password';
-        $this->view('user/change_pass', $data);
+        $this->view('user/changePass', $data);
     }
 }

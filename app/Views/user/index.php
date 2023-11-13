@@ -5,16 +5,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3 mx-auto">
-            <div class="card card-primary card-outline">
+            <div class="card card-dark card-outline">
                 <div class="card-body text-center">
-                    <img src="image/user/USER000M.jpg" class="img img-thumbnail rounded-circle" style="width: 180px;" />
+                    <img src="<?= userdata('foto') ?>" class="img img-thumbnail rounded-circle" style="width: 180px;" />
                     <h4 class="mt-3"><?= userdata('nama') ?></h4>
                     <a href="/setting" class="btn btn-primary btn-block text-bold"><i class="fas fa-cog mr-2"></i>Setting</a>
                 </div>
             </div>
         </div>
         <div class="col-md-9">
-            <div class="card">
+            <div class="card card-dark card-outline">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-5">

@@ -2,68 +2,56 @@
 
 <?= $this->section('content'); ?>
 
-
 <div class="content">
+    <!-- Profile Card -->
     <div class="card">
         <div class="card-header">
-            <b>Profile</b>
-            <a href="<?= base_url('/user/edit_profile_image'); ?>"><i class="fas fa-edit fa-fw mr-1"></i>Change Photo Profile</a>
+            <b>Profile Image</b><i class="fas fa-light fa-camera ml-1"></i>
+            <button type="button" class="btn btn-primary text-bold" data-toggle="modal" data-target="#photo" style="margin-left: 760px;">
+                <i class=" fas fa-edit edit-icon"></i>Edit Foto Profile
+            </button>
         </div>
         <div class="card-body">
-            <img src="/image/user/USER000M.jpg" alt="" height="80" width="80">
+            <img src="<?= userdata('foto') ?>" alt="" class="profile-image" height="80" width="80">
         </div>
     </div>
+
+    <!-- Profile Settings Card -->
     <div class="card">
         <div class="card-header">
-            <b>Profile Settings</b>
-            <a href="<?= base_url('/user/edit_profile'); ?>"><i class="fas fa-edit fa-fw mr-1"></i>Edit Profile</a>
+            <b>Profile Settings</b><i class="fas fa-light fa-user ml-1"></i>
+            <button type="button" class="btn btn-primary text-bold" data-toggle="modal" data-target="#profile" style="margin-left: 780px;">
+                <i class=" fas fa-edit edit-icon"></i>Edit Profile
+            </button>
         </div>
         <div class="card-body">
-            Name: <span class="text-gray"><?= userdata('nama'); ?></span>
-            <br>
-            Username: <span class="text-gray"><?= userdata('user'); ?></span>
-            <br>
-            Kantor: <span class="text-gray"><?= userdata('office'); ?></span>
-            <br>
+            Name: <span class="text-gray"><?= userdata('nama'); ?></span><br>
+            Username: <span class="text-gray"><?= userdata('user'); ?></span><br>
+            Kantor: <span class="text-gray"><?= userdata('office'); ?></span><br>
             Jabatan: <span class="text-gray"><?= userdata('role'); ?></span>
         </div>
     </div>
+
+    <!-- Security & Password Card -->
     <div class="card">
         <div class="card-header">
-            <b>Security & Password</b>
-            <a href="<?= base_url('/user/change_pass'); ?>"><i class="fas fa-edit fa-fw mr-1"></i>Edit Password</a>
+            <b>Security & Password</b><i class="fas fa-light fa-lock ml-1"></i>
+            <button type="button" class="btn btn-primary text-bold" data-toggle="modal" data-target="#changepass" style="margin-left: 730px;">
+                <i class=" fas fa-edit edit-icon"></i>Edit Password
+            </button>
         </div>
         <div class="card-body">
-            Your Password: <span class="text-gray">******</span>
-            <br>
             Last Changed: <span class="text-gray">22-08-2020</span>
         </div>
     </div>
-
 </div>
-</main>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        iconColor: 'black',
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-    })
 
-    Toast.fire({
-        icon: 'error',
-        title: 'Ooops. Sedang Dalam Perbaikan',
-    })
-</script>
+<?php $this->include('user/editProfile'); ?>
+<?php $this->include('user/editImage'); ?>
+<?php $this->include('user/changePass'); ?>
+
+
 </body>
-
 
 <?= $this->endSection(); ?>
