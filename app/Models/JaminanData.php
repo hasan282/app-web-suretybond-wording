@@ -74,7 +74,7 @@ class JaminanData
         )->data(false);
     }
 
-    public function rowEdit(string $enkripsi, ?string $userid = null)
+    public function rowEdit(string $enkripsi)
     {
         $request = \Config\Services::request();
         $data = array(
@@ -112,7 +112,7 @@ class JaminanData
         } else {
             $logdata = array(
                 'logstamp' => date('ymdHis'),
-                'id_user' => $userid,
+                'id_user' => userdata('id'),
                 'id_tipe' => 212,
                 'data_id18' => $row['id']
             );

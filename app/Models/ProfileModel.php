@@ -38,6 +38,12 @@ class ProfileModel extends BaseModel
                 );
             }
             $db->table('print_profile')->insert($data);
+            $db->table('user_log')->insert(array(
+                'logstamp' => date('ymdHis'),
+                'id_user' => userdata('id'),
+                'id_tipe' => 221,
+                'data_id16' => $data['id']
+            ));
         });
     }
 
