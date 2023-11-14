@@ -38,7 +38,7 @@ $inforce = $tables->inforceList(1);
 
     </div>
 </div>
-<div class="card">
+<div class="card card-primary card-outline">
     <div class="overlay<?= $darkmode ? ' dark' : ''; ?>" id="loading"></div>
     <div class="card-header">
         <h3 class="card-title">

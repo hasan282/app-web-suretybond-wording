@@ -8,7 +8,7 @@ $asuransi = $insuranceModel->getNestData();
 ?>
 <div class="row">
     <div class="col-4">
-        <div class="card">
+        <div class="card card-primary card-outline">
             <div class="card-body text-bold">
                 <div class="list-group" id="list_asuransi" role="tablist">
                     <?php foreach ($asuransi as $no => $asr) :
@@ -20,7 +20,7 @@ $asuransi = $insuranceModel->getNestData();
         </div>
     </div>
     <div class="col-8">
-        <div class="card">
+        <div class="card card-primary card-outline">
             <div class="card-body pb-2">
                 <div class="tab-content" id="list_asuransiContent">
                     <?php foreach ($asuransi as $no => $as) :

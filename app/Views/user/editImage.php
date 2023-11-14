@@ -31,10 +31,10 @@
     }
 </style>
 
-<div class="modal fade" id="photo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="photo" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-primary">
                 <h5 class="modal-title" id="exampleModalLabel">Ganti Foto Profile</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -76,7 +76,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary btn-block text-bold"><i class="fa fa-save"></i> Save changes</button>
+                                <!-- <button type="submit" class="btn btn-primary btn-block text-bold"><i class="fa fa-save"></i> Save changes</button> -->
+                                <a href="/user" class="btn btn-primary btn-block text-bold"><i class="fa fa-save mr-2"></i>Save Changes</a>
                             </div>
                         </div>
                     </div>

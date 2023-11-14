@@ -36,7 +36,7 @@
     <div class="card">
         <div class="card-header">
             <b>Security & Password</b><i class="fas fa-light fa-lock ml-1"></i>
-            <button type="button" class="btn btn-primary text-bold" data-toggle="modal" data-target="#changepass" style="margin-left: 730px;">
+            <button type="button" class="btn btn-primary text-bold" data-toggle="modal" data-target="#changepass" style="margin-left: 725px;">
                 <i class=" fas fa-edit edit-icon"></i>Edit Password
             </button>
         </div>
