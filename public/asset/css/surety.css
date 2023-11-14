@@ -154,3 +154,25 @@ table th.fit {
 .select2-selection__arrow {
     height: 38px !important;
 }
+
+.skeleton-load {
+    background: #eee;
+    background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+    border-radius: 3px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+}
+
+.skeleton-load-info {
+    background: #9df2ff;
+    background: linear-gradient(110deg, #b9f6ff 8%, #cff9ff 18%, #b9f6ff 33%);
+    border-radius: 3px;
+    background-size: 200% 100%;
+    animation: 1.5s shine linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position-x: -200%;
+    }
+}

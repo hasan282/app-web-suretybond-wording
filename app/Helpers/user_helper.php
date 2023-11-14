@@ -71,3 +71,17 @@ if (!function_exists('login_page')) {
         return redirect()->to('');
     }
 }
+
+if (!function_exists('role_is')) {
+    /**
+     * Cek apakah Role ID sama seperti di dalam Array
+     */
+    function role_is(array $roles): bool
+    {
+        $result = false;
+        $session = \Config\Services::session();
+        $role = intval($session->get('userdata_role_id'));
+        foreach ($roles as $rl) if ($role === intval($rl)) $result = true;
+        return $result;
+    }
+}

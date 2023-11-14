@@ -9,6 +9,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/dashboard', 'Dashboard::index');
 
 $routes->get('/user', 'User::index');
+$routes->get('/user/account', 'User::account');
 
 $routes->get('/setting', 'Setting::index');
 
