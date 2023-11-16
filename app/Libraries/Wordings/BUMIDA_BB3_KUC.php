@@ -26,3 +26,33 @@ class BUMIDA_BB3_KUC extends BaseWording
         return $this;
     }
 }
+
+/*
+
+<b>'.$this->data('principal').'</b>
+
+'.$this->data('principal_alamat').'
+
+<b>'.$this->data('asuransi_print').$this->data('cabang_print',' $1').'</b>
+
+'.$this->data('cabang_alamat').'
+
+<b>'.$this->data('obligee').'</b>
+
+'.$this->data('obligee_alamat').'
+
+<b>'.$this->data('symbol').' '.nformat($this->data('nilai')).'</b> <bi>('.$this->terbilang('nilai').' '.$this->data('currency').')</bi>
+
+<b>'.$this->data('proyek_nama').'</b>
+
+<b>'.$this->data('dokumen').'</b>'.$this->data('dokumen_date',' tanggal <b>$1</b>',function($date){return fdate($date,'DD1 MM3 YY2');}).'
+
+<b>'.$this->data('days').' ('.$this->terbilang('days').')</b>
+
+<b>'.fdate($this->data('date_from'),'DD1 MM3 YY2').'</b>
+
+<b>'.fdate($this->data('date_to'),'DD1 MM3 YY2').'</b>
+
+'.$this->conditional().'
+
+*/

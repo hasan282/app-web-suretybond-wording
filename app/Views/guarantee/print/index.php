@@ -16,7 +16,7 @@ $modelNumber->isConditional(
 );
 $className = $modelNumber->getClassName();
 if (!file_exists(APPPATH . 'Libraries/Wordings/' . $className . '.php')) $className = null;
-$className = 'BUMIDA_APB1_KC';
+// $className = 'BUMIDA_PB4_NKUC';
 $pageSettings = array(
     'paper' => 'A4',
     'page_top' => '50',
