@@ -115,4 +115,16 @@ class Tables
         )->order('newest')->data();
         return $this->_objectReturn('inforce/table', 'jaminan');
     }
+
+    public function userList(int $page = 1)
+    {
+        $model = new \App\Models\UserModel;
+        $model->getData(['enkrip', 'user', 'pass', 'nama', 'office', 'role']);
+        $this->_setPage($page, $model->count());
+        $this->dataList = $model->limit(
+            $this->limit,
+            $this->offset
+        )->order(['active', 'office_tipe', 'office', 'role', 'user'])->data();
+        return $this->_objectReturn('administrator/table/users', 'userdata');
+    }
 }

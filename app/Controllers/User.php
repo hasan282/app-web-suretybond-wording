@@ -23,8 +23,20 @@ class User extends BaseController
             throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         } else {
             $data['title'] = 'Manajemen User';
+            $data['jscript'] = 'all/tables';
             $this->plugin->setup('scrollbar');
             return $this->view('administrator/account/index', $data, true);
+        }
+    }
+
+    public function table($pageNumber)
+    {
+        $page = intval($pageNumber);
+        if (is_login() && $page > 0) {
+            $table = new \App\Libraries\Tables;
+            return $this->response->setJSON($table->userList($page));
+        } else {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
         }
     }
 }

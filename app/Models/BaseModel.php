@@ -53,7 +53,7 @@ class BaseModel
         }
     }
 
-    public function count(string $field = 'id'): int
+    public function count(string $field = '*'): int
     {
         if (!is_string($this->table)) {
             return 0;
