@@ -6,6 +6,7 @@ class Login extends BaseController
 {
     public function index()
     {
+        // $this->_trials();
         if (is_login()) {
             return redirect()->to('dashboard');
         } else {
@@ -13,5 +14,13 @@ class Login extends BaseController
             $this->plugin->setup('icheck');
             return $this->view('layout/login', $data, true);
         }
+    }
+
+    private function _trials()
+    {
+        $model = new \App\Models\ExampleModel;
+        $model->select([
+            'id', 'idam', 'hash', 'nama', 'people_nama', 'doc_id', 'file'
+        ])->dumps();
     }
 }
