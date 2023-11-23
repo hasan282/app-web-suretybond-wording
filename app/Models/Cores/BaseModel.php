@@ -10,7 +10,9 @@ class BaseModel
 
     private $fields, $aliases, $duplicate, $table, $joins;
     private $select, $fieldselect, $tablefrom;
-    private $limit, $offset;
+    private $where, $wherealias, $limit, $offset;
+    private $order, $orderalias;
+    private $group, $groupalias;
 
     public function __construct()
     {
@@ -54,6 +56,113 @@ class BaseModel
         $this->fieldselect = $queryselect;
         $this->tablefrom = $queryfrom;
         return $this;
+    }
+
+    /**
+     * Set Where
+     * @param string|array $where
+     */
+    public function where($where)
+    {
+        if (is_string($where)) {
+            $this->where[] = array(
+                'tipe' => 'string',
+                'value' => $where
+            );
+        }
+        if (is_array($where)) {
+            foreach ($where as $key => $val) {
+                $field = array_key_exists($key, $this->wherealias) ? $this->wherealias[$key] : $key;
+                $whereis = array('tipe' => null, 'field' => $field, 'value' => $val);
+                if (is_array($val)) $whereis['tipe'] = 'in';
+                if (is_integer($val)) $whereis['tipe'] = 'where';
+                if (is_string($val)) {
+                    $whereis['tipe'] = 'where';
+                    if (substr($val, 0, 1) == '%' || substr($val, -1) == '%') {
+                        $whereis['tipe'] = 'like';
+                        $perbefore = substr($val, 0, 1) == '%';
+                        $persafter = substr($val, -1) == '%';
+                        if ($perbefore && $persafter) {
+                            $whereis['side'] = 'both';
+                        } elseif ($perbefore) {
+                            $whereis['side'] = 'before';
+                        } elseif ($persafter) {
+                            $whereis['side'] = 'after';
+                        } else {
+                            $whereis['side'] = 'both';
+                        }
+                        $whereis['value'] = trim($val, '%');
+                    }
+                    if ($val == '!null') {
+                        $whereis['tipe'] = null;
+                        $this->where[] = array(
+                            'tipe' => 'string',
+                            'value' => $field . ' IS NOT NULL'
+                        );
+                    }
+                }
+                if ($whereis['tipe'] !== null) $this->where[] = $whereis;
+                if ($val === null) {
+                    $this->where[] = array(
+                        'tipe' => 'string',
+                        'value' => $field . ' IS NULL'
+                    );
+                }
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * Set Order
+     * @param string|array $order query order or alias
+     */
+    public function order($order)
+    {
+        if (is_string($order)) $this->_setorder($order);
+        if (is_array($order)) foreach ($order as $od)
+            if (is_string($od)) $this->_setorder($od);
+        return $this;
+    }
+
+    private function _setorder(string $order)
+    {
+        $query = $order;
+        if (array_key_exists($order, $this->orderalias))
+            $query = $this->orderalias[$order];
+        if (substr(strtolower($query), -4) == ' asc') {
+            $this->order[] = array(
+                'field' => trim(substr($query, 0, strlen($query) - 4)),
+                'direct' => 'ASC'
+            );
+        }
+        if (substr(strtolower($query), -5) == ' desc') {
+            $this->order[] = array(
+                'field' => trim(substr($query, 0, strlen($query) - 5)),
+                'direct' => 'DESC'
+            );
+        }
+    }
+
+    /**
+     * Set Group By
+     * @param string|array $group query group by or alias
+     */
+    public function group($group)
+    {
+        if (is_string($group)) $this->_setgroup($group);
+        if (is_array($group)) foreach ($group as $gr)
+            if (is_string($gr)) $this->_setgroup($gr);
+        return $this;
+    }
+
+    private function _setgroup($group)
+    {
+        if (array_key_exists($group, $this->groupalias)) {
+            $this->group[] = $this->groupalias[$group];
+        } else {
+            $this->group[] = $group;
+        }
     }
 
     public function limit(int $limit, int $offset = 0)
@@ -143,10 +252,36 @@ class BaseModel
         return true;
     }
 
+    /**
+     * Set Aliases
+     * @param string $for where / order / group
+     * @param array $alias alias => fieldname
+     */
+    protected function alias(string $for, array $alias = [])
+    {
+        if ($for == 'where') {
+            foreach ($alias as $kw => $vw) $this->wherealias[$kw] = $vw;
+        }
+        if ($for == 'order') {
+            foreach ($alias as $ko => $vo) $this->orderalias[$ko] = $vo;
+        }
+        if ($for == 'group') {
+            foreach ($alias as $kg => $vg) $this->groupalias[$kg] = $vg;
+        }
+    }
+
     private function _build()
     {
         if ($this->tablefrom === null) return null;
         $build = $this->connect->table($this->tablefrom)->limit($this->limit, $this->offset);
+        foreach ($this->where as $where) {
+            if ($where['tipe'] == 'where') $build->where($where['field'], $where['value']);
+            if ($where['tipe'] == 'string') $build->where($where['value']);
+            if ($where['tipe'] == 'like') $build->like($where['field'], $where['value'], $where['side']);
+            if ($where['tipe'] == 'in') $build->whereIn($where['field'], $where['value']);
+        }
+        foreach ($this->order as $order) $build->orderBy($order['field'], $order['direct']);
+        foreach ($this->group as $group) $build->groupBy($group);
         return $build;
     }
 
@@ -163,8 +298,20 @@ class BaseModel
             $this->select = array();
             $this->fieldselect = null;
             $this->tablefrom = null;
+            $this->where = array();
+            $this->order = array();
+            $this->group = array();
             $this->limit = null;
             $this->offset = 0;
+        }
+        if ($all || $bundle == 'where') {
+            $this->wherealias = array();
+        }
+        if ($all || $bundle == 'order') {
+            $this->orderalias = array();
+        }
+        if ($all || $bundle == 'group') {
+            $this->groupalias = array();
         }
     }
 }

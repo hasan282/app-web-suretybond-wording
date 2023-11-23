@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Models\Cores\BaseModel;
 
-class DataModel extends BaseModel
+class PrincipalModel2 extends BaseModel
 {
     public function select(array $fields = [])
     {
@@ -22,7 +22,7 @@ class DataModel extends BaseModel
         $this->fields('principal_people', array(
             'people_id' => 'id',
             'people_hash' => 'enkripsi',
-            'people_nama' => 'nama',
+            'people' => 'nama',
             'jabatan' => 'jabatan',
             'people_active' => 'actives'
         ));
@@ -34,5 +34,24 @@ class DataModel extends BaseModel
         $this->join('principal.id=principal_people.id_principal', 'LEFT');
         $this->join('principal.id=principal_document.id_principal', 'LEFT');
         return parent::select($fields);
+    }
+
+    public function where($where)
+    {
+        $this->alias('where', array(
+            'id' => 'principal.id',
+            'id_people' => 'principal_people.id',
+            'principal' => 'principal.nama',
+            'active' => 'principal.actives',
+        ));
+        return parent::where($where);
+    }
+
+    public function order($order)
+    {
+        $this->alias('order', array(
+            'principal' => 'principal.nama ASC'
+        ));
+        return parent::order($order);
     }
 }
