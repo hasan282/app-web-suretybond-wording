@@ -5,8 +5,10 @@ namespace App\Models;
 class BaseModelTwo
 {
     protected $connect;
+    protected $wherefields;
 
-    private $table, $joins, $query;
+    private $select, $table, $joins, $query;
+    private $where, $bind;
 
     public function __construct()
     {
@@ -32,11 +34,14 @@ class BaseModelTwo
             foreach ($fields as $alias => $flds) if (in_array($alias, $select)) $selectors[] = $flds;
             if (!empty($selectors)) $selector = implode(', ', $selectors);
         }
-        $this->query = 'SELECT ' . $selector . ' FROM ' . $table;
+        $this->select = array(
+            'table' => $table,
+            'fields' => $selector
+        );
         return $this;
     }
 
-    public function where()
+    public function where($where)
     {
         return $this;
     }
@@ -45,6 +50,26 @@ class BaseModelTwo
     {
         $this->_emptyall();
         return $this;
+    }
+
+    public function count(): ?int
+    {
+        if (empty($this->select)) return null;
+        $result = $this->connect->table(
+            $this->select['table']
+        )->select('COUNT(*) AS `count`')->getCompiledSelect();
+    }
+
+    public function querystring(): ?string
+    {
+        return $this->connect->table(
+            $this->select['table']
+        )->select(
+            $this->select['fields']
+        )
+            ->where('principal.active', 1)
+            ->where('principal.id', '902312')
+            ->getCompiledSelect();
     }
 
     protected function table(array $tableFields)
@@ -75,8 +100,16 @@ class BaseModelTwo
         return array('table' => $table, 'fields' => $result);
     }
 
+    private function _compile(): ?string
+    {
+        if (empty($this->select)) return null;
+        $query = 'SELECT ' . $this->select['fields'] . ' FROM ' . $this->select['table'];
+        return $query;
+    }
+
     private function _emptyall()
     {
+        $this->select = array();
         $this->table = array();
         $this->joins = array();
         $this->query = null;
@@ -84,9 +117,8 @@ class BaseModelTwo
 
     public function dumps()
     {
+        var_dump($this->select);
         var_dump($this->table);
         var_dump($this->joins);
-        // var_dump($this->query);
-        echo '<textarea>' . $this->query . '</textarea>';
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class ExampleModel extends BaseModelTwo
+class PrincipalModelTwo extends BaseModelTwo
 {
     public function select(array $select = [])
     {
@@ -35,8 +35,8 @@ class ExampleModel extends BaseModelTwo
         return parent::select($select);
     }
 
-    public function where()
+    public function where($where)
     {
-        return parent::where();
+        return parent::where($where);
     }
 }

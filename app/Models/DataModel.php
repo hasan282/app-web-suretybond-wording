@@ -2,42 +2,37 @@
 
 namespace App\Models;
 
-use CodeIgniter\Model;
+use App\Models\Cores\BaseModel;
 
-class DataModel extends Model
+class DataModel extends BaseModel
 {
-    public function dataJaminan()
+    public function select(array $fields = [])
     {
-        $data = array();
-
-        for ($i = 0; $i < 10; $i++) {
-            $push['nomor'] = '23.08.02.' . mt_rand(1000, 9000) . '.DRAFT';
-            $jenis = array('Pemeliharaan', 'Uang Muka', 'Pelaksanaan', 'Penawaran');
-            $push['jenis'] = 'Jaminan ' . $jenis[array_rand($jenis)];
-            $push['principal'] = 'PT. FIBERHOME TECHNOLOGIES INDONESIA';
-            $push['nilai'] = mt_rand(400000, 955555) . '00';
-
-            array_push($data, $push);
-        }
-
-        return $data;
-    }
-
-    public function dataIssued()
-    {
-        $data = array();
-
-        for ($i = 0; $i < 10; $i++) {
-            $push['prefix'] = 'MAX-';
-            $push['register'] = '00' . mt_rand(2000, 8500);
-            $push['nomor'] = '23.08.02.' . mt_rand(1000, 9000) . '.' . mt_rand(1000, 9000);
-            $jenis = array('Pemeliharaan', 'Uang Muka', 'Pelaksanaan', 'Penawaran');
-            $push['jenis'] = 'Jaminan ' . $jenis[array_rand($jenis)];
-            $push['principal'] = 'PT. FIBERHOME TECHNOLOGIES INDONESIA';
-
-            array_push($data, $push);
-        }
-
-        return $data;
+        $this->fields('principal', array(
+            'id' => 'id',
+            'hash' => 'enkripsi',
+            'principal' => 'nama',
+            'telpon' => 'telpon',
+            'email' => 'email',
+            'alamat' => 'alamat',
+            'office_id' => 'id_office',
+            'marketing_id' => 'id_marketing',
+            'active' => 'actives'
+        ));
+        $this->fields('principal_people', array(
+            'people_id' => 'id',
+            'people_hash' => 'enkripsi',
+            'people_nama' => 'nama',
+            'jabatan' => 'jabatan',
+            'people_active' => 'actives'
+        ));
+        $this->fields('principal_document', array(
+            'doc_id' => 'id',
+            'file' => 'filename',
+            'doc_active' => 'actives'
+        ));
+        $this->join('principal.id=principal_people.id_principal', 'LEFT');
+        $this->join('principal.id=principal_document.id_principal', 'LEFT');
+        return parent::select($fields);
     }
 }
