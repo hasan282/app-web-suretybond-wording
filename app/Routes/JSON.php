@@ -10,6 +10,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/tb/guarantee/(:segment)/(:num)', 'Guarantee::table/$1/$2');
 $routes->get('/tb/inforce/(:num)', 'Inforce::table/$1');
 $routes->get('/tb/client/(:num)', 'Client::table/$1');
+$routes->get('/tb/userdata/(:num)', 'User::table/$1');
 
 // --- JSON Data ---------------------------------------------------------
 $routes->get('/d/client', 'Client::dataList');

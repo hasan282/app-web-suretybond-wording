@@ -2,42 +2,33 @@
 
 <?= $this->section('content'); ?>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3 mx-auto">
-            <div class="card card-primary card-outline">
-                <div class="card-body text-center">
-                    <img src="image/user/USER000M.jpg" class="img img-thumbnail rounded-circle" style="width: 180px;" />
-                    <h4 class="mt-3"><?= userdata('nama') ?></h4>
-                    <a href="/setting" class="btn btn-primary btn-block text-bold"><i class="fas fa-cog mr-2"></i>Setting</a>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body box-profile">
+                <div class="text-center mw-2 mx-auto">
+                    <img class="profile-user-img img-fluid img-circle w-100" src="<?= userdata('foto'); ?>" alt="">
                 </div>
+                <h3 class="profile-username text-center mt-3 mb-0"><?= userdata('nama'); ?></h3>
+                <p class="text-muted text-center"><?= userdata('user'); ?></p>
+                <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item text-center">
+                        <span class="text-bold"><?= userdata('office'); ?></span>
+                    </li>
+                    <li class="list-group-item text-center">
+                        <span class="text-secondary"><?= userdata('role'); ?></span>
+                    </li>
+                </ul>
+                <a href="/setting" class="btn btn-primary btn-block">
+                    <i class="fas fa-cog mr-2"></i>Pengaturan Akun
+                </a>
             </div>
         </div>
-        <div class="col-md-9">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-5">
-                            <p><i class="fas fa-user fa-fw mr-2"></i>Nama Pengguna</p>
-                            <p class="text-bold"><?= userdata('nama'); ?></p>
-                        </div>
-                        <div class="col-md-5">
-                            <p><i class="fas fa-user-edit fa-fw mr-2"></i>Username</p>
-                            <p class="text-bold"><?= userdata('user'); ?></p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-5">
-                            <p><i class="fas fa-laptop-house fa-fw mr-2"></i>Nama Kantor Agen</p>
-                            <p class="text-bold"><?= userdata('office'); ?></p>
-                        </div>
-                        <div class="col-md-5">
-                            <p><i class="fas fa-briefcase fa-fw mr-2"></i>Jabatan</p>
-                            <p class="text-bold"><?= userdata('role'); ?></p>
-                        </div>
-                    </div>
-                </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+
             </div>
         </div>
     </div>

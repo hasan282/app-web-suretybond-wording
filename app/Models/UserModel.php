@@ -84,7 +84,13 @@ class UserModel extends BaseModel
 
     public function order($order, bool $isQuery = false, array $addOption = [])
     {
-        $options = array();
+        $options = array(
+            'user' => 'users.username ASC',
+            'role' => 'users.id_role ASC',
+            'active' => 'users.actives DESC',
+            'office' => 'users.id_office ASC',
+            'office_tipe' => 'user_office.id_tipe ASC'
+        );
         if (!empty($addOption)) $options = array_merge($options, $addOption);
         return parent::order($order, $isQuery, $options);
     }

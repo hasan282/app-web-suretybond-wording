@@ -3,7 +3,6 @@
 namespace App\Libraries\Wordings;
 
 use App\Libraries\PDFMake;
-use tidy;
 
 class BaseWording extends PDFMake
 {

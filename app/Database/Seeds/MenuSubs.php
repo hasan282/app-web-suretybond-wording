@@ -14,7 +14,7 @@ class MenuSubs extends Seeder
                 'id_menu' => 101,
                 'text' => 'User Account',
                 'icon' => 'fas fa-user-alt',
-                'url' => '#'
+                'url' => 'user/account'
             ),
             array(
                 'id' => 112,

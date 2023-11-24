@@ -155,7 +155,7 @@ class Guarantee extends BaseController
         if (!is_login())
             return login_page(full_url(false));
         $jaminan = new \App\Models\JaminanData;
-        $update = $jaminan->rowEdit($param, userdata('id'));
+        $update = $jaminan->rowEdit($param);
         if ($update === false) {
             // failed or false
         } else {

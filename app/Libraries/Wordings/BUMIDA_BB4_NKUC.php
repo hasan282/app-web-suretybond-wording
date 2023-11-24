@@ -15,15 +15,44 @@ class BUMIDA_BB4_NKUC extends BaseWording
 
     public function content()
     {
-        $this->setPoint('Dengan ini dinyatakan, bahwa kami : <b>' . $this->data('principal') . '</b>, Alamat : ' . $this->data('principal_alamat') . ' sebagai <b>PESERTA</b>, selanjutnya disebut <b>PRINCIPAL</b>, dan <b>' . $this->data('asuransi_print') . '</b> Alamat : ' . $this->data('cabang_alamat') . ' sebagai  Penjamin, selanjutnya disebut sebagai <b>SURETY</b>, bertanggung jawab dan dengan tegas terikat pada <b>' . $this->data('obligee') . '</b>, alamat ' . $this->data('obligee_alamat') . ' sebagai Pemilik, selanjutnya disebut 
-        <b>OBLIGEE</b> atas uang sejumlah <bi>' . $this->data('symbol') . ' ' . nformat($this->data('nilai')) . ' </bi> <bi>(' . $this->terbilang('nilai') . ' ' . $this->data('currency') . ')</bi>');
-        $this->setPoint('Maka kami, <b>PRINCIPAL</b> dan <b>SURETY</b> dengan ini mengikatkan diri untuk melakukan pembayaran jumlah tersebut di atas dengan baik dan benar bilamana <b>PRINCIPAL</b> tidak memenuhi kewajiban sebagaimana ditetapkan dalam Dokumen    , Tanggal  untuk melaksanakan pelelangan pekerjaan <b>' . $this->data('proyek_nama') . '</b> sesuai Berita Acara Rapat Penjelasan (Aanwijzing) tanggal <b>' . $this->data('issued_date') . '</b> yang diselenggarakan oleh <b>OBLIGEE.</b>');
-        $this->setPoint('Surat Jaminan ini berlaku apabila <b>PRINCIPAL</b> :');
-        $this->setPoint('menarik kembali Penawarannya selama dilaksanakannya pelelangan atau sesudah di nyatakan sebagai pemenang; a. Tidak  : b. <b>(i)</b> hadir dalam klarifikasi dan / atau verifikasi kualifikasi dalam hal pelelangan dilakukan dengan Pascakualifikasi ; atau <b>(ii)</b>   menyerahkan Jaminan Pelaksanaan setelah ditunjuk sebagai pemenang. c. Terlibat Korupsi, Kolusi dan Nepotisme (KKN) ; atau Melakukan penipuan / pemalsuan atas informasi yang disampaikan dalam Dokumen Penawaran d.');
-        $this->setPoint('Surat Jaminan ini berlaku selama <b>59 (LIMA PULUH SEMBILAN ) hari</b> kalender dan efektif mulai dari tanggal <b>' . $this->data('date_from') . '</b> sampai dengan tanggal <b>' . $this->data('date_to') . '</b>. <b>SURETY</b> akan membayar kepada <b>OBLIGEE</b> sejumlah nilai jaminan tersebut di atas dalam waktu paling lambat <b>14 (empat belas) hari</b> kerja tanpa syarat (Unconditional) setelah menerima tuntutan penagihan secara tertulis dari <b>OBLIGEE</b> berdasar Keputusan <b>OBLIGEE</b> mengenai pengenaan sanksi akibat <b>PRINCIPAL</b> cidera janji/wanprestasi.');
+        $this->setPoint('Dengan ini dinyatakan, bahwa kami __PRINCIPAL__, __PRINCIPAL_ALAMAT__ sebagai <b>PESERTA</b>, selanjutnya disebut <b>PRINCIPAL</b>, dan __ASURANSI__ __ASURANSI_ALAMAT__ sebagai  Penjamin, selanjutnya disebut sebagai <b>SURETY</b>, bertanggung jawab dan dengan tegas terikat pada __OBLIGEE__, __OBLIGEE_ALAMAT__ sebagai Pemilik, selanjutnya disebut <b>OBLIGEE</b> atas uang sejumlah __NILAI__.');
+        $this->setPoint('Maka kami, <b>PRINCIPAL</b> dan <b>SURETY</b> dengan ini mengikatkan diri untuk melakukan pembayaran jumlah tersebut di atas dengan baik dan benar bilamana <b>PRINCIPAL</b> tidak memenuhi kewajiban sebagaimana ditetapkan dalam Dokumen __DOKUMEN__ untuk melaksanakan pelelangan pekerjaan __PROYEK_NAMA__ yang diselenggarakan oleh <b>OBLIGEE</b>.');
+        $this->setPoint('Surat Jaminan ini berlaku apabila <b>PRINCIPAL</b> :', array('menarik kembali Penawarannya selama dilaksanakannya pelelangan atau sesudah di nyatakan sebagai pemenang;', 'Tidak :' . PHP_EOL . '(i) hadir dalam klarifikasi dan / atau verifikasi kualifikasi dalam hal pelelangan dilakukan dengan Pascakualifikasi; atau' . PHP_EOL . '(ii) menyerahkan Jaminan Pelaksanaan setelah ditunjuk sebagai pemenang.', 'Terlibat Korupsi, Kolusi dan Nepotisme (KKN); atau', 'Melakukan penipuan / pemalsuan atas informasi yang disampaikan dalam Dokumen Penawaran.'));
+        $this->setPoint('Surat Jaminan ini berlaku selama __DAYS__ kalender dan efektif mulai dari tanggal __DATEFROM__ sampai dengan tanggal __DATETO__.');
+        $this->setPoint('<b>SURETY</b> akan membayar kepada <b>OBLIGEE</b> sejumlah nilai jaminan tersebut di atas dalam waktu paling lambat 14 (Empat Belas) hari kerja __CONDITIONAL__ setelah menerima tuntutan penagihan secara tertulis dari <b>OBLIGEE</b> berdasar Keputusan <b>OBLIGEE</b> mengenai pengenaan sanksi akibat <b>PRINCIPAL</b> cidera janji/wanprestasi.');
         $this->setPoint('Menunjuk pada Pasal 1832 KUH Perdata dengan ini ditegaskan kembali bahwa <b>SURETY</b> melepaskan hak-hak istimewanya untuk menuntut supaya harta benda pihak yang dijamin lebih dahulu disita dan dijual guna melunasi hutangnya sebagaimana dimaksud dalam Pasal 1831 KUH Perdata.');
-        $this->setPoint('Setiap pengajuan ganti rugi terhadap <b>SURETY</b> berdasarkan Jaminan ini harus sudah diajukan selambat-lambatnya dalam waktu <b>30 (tiga puluh) hari</b> kalender sesudah berakhirnya masa laku Jaminan ini.');
+        $this->setPoint('Setiap pengajuan ganti rugi terhadap <b>SURETY</b> berdasarkan Jaminan ini harus sudah diajukan selambat-lambatnya dalam waktu 30 (Tiga Puluh) hari kalender sesudah berakhirnya masa laku Jaminan ini.');
         $this->setContent();
         return $this;
     }
 }
+
+/*
+
+<b>'.$this->data('principal').'</b>
+
+'.$this->data('principal_alamat').'
+
+<b>'.$this->data('asuransi_print').$this->data('cabang_print',' $1').'</b>
+
+'.$this->data('cabang_alamat').'
+
+<b>'.$this->data('obligee').'</b>
+
+'.$this->data('obligee_alamat').'
+
+<b>'.$this->data('symbol').' '.nformat($this->data('nilai')).'</b> <bi>('.$this->terbilang('nilai').' '.$this->data('currency').')</bi>
+
+<b>'.$this->data('proyek_nama').'</b>
+
+<b>'.$this->data('dokumen').'</b>'.$this->data('dokumen_date',' tanggal <b>$1</b>',function($date){return fdate($date,'DD1 MM3 YY2');}).'
+
+<b>'.$this->data('days').' ('.$this->terbilang('days').')</b>
+
+<b>'.fdate($this->data('date_from'),'DD1 MM3 YY2').'</b>
+
+<b>'.fdate($this->data('date_to'),'DD1 MM3 YY2').'</b>
+
+'.$this->conditional().'
+
+*/
