@@ -11,7 +11,8 @@ class Inforce extends BaseController
         $data['title'] = 'Inforce Jaminan';
         $data['jscript'] = ['all/tables', 'all/checklist'];
         $this->plugin->setup('scrollbar|icheck');
-        return $this->view('inforce/index', $data, true);
+        // return $this->view('inforce/index', $data, true);
+        return $this->view('layout/maintenance/index', $data, true);
     }
 
     public function newRequest($param)
