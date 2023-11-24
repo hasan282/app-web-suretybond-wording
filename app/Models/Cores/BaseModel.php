@@ -270,6 +270,11 @@ class BaseModel
         }
     }
 
+    protected function query(string $query)
+    {
+        return $this->connect->query($query);
+    }
+
     private function _build()
     {
         if ($this->tablefrom === null) return null;

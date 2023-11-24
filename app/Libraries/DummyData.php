@@ -27,10 +27,9 @@ class DummyData
             $jaminan['id_principal_people'] = $dataPrinc[array_rand($dataPrinc)];
             $jaminan['id_asuransi_people'] = $dataInsrc[array_rand($dataInsrc)];
             $jaminan['nilai_proyek'] = mt_rand(100000, 2550000) . '00';
-            $jaminan['id_currency_proyek'] = '1';
             $jaminan['nilai_jaminan'] = ($jaminan['nilai_proyek'] * 15 / 100) . '';
-            $jaminan['id_currency_jaminan'] = '1';
-            $jaminan['actives'] = '1';
+            $jaminan['id_currency'] = 1;
+            $jaminan['actives'] = 1;
             $data[] = $jaminan;
         }
         return $data;
