@@ -25,13 +25,32 @@
             </div>
         </div>
     </div>
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-body">
 
+    <div class="col-md-8">
+        <div class="card card-primary">
+            <div class="card-header">
+                <strong>About Me</strong>
+            </div>
+            <div class="card-body">
+                <p><strong>Nama:</strong></p>
+                <p><?= userdata('nama'); ?></p>
+
+                <!-- Informasi tambahan -->
+                <div class="profile-info mt-4">
+                    <p><strong>Email:</strong></p>
+                    <p>risky@gmail.com</p>
+                </div>
+
+                <!-- Deskripsi atau bio -->
+                <div class="profile-bio mt-4">
+                    <p><strong>Deskripsi:</strong></p>
+
+                </div>
             </div>
         </div>
     </div>
+
+
 </div>
 
 <?= $this->endSection(); ?>

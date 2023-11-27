@@ -6,7 +6,7 @@
 
     <!-- Profile Card -->
     <div class="container mt-2">
-        <div class="card">
+        <div class="card card-secondary">
             <div class="card-header">
                 <h5 class="mb-0">
                     <i class="fas fa-light fa-camera ml-1" style="margin-right: 10px;"></i>
@@ -25,7 +25,7 @@
 
     <!-- Profile Settings Card -->
     <div class="container mt-2">
-        <div class="card">
+        <div class="card card-secondary">
             <div class="card-header">
                 <h5 class="mb-0">
                     <i class="fas fa-light fa-user ml-1" style="margin-right: 10px;"></i>
@@ -70,7 +70,7 @@
 
     <!-- Security & Password Card -->
     <div class="container mt-2">
-        <div class="card">
+        <div class="card card-secondary">
             <div class="card-header">
                 <h5 class="mb-0">
                     <i class="fas fa-light fa-lock ml-1" style="margin-right: 10px;"></i>
