@@ -10,6 +10,7 @@ $routes->post('/', 'Auth::login');
 // $routes->post('/', 'Auth::user');
 
 $routes->get('/user/logout', 'Auth::logout');
+$routes->get('/user/change', 'Login::userchange');
 
 $routes->get('/guarantee/delete/(:hash)', 'Guarantee::delete/$1');
 
