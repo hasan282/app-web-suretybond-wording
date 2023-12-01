@@ -27,30 +27,46 @@
     </div>
 
     <div class="col-md-8">
-        <div class="card card-primary">
-            <div class="card-header">
-                <strong>About Me</strong>
+        <div class="card">
+            <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a class="nav-link active" href="#about_me" data-toggle="tab">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
+                </ul>
             </div>
             <div class="card-body">
-                <p><strong>Nama:</strong></p>
-                <p><?= userdata('nama'); ?></p>
+                <div class="tab-content">
+                    <div class="active tab-pane" id="about_me">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <strong>Nama:</strong>
+                                <p class="mb-0"><?= userdata('nama'); ?></p>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Username:</strong>
+                                <p class="mb-0"><?= userdata('user'); ?></p>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Office ID:</strong>
+                                <p class="mb-0"><?= userdata('office_id'); ?></p>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Role ID:</strong>
+                                <p class="mb-0"><?= userdata('role_id'); ?></p>
+                            </li>
+                        </ul>
+                    </div>
 
-                <!-- Informasi tambahan -->
-                <div class="profile-info mt-4">
-                    <p><strong>Email:</strong></p>
-                    <p>risky@gmail.com</p>
-                </div>
+                    <div class="tab-pane" id="timeline">
+                        <div class="timeline timeline-inverse">
 
-                <!-- Deskripsi atau bio -->
-                <div class="profile-bio mt-4">
-                    <p><strong>Deskripsi:</strong></p>
 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>
 
 <?= $this->endSection(); ?>

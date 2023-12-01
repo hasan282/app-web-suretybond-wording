@@ -29,10 +29,9 @@
             <div class="card-header">
                 <h5 class="mb-0">
                     <i class="fas fa-light fa-user ml-1" style="margin-right: 10px;"></i>
-                    <span>Profile Setting</span>
+                    <span class="small-text">Profile Setting</span>
                 </h5>
             </div>
-
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-2">
