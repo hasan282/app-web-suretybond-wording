@@ -51,6 +51,7 @@ abstract class BaseController extends Controller
             'head' => $this->plugin->head(),
             'foot' => $this->plugin->foot()
         );
+        $data['darkmode'] = intval(get_cookie('DRKMOD') ?? '0') === 1;
         $source = view($view, $data);
         if (env_is('production')) $source = nl2space($source);
         if ($return) {

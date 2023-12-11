@@ -26,7 +26,9 @@ $widget = array(
         'icon' => 'fas fa-briefcase',
         'link' => 'client',
         'color' => 'info',
-        'data' => $principal->getData(['id'])->count()
+        'data' => $principal->getData(['id'])->where(
+            ['office' => userdata('office_id')]
+        )->count()
     ]
 );
 ?>
