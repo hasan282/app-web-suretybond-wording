@@ -16,6 +16,9 @@ public/fonts/*
 
 .envhosting
 
+vendor_ci_v4.4.1.zip
+public/plugins_and_fonts.zip
+
 # -------- frameworks --------
 
 # OS X
